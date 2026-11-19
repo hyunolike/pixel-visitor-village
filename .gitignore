@@ -1,0 +1,26 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+.vite/
+.cache/
+playwright-report/
+test-results/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.local
+*.log
+*.pem
+*.key
+
+# Local blog backups
+private/
+
+# Operating system and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
