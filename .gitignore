@@ -24,3 +24,7 @@ private/
 Thumbs.db
 .idea/
 .vscode/
+
+# Deployment metadata and packaged release
+.vercel/
+release/

@@ -1,0 +1,10 @@
+.git/
+.env
+.env.*
+node_modules/
+dist/
+release/
+test-results/
+playwright-report/
+assets/concepts/
+private/
