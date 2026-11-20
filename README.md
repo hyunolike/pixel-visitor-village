@@ -20,6 +20,8 @@
 - **화면에 보일 때 움직임 재생** — 숨겨진 탭과 화면 밖에서는 멈춥니다. 운영체제의 모션 줄이기 설정과 수동 정지도 반영합니다.
 - **블로그 안의 정해진 영역에 표시** — 반응형 크기를 지원하고, 캔버스가 본문 링크나 모바일 스크롤을 가로채지 않습니다.
 
+캐릭터 개선 개발 버전에는 의상과 표정이 다른 **20×28px 캐릭터 8종**, 앞/옆/뒤 방향과 4프레임 걷기, 눈 깜박임이 들어 있습니다. [확대 시트](docs/assets/characters-v2.png)와 [실제 마을 적용 화면](docs/assets/village-characters-v2.png)을 볼 수 있습니다. 이 개선본은 아직 공개 배포 전이며, 위의 대표 화면과 아래 계절별 화면은 기존 공개 배포 버전입니다.
+
 ## 계절별 마을
 
 기본 테마는 날짜와 관계없이 **크리스마스**입니다. 데모의 ‘나무 꾸미기’에서 바로 바꿔 볼 수 있습니다.
@@ -90,6 +92,7 @@ flowchart TD
 | 입력 검증과 이동 계산 | TypeScript · [`model.ts`](src/model.ts) |
 | 화면 그리기 | PixiJS 8, WebGL · [`renderer.ts`](src/renderer.ts) |
 | 나무와 마을 그림 | PNG, Canvas 2D로 만든 텍스처 · [`art.ts`](src/art.ts), [`themes.ts`](src/themes.ts) |
+| 캐릭터 그림과 동작 | 자체 RGBA 픽셀 프레임과 공유 아틀라스 · [`characters.ts`](src/characters.ts), [`character-motion.ts`](src/character-motion.ts) |
 | 설치 코드 생성 | 브라우저 안에서 주소 정규화와 코드 생성 · [`install-model.ts`](src/install-model.ts) |
 | 빌드와 배포 | Vite, Vercel · [`vite.widget.config.ts`](vite.widget.config.ts), [`vercel.json`](vercel.json) |
 
@@ -103,7 +106,9 @@ pixel-visitor-village/
 │   ├── visitor-village.ts       # 공개 웹 컴포넌트
 │   ├── model.ts                # 방문자 수 검증과 이동 모델
 │   ├── renderer.ts             # PixiJS 화면과 자원 관리
-│   ├── art.ts / themes.ts      # 픽셀 그림과 계절 설정
+│   ├── art.ts / themes.ts      # 마을 그림과 계절 설정
+│   ├── characters.ts          # 8종 캐릭터의 픽셀 프레임
+│   ├── character-motion.ts    # 방향, 걷기와 표정 선택
 │   ├── demo.ts / demo.css      # 마을 시연 화면
 │   ├── install*.ts / *.css     # 설치 도우미와 스타일
 │   └── assets/                 # 배포용 크리스마스 나무
@@ -187,7 +192,7 @@ pnpm preview   # http://127.0.0.1:4178/
 | [나무 원본과 생성 기록](assets/concepts/README.md) | AI로 생성한 크리스마스 트리 시안과 프롬프트 |
 | [화면 캡처 안내](docs/assets/README.md) | 이 README에 사용한 실제 화면의 출처와 촬영 조건 |
 
-크리스마스 트리의 배포용 이미지는 [`src/assets/christmas-tree.png`](src/assets/christmas-tree.png)입니다. 다른 계절의 나무와 캐릭터, 배경은 `src/art.ts`에서 직접 그립니다. 외부 게임 에셋은 사용하지 않았습니다.
+크리스마스 트리의 배포용 이미지는 [`src/assets/christmas-tree.png`](src/assets/christmas-tree.png)입니다. 다른 계절의 나무와 배경은 `src/art.ts`, 개선 캐릭터는 `src/characters.ts`에서 직접 그립니다. 외부 게임 에셋은 사용하지 않았습니다.
 
 ## README 구성 참고
 

@@ -1,20 +1,12 @@
 import type { Season } from './model';
 import { themes, type Theme } from './themes';
 export const hash=(n:number)=>{const value=Math.sin(n*127.1+31.7)*43758.5453;return value-Math.floor(value);};
-const palette=['#b96463','#5a8e9b','#d1aa62','#758966','#9c7da0','#9d7766'];
 export function surface(width:number,height:number) {
   const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(width));canvas.height=Math.max(1,Math.round(height));
   const ctx=canvas.getContext('2d');if(!ctx) throw new Error('2D 그래픽을 사용할 수 없어요.');
   ctx.imageSmoothingEnabled=false;return {canvas,ctx};
 }
 function brush(ctx:CanvasRenderingContext2D) {return (x:number,y:number,w:number,h:number,color:string)=>{ctx.fillStyle=color;ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));};}
-export function visitorArt(color:number,frame:number) {
-  const {canvas,ctx}=surface(13,19),r=brush(ctx),coat=palette[color%palette.length];
-  r(3,17,7,2,'#45605244');r(4,4,5,4,'#d6af89');r(3,2,7,3,coat);r(4,1,5,2,coat);
-  r(3,8,7,5,coat);r(2,8,2,4,coat);r(10,9,1,3,'#c6a17f');r(4,13,2,3-frame,'#49535b');r(7,13,2,2+frame,'#49535b');r(4,8,5,1,'#e1cfaa');r(8,5,1,1,'#4e463e');
-  if(color%3===0) {r(9,12,4,4,'#b77d51');r(9,11,4,1,'#e5c592');}
-  return canvas;
-}
 function house(ctx:CanvasRenderingContext2D,x:number,y:number,s:number,t:Theme,snow:boolean) {
   const r=brush(ctx),width=34*s,height=22*s;
   r(x-width/2,y-height,width,height,t.wall);r(x-width/2,y-height,width,3*s,'#7f6b5c');
