@@ -6,9 +6,11 @@
 
 [마을 구경하기](https://pixel-visitor-village.vercel.app/) · [티스토리 설치하기](https://pixel-visitor-village.vercel.app/install.html) · [설치 코드](examples/tistory-snippet.html)
 
-![크리스마스 트리와 눈 덮인 마을을 돌아다니는 픽셀 캐릭터들](docs/assets/village-christmas.png)
+[![방문자 수가 늘며 캐릭터가 모이는 작은 방문자 마을 소개 영상 미리보기](docs/assets/intro-preview.gif)](https://pixel-visitor-village.vercel.app/#intro-film)
 
-*실제 배포 화면을 캡처했습니다. 미리보기의 방문자 24명은 시연용 숫자입니다.*
+**20초 소개 영상** — 위 미리보기는 README에서 자동으로 움직입니다. 클릭하면 데모의 영상 영역으로 이동합니다. [썸네일](public/media/intro-poster.jpg) · [MP4](public/media/intro.mp4) · [제작과 음원 출처](docs/features/visitor-village/intro-media.md)
+
+*실제 마을 그림과 이동 코드를 사용해 Claude Code의 brag 스킬로 제작했습니다. 영상 속 방문자 24명은 시연용 숫자입니다. 새 영상 플레이어는 이 브랜치에 반영했으며, 운영 사이트에는 후속 배포가 필요합니다.*
 
 [주요 기능](#주요-기능) · [계절별 마을](#계절별-마을) · [티스토리 설치](#티스토리-설치) · [동작 구조](#동작-구조) · [로컬 개발](#로컬-개발) · [문서](#문서와-에셋)
 
@@ -20,7 +22,7 @@
 - **화면에 보일 때 움직임 재생** — 숨겨진 탭과 화면 밖에서는 멈춥니다. 운영체제의 모션 줄이기 설정과 수동 정지도 반영합니다.
 - **블로그 안의 정해진 영역에 표시** — 반응형 크기를 지원하고, 캔버스가 본문 링크나 모바일 스크롤을 가로채지 않습니다.
 
-캐릭터 개선 개발 버전에는 의상과 표정이 다른 **20×28px 캐릭터 8종**, 앞/옆/뒤 방향과 4프레임 걷기, 눈 깜박임이 들어 있습니다. [확대 시트](docs/assets/characters-v2.png)와 [실제 마을 적용 화면](docs/assets/village-characters-v2.png)을 볼 수 있습니다. 이 개선본은 아직 공개 배포 전이며, 위의 대표 화면과 아래 계절별 화면은 기존 공개 배포 버전입니다.
+의상과 표정이 다른 **20×28px 캐릭터 8종**, 앞/옆/뒤 방향과 4프레임 걷기, 눈 깜박임이 들어 있습니다. 캐릭터 개선은 운영 사이트에 반영됐습니다. [확대 시트](docs/assets/characters-v2.png)와 [실제 마을 적용 화면](docs/assets/village-characters-v2.png)을 볼 수 있습니다. 아래 계절별 이미지는 초기 공개 배포 버전의 캡처입니다.
 
 ## 계절별 마을
 
@@ -190,6 +192,7 @@ pnpm preview   # http://127.0.0.1:4178/
 | [배포와 설치](docs/features/visitor-village/deployment.md) | Vercel 설정과 설치 확인 기록 |
 | [독립 검토 기록](docs/features/visitor-village/reviews/) | 코드와 설치 흐름 검토 결과 |
 | [나무 원본과 생성 기록](assets/concepts/README.md) | AI로 생성한 크리스마스 트리 시안과 프롬프트 |
+| [소개 영상 제작과 출처](docs/features/visitor-village/intro-media.md) | Claude Code brag 실행, 영상 정보와 음악 라이선스 |
 | [화면 캡처 안내](docs/assets/README.md) | 이 README에 사용한 실제 화면의 출처와 촬영 조건 |
 
 크리스마스 트리의 배포용 이미지는 [`src/assets/christmas-tree.png`](src/assets/christmas-tree.png)입니다. 다른 계절의 나무와 배경은 `src/art.ts`, 개선 캐릭터는 `src/characters.ts`에서 직접 그립니다. 외부 게임 에셋은 사용하지 않았습니다.

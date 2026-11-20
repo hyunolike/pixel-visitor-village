@@ -28,3 +28,11 @@
 - [개선 캐릭터가 표시된 크리스마스 마을](village-characters-v2.png): 1082 × 541px.
 
 확대 시트는 `src/characters.ts`의 실제 RGBA 프레임을 Canvas에 그린 검토용 화면입니다. 마을 화면은 데모의 `<visitor-village>` 영역이며 방문자 24명은 시연용입니다. Google Chrome headless와 기기 배율 1을 사용했고, 이동 후 정지한 상태를 촬영했습니다. 별도 그림 목업이나 외부 스프라이트를 사용하지 않았습니다.
+
+## 소개 영상 미디어
+
+- `intro-preview.gif`: Claude Code의 실제 brag 산출물에서 0.07~7.07초를 추출한 720×406px, 12fps 자동 움직임 미리보기. 음성/음악은 GIF에 포함되지 않는다.
+- [`../../public/media/intro-poster.jpg`](../../public/media/intro-poster.jpg): 영상 19.5초의 정착 장면. 1920×1080px.
+- [`../../public/media/intro.mp4`](../../public/media/intro.mp4): 1920×1080px, 30fps, 600프레임, 20.000초 H.264/AAC 영상. 첫 프레임에 포스터를 구웠다.
+
+실제 프로젝트의 model/art/characters/character-motion을 재사용해 프레임별로 재현 가능한 마을을 그렸다. 제품 위젯의 PixiJS 실시간 화면을 녹화한 것으로 설명하지 않는다. [제작 과정과 음원 출처](../features/visitor-village/intro-media.md)를 참고한다.
