@@ -1,8 +1,9 @@
 import { Application, Container, Graphics, Rectangle, Sprite, Texture } from 'pixi.js';
 import treeUrl from './assets/christmas-tree.png';
-import { backdrop, hash, seasonalTree, surface, treeGlow } from './art';
+import { hash, seasonalTree, surface, treeGlow } from './art';
 import { getTreeLayout, VillageModel, type Season } from './model';
 import { themes } from './themes';
+import { createVillageScene,type VillageScenery } from './environment';
 import { CHARACTER_WIDTH, CHARACTER_HEIGHT, VISITOR_STYLES, VISITOR_FACINGS, visitorPixels } from './characters';
 import { visitorPose, type VisitorPose } from './character-motion';
 
@@ -26,6 +27,9 @@ export class VillageRenderer {
   private pose:VisitorPose={facing:'front',flip:false,frame:0};
   private people:Sprite[]=[];
   private backgroundTexture:Texture|undefined;
+  private sceneryAtlas:Texture|undefined;
+  private sceneryFrames:Texture[]=[];
+  private scenerySprites:Sprite[]=[];
   private glowTexture:Texture|undefined;
   private dead=false;
   private glowEnabled=true;
@@ -85,14 +89,39 @@ export class VillageRenderer {
   setTheme() {
     if(this.dead)return;
     const {width,height}=this.app.screen;
+    const scene=createVillageScene(width,height,this.model.season);
     const previous=this.backgroundTexture;
-    this.backgroundTexture=Texture.from(backdrop(width,height,this.model.season));
+    this.backgroundTexture=Texture.from(scene.ground);
     this.backgroundTexture.source.scaleMode='nearest';this.background.texture=this.backgroundTexture;previous?.destroy(true);
+    this.setScenery(scene.objects);
     this.tree.texture=this.trees.get(this.model.season)!;
     const layout=getTreeLayout(width,height);
     this.tree.position.set(layout.x,layout.base);this.tree.width=layout.size;this.tree.height=layout.size;this.tree.zIndex=layout.base;
     this.glow.position.set(layout.x,layout.base-layout.size*.35);this.glow.width=layout.size*.85;this.glow.height=layout.size*.85;this.glow.zIndex=layout.base+.01;
     this.renderState();this.app.render();
+  }
+
+  private clearScenery() {
+    for(const sprite of this.scenerySprites){sprite.removeFromParent();sprite.destroy();}
+    for(const texture of this.sceneryFrames)texture.destroy();
+    this.sceneryAtlas?.destroy(true);
+    this.scenerySprites=[];this.sceneryFrames=[];this.sceneryAtlas=undefined;
+  }
+
+  private setScenery(props:VillageScenery[]) {
+    this.clearScenery();
+    if(!props.length)return;
+    const atlas=surface(props.reduce((sum,prop)=>sum+prop.width,0),Math.max(...props.map(prop=>prop.height)));
+    this.sceneryAtlas=Texture.from(atlas.canvas);this.sceneryAtlas.source.scaleMode='nearest';
+    let offset=0;
+    for(const prop of props) {
+      atlas.ctx.drawImage(prop.canvas,offset,0);
+      const texture=new Texture({source:this.sceneryAtlas.source,frame:new Rectangle(offset,0,prop.width,prop.height)});
+      this.sceneryFrames.push(texture);
+      const sprite=new Sprite(texture);sprite.anchor.set(.5,1);sprite.position.set(prop.x,prop.y);sprite.zIndex=prop.y;
+      this.scenerySprites.push(sprite);this.objects.addChild(sprite);offset+=prop.width;
+    }
+    this.sceneryAtlas.source.update();
   }
 
   setGlow(enabled:boolean) {this.glowEnabled=enabled;this.renderState();this.app.render();}
@@ -130,6 +159,7 @@ export class VillageRenderer {
   play(active:boolean) {if(this.dead)return;active?this.app.start():this.app.stop();}
   destroy() {
     if(this.dead)return;this.dead=true;
+    this.clearScenery();
     if(this.initialized)this.app.destroy(true,{children:true});
     this.backgroundTexture?.destroy(true);this.glowTexture?.destroy(true);
     for(const texture of this.frames.flat(2))texture.destroy();
