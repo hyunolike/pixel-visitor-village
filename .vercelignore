@@ -8,3 +8,6 @@ test-results/
 playwright-report/
 assets/concepts/
 private/
+
+# Editable brag composition and full-resolution renders stay local.
+brag-output/

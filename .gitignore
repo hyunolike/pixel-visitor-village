@@ -28,3 +28,6 @@ Thumbs.db
 # Deployment metadata and packaged release
 .vercel/
 release/
+
+# Editable brag composition and full-resolution renders stay local.
+brag-output/
