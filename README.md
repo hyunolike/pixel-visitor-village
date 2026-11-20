@@ -10,7 +10,7 @@
 
 **20초 소개 영상** — 위 미리보기는 README에서 자동으로 움직입니다. 클릭하면 데모의 영상 영역으로 이동합니다. [썸네일](public/media/intro-poster.jpg) · [MP4](public/media/intro.mp4) · [제작과 음원 출처](docs/features/visitor-village/intro-media.md)
 
-*실제 마을 그림과 이동 코드를 사용해 Claude Code의 brag 스킬로 제작했습니다. 영상 속 방문자 24명은 시연용 숫자입니다. 새 영상 플레이어는 이 브랜치에 반영했으며, 운영 사이트에는 후속 배포가 필요합니다.*
+*실제 마을 그림과 이동 코드를 사용해 Claude Code의 brag 스킬로 제작했습니다. 영상 속 방문자 24명은 시연용 숫자입니다. 소개 영상은 운영 사이트에서 재생할 수 있습니다. 영상은 환경 에셋 개선 전 버전의 고정 렌더입니다.*
 
 [주요 기능](#주요-기능) · [계절별 마을](#계절별-마을) · [티스토리 설치](#티스토리-설치) · [동작 구조](#동작-구조) · [로컬 개발](#로컬-개발) · [문서](#문서와-에셋)
 
@@ -22,11 +22,13 @@
 - **화면에 보일 때 움직임 재생** — 숨겨진 탭과 화면 밖에서는 멈춥니다. 운영체제의 모션 줄이기 설정과 수동 정지도 반영합니다.
 - **블로그 안의 정해진 영역에 표시** — 반응형 크기를 지원하고, 캔버스가 본문 링크나 모바일 스크롤을 가로채지 않습니다.
 
-의상과 표정이 다른 **20×28px 캐릭터 8종**, 앞/옆/뒤 방향과 4프레임 걷기, 눈 깜박임이 들어 있습니다. 캐릭터 개선은 운영 사이트에 반영됐습니다. [확대 시트](docs/assets/characters-v2.png)와 [실제 마을 적용 화면](docs/assets/village-characters-v2.png)을 볼 수 있습니다. 아래 계절별 이미지는 초기 공개 배포 버전의 캡처입니다.
+의상과 표정이 다른 **20×28px 캐릭터 8종**, 앞/옆/뒤 방향과 4프레임 걷기, 눈 깜박임이 들어 있습니다. 캐릭터 개선은 운영 사이트에 반영됐습니다. [확대 시트](docs/assets/characters-v2.png)와 [실제 마을 적용 화면](docs/assets/village-characters-v2.png)을 볼 수 있습니다. 아래 계절별 이미지는 주변 환경까지 개선한 로컬 개발 버전의 캡처입니다. 새 환경의 운영 반영에는 후속 배포가 필요합니다.
 
 ## 계절별 마을
 
 기본 테마는 날짜와 관계없이 **크리스마스**입니다. 데모의 ‘나무 꾸미기’에서 바로 바꿔 볼 수 있습니다.
+
+집의 기와 지붕과 창틀, 가게 차양, 돌길과 벤치를 새로 그렸습니다. 꽃과 열매, 낙엽과 눈으로 계절을 구분하고, 집과 소품은 캐릭터의 발 위치에 따라 앞뒤로 표시합니다. [나무와 소품 확대 시트](docs/assets/environment-v2.png)에서 디테일을 볼 수 있습니다.
 
 <table>
   <tr>
@@ -93,7 +95,8 @@ flowchart TD
 | 삽입과 스타일 분리 | Web Components, Shadow DOM · [`visitor-village.ts`](src/visitor-village.ts) |
 | 입력 검증과 이동 계산 | TypeScript · [`model.ts`](src/model.ts) |
 | 화면 그리기 | PixiJS 8, WebGL · [`renderer.ts`](src/renderer.ts) |
-| 나무와 마을 그림 | PNG, Canvas 2D로 만든 텍스처 · [`art.ts`](src/art.ts), [`themes.ts`](src/themes.ts) |
+| 나무 그림 | 크리스마스 PNG와 자체 Canvas 픽셀 그림 · [`art.ts`](src/art.ts), [`themes.ts`](src/themes.ts) |
+| 마을 환경과 배치 | 바닥, 집과 소품의 공유 아틀라스 · [`environment.ts`](src/environment.ts), [`environment-layout.ts`](src/environment-layout.ts), [`pixel-art.ts`](src/pixel-art.ts) |
 | 캐릭터 그림과 동작 | 자체 RGBA 픽셀 프레임과 공유 아틀라스 · [`characters.ts`](src/characters.ts), [`character-motion.ts`](src/character-motion.ts) |
 | 설치 코드 생성 | 브라우저 안에서 주소 정규화와 코드 생성 · [`install-model.ts`](src/install-model.ts) |
 | 빌드와 배포 | Vite, Vercel · [`vite.widget.config.ts`](vite.widget.config.ts), [`vercel.json`](vercel.json) |
@@ -108,7 +111,10 @@ pixel-visitor-village/
 │   ├── visitor-village.ts       # 공개 웹 컴포넌트
 │   ├── model.ts                # 방문자 수 검증과 이동 모델
 │   ├── renderer.ts             # PixiJS 화면과 자원 관리
-│   ├── art.ts / themes.ts      # 마을 그림과 계절 설정
+│   ├── art.ts / themes.ts      # 계절 나무와 테마 설정
+│   ├── environment.ts          # 지형, 집과 거리 소품 그림
+│   ├── environment-layout.ts   # 반응형 소품 배치
+│   ├── pixel-art.ts            # 공통 픽셀 그리기 도구
 │   ├── characters.ts          # 8종 캐릭터의 픽셀 프레임
 │   ├── character-motion.ts    # 방향, 걷기와 표정 선택
 │   ├── demo.ts / demo.css      # 마을 시연 화면
@@ -195,7 +201,7 @@ pnpm preview   # http://127.0.0.1:4178/
 | [소개 영상 제작과 출처](docs/features/visitor-village/intro-media.md) | Claude Code brag 실행, 영상 정보와 음악 라이선스 |
 | [화면 캡처 안내](docs/assets/README.md) | 이 README에 사용한 실제 화면의 출처와 촬영 조건 |
 
-크리스마스 트리의 배포용 이미지는 [`src/assets/christmas-tree.png`](src/assets/christmas-tree.png)입니다. 다른 계절의 나무와 배경은 `src/art.ts`, 개선 캐릭터는 `src/characters.ts`에서 직접 그립니다. 외부 게임 에셋은 사용하지 않았습니다.
+크리스마스 트리의 배포용 이미지는 [`src/assets/christmas-tree.png`](src/assets/christmas-tree.png)입니다. 다른 계절의 나무는 `src/art.ts`, 지형과 집, 거리 소품은 `src/environment.ts`, 개선 캐릭터는 `src/characters.ts`에서 직접 그립니다. 외부 게임 에셋은 사용하지 않았습니다.
 
 ## README 구성 참고
 
