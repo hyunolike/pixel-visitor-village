@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17332c"><title>블로그에 설치하기 | 작은 방문자 마을</title></head>
+<body><main class="install-page">
+  <header><a href="./index.html">작은 방문자 마을</a><span>티스토리 설치</span></header>
+  <section class="intro-copy"><h1>내 블로그에<br>작은 마을을 초대하세요.</h1><p>주소를 넣고 코드를 복사한 뒤, 스킨에 한 번 붙여 넣으면 됩니다.</p></section>
+  <form id="install-form" novalidate>
+    <label for="blog-url">티스토리 주소</label><input id="blog-url" type="text" inputmode="url" placeholder="myblog.tistory.com" autocomplete="url" required aria-describedby="blog-help">
+    <p id="blog-help">티스토리 기본 주소나 연결한 개인 도메인을 입력해 주세요.</p>
+    <label for="install-season">처음 보여 줄 나무</label><select id="install-season"><option value="christmas">크리스마스</option><option value="spring">봄 · 꽃나무</option><option value="summer">여름 · 푸른 나무</option><option value="autumn">가을 · 단풍나무</option><option value="winter">겨울 · 눈꽃나무</option></select>
+    <button type="submit">설치 코드 만들기</button><p id="install-error" role="alert"></p>
+  </form>
+  <section id="install-result" hidden aria-label="설치 코드와 관리자 링크">
+    <p id="normalized-blog"></p><h2>코드를 복사하세요.</h2><textarea id="install-code" aria-label="티스토리 설치 코드" readonly spellcheck="false" rows="9"></textarea>
+    <div class="copy-row"><button id="copy-code" type="button">코드 복사</button><span id="copy-state" role="status" aria-live="polite"></span></div>
+    <h2>내 블로그 스킨에 붙여 넣으세요.</h2><p>관리자에서 <strong>꾸미기 → 스킨 편집 → HTML 편집</strong>을 열고, 마을을 넣을 위치에 코드를 붙여 넣어 저장하세요.</p>
+    <a id="admin-link" class="admin-button" target="_blank" rel="noopener noreferrer">내 블로그 관리자 열기</a>
+    <p class="last-step">주소 입력만으로 설치되지는 않습니다. 최초 한 번은 블로그 소유자가 코드를 붙여 넣어야 해요. 이후 페이지를 열면 오늘 방문자 수를 사용합니다.</p>
+  </section>
+  <footer>계절은 설치 코드의 season 값으로 바꿀 수 있어요. <a href="./index.html">마을 시연 보기</a></footer>
+</main><script type="module" src="/src/install.ts"></script></body></html>
