@@ -119,3 +119,34 @@ https://pixel-visitor-village.vercel.app/install.html 에서 블로그 주소를
 - [독립 읽기 전용 코드 검토](reviews/environment-2026-11-20.md): 확정된 중요 문제 없음. 공유 소스 해제와 테마/크기 변경, 프레임별 재생성 방지, 깊이 정렬을 확인했다.
 - 계절별 README PNG와 출처 설명을 새 로컬 캡처로 교체했다. 소개 영상/포스터/GIF는 이전 환경 버전의 고정 렌더를 유지한다.
 - 구현 단계 종료 시 `feat/village-environment-art`에 미커밋 상태로 전달했다. 이후 사용자가 “커밋 풀리퀘 진행해줘”로 요청해 같은 브랜치에서 최종 검증 후 커밋/푸시와 `main` 대상 PR을 진행한다. 공개 배포와 실제 티스토리 스킨 검증은 이번 요청에 포함하지 않는다. 로컬 확인 주소는 `http://127.0.0.1:5196/`다.
+
+## 2026-11-21 Cloudflare Pages 이전
+
+- [x] Vercel 402/DEPLOYMENT_DISABLED와 무료 플랜 조건 확인, 사용자 Pages 이전 요청 확인.
+- [x] 최신 main `234e854`로 동기화 후 `feat/cloudflare-pages` 생성, 기준 단위 60/60 통과.
+- [x] Wrangler OAuth와 대상 계정/무료 프로젝트 확인.
+- [x] Pages 헤더/404/설정과 배포 파일 중복 제거.
+- [x] 실제 주소와 README/설치 예제/배포 문서 갱신.
+- [x] 로컬 단위/타입/빌드/브라우저/Pages 응답 검증과 독립 검토.
+- [x] 무료 공개 배포와 비로그인 HTTPS/외부 삽입/영상/모바일 검증.
+
+배포는 사용자 요청으로 승인됐다. 커밋/푸시와 GitHub 자동 배포, 유료 서비스나 도메인 구매는 수행하지 않는다. 실제 티스토리 스킨과 모바일 실기기 확인은 완료로 기록하지 않는다.
+
+
+### 2026-11-23 재개와 공개 검증 결과
+
+- 앱 업데이트로 중단된 상태에서 재개했다. 기존 사용자 OAuth의 계정/Pages 권한을 확인했으며 새 인증을 요청하거나 토큰을 출력/저장소에 기록하지 않았다.
+- Wrangler 4.166.0의 최초 create 명령이 Workers로 위임돼 entry-point 오류로 실패했다. 설치된 공식 CLI 구현과 오류를 확인한 뒤 `pages project create --force`로 요청한 Pages 프로젝트를 생성했다. 이후 deploy는 `--force` 없이 기존 Pages 프로젝트를 대상으로 성공했다.
+- 정식 주소: https://pixel-visitor-village.pages.dev/ ; 고유 배포: https://d2990b28.pixel-visitor-village.pages.dev/ . Production branch는 main이다. 소스는 `234e854`에 이번 미커밋 호스팅 설정을 더한 작업 트리로, 새 커밋이나 자동 Git 배포로 설명하지 않는다.
+- 현재 작업 트리의 `pnpm test` 60/60, `pnpm build`의 타입/사이트/위젯 빌드, `pnpm test:e2e` 22/22 통과.
+- Pages 로컬 런타임 4186과 실제 공개 HTTPS에서 홈/설치/포스터 200, 없는 위젯 파일 404, JS MIME/CORS/5분 캐시/보안 헤더를 확인했다.
+- 공개 위젯 SHA-256 `ca2e663fd4cb478b6fe0e81d80e66265746df8c9aca42e306315e24fc19af37e`는 검증한 로컬 빌드와 일치한다. 공개 캐시 헤더: `public, max-age=300, must-revalidate`.
+- 로그인 없는 Chrome에서 5개 계절/24명/방문자 ID와 위치 보존, 390px 화면과 넘침 없음, 새 origin의 설치 코드와 치환자 보존, 별도 출처 37명 위젯 로드를 확인했다. 24와 37은 시연/검증 값이다. 페이지 스크립트 오류 없음.
+- MP4 Range 요청 응답은 200 `video/mp4`였다. 실제 영상은 20초, 음소거/인라인 재생과 currentTime 진행을 확인했다. 206 지원이나 Safari/iOS 실기기 호환을 검증했다고 기록하지 않는다.
+- [독립 읽기 전용 설정 검토](reviews/cloudflare-2026-11-23.md): 확정된 중요 문제 없음. 첫 검토는 앱 중단으로 결과를 받지 못해 완료로 세지 않았고, 재개 후 별도 검토 결과를 받았다.
+- 커밋/푸시/새 PR과 GitHub 자동 배포, 유료 서비스, 기존 Vercel 프로젝트 삭제는 수행하지 않았다. 실제 티스토리 스킨 설치는 소유자가 새 설치 코드로 적용한 후 확인해야 한다.
+
+
+### 2026-11-23 PR 진행
+
+공개 배포와 검증 후 사용자가 “풀리퀘 해줘”로 요청했다. 같은 `feat/cloudflare-pages` 브랜치에서 최종 검증 후 호스팅 설정과 문서를 커밋/푸시하고 `main` 대상 PR을 생성한다. 위 배포 당시 미커밋 소스 기록은 당시 상태로 유지한다. 이번 Git 반영을 새 Cloudflare 배포나 GitHub 자동 배포 설정으로 설명하지 않는다.

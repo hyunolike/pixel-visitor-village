@@ -1,52 +1,68 @@
 # 배포와 티스토리 설치
 
-현재 단계: Vercel production 배포와 공개 URL 검증을 완료했다. 사용자가 Vercel 공개 배포를 명시적으로 요청했다. 대상 티스토리 주소는 아직 제공되지 않았으며, 설치 도우미에서 소유자가 주소를 입력하고 최초 한 번 코드를 붙여 넣도록 한다. 대화 안 미리보기 호환 문제는 사용자 요청으로 보류한다.
+현재 공개 호스트는 **Cloudflare Pages Free**다. 2026-11-23 KST에 무료 정적 배포와 로그인 없는 공개 접근, 외부 출처 위젯 로드를 확인했다. 사용자가 무료 요금 비교 뒤 Pages 이전을 요청했다. 실제 티스토리 스킨 설치와 모바일 실기기 확인은 아직 남아 있다.
 
-## 배포 방식
+## 공개 주소와 배포 상태
 
-별도 서버나 데이터베이스가 필요 없는 정적 웹사이트다. Vercel은 현재 로그인된 `hyunolike` 계정의 `hyunho-jangs-projects` 팀을 후보로 확인했다. 기존 프로젝트를 재사용한다고 가정하지 않는다. 새 프로젝트명 후보는 `pixel-visitor-village`다.
+- 마을: https://pixel-visitor-village.pages.dev/
+- 설치 도우미: https://pixel-visitor-village.pages.dev/install.html
+- 독립 모듈: https://pixel-visitor-village.pages.dev/widget/visitor-village.js
+- 이번 고유 배포: https://d2990b28.pixel-visitor-village.pages.dev/
+- 프로젝트: `pixel-visitor-village`, production branch: `main`, 방식: Wrangler Direct Upload.
+- 계정 ID: `96dc7e6d07c8cb414af597acfec30146`. 인증은 사용자 OAuth를 사용하며 인증 값은 저장소와 명령 인자에 넣지 않는다.
+- 소스: 병합 커밋 `234e854`와 미커밋 Pages 호스팅 설정. 배포 당시에는 커밋/푸시와 새 PR을 만들지 않았다. 이후 사용자 PR 요청에 따라 같은 브랜치에서 커밋/푸시와 `main` 대상 PR을 진행한다. GitHub 자동 배포는 구성하지 않았다.
 
-Vercel 설정은 `pnpm build`를 실행하고 `dist`만 웹사이트로 제공한다. `/widget/*`에 외부 ES 모듈 사용을 위한 `Access-Control-Allow-Origin: *`를 설정한다. 인증 정보가 없는 공개 정적 파일에만 적용한다. 이름이 고정된 모듈은 5분 캐시와 재검증을 사용한다.
+## 정적 배포 구성
 
-설정 근거: [Vercel 프로젝트 설정](https://vercel.com/docs/project-configuration), [응답 헤더](https://vercel.com/docs/headers).
+서버와 데이터베이스, Pages Functions 없이 `pnpm build`의 `dist`만 제공한다. 원본 에셋과 소스, 인증/개인 스킨, `node_modules`, 테스트 결과와 `brag-output`을 배포하지 않는다. 현재 23개 로컬 출력 파일은 총 5,401,335bytes이며 가장 큰 MP4는 2,979,821bytes다. `dist/widget`에는 독립 JavaScript 한 개만 둔다. 업로더는 `_headers`를 별도 처리하고 나머지 22개 파일을 올렸다.
 
-## 실제 배포 전 확인할 내용
+`wrangler.jsonc`는 이름/출력/호환 날짜를 고정한다. `public/_headers`는 `/widget/*`에 CORS `*`, `public, max-age=300, must-revalidate`, `nosniff`를 적용한다. `public/404.html`로 없는 JS 경로가 기본 SPA HTML 200으로 바뀌지 않게 한다. `vite.widget.config.ts`의 `publicDir: false`는 영상과 설정의 중복 복사를 막는다.
 
-- 사용자가 Vercel 공개 배포에 동의했고 올바른 계정/팀/프로젝트를 대상으로 하는지 확인한다.
-- 이 변경은 아직 미커밋 상태다. Git에 없는 코드를 배포할 경우 배포 대상 파일과 해시를 기록한다. 별도 요청 없이 커밋이나 푸시하지 않는다.
-- 배포가 끝나면 로그인하지 않은 요청에서 HTML과 `/widget/visitor-village.js`가 200으로 열리는지 확인한다. 티스토리에서 읽을 위젯 파일에 로그인 화면이 반환되면 설치 완료로 보지 않는다.
-- 모듈의 JavaScript MIME과 CORS 헤더를 실제 HTTPS 응답에서 확인한다. 로컬 브라우저 검증만으로 Vercel 헤더까지 검증했다고 기록하지 않는다.
+설치 도우미는 자기 origin을 기준으로 모듈 URL을 생성한다. 서버에서 블로그에 접근하거나 비밀번호를 받지 않는다.
+
+## 다시 배포하는 방법
+
+Node.js 22.12 이상과 pnpm 10, 사용자 Cloudflare 로그인을 사용한다.
+
+```bash
+npx --yes wrangler@4.166.0 whoami
+pnpm build
+pnpm test
+pnpm test:e2e
+npx --yes wrangler@4.166.0 pages deploy dist --project-name pixel-visitor-village --branch main
+```
+
+새 배포를 실행할 때 대상 계정/프로젝트와 소스 상태를 확인한다. 이번처럼 미커밋 배포가 승인된 경우에만 `--commit-dirty=true`를 사용하고 기록에 남긴다. 위 명령은 직접 배포하며 GitHub push에 따른 자동 배포는 구성하지 않았다.
+
+Wrangler 4.166.0은 최초 Pages 생성 명령을 Workers로 위임할 수 있다. 이번에는 요청한 Pages를 직접 만들기 위해 `pages project create pixel-visitor-village --production-branch main --force`를 한 번 사용했다. 이미 존재하는 이 프로젝트의 이후 배포에는 `--force`가 필요 없다.
+
+Direct Upload 프로젝트를 나중에 Pages 기본 Git 통합으로 전환할 수는 없다. 자동화가 필요하면 외부 CI에서 Wrangler로 업로드하거나 새 Git 통합 프로젝트를 만든다. 자동화 설정과 토큰/Secret 생성은 이번에 수행하지 않았다.
+
+근거: [Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/), [Headers](https://developers.cloudflare.com/pages/configuration/headers/), [Serving Pages](https://developers.cloudflare.com/pages/configuration/serving-pages/), [무료 제한](https://developers.cloudflare.com/pages/platform/limits/).
+
+## 이번 배포의 실제 확인
+
+- 단위 테스트 60/60, TypeScript와 사이트/모듈 빌드, 기존 Chrome 브라우저 회귀 22/22 통과.
+- 비로그인 HTTPS에서 홈/설치/포스터와 위젯 접근 성공, 없는 `/widget/does-not-exist.js`는 404.
+- 위젯 MIME: `application/javascript`, CORS: `*`, Cache-Control: `public, max-age=300, must-revalidate`, `nosniff` 확인.
+- 공개 모듈 SHA-256: `ca2e663fd4cb478b6fe0e81d80e66265746df8c9aca42e306315e24fc19af37e`. 테스트한 로컬 빌드와 바이트 단위로 일치한다.
+- 실제 공개 Chrome에서 5개 테마의 렌더러 준비와 24명, 계절 전환 시 위치 보존, 390px 화면과 가로 넘침 없음, 설치 코드의 실제 Pages origin과 티스토리 치환자 보존을 확인했다. 스크립트 오류 없음.
+- 별도 HTTP 출처에서 공개 모듈을 불러 크리스마스 37명 위젯을 생성했다. 24와 37은 시연/검증용 값이다.
+- MP4 Range 요청은 200 `video/mp4`였다. Chrome에서 20초 영상의 currentTime 진행과 음소거/인라인 재생을 확인했다. 206 구간 응답이나 Safari/iOS 실기기 호환을 확인한 것으로 해석하지 않는다.
+- [독립 설정 검토](reviews/cloudflare-2026-11-23.md)에서 확정된 중요 문제 없음.
 
 ## 티스토리 설치
 
-1. 사용 중인 스킨을 백업한다.
-2. [설치 코드](../../../examples/tistory-snippet.html)의 `YOUR_HOST`를 공개 배포 호스트명으로 바꾼다. 현재 템플릿에는 실제 주소를 반영했다.
-3. 티스토리 관리자에서 꾸미기 → 스킨 편집 → HTML 편집을 연다.
-4. 마을을 넣을 영역에 코드를 삽입한다. 전체 페이지를 덮는 고정 요소로 넣지 않는다. 오늘 방문자 수 치환자는 기존 스킨의 방문자 수 영역과 같은 처리 문맥에서 사용하는 것이 좋다.
-5. 실제 페이지에서 숫자가 치환됐는지 확인한다. `[##_count_today_##]`가 그대로 남으면 설치 오류이며 임의의 시연 값으로 바꾸지 않는다.
-6. 실제 방문자 수와 캐릭터 수를 확인하고 좁은 화면에서 스크롤과 본문 링크도 확인한다. 티스토리 자동 모바일 스킨을 사용하면 별도 적용 여부를 확인한다.
+1. [설치 도우미](https://pixel-visitor-village.pages.dev/install.html)에 블로그 주소와 계절을 입력하고 코드를 복사한다.
+2. 사용 중인 스킨을 백업한 뒤 티스토리 관리자 → 꾸미기 → 스킨 편집 → HTML 편집을 연다.
+3. 마을을 표시할 위치에 코드를 붙여 넣고 저장한다. 기존 Vercel 스크립트를 넣었다면 새 Pages 주소로 바꾸며 같은 위젯을 중복 삽입하지 않는다.
+4. `[##_count_today_##]`가 실제 오늘 방문자 수로 바뀌고 캐릭터 수와 일치하는지 확인한다. 치환자가 남으면 시연 숫자로 덮어쓰지 말고 스킨 삽입 위치를 확인한다.
+5. 모바일 화면과 스크롤, 본문 링크를 확인한다. 자동 모바일 스킨을 사용하면 그 스킨의 별도 적용 여부도 확인한다.
 
-## 배포 묶음
+주소 입력만으로 원격 스킨이 바뀌지는 않는다. 소유자가 최초 한 번 붙여 넣어야 하며 실제 대상 계정과 스킨 검증은 아직 수행하지 않았다. [정적 예제](../../../examples/tistory-snippet.html)에도 새 Pages 주소를 반영했다.
 
-`release/pixel-visitor-village-0.1.0.tar.gz`에 빌드한 정적 사이트와 설치 코드, SHA-256 목록을 포함한다. 인증 파일, 원본 스킨, node_modules와 테스트 추적 파일은 포함하지 않는다. 배포 묶음의 설치 코드에는 실제 공개 호스트명을 적용했다.
+## 이전 Vercel 기록
 
-## 후속 작업
+이전 주소는 `https://pixel-visitor-village.vercel.app`이며 2026-11-21 확인 당시 홈과 위젯 파일이 HTTP 402 `DEPLOYMENT_DISABLED`를 반환했다. 당시 alias는 `dpl_666mTTaes3k9DMSbvJe7Gi48Wsoz`를 가리켰다. 기존 프로젝트와 `vercel.json`은 삭제하지 않았다.
 
-공개 URL과 실제 스킨 확인 결과를 이 문서에 기록한 뒤 `tasks.md`의 남은 설치 항목을 완료한다. 현재 공개 배포를 승인받아 production 배포를 완료했다. 실제 티스토리 주소와 스킨 적용은 아직 확인하지 않았다.
-
-## 설치 도우미
-
-공개 배포 후 `/install.html`에서 주소를 입력하면 해당 블로그 관리자 링크와 실제 배포 호스트의 위젯 코드가 생성된다. 주소만으로 계정에 접근하거나 스킨을 수정하지 않는다. 티스토리의 공개 API는 [공식 종료 안내](https://notice.tistory.com/2664)에 따라 종료되었으며 이 기능은 API나 비밀번호 수집에 의존하지 않는다.
-
-## 배포 결과와 실제 확인
-
-- production: https://pixel-visitor-village.vercel.app
-- 설치 도우미: https://pixel-visitor-village.vercel.app/install.html
-- 프로젝트: hyunho-jangs-projects/pixel-visitor-village
-- deployment: dpl_87WZRKurrkR53K4c3LmTp354mSXC, READY
-- 소스 상태: feat/seasonal-village의 미커밋 파일. 별도 커밋/푸시는 하지 않았다. Git HEAD의 초기 문서 커밋을 기능 코드의 커밋으로 주장하지 않는다.
-- 로그인 정보 없는 HTTP 요청으로 메인, 설치 페이지와 위젯 파일 접근 성공.
-- 위젯 MIME: application/javascript; charset=utf-8
-- 실제 응답: Access-Control-Allow-Origin: *, Cache-Control: public, max-age=300, must-revalidate, X-Content-Type-Options: nosniff
-- 공개 설치 페이지에서 생성한 코드를 다른 HTTP 출처에서 읽어 크리스마스 캐릭터 37명 생성 확인. 37은 검증용 값이며 실제 티스토리 집계 검증은 아니다.
-- 공개 모듈 SHA-256: `45b01d8d12f5457c53338a2194750e214165c71102722764730ccba1ff67fc5f`. 로컬에서 테스트한 빌드와 바이트 단위로 일치한다.
+최초 배포 당시 만들어 둔 `release/pixel-visitor-village-0.1.0.tar.gz`는 이전 Vercel 주소를 포함한 로컬 보관물이며 이번 Pages 배포 파일로 사용하지 않는다. Pages의 현재 상태와 주소는 위 기록을 따른다.

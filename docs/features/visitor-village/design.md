@@ -167,3 +167,15 @@ GitHub README에 임의 HTML video의 자동 재생을 가정하지 않는다. R
 집은 기와 줄, 창틀, 처마와 포치, 차양/화분으로 구분한다. 돌길은 경계와 작은 포장석을, 숲은 멀고 가까운 층을 만든다. 꽃과 잔디는 작은 군락으로 두고 중앙 광장을 비운다. 사계절 나무는 픽셀 타원 군집에 명암을 주며 꽃/열매/단풍을 수관 안에만 그린다. 겨울은 가지와 그 위에 쌓인 눈 덩이를 그린다.
 
 renderer는 소품을 하나의 공유 아틀라스에 굽고 각각의 발 기준점을 zIndex로 사용한다. 크기/테마 변경 시 기존 프레임 Texture를 해제하고 공유 소스를 한 번 해제한다. 매 프레임에는 기존 캐릭터와 날씨만 갱신한다. 이동 모델에 새 장애물을 추가하지 않으며, 장식과 건물의 원근 표현만 개선한다.
+
+## 2026-11-21 Cloudflare Pages 설계
+
+기존 정적 `dist`를 Wrangler Direct Upload로 배포한다. Git 통합은 향후 자동 배포에 유리하지만 별도 GitHub 앱 연결이 필요하므로 지금의 접속 복구에는 사용하지 않는다. Direct Upload 프로젝트를 나중에 Pages Git 통합 프로젝트로 전환할 수 없으며, 자동화가 필요하면 외부 CI에서 같은 업로드 방식을 쓰거나 새 Git 통합 프로젝트를 만들어야 한다. 이 배포 방식은 구현자 선택이며 사용자에게 진행 중 설명했다.
+
+`wrangler.jsonc`는 프로젝트 이름, 출력 디렉터리와 검증한 런타임 호환 날짜 `2026-11-19`를 선언한다. 런타임 서버, Functions와 데이터 바인딩은 추가하지 않는다. Wrangler는 조사한 공식 최신 버전 `4.166.0`으로 고정해서 npx로 실행한다. 인증 값은 명령 인자, Git와 로그에 기록하지 않는다.
+
+`public/_headers`는 위젯에 CORS/캐시/보안 헤더를 적용한다. 루트 `public/404.html`은 Pages의 기본 SPA 대체 응답을 끄고 잘못된 JS 경로가 HTML 200이 되지 않게 한다. 독립 라이브러리 빌드는 `publicDir: false`로 이미 사이트 빌드가 복사한 영상/예제/헤더를 widget 아래에 중복 복사하지 않는다.
+
+실제 프로젝트 생성 후 반환된 Pages 도메인을 사용한다. 설치 도우미는 현재 origin에서 모듈 URL을 만들므로 제품 코드를 수정할 필요가 없다. README와 정적 스킨 예제만 새 실제 주소로 바꾼다. 기존 Vercel 설정은 수동 대체용으로 남긴다.
+
+근거: [Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/), [Headers](https://developers.cloudflare.com/pages/configuration/headers/), [Serving Pages](https://developers.cloudflare.com/pages/configuration/serving-pages/). Pages의 공식 문서는 Range 요청이 200일 수 있음을 명시하므로 실제 MP4 재생과 응답 상태를 따로 확인한다.
