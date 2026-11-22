@@ -27,6 +27,9 @@ Thumbs.db
 
 # Deployment metadata and packaged release
 .vercel/
+.wrangler/
+.dev.vars
+.dev.vars.*
 release/
 
 # Editable brag composition and full-resolution renders stay local.

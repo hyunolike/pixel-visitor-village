@@ -4,9 +4,9 @@
 
 티스토리의 오늘 방문자 수를 픽셀 캐릭터로 보여 주는 웹 위젯입니다. 커다란 나무 주변에서 캐릭터들이 걷고 쉬며, 크리스마스부터 사계절까지 마을 분위기를 바꿀 수 있습니다.
 
-[마을 구경하기](https://pixel-visitor-village.vercel.app/) · [티스토리 설치하기](https://pixel-visitor-village.vercel.app/install.html) · [설치 코드](examples/tistory-snippet.html)
+[마을 구경하기](https://pixel-visitor-village.pages.dev/) · [티스토리 설치하기](https://pixel-visitor-village.pages.dev/install.html) · [설치 코드](examples/tistory-snippet.html)
 
-[![방문자 수가 늘며 캐릭터가 모이는 작은 방문자 마을 소개 영상 미리보기](docs/assets/intro-preview.gif)](https://pixel-visitor-village.vercel.app/#intro-film)
+[![방문자 수가 늘며 캐릭터가 모이는 작은 방문자 마을 소개 영상 미리보기](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
 
 **20초 소개 영상** — 위 미리보기는 README에서 자동으로 움직입니다. 클릭하면 데모의 영상 영역으로 이동합니다. [썸네일](public/media/intro-poster.jpg) · [MP4](public/media/intro.mp4) · [제작과 음원 출처](docs/features/visitor-village/intro-media.md)
 
@@ -22,7 +22,7 @@
 - **화면에 보일 때 움직임 재생** — 숨겨진 탭과 화면 밖에서는 멈춥니다. 운영체제의 모션 줄이기 설정과 수동 정지도 반영합니다.
 - **블로그 안의 정해진 영역에 표시** — 반응형 크기를 지원하고, 캔버스가 본문 링크나 모바일 스크롤을 가로채지 않습니다.
 
-의상과 표정이 다른 **20×28px 캐릭터 8종**, 앞/옆/뒤 방향과 4프레임 걷기, 눈 깜박임이 들어 있습니다. 캐릭터 개선은 운영 사이트에 반영됐습니다. [확대 시트](docs/assets/characters-v2.png)와 [실제 마을 적용 화면](docs/assets/village-characters-v2.png)을 볼 수 있습니다. 아래 계절별 이미지는 주변 환경까지 개선한 로컬 개발 버전의 캡처입니다. 새 환경의 운영 반영에는 후속 배포가 필요합니다.
+의상과 표정이 다른 **20×28px 캐릭터 8종**, 앞/옆/뒤 방향과 4프레임 걷기, 눈 깜박임이 들어 있습니다. 캐릭터 개선은 운영 사이트에 반영됐습니다. [확대 시트](docs/assets/characters-v2.png)와 [실제 마을 적용 화면](docs/assets/village-characters-v2.png)을 볼 수 있습니다. 아래 계절별 이미지는 주변 환경을 개선한 버전의 로컬 캡처입니다. 같은 환경 에셋은 공개 마을에도 반영됐습니다.
 
 ## 계절별 마을
 
@@ -51,7 +51,7 @@
 
 ## 티스토리 설치
 
-1. [설치 도우미](https://pixel-visitor-village.vercel.app/install.html)에 블로그 주소와 처음 보여 줄 테마를 입력하고 코드를 복사합니다.
+1. [설치 도우미](https://pixel-visitor-village.pages.dev/install.html)에 블로그 주소와 처음 보여 줄 테마를 입력하고 코드를 복사합니다.
 2. 사용 중인 스킨을 백업한 뒤, 티스토리 관리자 → **꾸미기 → 스킨 편집 → HTML 편집**을 엽니다.
 3. 마을을 표시할 위치에 코드를 붙여 넣고 저장합니다. 실제 블로그에서 방문자 수와 모바일 화면을 확인합니다.
 
@@ -62,7 +62,7 @@
 ```html
 <script
   type="module"
-  src="https://pixel-visitor-village.vercel.app/widget/visitor-village.js"
+  src="https://pixel-visitor-village.pages.dev/widget/visitor-village.js"
 ></script>
 
 <visitor-village
@@ -74,7 +74,7 @@
 
 `[##_count_today_##]`는 **티스토리 스킨 HTML에서** 오늘 방문자 수로 치환됩니다. 외부 JavaScript 파일이나 일반 글 본문에 넣는 방식은 지원하지 않습니다. 실제 페이지에 치환자가 그대로 보이면 스킨의 삽입 위치를 확인해야 합니다. 자동 모바일 스킨을 사용하는 경우에도 별도 적용 여부를 확인합니다.
 
-Vercel 공개 배포와 다른 출처에서의 위젯 로드는 확인했습니다. **실제 티스토리 계정의 스킨 설치 검증은 아직 남아 있습니다.** 자세한 확인 순서는 [배포와 설치 안내](docs/features/visitor-village/deployment.md)를 참고하세요.
+Cloudflare Pages 무료 정적 배포와 다른 출처에서의 위젯 로드를 확인했습니다. **실제 티스토리 계정의 스킨 설치 검증은 아직 남아 있습니다.** 자세한 확인 순서는 [배포와 설치 안내](docs/features/visitor-village/deployment.md)를 참고하세요.
 
 ## 동작 구조
 
@@ -83,7 +83,7 @@ Vercel 공개 배포와 다른 출처에서의 위젯 로드는 확인했습니�
 ```mermaid
 flowchart TD
     T["티스토리 스킨 HTML<br/>오늘 방문자 수 치환"] -->|count 속성| W["visitor-village<br/>입력 검증과 생명주기 관리"]
-    V["Vercel 정적 호스팅<br/>visitor-village.js"] -->|ES 모듈 로드| W
+    V["Cloudflare Pages 정적 호스팅<br/>visitor-village.js"] -->|ES 모듈 로드| W
     W --> M["VillageModel<br/>캐릭터 수와 이동 상태 계산"]
     M --> R["PixiJS 렌더러<br/>WebGL로 마을 그리기"]
     A["계절별 픽셀 그림<br/>나무 PNG와 Canvas 그림"] --> R
@@ -99,7 +99,7 @@ flowchart TD
 | 마을 환경과 배치 | 바닥, 집과 소품의 공유 아틀라스 · [`environment.ts`](src/environment.ts), [`environment-layout.ts`](src/environment-layout.ts), [`pixel-art.ts`](src/pixel-art.ts) |
 | 캐릭터 그림과 동작 | 자체 RGBA 픽셀 프레임과 공유 아틀라스 · [`characters.ts`](src/characters.ts), [`character-motion.ts`](src/character-motion.ts) |
 | 설치 코드 생성 | 브라우저 안에서 주소 정규화와 코드 생성 · [`install-model.ts`](src/install-model.ts) |
-| 빌드와 배포 | Vite, Vercel · [`vite.widget.config.ts`](vite.widget.config.ts), [`vercel.json`](vercel.json) |
+| 빌드와 배포 | Vite, Cloudflare Pages · [`vite.widget.config.ts`](vite.widget.config.ts), [`wrangler.jsonc`](wrangler.jsonc), [`_headers`](public/_headers) |
 
 <details>
 <summary>저장소 구조</summary>
@@ -123,6 +123,8 @@ pixel-visitor-village/
 ├── tests/widget.spec.ts        # 브라우저 통합 검증
 ├── examples/                   # 티스토리 삽입 코드
 ├── public/embed-example.html   # 독립 삽입 예제
+├── public/_headers / 404.html   # Pages 헤더와 없는 경로 처리
+├── wrangler.jsonc              # Pages 프로젝트와 출력 설정
 ├── assets/concepts/            # 나무 원본 시안과 생성 기록
 └── docs/
     ├── assets/                 # 실제 화면 캡처
@@ -178,7 +180,7 @@ pnpm preview   # http://127.0.0.1:4178/
 
 브라우저 테스트는 설치된 Chrome을 headless로 실행하며 모바일은 에뮬레이션으로 확인합니다. Chrome이 없는 환경은 설치하거나 [`playwright.config.ts`](playwright.config.ts)의 `channel`을 조정합니다.
 
-직접 호스팅할 때는 HTTPS와 위젯 모듈의 교차 출처 로드를 허용해야 합니다. 현재 Vercel 설정은 `/widget/*`에 CORS 헤더를 제공합니다. 상세 설정과 배포 확인 기록은 [배포 문서](docs/features/visitor-village/deployment.md)에 있습니다.
+직접 호스팅할 때는 HTTPS와 위젯 모듈의 교차 출처 로드를 허용해야 합니다. Pages의 `public/_headers`는 `/widget/*`에 CORS와 5분 캐시/재검증 헤더를 제공합니다. 배포는 Wrangler로 직접 업로드하며 GitHub 자동 배포는 아직 설정하지 않았습니다. 상세 설정과 배포 확인 기록은 [배포 문서](docs/features/visitor-village/deployment.md)에 있습니다.
 
 ## 현재 범위
 
