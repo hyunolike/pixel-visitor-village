@@ -14,7 +14,7 @@ A web widget for Tistory blogs that creates one pixel character for each visitor
 
 *Created with Claude Code's brag skill using the project's village artwork and movement code. The 24 visitors in the video are a demo value. The video is available on the live site and is a fixed render from before the scenery update.*
 
-> The redesigned installation helper supports Korean, English, Japanese, and Simplified Chinese, with a live seasonal preview. This revision has been verified locally; public deployment is pending. The main demo, introduction video, and technical documents remain in Korean. Translated READMEs are linked above.
+> The redesigned installation helper supports Korean, English, Japanese, and Simplified Chinese, with a live seasonal preview. The update is live on Cloudflare Pages and has passed public-site checks. The main demo, introduction video, and technical documents remain in Korean. Translated READMEs are linked above.
 
 [Features](#features) | [Seasonal villages](#seasonal-villages) | [Tistory installation](#tistory-installation) | [How it works](#how-it-works) | [Configuration](#widget-configuration) | [Visitor notices](#visitor-notices-and-optional-refresh) | [Development](#local-development) | [Docs](#documentation-and-assets)
 
@@ -138,7 +138,7 @@ A small wooden sign drops into the village to show today's count. An increase sh
 
 Automatic checking is **off by default**. Add `refresh-interval="60"` to the existing tag, or select the one-minute option in the installation helper. Use `refresh-interval="0"` to disable it. The widget reads the current blog origin's home-page HTML while visible. That page must contain at least one widget with a valid count, and all widget counts on that page must agree. It does not execute the fetched page's scripts or load its images. Visible widgets in the same document share one request; failures preserve the last valid village and retry less often.
 
-This checks the daily aggregate periodically, rather than receiving individual arrival events. Tistory's aggregation delay and the effect of repeated HTML requests on its statistics have **not been verified**. Enable checking only with that limitation in mind. The sign, link, and refresh option are implemented locally and require deployment before they appear on installed blogs.
+This checks the daily aggregate periodically, rather than receiving individual arrival events. Tistory's aggregation delay and the effect of repeated HTML requests on its statistics have **not been verified**. Enable checking only with that limitation in mind. The sign, link, and refresh option are available in the published widget. Existing installations may retain the previous module for up to five minutes.
 
 
 <details>
@@ -212,7 +212,7 @@ The widget and demo use square corners. In the Christmas theme, an original pixe
 
 Nearby characters occasionally stop, face each other, wave, and exchange a tiny icon balloon before walking again. Up to three pairs interact at once (one on small screens). These are decorative reactions, independent of real visitor identities. Pausing freezes the interaction; reduced motion disables it.
 
-These additions are implemented locally and still require a public deployment.
+These additions are available in the published widget.
 
 ## README references
 

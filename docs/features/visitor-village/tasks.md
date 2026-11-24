@@ -214,3 +214,11 @@ https://pixel-visitor-village.vercel.app/install.html 에서 블로그 주소를
 기존 미커밋 위젯/설치 변경을 보존하고 커밋/푸시/공개 배포는 하지 않는다. 실제 방문 데이터 수집은 이 작업의 실행 범위에 넣지 않는다.
 
 자동 인사/아이콘 반응의 로컬 구현과 주변 환경 조사를 마쳤다. 단위 128/128, 타입/앱/독립 위젯 빌드, 고정 번들의 전체 Chrome 56/56, 기본 시연 24명의 데스크톱/320px 확인과 네 언어 README 계약 검사를 통과했다. 독립 검토에서 발견한 모션 설정/재연결 문제는 실패 재현 후 수정했고 검토자가 재확인했다. [검토 기록과 검증 경계](reviews/social-2026-11-25.md), design.md의 주변 환경 조사, docs/assets의 실제 장면 캡처를 참고한다.
+
+## 2026-11-25 커밋과 공개 배포
+
+- [x] 사용자 커밋/푸시/배포 요청 확인, 미완료 디자인 개선을 보존한 별도 배포 소스 준비.
+- [x] 단위 128/128, 타입/빌드와 전체 Chrome 56/56 확인 후 기능 커밋 91aa12f 생성 및 origin/feat/visitor-notice 푸시.
+- [x] 기존 Cloudflare Pages production에 직접 업로드하고 공개 모듈 해시/CORS/404, 네 언어 설치 코드, 인사/크리스마스 장식/모션 줄이기, 320px와 외부 출처 37명 삽입 검증.
+
+공개 주소는 https://pixel-visitor-village.pages.dev/ 이며 고유 배포는 https://09738faa.pixel-visitor-village.pages.dev/ 이다. 자세한 검증과 제외 범위는 [배포 기록](deployment.md)의 2026-11-25 절에 있다. main 병합은 수행하지 않았다.

@@ -7,14 +7,28 @@
 - 마을: https://pixel-visitor-village.pages.dev/
 - 설치 도우미: https://pixel-visitor-village.pages.dev/install.html
 - 독립 모듈: https://pixel-visitor-village.pages.dev/widget/visitor-village.js
-- 이번 고유 배포: https://d2990b28.pixel-visitor-village.pages.dev/
+- 이번 고유 배포: https://09738faa.pixel-visitor-village.pages.dev/
 - 프로젝트: `pixel-visitor-village`, production branch: `main`, 방식: Wrangler Direct Upload.
 - 계정 ID: `96dc7e6d07c8cb414af597acfec30146`. 인증은 사용자 OAuth를 사용하며 인증 값은 저장소와 명령 인자에 넣지 않는다.
-- 소스: 병합 커밋 `234e854`와 미커밋 Pages 호스팅 설정. 배포 당시에는 커밋/푸시와 새 PR을 만들지 않았다. 이후 사용자 PR 요청에 따라 같은 브랜치에서 커밋/푸시와 `main` 대상 PR을 진행한다. GitHub 자동 배포는 구성하지 않았다.
+- 최신 소스: `91aa12f964e4c1f74481af1442caec1bfafb44d8` (`feat/visitor-notice`). 최초 Pages 이전은 `234e854` 기반으로 진행했고 이후 `main`에 병합되었다. 이번 기능 커밋은 기능 브랜치에 푸시했으며 GitHub 자동 배포는 구성하지 않았다.
+
+## 2026-11-25 기능 배포 완료
+
+사용자가 커밋/푸시/배포를 요청했다. 소스 커밋은 `91aa12f964e4c1f74481af1442caec1bfafb44d8`이며 `origin/feat/visitor-notice`로 푸시했다. 이 커밋의 배포용 소스 100개와 Git 내용을 바이트 단위로 대조한 뒤 기존 production 프로젝트에 Direct Upload했다. 미완료 디자인 시스템 개선은 로컬에 보존하고 이번 커밋/배포에서 제외했다. main 병합과 Git 자동 배포 설정은 수행하지 않았다.
+
+- 배포 URL: https://09738faa.pixel-visitor-village.pages.dev/
+- 공개 주소: https://pixel-visitor-village.pages.dev/ 및 /install.html.
+- 포함 기능: 나무 팻말/선택적 방문 수 확인/저장소 링크, 직각 프레임, 산타/루돌프 장식, 캐릭터 자동 인사/아이콘 반응, 다국어 설치 페이지 개편.
+- 단위 128/128, 타입 검사와 앱/독립 위젯 빌드, 배포 소스의 전체 Chrome 56/56 통과. 브라우저 검사는 별도 스냅샷과 5202 포트를 사용했으며 커밋의 기본 테스트 설정은 유지했다.
+- 공개 위젯 SHA-256: `36b084240f6f801b2c74199ec55262088714a24d23dced877cfa1b8d2a337154`. 검증한 로컬 번들과 일치한다.
+- 공개 응답에서 JavaScript MIME, CORS `*`, `public, max-age=300, must-revalidate`, `nosniff`와 없는 JS의 404를 확인했다.
+- 실제 공개 Chrome에서 24명, 직각 프레임, 자동 인사, 산타/루돌프, 모션 줄이기, 네 언어 설치 코드의 Pages origin/티스토리 치환자, 320px 넘침 없음, 별도 HTTP 출처의 37명 위젯을 확인했다. 스크립트 오류 없음.
+
+집/나무 아트는 조사만 포함하며 교체하지 않았다. 방문자 시각/지역 수집도 구현하지 않았다. 기존 Pages 모듈을 사용하는 블로그는 같은 URL로 새 코드를 받지만 이전 파일이 최대 5분간 캐시될 수 있다. 실제 티스토리 스킨과 모바일 실기기 검증은 남아 있다.
 
 ## 정적 배포 구성
 
-서버와 데이터베이스, Pages Functions 없이 `pnpm build`의 `dist`만 제공한다. 원본 에셋과 소스, 인증/개인 스킨, `node_modules`, 테스트 결과와 `brag-output`을 배포하지 않는다. 현재 23개 로컬 출력 파일은 총 5,401,335bytes이며 가장 큰 MP4는 2,979,821bytes다. `dist/widget`에는 독립 JavaScript 한 개만 둔다. 업로더는 `_headers`를 별도 처리하고 나머지 22개 파일을 올렸다.
+서버와 데이터베이스, Pages Functions 없이 `pnpm build`의 `dist`만 제공한다. 원본 에셋과 소스, 인증/개인 스킨, `node_modules`, 테스트 결과와 `brag-output`을 배포하지 않는다. 2026-11-25 배포의 출력 파일 24개는 총 5,475,835bytes이며 가장 큰 MP4는 2,979,821bytes다. `dist/widget`에는 독립 JavaScript 한 개만 둔다. 업로더는 `_headers`를 별도 처리하고 나머지 23개 파일 중 18개를 새로 올렸으며 5개는 기존 업로드를 재사용했다.
 
 `wrangler.jsonc`는 이름/출력/호환 날짜를 고정한다. `public/_headers`는 `/widget/*`에 CORS `*`, `public, max-age=300, must-revalidate`, `nosniff`를 적용한다. `public/404.html`로 없는 JS 경로가 기본 SPA HTML 200으로 바뀌지 않게 한다. `vite.widget.config.ts`의 `publicDir: false`는 영상과 설정의 중복 복사를 막는다.
 
@@ -40,7 +54,7 @@ Direct Upload 프로젝트를 나중에 Pages 기본 Git 통합으로 전환할 
 
 근거: [Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/), [Headers](https://developers.cloudflare.com/pages/configuration/headers/), [Serving Pages](https://developers.cloudflare.com/pages/configuration/serving-pages/), [무료 제한](https://developers.cloudflare.com/pages/platform/limits/).
 
-## 이번 배포의 실제 확인
+## 2026-11-23 초기 배포의 실제 확인
 
 - 단위 테스트 60/60, TypeScript와 사이트/모듈 빌드, 기존 Chrome 브라우저 회귀 22/22 통과.
 - 비로그인 HTTPS에서 홈/설치/포스터와 위젯 접근 성공, 없는 `/widget/does-not-exist.js`는 404.
