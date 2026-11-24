@@ -7,10 +7,24 @@
 - 마을: https://pixel-visitor-village.pages.dev/
 - 설치 도우미: https://pixel-visitor-village.pages.dev/install.html
 - 독립 모듈: https://pixel-visitor-village.pages.dev/widget/visitor-village.js
-- 이번 고유 배포: https://09738faa.pixel-visitor-village.pages.dev/
+- 이번 고유 배포: https://1d843341.pixel-visitor-village.pages.dev/
 - 프로젝트: `pixel-visitor-village`, production branch: `main`, 방식: Wrangler Direct Upload.
 - 계정 ID: `96dc7e6d07c8cb414af597acfec30146`. 인증은 사용자 OAuth를 사용하며 인증 값은 저장소와 명령 인자에 넣지 않는다.
-- 최신 소스: `91aa12f964e4c1f74481af1442caec1bfafb44d8` (`feat/visitor-notice`). 최초 Pages 이전은 `234e854` 기반으로 진행했고 이후 `main`에 병합되었다. 이번 기능 커밋은 기능 브랜치에 푸시했으며 GitHub 자동 배포는 구성하지 않았다.
+- 최신 소스: `f67b67de3fc34daa853c4be3211918f0d765fb9b` (`feat/visitor-notice`). 최초 Pages 이전은 `234e854` 기반으로 진행했고 이후 `main`에 병합되었다. 이번 기능 커밋은 기능 브랜치에 푸시했으며 GitHub 자동 배포는 구성하지 않았다.
+
+## 2026-11-25 디자인 시스템 후속 개선 배포 완료
+
+준비한 개선안의 커밋/푸시와 운영 배포를 사용자가 승인했다. 소스 커밋은 `f67b67de3fc34daa853c4be3211918f0d765fb9b`이며 기존 `origin/feat/visitor-notice`에 푸시했다. 커밋의 배포 소스44개와 작업 파일을 바이트 단위로 대조하고 검증한 정적 파일24개의 해시 일치를 확인한 뒤 기존 Pages production에 Direct Upload했다.
+
+- 고유 배포: https://1d843341.pixel-visitor-village.pages.dev/ (`1d843341-942c-400b-8fb2-2a02e024cbd0`).
+- 공개 설치 화면: https://pixel-visitor-village.pages.dev/install?lang=ko. `/install.html`도 기존대로 사용할 수 있다.
+- 공통 토큰/브랜드와 제어 규격, 모바일 조판과 하단 행동, 고급 설정과 경고, 설정 변경 안내, 설치 미리보기 링크 범위와 숨긴 알림 접근성을 반영했다. 설치 화면의 한국어/영어/일본어/중국어 간체 지원을 유지한다.
+- 커밋 전 단위128/128, 전체 Chrome63/63, 타입 검사와 빌드를 통과했다. 공개 Chrome 검증7/7도 통과했다.
+- 공개 검증: 320px 네 언어의 고급 설정 열기/닫기와 주의, 코드 생성/변경/재생성, 실제 Pages 모듈 URL과 티스토리 치환자, 관리자 링크와 클립보드 복사, 데스크톱 공통 제어, 375px 첫 화면을 확인했다. 별도 HTTP 블로그 출처에서 공개 모듈로37명을 렌더링했다. 페이지 스크립트 오류 없음.
+- 공개 위젯 SHA-256은 `6598bd78157dc7095b6ea70cbd0f24450245fb858c1da8fbcb83f37a240af4d7`로 검증한 묶음과 일치한다. JavaScript MIME/CORS `*`/`nosniff`/5분 캐시와 없는 JS의404를 확인했다. 공개 HTML의 새 설치 JS/CSS 참조도 확인했다.
+- 직전 production은 `09738faa-0e3b-4a88-8b61-7ca2ded22215`다. 필요할 때 되돌릴 이전 버전으로 기록하며 이번에는 롤백하지 않았다.
+
+실제 티스토리 스킨 편집과 방문자 집계, 모바일 실기기와 보조 기술의 음성 출력 검증은 별도 범위다. 기존 블로그는 동일한 모듈 URL을 계속 사용하며 브라우저 캐시 때문에 이전 파일이 최대5분 남을 수 있다. GitHub main 병합이나 자동 배포 설정은 변경하지 않았다.
 
 ## 2026-11-25 기능 배포 완료
 
@@ -100,3 +114,5 @@ Direct Upload 프로젝트를 나중에 Pages 기본 Git 통합으로 전환할 
 프로젝트 `AGENTS.md`는 커밋과 푸시를 사용자가 요청한 범위에서만 하도록 정한다. 이번 구현 계획도 공개 배포를 별도 단계로 두었으므로, 준비한 결과물의 커밋/푸시와 현재 Pages production 반영 범위를 확인한 뒤 수행한다.
 
 후속 상태: 사용자가 위 준비 결과의 커밋/푸시와 기존 Pages production 배포를 “진행해줘”로 승인했다. 승인한 버전의 최종 반영과 공개 검증을 진행한다.
+
+최종 상태: 위 준비 묶음을 소스 `f67b67d`로 기존 production에 반영했고 공개 검증7/7을 통과했다. 최신 공개 주소와 해시는 문서 상단의 후속 개선 배포 완료 기록을 따른다.
