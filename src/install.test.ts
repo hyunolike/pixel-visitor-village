@@ -1,5 +1,5 @@
 import { describe,expect,it } from 'vitest';
-import { buildInstallSnippet,normalizeBlogUrl } from './install-model';
+import { buildInstallSnippet,normalizeBlogUrl,InstallError } from './install-model';
 
 describe('blog installation address',()=>{
   it('accepts a Tistory URL and drops a post path from the admin address',()=>{
@@ -15,6 +15,11 @@ describe('blog installation address',()=>{
 });
 
 describe('Tistory installation snippet',()=>{
+  it('provides stable translatable errors without changing Korean error messages',()=>{
+    expect(()=>normalizeBlogUrl('')).toThrowError(expect.objectContaining({code:'empty',message:'티스토리 주소를 입력해 주세요.'}));
+    expect(()=>normalizeBlogUrl('javascript:alert(1)')).toThrow(InstallError);
+    expect(()=>buildInstallSnippet('not a URL')).toThrowError(expect.objectContaining({code:'module'}));
+  });
   it('uses the deployed module and preserves the real visitor placeholder',()=>{
     const code=buildInstallSnippet('https://village.example.com/widget/visitor-village.js','christmas');
     expect(code).toContain('src="https://village.example.com/widget/visitor-village.js"');
@@ -25,5 +30,10 @@ describe('Tistory installation snippet',()=>{
   it('rejects executable URLs and unknown seasons',()=>{
     expect(()=>buildInstallSnippet('javascript:alert(1)','christmas')).toThrow();
     expect(()=>buildInstallSnippet('https://example.com/widget.js','<script>')).toThrow();
+  });
+  it('only enables minute polling when the owner explicitly chooses it',()=>{
+    expect(buildInstallSnippet('https://example.com/widget.js','spring')).not.toContain('refresh-interval');
+    expect(buildInstallSnippet('https://example.com/widget.js','spring',true)).toContain('refresh-interval="60"');
+    expect(buildInstallSnippet('https://example.com/widget.js','spring',true)).toContain('count="[##_count_today_##]"');
   });
 });

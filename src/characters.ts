@@ -2,6 +2,7 @@ import type { VisitorFacing } from './character-motion';
 
 export const CHARACTER_WIDTH=20;
 export const CHARACTER_HEIGHT=28;
+export const CHARACTER_FRAMES=8;
 export const VISITOR_FACINGS=['front','side','back'] as const;
 
 // Original designs. Every costume uses the same anatomy and foot baseline.
@@ -63,8 +64,10 @@ export function visitorPixels(style:number,facing:VisitorFacing,frame:number):Ui
     r(3,y(17+leftArm),3,4,ink);r(4,y(17+leftArm),2,2,outfit.light);
     r(3,y(20+leftArm),3,2,outfit.skinShade);r(4,y(20+leftArm),2,1,outfit.skin);
   }
-  r(side?13:14,y(17-leftArm),3,4,ink);r(side?13:14,y(17-leftArm),2,2,outfit.coat);
-  r(side?13:14,y(20-leftArm),3,2,outfit.skinShade);r(side?13:14,y(20-leftArm),2,1,outfit.skin);
+  if(frame<6){
+    r(side?13:14,y(17-leftArm),3,4,ink);r(side?13:14,y(17-leftArm),2,2,outfit.coat);
+    r(side?13:14,y(20-leftArm),3,2,outfit.skinShade);r(side?13:14,y(20-leftArm),2,1,outfit.skin);
+  }
   r(side?8:6,y(15),side?6:8,2,outfit.accent);
   if(!back){r(side?12:11,y(17),2,3,outfit.accent);r(side?10:9,y(19),1,1,outfit.accent);r(side?10:9,y(21),1,1,outfit.accent);}
 
@@ -128,6 +131,11 @@ export function visitorPixels(style:number,facing:VisitorFacing,frame:number):Ui
   }
   if(back){
     r(7,y(17),7,6,ink);r(8,y(17),5,5,outfit.accent);r(9,y(17),2,1,'#fff0ce');r(8,y(20),5,1,outfit.shade);
+  }
+  if(frame===6||frame===7){
+    const handX=frame===6?16:17,handY=frame===6?12:10;
+    r(14,y(16),4,3,ink);r(15,y(16),2,2,outfit.coat);
+    r(handX-1,y(handY),3,6,ink);r(handX,y(handY),2,3,outfit.skin);r(handX,y(handY+3),2,2,outfit.light);
   }
   return pixels;
 }

@@ -66,3 +66,8 @@ Direct Upload 프로젝트를 나중에 Pages 기본 Git 통합으로 전환할 
 이전 주소는 `https://pixel-visitor-village.vercel.app`이며 2026-11-21 확인 당시 홈과 위젯 파일이 HTTP 402 `DEPLOYMENT_DISABLED`를 반환했다. 당시 alias는 `dpl_666mTTaes3k9DMSbvJe7Gi48Wsoz`를 가리켰다. 기존 프로젝트와 `vercel.json`은 삭제하지 않았다.
 
 최초 배포 당시 만들어 둔 `release/pixel-visitor-village-0.1.0.tar.gz`는 이전 Vercel 주소를 포함한 로컬 보관물이며 이번 Pages 배포 파일로 사용하지 않는다. Pages의 현재 상태와 주소는 위 기록을 따른다.
+
+
+## 2026-11-24 방문 수 팻말 후속 변경
+
+팻말/저장소 링크와 선택적 확인 기능은 로컬 구현 단계이며 이번 변경을 공개 배포한 것으로 기록하지 않는다. 배포 뒤 기존 설치에도 팻말과 링크가 표시되며, 1분 확인은 소유자가 설치 도우미에서 선택하거나 기존 태그에 refresh-interval="60"을 추가해야 한다. 자동 확인을 사용하려면 같은 블로그 홈페이지에도 정상 치환된 visitor-village count가 있어야 한다. 공개 블로그 HTML의 숫자 일치는 확인했지만 반복 조회의 집계 영향과 새 모듈의 실제 티스토리 실행은 미검증이다.

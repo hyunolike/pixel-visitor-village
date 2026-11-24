@@ -14,9 +14,9 @@ A web widget for Tistory blogs that creates one pixel character for each visitor
 
 *Created with Claude Code's brag skill using the project's village artwork and movement code. The 24 visitors in the video are a demo value. The video is available on the live site and is a fixed render from before the scenery update.*
 
-> The demo, installation helper, introduction video, and detailed technical documents are currently in Korean. This is the default English README; translated READMEs are linked above.
+> The redesigned installation helper supports Korean, English, Japanese, and Simplified Chinese, with a live seasonal preview. This revision has been verified locally; public deployment is pending. The main demo, introduction video, and technical documents remain in Korean. Translated READMEs are linked above.
 
-[Features](#features) | [Seasonal villages](#seasonal-villages) | [Tistory installation](#tistory-installation) | [How it works](#how-it-works) | [Configuration](#widget-configuration) | [Development](#local-development) | [Docs](#documentation-and-assets)
+[Features](#features) | [Seasonal villages](#seasonal-villages) | [Tistory installation](#tistory-installation) | [How it works](#how-it-works) | [Configuration](#widget-configuration) | [Visitor notices](#visitor-notices-and-optional-refresh) | [Development](#local-development) | [Docs](#documentation-and-assets)
 
 ## Features
 
@@ -130,6 +130,16 @@ pixel-visitor-village/
 | `season` | `christmas` | `christmas`, `spring`, `summer`, `autumn`, or `winter`. Invalid input preserves the current season. |
 | `paused` | Absent | Its presence pauses animation, including `paused="false"`. Remove the attribute to resume. |
 | `glow` | Enabled | Set `glow="false"` to disable the Christmas tree's glow effect. Bulb colors painted into the image remain. |
+| `refresh-interval` | `0` | Optional checking interval in seconds: `0` disables it; integers from `60` to `3600` enable it. Invalid values preserve the last valid setting. |
+
+## Visitor notices and optional refresh
+
+A small wooden sign drops into the village to show today's count. An increase shows the difference, such as “Today 13 (+3)” (the widget currently uses Korean labels). Repeated values do not replay the sign, and a new Korean calendar day does not count as an arrival. Clicking anywhere in the village opens the project repository in a new tab; keyboard navigation and mobile scrolling remain available.
+
+Automatic checking is **off by default**. Add `refresh-interval="60"` to the existing tag, or select the one-minute option in the installation helper. Use `refresh-interval="0"` to disable it. The widget reads the current blog origin's home-page HTML while visible. That page must contain at least one widget with a valid count, and all widget counts on that page must agree. It does not execute the fetched page's scripts or load its images. Visible widgets in the same document share one request; failures preserve the last valid village and retry less often.
+
+This checks the daily aggregate periodically, rather than receiving individual arrival events. Tistory's aggregation delay and the effect of repeated HTML requests on its statistics have **not been verified**. Enable checking only with that limitation in mind. The sign, link, and refresh option are implemented locally and require deployment before they appear on installed blogs.
+
 
 <details>
 <summary>JavaScript API and events</summary>
@@ -195,6 +205,14 @@ The detailed documents linked here are in Korean.
 | [Screenshot notes](docs/assets/README.md) | Sources and capture conditions for README images |
 
 The production Christmas tree image is [src/assets/christmas-tree.png](src/assets/christmas-tree.png). Other seasonal trees are drawn in `src/art.ts`, scenery in `src/environment.ts`, and updated characters in `src/characters.ts`. No external game assets are used.
+
+## Square frames and Christmas guests
+
+The widget and demo use square corners. In the Christmas theme, an original pixel Santa or Rudolph occasionally appears for 5–8 seconds, then disappears. Only one decorative guest appears at a time; these guests never change the actual visitor count. Their clock pauses offscreen, in hidden tabs, or during manual pause. Reduced motion and other seasons hide them.
+
+Nearby characters occasionally stop, face each other, wave, and exchange a tiny icon balloon before walking again. Up to three pairs interact at once (one on small screens). These are decorative reactions, independent of real visitor identities. Pausing freezes the interaction; reduced motion disables it.
+
+These additions are implemented locally and still require a public deployment.
 
 ## README references
 

@@ -1,3 +1,4 @@
+import { SocialModel } from './social';
 export const MAX_VISITORS = 5000;
 export const SEASONS = ['christmas', 'spring', 'summer', 'autumn', 'winter'] as const;
 export type Season = typeof SEASONS[number];
@@ -24,6 +25,7 @@ export function getTreeLayout(width:number,height:number) {
 
 export class VillageModel {
   readonly visitors:Visitor[]=[];
+  readonly social=new SocialModel();
   season:Season='christmas';
   elapsed=0;
   setCount(count:number):void {
@@ -36,15 +38,20 @@ export class VillageModel {
       this.visitors.push({id,x,y,vx:(hash(id+3)>.5?1:-1)*(.012+hash(id+7)*.012),vy:(hash(id+5)>.5?1:-1)*(.004+hash(id+9)*.006),phase:hash(id+39)*Math.PI*2});
     }
     this.visitors.length=count;
+    this.social.reconcile(this.visitors);
   }
+  setViewport(width:number,height:number) {this.social.setViewport(width,height);}
   setSeason(value:string):void {
     if(!(SEASONS as readonly string[]).includes(value)) throw new Error('선택할 수 없는 계절이에요. christmas, spring, summer, autumn, winter 중 하나를 사용해 주세요.');
+    if(this.season!==value)this.social.reset();
     this.season=value as Season;
   }
   step(seconds:number):void {
     if(!Number.isFinite(seconds)||seconds<=0) return;
     const dt=Math.min(.05,seconds);this.elapsed+=dt;
+    this.social.step(this.visitors,dt);
     for(const p of this.visitors) {
+      if(this.social.getPartner(p.id))continue;
       if(Math.sin(this.elapsed*.7+p.phase)<-.45) continue;
       let x=p.x+p.vx*dt,y=p.y+p.vy*dt;
       if(x<.035||x>.965) {p.vx*=-1;x=Math.max(.035,Math.min(.965,x));}

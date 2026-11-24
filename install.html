@@ -1,20 +1,92 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17332c"><title>블로그에 설치하기 | 작은 방문자 마을</title></head>
-<body><main class="install-page">
-  <header><a href="./index.html">작은 방문자 마을</a><span>티스토리 설치</span></header>
-  <section class="intro-copy"><h1>내 블로그에<br>작은 마을을 초대하세요.</h1><p>주소를 넣고 코드를 복사한 뒤, 스킨에 한 번 붙여 넣으면 됩니다.</p></section>
-  <form id="install-form" novalidate>
-    <label for="blog-url">티스토리 주소</label><input id="blog-url" type="text" inputmode="url" placeholder="myblog.tistory.com" autocomplete="url" required aria-describedby="blog-help">
-    <p id="blog-help">티스토리 기본 주소나 연결한 개인 도메인을 입력해 주세요.</p>
-    <label for="install-season">처음 보여 줄 나무</label><select id="install-season"><option value="christmas">크리스마스</option><option value="spring">봄 · 꽃나무</option><option value="summer">여름 · 푸른 나무</option><option value="autumn">가을 · 단풍나무</option><option value="winter">겨울 · 눈꽃나무</option></select>
-    <button type="submit">설치 코드 만들기</button><p id="install-error" role="alert"></p>
-  </form>
-  <section id="install-result" hidden aria-label="설치 코드와 관리자 링크">
-    <p id="normalized-blog"></p><h2>코드를 복사하세요.</h2><textarea id="install-code" aria-label="티스토리 설치 코드" readonly spellcheck="false" rows="9"></textarea>
-    <div class="copy-row"><button id="copy-code" type="button">코드 복사</button><span id="copy-state" role="status" aria-live="polite"></span></div>
-    <h2>내 블로그 스킨에 붙여 넣으세요.</h2><p>관리자에서 <strong>꾸미기 → 스킨 편집 → HTML 편집</strong>을 열고, 마을을 넣을 위치에 코드를 붙여 넣어 저장하세요.</p>
-    <a id="admin-link" class="admin-button" target="_blank" rel="noopener noreferrer">내 블로그 관리자 열기</a>
-    <p class="last-step">주소 입력만으로 설치되지는 않습니다. 최초 한 번은 블로그 소유자가 코드를 붙여 넣어야 해요. 이후 페이지를 열면 오늘 방문자 수를 사용합니다.</p>
-  </section>
-  <footer>계절은 설치 코드의 season 값으로 바꿀 수 있어요. <a href="./index.html">마을 시연 보기</a></footer>
-</main><script type="module" src="/src/install.ts"></script></body></html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#F7F8FC">
+  <meta name="description" content="오늘 방문자 수를 작은 픽셀 마을로. 계절을 고르고 티스토리 블로그에 설치하세요.">
+  <title>블로그에 설치하기 | 작은 방문자 마을</title>
+</head>
+<body>
+  <a class="skip-link" href="#setup" data-i18n="skipLink">마을 설정으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./index.html"><span class="brand-tree" aria-hidden="true"></span><span data-i18n="brand">작은 방문자 마을</span></a>
+      <nav class="header-actions" aria-label="Navigation">
+        <a class="demo-link" href="./index.html" data-i18n="demoLink">마을 둘러보기</a>
+        <label class="language-picker"><span class="sr-only" data-i18n="language">언어</span><select id="locale-select" autocomplete="off"><option value="ko" lang="ko">한국어</option><option value="en" lang="en">English</option><option value="ja" lang="ja">日本語</option><option value="zh-CN" lang="zh-CN">简体中文</option></select></label>
+      </nav>
+    </div>
+  </header>
+  <main class="install-page">
+    <section class="intro-copy" aria-labelledby="page-title">
+      <h1 id="page-title" data-i18n="introTitle">내 블로그에 작은 마을을 초대하세요.</h1>
+      <p data-i18n="introBody">주소와 계절을 정하고, 나만의 마을을 설치해 보세요.</p>
+    </section>
+    <div class="studio">
+      <section id="setup" class="settings-panel" aria-labelledby="settings-title" tabindex="-1">
+        <h2 id="settings-title" class="step-title"><span class="step-number" aria-hidden="true">1</span><span data-i18n="settingsTitle">마을 설정</span></h2>
+        <form id="install-form" novalidate>
+          <div class="form-field">
+            <label for="blog-url" data-i18n="addressLabel">티스토리 주소</label>
+            <input id="blog-url" type="text" inputmode="url" placeholder="myblog.tistory.com" autocomplete="url" required aria-describedby="blog-help install-error" autocapitalize="none" spellcheck="false">
+            <p id="blog-help" class="help-text" data-i18n="addressHelp">티스토리 주소나 연결한 개인 도메인을 입력하세요.</p>
+            <p id="install-error" class="field-error" role="alert"></p>
+          </div>
+          <fieldset id="install-season" class="season-field">
+            <legend data-i18n="seasonLabel">처음 보여 줄 계절</legend>
+            <div class="season-options">
+              <label class="season-option"><input type="radio" name="season" value="christmas" checked><span data-season="christmas">크리스마스</span></label>
+              <label class="season-option"><input type="radio" name="season" value="spring"><span data-season="spring">봄</span></label>
+              <label class="season-option"><input type="radio" name="season" value="summer"><span data-season="summer">여름</span></label>
+              <label class="season-option"><input type="radio" name="season" value="autumn"><span data-season="autumn">가을</span></label>
+              <label class="season-option"><input type="radio" name="season" value="winter"><span data-season="winter">겨울</span></label>
+            </div>
+          </fieldset>
+          <div class="refresh-option">
+            <label for="install-refresh"><input id="install-refresh" type="checkbox" aria-describedby="refresh-help"><span data-i18n="refreshLabel">오늘 방문 수를 1분마다 확인</span></label>
+            <p id="refresh-help" class="help-text" data-i18n="refreshHelp">선택 기능입니다. 화면에 보일 때 블로그 HTML을 조회합니다. 집계 지연이 있을 수 있으며, 반복 조회의 집계 영향은 아직 검증하지 않았습니다.</p>
+          </div>
+          <button id="create-code" class="button button-primary" type="submit" data-i18n="createCode">설치 코드 만들기</button>
+          <p class="form-note" data-i18n="manualNote">주소 입력만으로 자동 설치되지는 않습니다.</p>
+        </form>
+      </section>
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <div class="preview-heading"><h2 id="preview-title" data-i18n="previewTitle">마을 미리보기</h2><span class="demo-badge" data-i18n="demoCount">시연용 24명</span></div>
+        <div id="preview-stage" class="preview-stage" aria-busy="true"></div>
+        <div id="preview-feedback" class="preview-feedback" role="status"><p id="preview-message" data-i18n="loading">마을을 준비하고 있어요.</p><button id="preview-retry" class="button button-secondary" type="button" data-i18n="retry" hidden>미리보기 다시 시도</button></div>
+        <p class="preview-caption" data-i18n="previewHint">설치 후에는 오늘 방문자 수만큼 캐릭터가 나타나요.</p>
+        <div class="preview-controls"><button id="preview-pause" class="button button-secondary" type="button" aria-pressed="false" disabled><span class="playback-symbol" aria-hidden="true">Ⅱ</span><span id="pause-label" data-i18n="pause">일시 정지</span></button><p id="preview-tip" data-i18n="previewTip">계절을 바꾸며 마을을 미리 확인하세요.</p></div>
+      </section>
+    </div>
+    <section class="copy-section" aria-labelledby="copy-title">
+      <h2 id="copy-title" class="step-title" tabindex="-1"><span class="step-number" aria-hidden="true">2</span><span data-i18n="copyTitle">설치 코드를 복사하세요</span></h2>
+      <div class="step-content">
+        <p id="code-pending" class="muted" data-i18n="codePending">위에서 코드를 만들면 이곳에 복사할 코드가 나타납니다.</p>
+        <section id="install-result" hidden aria-label="설치 코드와 관리자 링크">
+          <p id="normalized-blog" class="muted"></p>
+          <label class="sr-only" for="install-code" data-i18n="codeLabel">티스토리 설치 코드</label>
+          <textarea id="install-code" readonly spellcheck="false" rows="9" wrap="off"></textarea>
+          <div class="copy-row"><button id="copy-code" class="button button-primary" type="button" data-i18n="copy">코드 복사</button><span id="copy-state" role="status" aria-live="polite"></span></div>
+        </section>
+      </div>
+    </section>
+    <section class="guide-section" aria-labelledby="guide-title">
+      <h2 id="guide-title" class="step-title"><span class="step-number" aria-hidden="true">3</span><span data-i18n="guideTitle">티스토리 스킨에 붙여 넣으세요</span></h2>
+      <div class="step-content guide-content">
+        <p data-i18n="guideIntro">관리자에서 아래 메뉴를 열고 마을을 넣을 위치에 코드를 붙여 넣어 저장하세요.</p>
+        <p class="menu-path" data-i18n="menuPath">꾸미기 → 스킨 편집 → HTML 편집</p>
+        <p id="menu-original" class="menu-original" lang="ko" hidden>꾸미기 → 스킨 편집 → HTML 편집</p>
+        <p class="help-text" data-i18n="backupNote">수정 전 현재 스킨을 백업해 두세요.</p>
+        <a id="admin-link" class="button button-secondary admin-button" target="_blank" rel="noopener noreferrer" data-i18n="adminLink" hidden>내 블로그 관리자 열기</a>
+        <p id="admin-pending" class="help-text" data-i18n="adminPending">코드를 만들면 내 블로그 관리자 링크가 나타납니다.</p>
+        <p class="last-step" data-i18n="manualFull">주소 입력만으로 설치되지는 않습니다. 최초 한 번은 블로그 소유자가 코드를 붙여 넣어야 해요. 이후 페이지를 열면 오늘 방문자 수를 사용합니다.</p>
+        <p class="help-text" data-i18n="checkHint">저장 후 실제 블로그에서 방문자 수와 모바일 화면을 확인하세요.</p>
+      </div>
+    </section>
+    <footer class="site-footer"><span data-i18n="footerText">오늘의 방문을 작은 마을로.</span><a href="./index.html" data-i18n="footerLink">마을 시연 보기</a></footer>
+    <noscript><p>설치 코드 생성에는 JavaScript가 필요합니다. Enable JavaScript to create your install code.</p></noscript>
+  </main>
+  <script type="module" src="/src/install.ts"></script>
+</body>
+</html>

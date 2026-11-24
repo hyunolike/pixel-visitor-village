@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { visitorPose } from './character-motion';
+import { interactionPose, visitorPose } from './character-motion';
 
 const person={id:0,vx:.02,vy:.008,phase:0};
 
@@ -41,5 +41,15 @@ describe('visitor pose selection',()=>{
     const result=visitorPose({...person,phase:4.2},0,100,500,scratch);
     expect(result).toBe(scratch);
     expect(result).toEqual({facing:'front',flip:false,frame:0});
+  });
+});
+
+describe('greeting pose selection',()=>{
+  it('faces the partner and alternates raised hands before the quiet reaction',()=>{
+    expect(interactionPose(30,0,.1)).toEqual({facing:'side',flip:false,frame:6});
+    expect(interactionPose(-30,0,.3)).toEqual({facing:'side',flip:true,frame:7});
+    expect(interactionPose(0,-30,.1).facing).toBe('back');
+    expect(interactionPose(0,30,.1).facing).toBe('front');
+    expect(interactionPose(30,0,1.5).frame).toBe(0);
   });
 });

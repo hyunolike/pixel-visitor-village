@@ -41,3 +41,12 @@
 - [`../../public/media/intro.mp4`](../../public/media/intro.mp4): 1920×1080px, 30fps, 600프레임, 20.000초 H.264/AAC 영상. 첫 프레임에 포스터를 구웠다.
 
 영상 제작 당시 프로젝트의 model/art/characters/character-motion을 재사용해 프레임별로 재현 가능한 마을을 그렸다. 소개 영상과 GIF, 포스터는 환경 에셋 개선 전 버전으로 유지한다. 제품 위젯의 PixiJS 실시간 화면을 녹화한 것으로 설명하지 않는다. [제작 과정과 음원 출처](../features/visitor-village/intro-media.md)를 참고한다.
+
+
+## 산타와 루돌프 픽셀 그림
+
+2026-11-24 추가한 산타와 루돌프는 [holiday-art.ts](../../src/holiday-art.ts)의 자체 RGBA 픽셀 코드로 그립니다. 원본은 32×36px이며 각각 두 자세를 제공합니다. 외부 이미지, 폰트, 게임 에셋과 다운로드 자료를 포함하지 않습니다. 렌더러 초기화 시 공유 아틀라스로 한 번 만들고 등장마다 다시 생성하지 않습니다. 이들은 실제 방문자 수와 별개인 크리스마스 장식입니다.
+
+## 자동 인사와 말풍선
+
+2026-11-25 손 인사는 [characters.ts](../../src/characters.ts)의 기존 캐릭터에 추가한 자체 두 자세입니다. [social-art.ts](../../src/social-art.ts)의 18×14px 말풍선 세 종류(점 세 개, 하트, 반짝임)도 자체 RGBA 코드이며 외부 에셋이나 폰트를 사용하지 않습니다. 실제 방문자 간 메시지나 신원을 나타내지 않습니다. [데스크톱](social-desktop.png)과 [320px 화면](social-mobile.png)은 로컬 배포 번들의 실제 Pixi 장면을 Chrome으로 캡처한 검증 화면이며 시연 숫자는 80입니다.
