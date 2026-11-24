@@ -1,2 +1,2 @@
 import { defineConfig } from 'vite';
-export default defineConfig({base:'./',server:{host:'127.0.0.1'},build:{target:'es2022',rollupOptions:{input:['index.html','install.html']}}});
+export default defineConfig({base:'./',server:{host:'127.0.0.1'},build:{target:'es2022',rollupOptions:{input:['index.html','install.html','docs/index.html']}}});

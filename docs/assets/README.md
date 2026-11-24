@@ -54,3 +54,7 @@
 ## 설치 화면 디자인 시스템 개선
 
 [데스크톱](install-desktop.png)은 1440px 너비의 전체 페이지, [모바일](install-mobile.png)은 375×667px의 첫 화면이다. 2026-11-25 로컬 production 빌드의 `/install.html?lang=ko`를 Chrome으로 촬영했다. 공통 브랜드/각진 컨트롤, 한국어 어절과 모바일 하단 생성 버튼을 확인할 수 있다. 미리보기 방문자 24명은 시연용이며 실제 티스토리 설치 화면을 촬영한 것이 아니다. [검토와 검증 기록](../features/visitor-village/reviews/design-system-polish-2026-11-25.md)을 함께 참고한다.
+
+## 홈과 사용 문서 화면
+
+2026-11-25 로컬 production 빌드의 [홈 데스크톱](home-desktop.png), [홈 320px](home-mobile.png), [문서 데스크톱](docs-desktop.png), [문서 320px](docs-mobile.png)을 Chrome으로 캡처했다. 데스크톱은 1440×1000, 모바일은 320×850 viewport의 첫 화면이며 공개 사이트나 실제 블로그 설치 화면으로 설명하지 않는다. 홈의 24명은 시연 값이다. 원본의 캐릭터/나무를 사용하는 실제 Pixi 화면과 정적 문서 레이아웃이다.

@@ -7,6 +7,69 @@ const waitReady=async(page:Page)=> {
 };
 const state=async(page:Page)=>page.locator('visitor-village').first().evaluate((el:any)=>({count:el.visitorCount,season:el.season,people:el.getVisitors()}));
 
+test('site pages connect the product explanation, live demo, installer and usage docs',async({page})=>{
+  await waitReady(page);
+  await expect(page.locator('#home-install')).toHaveAttribute('href','./install.html');
+  await expect(page.locator('.hero-description')).toContainText('오늘 방문자 수');
+  await page.locator('.project-nav a[href="#demo"]').click();await expect(page).toHaveURL(/#demo$/);
+  await expect(page.locator('visitor-village').first()).toBeInViewport();
+  await page.locator('#season').selectOption('spring');expect((await state(page)).season).toBe('spring');
+  await page.locator('#home-install').click();await expect(page).toHaveURL(/install.html$/);
+  await page.locator('#usage-docs-link').click();await expect(page).toHaveURL(/\/docs\/$/);
+  await expect(page.getByRole('heading',{name:'마을 사용 문서',exact:true})).toBeVisible();
+  await page.locator('.docs-toc a[href="#troubleshooting"]').click();
+  await expect(page.locator('#troubleshooting')).toBeInViewport();
+  await page.locator('.project-nav a[href="../index.html#demo"]').click();
+  await page.waitForFunction(()=>Boolean((document.querySelector('visitor-village') as any)?.ready));
+  await expect(page.locator('visitor-village').first()).toBeInViewport();
+  await page.locator('.project-nav a[href="./docs/"]').click();
+  await page.locator('.project-nav a[href="../install.html"]').click();await expect(page.locator('#blog-url')).toBeVisible();
+});
+
+test('usage docs serve readable HTML without JavaScript and expose the real widget contract',async({browser,request})=>{
+  const response=await request.get(`${appOrigin()}/docs/`);expect(response.status()).toBe(200);
+  const context=await browser.newContext({javaScriptEnabled:false});
+  try{
+    const page=await context.newPage();await page.goto(`${appOrigin()}/docs/`);
+    await expect(page.getByRole('heading',{name:'마을 사용 문서',exact:true})).toBeVisible();
+    const options=page.getByRole('table',{name:'위젯 속성'});
+    await expect(options).toContainText('0~5,000');await expect(options).toContainText('60~3600');
+    await expect(options).toContainText('paused="false"');
+    await expect(page.locator('#visitor-count')).toContainText('동시 접속자');
+    await page.locator('.docs-toc a[href="#credits"]').click();await expect(page.locator('#credits')).toBeInViewport();
+    expect(await page.locator('.brand-mark').evaluate(el=>getComputedStyle(el).width)).not.toBe('auto');
+  }finally{await context.close();}
+});
+
+test('installer docs navigation stays translated and preserves generated code',async({page})=>{
+  await page.setViewportSize({width:320,height:850});
+  await page.goto('/install.html?lang=ko');await page.locator('#blog-url').fill('example.tistory.com');await page.locator('#create-code').click();
+  const code=await page.locator('#install-code').inputValue();
+  for(const [locale,label] of [['en','Docs (Korean)'],['ja','使い方（韓国語）'],['zh-CN','文档（韩语）'],['ko','사용 문서']]){
+    await page.locator('#locale-select').selectOption(locale);
+    await expect(page.locator('#usage-docs-link')).toHaveText(label);
+    await expect(page.locator('#usage-docs-link')).toHaveAttribute('href','./docs/');
+    await expect(page.locator('#install-code')).toHaveValue(code);
+    await expect(page.locator('#check-docs-link')).toHaveAttribute('href','./docs/#troubleshooting');
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    for(const link of await page.locator('.project-nav a, #locale-select').all()){
+      const box=await link.boundingBox();expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.x+box!.width).toBeLessThanOrEqual(320);
+    }
+  }
+});
+
+test('home and usage docs keep their navigation, tables and code within 320px',async({page},testInfo)=>{
+  await page.setViewportSize({width:320,height:850});
+  for(const [path,name] of [['/','home-mobile'],['/docs/','docs-mobile']]){
+    await page.goto(path);await expect(page.locator('h1')).toBeVisible();
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    for(const link of await page.locator('.project-nav a').all()){
+      const box=await link.boundingBox();expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.x+box!.width).toBeLessThanOrEqual(320);
+    }
+    await page.screenshot({path:testInfo.outputPath(`${name}.png`),fullPage:true});
+  }
+});
+
 test('automatic greetings pause, show icon balloons and release deleted or disconnected partners',async({page},testInfo)=>{
   await page.clock.install();await waitReady(page);
   const village=page.locator('visitor-village').first(),canvas=village.locator('canvas');

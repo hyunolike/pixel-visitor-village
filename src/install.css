@@ -1,4 +1,4 @@
-@import './design-system.css';
+@import './site-pages.css';
 .site-header { background: var(--color-surface); border-bottom: 1px solid var(--color-divider); }
 .header-inner, .install-page { max-width: 1248px; margin: auto; padding-inline: var(--space-8); }
 .header-inner { display: flex; justify-content: space-between; align-items: center; min-height: 80px; gap: var(--space-6); }
@@ -55,3 +55,7 @@ h2 { font-size: var(--font-size-section); letter-spacing: -.015em; }
   :is(input,summary,button,[tabindex]) { scroll-margin-block:96px; }
   .step-content { margin-left:0; }#install-code { padding:var(--space-3); }.site-footer { align-items:flex-start;flex-direction:column;gap:var(--space-2);margin-top:var(--space-8); }.copy-row .button,.admin-button { width:100%; }
 }
+
+/* The project menu stays available alongside the existing locale picker. */
+@media(max-width:1100px) { .header-inner { flex-wrap:wrap;padding-block:var(--space-4); }.header-actions { gap:var(--space-3) var(--space-4); }.header-actions.project-nav { flex-wrap:wrap; } }
+@media(max-width:600px) { .header-inner { gap:var(--space-3); }.header-actions.project-nav { flex-basis:100%; }.header-actions .demo-link { display:inline; }.header-actions .language-picker { margin-left:auto; } }

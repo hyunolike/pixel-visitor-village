@@ -6,7 +6,9 @@
 
 Tistoryブログの今日の訪問者数を、1人につき1体のピクセルキャラクターで表すWebウィジェットです。キャラクターは大きな木の周りを歩いたり休んだりします。クリスマスと四季のテーマを選べます。
 
-[村を見てみる](https://pixel-visitor-village.pages.dev/) | [Tistoryに設置する](https://pixel-visitor-village.pages.dev/install.html) | [埋め込みコード](examples/tistory-snippet.html)
+[村を見てみる](https://pixel-visitor-village.pages.dev/) | [Tistoryに設置する](https://pixel-visitor-village.pages.dev/install.html) | [埋め込みコード](examples/tistory-snippet.html) | [使い方（韓国語）](docs/index.html)
+
+設置方法、ウィジェット設定、集計とトラブル対処をHTML文書で案内します。新しいホームと文書はローカル実装済みで、公開には今後のデプロイが必要です。
 
 [![訪問者数が増えるにつれてキャラクターが集まる、ピクセルの村のアニメーションプレビュー](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
 

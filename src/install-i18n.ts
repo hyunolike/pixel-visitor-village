@@ -36,6 +36,7 @@ export function saveLocale(locale: Locale, write: (value: string) => void): void
 
 const ko = {
   brand: '작은 방문자 마을', pageTitle: '블로그에 설치하기 | 작은 방문자 마을',
+  installLink: '설치하기', docsLink: '사용 문서', checkDocs: '설치 후 문제 해결 보기', newTab: ' (새 탭)',
   language: '언어', demoLink: '마을 둘러보기', skipLink: '마을 설정으로 건너뛰기',
   introTitle: '내 블로그에 작은 마을을 초대하세요.',
   introBody: '주소와 계절을 정하고, 나만의 마을을 설치해 보세요.',
@@ -80,6 +81,7 @@ export type TextKey = { [K in keyof Messages]: Messages[K] extends string ? K : 
 
 const en: Messages = {
   brand: 'Little Visitor Village', pageTitle: 'Install on your blog | Little Visitor Village',
+  installLink: 'Install', docsLink: 'Docs (Korean)', checkDocs: 'Troubleshooting guide (Korean)', newTab: ' (new tab)',
   language: 'Language', demoLink: 'Explore the village (Korean)', skipLink: 'Skip to village settings',
   introTitle: 'A little village. A home on your blog.', introBody: 'Choose a season, preview your village, and make it yours.',
   settingsTitle: 'Village settings', addressLabel: 'Tistory blog address',
@@ -127,6 +129,7 @@ const en: Messages = {
 
 const ja: Messages = {
   brand: '小さな訪問者の村', pageTitle: 'ブログに設置する | 小さな訪問者の村',
+  installLink: '設置する', docsLink: '使い方（韓国語）', checkDocs: '設置後のトラブル対処（韓国語）', newTab: '（新しいタブ）',
   language: '言語', demoLink: '村を見てみる（韓国語）', skipLink: '村の設定へスキップ',
   introTitle: 'あなたのブログに、小さな村を。', introBody: '季節を選んで村を確認したら、ブログに設置しましょう。',
   settingsTitle: '村の設定', addressLabel: 'Tistoryのブログアドレス',
@@ -172,6 +175,7 @@ const ja: Messages = {
 
 const zh: Messages = {
   brand: '小小访客村庄', pageTitle: '安装到博客 | 小小访客村庄',
+  installLink: '安装', docsLink: '文档（韩语）', checkDocs: '安装后问题排查（韩语）', newTab: '（新标签页）',
   language: '语言', demoLink: '探索村庄（韩语）', skipLink: '跳转到村庄设置',
   introTitle: '给你的博客，添一座小村庄。', introBody: '选择季节，预览村庄，再把它安装到你的博客。',
   settingsTitle: '村庄设置', addressLabel: 'Tistory 博客地址', addressHelp: '请输入 Tistory 地址或已绑定的自定义域名。',

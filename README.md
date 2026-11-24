@@ -6,7 +6,9 @@
 
 A web widget for Tistory blogs that creates one pixel character for each visitor counted today. Characters walk and rest around a large tree, with Christmas and four seasonal themes to choose from.
 
-[Explore the village](https://pixel-visitor-village.pages.dev/) | [Install on Tistory](https://pixel-visitor-village.pages.dev/install.html) | [Embed snippet](examples/tistory-snippet.html)
+[Explore the village](https://pixel-visitor-village.pages.dev/) | [Install on Tistory](https://pixel-visitor-village.pages.dev/install.html) | [Embed snippet](examples/tistory-snippet.html) | [Usage guide (Korean)](docs/index.html)
+
+A browsable HTML guide covers installation, widget options, counting rules and troubleshooting. The new home and guide are implemented locally; a new public deployment is pending.
 
 [![Animated preview of a pixel village filling with characters as the visitor count grows](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
 

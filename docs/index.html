@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="작은 방문자 마을의 티스토리 설치 방법, 설정값, 방문 수 집계 방식과 문제 해결 안내입니다.">
+  <title>사용 문서 | 작은 방문자 마을</title>
+  <link rel="stylesheet" href="../src/site-pages.css">
+</head>
+<body class="docs-body">
+  <a class="skip-link" href="#main-content">문서 본문으로 건너뛰기</a>
+  <div class="docs-shell">
+    <header class="docs-header">
+      <a class="project-brand" href="../index.html" aria-label="작은 방문자 마을 홈"><span class="brand-mark" aria-hidden="true"></span><span class="brand-title">작은 방문자 마을</span></a>
+      <nav class="project-nav" aria-label="프로젝트 안내"><a href="../index.html#demo">마을 체험</a><a href="../install.html">설치하기</a><a href="./" aria-current="page">사용 문서</a><a href="https://github.com/hyunolike/pixel-visitor-village" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (새 탭)</span></a></nav>
+    </header>
+    <main id="main-content" tabindex="-1">
+      <div class="docs-intro"><h1>마을 사용 문서</h1><p>설치부터 숫자 확인까지. 내 블로그에 마을을 놓을 때 필요한 내용을 모았습니다.</p></div>
+      <div class="docs-layout">
+        <nav class="docs-toc" aria-label="문서 목차"><span>이 문서에서</span><a href="#quick-start">빠른 시작</a><a href="#configuration">위젯 설정</a><a href="#visitor-count">방문 수 집계</a><a href="#troubleshooting">문제 해결</a><a href="#development">개발과 자체 호스팅</a><a href="#credits">제작과 출처</a></nav>
+        <div class="docs-content">
+          <section id="quick-start" aria-labelledby="quick-title">
+            <h2 id="quick-title">빠른 시작</h2>
+            <p>작은 방문자 마을은 티스토리의 오늘 방문자 수를 픽셀 캐릭터로 보여 주는 위젯입니다. 설치에는 블로그 소유자의 스킨 HTML 편집 권한이 필요합니다.</p>
+            <ol><li><a href="../install.html">설치 화면</a>에서 블로그 주소와 처음 보여 줄 계절을 선택합니다.</li><li>설치 코드를 만들고 복사합니다. 주소 입력만으로 블로그가 바뀌지는 않습니다.</li><li>현재 스킨을 백업한 뒤 관리자에서 <strong>꾸미기 → 스킨 편집 → HTML 편집</strong>을 엽니다. 마을을 보여 줄 위치에 코드를 넣고 저장합니다.</li><li>실제 블로그를 새로 열어 마을, 오늘 방문자 수, 모바일 스크롤과 본문 링크를 확인합니다. 스킨에 따라 모바일에도 별도 적용이 필요할 수 있습니다.</li></ol>
+            <p class="message message-info">설치 화면과 홈에 표시되는 24명은 시연 숫자입니다. 실제 설치 코드는 티스토리 치환자 <code>[##_count_today_##]</code>를 사용합니다.</p>
+          </section>
+          <section id="configuration" aria-labelledby="config-title">
+            <h2 id="config-title">위젯 설정</h2><p>설치 코드의 <code>&lt;visitor-village&gt;</code> 속성으로 바꿉니다. 잘못된 값은 안내하고 마지막 정상 상태를 유지하며, 방문 수를 임의로 줄여 표시하지 않습니다.</p>
+            <div class="docs-table" role="region" aria-label="위젯 설정 표 가로 스크롤" tabindex="0"><table aria-label="위젯 속성"><thead><tr><th scope="col">속성</th><th scope="col">기본값</th><th scope="col">사용 방법</th></tr></thead><tbody>
+              <tr><th scope="row"><code>count</code></th><td><code>0</code></td><td>0~5,000의 정수입니다. <code>1,234</code> 같은 올바른 쉼표 표기도 허용합니다. 실제 티스토리에서는 오늘 방문 수 치환자를 사용합니다.</td></tr>
+              <tr><th scope="row"><code>season</code></th><td><code>christmas</code></td><td><code>christmas</code>, <code>spring</code>, <code>summer</code>, <code>autumn</code>, <code>winter</code> 중 선택합니다.</td></tr>
+              <tr><th scope="row"><code>paused</code></th><td>없음</td><td>속성이 있으면 멈춥니다. <code>paused="false"</code>도 정지입니다. 다시 움직이게 하려면 속성을 제거하세요.</td></tr>
+              <tr><th scope="row"><code>glow</code></th><td>켜짐</td><td><code>glow="false"</code>로 크리스마스 나무의 빛 번짐을 끕니다. 그림 속 전구색은 유지됩니다.</td></tr>
+              <tr><th scope="row"><code>refresh-interval</code></th><td><code>0</code> (끄기)</td><td>선택적 확인 주기는 60~3600초의 정수입니다. <code>60</code>은 1분마다 확인하고 <code>0</code>은 끕니다.</td></tr>
+            </tbody></table></div>
+            <p>기기의 모션 줄이기 설정에서는 자동 이동과 인사, 크리스마스 손님 연출을 멈춥니다. 위젯이 화면 밖에 있거나 탭이 숨겨져도 움직임은 쉬어 갑니다.</p>
+          </section>
+          <section id="visitor-count" aria-labelledby="count-title">
+            <h2 id="count-title">방문 수는 어떻게 반영되나요?</h2><p>오늘 누적 방문 수를 사용하며 현재 동시 접속자 수를 나타내지 않습니다. 캐릭터는 개별 방문자와 연결되지 않으며 이름이나 위치를 표시하지 않습니다. 실제 방문 시각이나 지역을 전달하는 수집 기능도 없습니다.</p>
+            <h3>기본은 페이지를 열 때 받은 숫자</h3><p>티스토리가 HTML의 방문 수 치환자를 숫자로 바꾸면 그 값을 전달받습니다. 나무 팻말은 처음 확인한 오늘의 수와 같은 날짜의 증가분을 알리며, 한국 날짜가 바뀐 뒤의 차이를 새 방문으로 안내하지 않습니다.</p>
+            <h3>1분 확인은 선택 기능</h3><p>설치 화면의 고급 설정에서 켜거나 <code>refresh-interval="60"</code>을 추가합니다. 보이는 동안 같은 블로그 출처의 홈페이지 HTML을 읽어 오늘 방문 수를 확인합니다. 홈페이지에도 정상 숫자로 치환된 위젯이 있어야 합니다.</p>
+            <p class="message message-warning">개별 방문의 실시간 도착 이벤트를 받는 기능은 아닙니다. 티스토리 집계 지연과 반복 HTML 조회가 집계에 미치는 영향은 아직 검증하지 않았습니다. 기본은 끄기입니다.</p>
+            <p>산타와 루돌프, 캐릭터의 인사와 아이콘 말풍선은 장식입니다. 실제 방문 수나 방문자의 행동을 추가로 의미하지 않습니다.</p>
+          </section>
+          <section id="troubleshooting" aria-labelledby="trouble-title">
+            <h2 id="trouble-title">문제 해결</h2>
+            <h3>숫자 대신 [##_count_today_##]가 남아 있어요</h3><p>코드가 티스토리 스킨 HTML에 들어갔는지 확인하세요. 편집 화면의 원본 치환자가 아니라 저장 후 실제 블로그의 HTML에서 숫자로 바뀌는지 확인합니다. 글 본문이나 별도 페이지에서는 같은 방식으로 치환되지 않을 수 있습니다. 임의의 시연 숫자로 덮어쓰지 마세요.</p>
+            <h3>방문 수가 늦게 바뀌거나 자동 확인이 실패해요</h3><p>자동 확인의 기본값은 끄기이며, 켠 경우에도 티스토리 집계가 늦을 수 있습니다. 블로그 홈페이지에 정상 방문 수의 위젯이 있는지 확인하세요. 홈페이지의 여러 위젯 숫자가 서로 다르면 확인을 중단하고 오류를 표시합니다. 오류 중에는 마지막 정상 마을을 유지합니다.</p>
+            <h3>모바일에서 마을이 안 보여요</h3><p>자동 모바일 스킨 사용 여부와 실제 모바일 페이지에 설치 코드가 있는지 확인하세요. 블로그의 모바일 본문 링크와 스크롤도 함께 점검합니다.</p>
+            <h3>움직이지 않거나 마을을 불러오지 못해요</h3><p><code>paused</code> 속성과 기기의 모션 줄이기 설정을 확인하세요. WebGL을 지원하는 브라우저가 필요합니다. 스크립트가 차단되거나 로드되지 않으면 설치 코드의 모듈 주소가 올바른지 확인합니다.</p>
+            <h3>업데이트가 아직 보이지 않아요</h3><p>기존 위젯 모듈은 최대 5분간 캐시될 수 있습니다. 잠시 후 새로고침해 보세요. 이전 Vercel 주소를 사용 중이면 현재 설치 화면에서 Pages 주소가 들어간 코드를 다시 만드세요.</p>
+            <p>계속 해결되지 않으면 브라우저, 선택 계절, 오류 문구와 재현 순서를 정리해 <a href="https://github.com/hyunolike/pixel-visitor-village/issues" target="_blank" rel="noopener noreferrer">GitHub 이슈 (새 탭)</a>로 알려 주세요. 인증 정보나 스킨 전체 원본은 올리지 마세요.</p>
+          </section>
+          <section id="development" aria-labelledby="dev-title">
+            <h2 id="dev-title">개발과 자체 호스팅</h2><p>Node.js 22.12 이상, pnpm 10을 사용합니다. 브라우저 검사에는 Google Chrome이 필요합니다.</p>
+            <div class="docs-code" role="region" aria-label="개발 명령어 가로 스크롤" tabindex="0"><pre><code>pnpm install
+pnpm dev
+
+pnpm test
+pnpm typecheck
+pnpm build
+pnpm test:e2e</code></pre></div>
+            <p><code>pnpm build</code>로 만든 <code>dist</code>를 정적 호스팅에 올립니다. 독립 위젯은 <code>dist/widget/visitor-village.js</code>입니다. HTTPS와 JavaScript MIME, 다른 출처의 모듈 로드를 위한 CORS가 필요합니다. 삽입 코드는 직접 호스팅한 모듈 URL로 바꿔 주세요.</p>
+            <p>속성과 이벤트, 테스트와 배포 상세는 <a href="https://github.com/hyunolike/pixel-visitor-village#readme" target="_blank" rel="noopener noreferrer">저장소 README (새 탭)</a>에서 확인할 수 있습니다. 운영 배포는 GitHub push와 별도의 Direct Upload 방식입니다.</p>
+          </section>
+          <section id="credits" aria-labelledby="credits-title">
+            <h2 id="credits-title">제작과 출처</h2><p>마을의 캐릭터와 계절 소품, 손 인사와 아이콘 말풍선은 프로젝트의 자체 픽셀 코드로 그립니다. 크리스마스 나무 PNG의 생성 과정과 원본 시안, 그림과 영상별 출처는 저장소에 기록되어 있습니다.</p><p>소개 영상 음악은 Sascha Ende의 곡을 20초로 편집했습니다. <a href="https://ende.app/en" target="_blank" rel="noopener noreferrer">음원 제작자 (새 탭)</a>와 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0 (새 탭)</a>을 확인할 수 있습니다.</p><p><a href="https://github.com/hyunolike/pixel-visitor-village/blob/feat/visitor-notice/docs/assets/README.md" target="_blank" rel="noopener noreferrer">에셋 기록 (새 탭)</a> · <a href="https://github.com/hyunolike/pixel-visitor-village/blob/feat/visitor-notice/docs/features/visitor-village/intro-media.md" target="_blank" rel="noopener noreferrer">영상 제작과 음원 출처 (새 탭)</a></p></section>
+        </div>
+      </div>
+    </main>
+    <footer class="docs-footer"><span>한국어 사용 문서</span><a class="button button-primary" href="../install.html">설치 코드 만들기</a></footer>
+  </div>
+</body>
+</html>

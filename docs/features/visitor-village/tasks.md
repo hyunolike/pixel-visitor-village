@@ -240,3 +240,16 @@ https://pixel-visitor-village.vercel.app/install.html 에서 블로그 주소를
 - [x] 기존 Cloudflare Pages production에 직접 업로드하고 공개 모듈 해시/CORS/404, 네 언어 설치 코드, 인사/크리스마스 장식/모션 줄이기, 320px와 외부 출처 37명 삽입 검증.
 
 공개 주소는 https://pixel-visitor-village.pages.dev/ 이며 고유 배포는 https://09738faa.pixel-visitor-village.pages.dev/ 이다. 자세한 검증과 제외 범위는 [배포 기록](deployment.md)의 2026-11-25 절에 있다. main 병합은 수행하지 않았다.
+
+## 2026-11-25 홈·설치·사용 문서 개편
+
+- [x] 레퍼런스 비교와 사용자 3페이지 구성 승인, 최신 깨끗한 HEAD 0fcdb54 확인.
+- [x] VV-SITE-001~004와 [실행 계획](site-pages-plan.md) 작성.
+- [x] 독립 준비 검토와 실패하는 브라우저 흐름 검사.
+- [x] 홈 소개/데모/설치/FAQ와 정적 사용자 문서, 네 언어 설치 메뉴 연결.
+- [x] 전체 단위/타입/빌드/브라우저, 데스크톱/320px 화면과 독립 코드 검토.
+- [x] README 진입점과 실제 결과/다음 시작점 기록.
+
+기존 공개 배포는 유지하며 새 변경은 로컬 구현으로 전달한다. 실제 티스토리 설치와 새 커밋/푸시/배포는 수행하지 않는다.
+
+구현을 마쳤다. 단위128/128, 타입/앱/독립 모듈 빌드, 고정 빌드의 전체 Chrome67/67과 163개 README 상대 Markdown 링크/문서 로컬 앵커를 확인했다. 실제 데스크톱/320px 화면과 독립 검토/보완 내역은 [검증 기록](reviews/site-pages-2026-11-25.md)에 있다. 로컬 미리보기는 http://127.0.0.1:5198/ 와 /install.html, /docs/ 이다. 공개 Pages는 이전 배포를 유지한다.
