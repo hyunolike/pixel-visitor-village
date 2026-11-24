@@ -6,9 +6,9 @@
 
 티스토리의 오늘 방문자 수를 픽셀 캐릭터로 보여 주는 웹 위젯입니다. 커다란 나무 주변에서 캐릭터들이 걷고 쉬며, 크리스마스부터 사계절까지 마을 분위기를 바꿀 수 있습니다.
 
-[마을 구경하기](https://pixel-visitor-village.pages.dev/) · [티스토리 설치하기](https://pixel-visitor-village.pages.dev/install.html) · [설치 코드](examples/tistory-snippet.html) | [사용 문서](docs/index.html)
+[마을 구경하기](https://pixel-visitor-village.pages.dev/) · [티스토리 설치하기](https://pixel-visitor-village.pages.dev/install.html) · [설치 코드](examples/tistory-snippet.html) | [사용 문서](https://pixel-visitor-village.pages.dev/docs/)
 
-설치 방법과 위젯 설정, 방문 수 집계와 문제 해결을 HTML 문서로 제공합니다. 새 홈과 문서는 로컬 구현을 마쳤으며 공개 반영은 후속 배포가 필요합니다.
+설치 방법과 위젯 설정, 방문 수 집계와 문제 해결을 HTML 문서로 제공합니다. 새 홈과 문서를 Cloudflare Pages에 배포하고 공개 사이트에서 확인했습니다.
 
 [![방문자 수가 늘며 캐릭터가 모이는 작은 방문자 마을 소개 영상 미리보기](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
 

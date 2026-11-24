@@ -6,9 +6,9 @@
 
 这是一个为 Tistory 博客制作的网页组件，将今天的访客数转换为相同数量的像素角色。角色会在大树周围散步、休息，你还可以选择圣诞节或四季主题。
 
-[逛逛村庄](https://pixel-visitor-village.pages.dev/) | [安装到 Tistory](https://pixel-visitor-village.pages.dev/install.html) | [嵌入代码](examples/tistory-snippet.html) | [使用文档（韩语）](docs/index.html)
+[逛逛村庄](https://pixel-visitor-village.pages.dev/) | [安装到 Tistory](https://pixel-visitor-village.pages.dev/install.html) | [嵌入代码](examples/tistory-snippet.html) | [使用文档（韩语）](https://pixel-visitor-village.pages.dev/docs/)
 
-HTML 文档包含安装方法、组件设置、统计规则和问题排查。新版首页和文档已完成本地实现，公开站点尚待后续部署。
+HTML 文档包含安装方法、组件设置、统计规则和问题排查。新版首页和文档已发布到 Cloudflare Pages，并完成公开站点验证。
 
 [![随着访客数增加，像素角色逐渐聚集到村庄中的动画预览](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
 
