@@ -11,7 +11,7 @@
   <a class="skip-link" href="#setup" data-i18n="skipLink">마을 설정으로 건너뛰기</a>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="./index.html"><span class="brand-tree" aria-hidden="true"></span><span data-i18n="brand">작은 방문자 마을</span></a>
+      <a class="brand" href="./index.html"><span class="brand-tree brand-mark" aria-hidden="true"></span><span class="brand-title" data-i18n="brand">작은 방문자 마을</span></a>
       <nav class="header-actions" aria-label="Navigation">
         <a class="demo-link" href="./index.html" data-i18n="demoLink">마을 둘러보기</a>
         <label class="language-picker"><span class="sr-only" data-i18n="language">언어</span><select id="locale-select" autocomplete="off"><option value="ko" lang="ko">한국어</option><option value="en" lang="en">English</option><option value="ja" lang="ja">日本語</option><option value="zh-CN" lang="zh-CN">简体中文</option></select></label>
@@ -43,12 +43,18 @@
               <label class="season-option"><input type="radio" name="season" value="winter"><span data-season="winter">겨울</span></label>
             </div>
           </fieldset>
-          <div class="refresh-option">
-            <label for="install-refresh"><input id="install-refresh" type="checkbox" aria-describedby="refresh-help"><span data-i18n="refreshLabel">오늘 방문 수를 1분마다 확인</span></label>
-            <p id="refresh-help" class="help-text" data-i18n="refreshHelp">선택 기능입니다. 화면에 보일 때 블로그 HTML을 조회합니다. 집계 지연이 있을 수 있으며, 반복 조회의 집계 영향은 아직 검증하지 않았습니다.</p>
+          <div class="form-action" data-state="pristine">
+            <button id="create-code" class="button button-primary button-lg" type="submit" data-i18n="createCode">설치 코드 만들기</button>
           </div>
-          <button id="create-code" class="button button-primary" type="submit" data-i18n="createCode">설치 코드 만들기</button>
-          <p class="form-note" data-i18n="manualNote">주소 입력만으로 자동 설치되지는 않습니다.</p>
+          <p id="settings-status" class="settings-status" role="status" aria-live="polite"></p>
+          <details id="advanced-settings" class="advanced-settings">
+            <summary><span data-i18n="advancedSettings">고급 설정</span><span id="refresh-enabled" class="option-enabled" data-i18n="refreshEnabled" hidden>자동 확인 켜짐</span></summary>
+            <div class="refresh-option">
+              <label for="install-refresh"><input id="install-refresh" type="checkbox" aria-describedby="refresh-help"><span data-i18n="refreshLabel">오늘 방문 수를 1분마다 확인</span></label>
+              <p id="refresh-help" class="help-text" data-i18n="refreshHelp">마을이 화면에 보일 때 같은 블로그의 HTML을 읽습니다.</p>
+            </div>
+          </details>
+          <p id="refresh-warning" class="message message-warning" data-i18n="refreshWarning" hidden>집계 지연이 있을 수 있습니다. 반복 조회의 집계 영향은 아직 검증하지 않았습니다.</p>
         </form>
       </section>
       <section class="preview-panel" aria-labelledby="preview-title">
@@ -62,7 +68,7 @@
     <section class="copy-section" aria-labelledby="copy-title">
       <h2 id="copy-title" class="step-title" tabindex="-1"><span class="step-number" aria-hidden="true">2</span><span data-i18n="copyTitle">설치 코드를 복사하세요</span></h2>
       <div class="step-content">
-        <p id="code-pending" class="muted" data-i18n="codePending">위에서 코드를 만들면 이곳에 복사할 코드가 나타납니다.</p>
+        <p id="code-pending" class="muted">위에서 코드를 만들면 이곳에 복사할 코드가 나타납니다.</p>
         <section id="install-result" hidden aria-label="설치 코드와 관리자 링크">
           <p id="normalized-blog" class="muted"></p>
           <label class="sr-only" for="install-code" data-i18n="codeLabel">티스토리 설치 코드</label>

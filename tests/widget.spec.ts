@@ -424,14 +424,15 @@ test('an in-flight refresh cannot overwrite a newer external count',async({page}
 
 test('the installer only adds automatic refresh after an explicit choice',async({page})=>{
   await page.goto('/install.html?lang=ko');
-  const option=page.getByRole('checkbox',{name:'오늘 방문 수를 1분마다 확인'});
+  const option=page.locator('#install-refresh');
   await expect(option).not.toBeChecked();
   await page.getByLabel('티스토리 주소',{exact:true}).fill('hyunolike.tistory.com');
-  await page.getByRole('button',{name:'설치 코드 만들기',exact:true}).click();
+  await page.locator('#create-code').click();
   expect(await page.getByLabel('티스토리 설치 코드',{exact:true}).inputValue()).not.toContain('refresh-interval');
+  await page.locator('#advanced-settings summary').click();
   await option.check();
   await expect(page.getByLabel('티스토리 설치 코드',{exact:true})).toBeHidden();
-  await page.getByRole('button',{name:'설치 코드 만들기',exact:true}).click();
+  await page.locator('#create-code').click();
   expect(await page.getByLabel('티스토리 설치 코드',{exact:true}).inputValue()).toContain('refresh-interval="60"');
 });
 
@@ -512,7 +513,7 @@ test('the installer generates deployed code and an owner admin link without clai
   await context.grantPermissions(['clipboard-read','clipboard-write']);
   await page.goto('/install.html?lang=ko');
   await page.getByLabel('티스토리 주소',{exact:true}).fill('example.tistory.com/entry/hello');
-  await page.getByRole('button',{name:'설치 코드 만들기',exact:true}).click();
+  await page.locator('#create-code').click();
   const code=await page.getByLabel('티스토리 설치 코드',{exact:true}).inputValue();
   expect(code).toContain(`src="${appOrigin()}/widget/visitor-village.js"`);
   expect(code).toContain('count="[##_count_today_##]"');
@@ -522,7 +523,7 @@ test('the installer generates deployed code and an owner admin link without clai
   expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe(code);
   await page.getByLabel('티스토리 주소',{exact:true}).fill('javascript:alert(1)');
   await expect(page.getByLabel('티스토리 설치 코드',{exact:true})).toBeHidden();
-  await page.getByRole('button',{name:'설치 코드 만들기',exact:true}).click();
+  await page.locator('#create-code').click();
   await expect(page.getByRole('alert')).not.toBeEmpty();
 });
 
@@ -532,6 +533,7 @@ test('installation languages preserve the generated code, selected season and fo
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await page.locator('#blog-url').fill('example.tistory.com/entry/welcome');
   await page.locator('input[name="season"][value="spring"]').check();
+  await page.locator('#advanced-settings summary').click();
   await page.locator('#install-refresh').check();
   await page.locator('#create-code').click();
   const snippet = await page.locator('#install-code').inputValue();
@@ -603,6 +605,7 @@ test('installer preview changes all five seasons without recreating characters a
   await page.locator('#locale-select').selectOption('ko');
   await page.locator('#preview-village').evaluate(el => el.setAttribute('count', '24'));
   await page.locator('#preview-pause').click();
+  await expect(page.locator('#preview-village .notice')).toHaveCSS('opacity', '0');
   await page.screenshot({path: testInfo.outputPath('install-desktop.png'), fullPage: true});
   await page.setViewportSize({width: 390, height: 844});
   await page.locator('#locale-select').selectOption('en');
@@ -640,6 +643,7 @@ test('installer clipboard fallback is translated and stale copy completion is ig
     (navigator.clipboard as any).writeText = () => new Promise<void>(resolve => { (window as any).completeCopy = resolve; });
   });
   await page.locator('#copy-code').click();
+  await page.locator('#advanced-settings summary').click();
   await page.locator('#install-refresh').check();
   await page.evaluate(() => (window as any).completeCopy());
   await expect(page.locator('#install-result')).toBeHidden();
@@ -698,9 +702,16 @@ test('installer settings and code generation work with the keyboard', async ({pa
   await page.keyboard.press('ArrowRight');
   await expect(page.locator('input[name="season"][value="spring"]')).toBeChecked();
   await page.keyboard.press('Tab');
+  await expect(page.locator('#create-code')).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(page.locator('#advanced-settings summary')).toBeFocused();
+  await page.keyboard.press('Enter');
+  await page.keyboard.press('Tab');
   await expect(page.locator('#install-refresh')).toBeFocused();
   await page.keyboard.press('Space');
-  await page.keyboard.press('Tab');
+  await page.keyboard.press('Shift+Tab');
+  await page.keyboard.press('Enter');
+  await page.keyboard.press('Shift+Tab');
   await expect(page.locator('#create-code')).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(page.locator('#copy-title')).toBeFocused();
@@ -725,3 +736,137 @@ for (const motion of ['reduce', 'no-preference'] as const) {
     await expect(canvas).toHaveAttribute('aria-label', '夏の緑の広場, 訪問者 24人');
   });
 }
+
+test('design polish keeps Korean words intact and the mobile install action available', async ({page}, testInfo) => {
+  await page.setViewportSize({width:375,height:667});
+  await page.goto('/install.html?lang=ko');
+  const wordLines=await page.locator('#page-title').evaluate(el=>{
+    const node=el.firstChild!;const start=node.textContent!.indexOf('마을');
+    const range=document.createRange();range.setStart(node,start);range.setEnd(node,start+2);
+    return range.getClientRects().length;
+  });
+  expect(wordLines).toBe(1);
+  const action=await page.locator('#create-code').boundingBox();
+  expect(action&&action.y>=0&&action.y+action.height<=667).toBe(true);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.screenshot({path:testInfo.outputPath('install-mobile-first-screen.png')});
+});
+
+test('design polish distinguishes changed settings from an unused install form in every language',async({page})=>{
+  await page.goto('/install.html?lang=ko');
+  await page.locator('#blog-url').fill('example.tistory.com');await page.locator('#create-code').click();
+  await page.locator('input[name="season"][value="spring"]').check();
+  await expect(page.locator('#settings-status')).toContainText('설정이 변경');
+  await expect(page.locator('#create-code')).toHaveText('코드 다시 만들기');
+  await expect(page.locator('#install-result')).toBeHidden();
+  await expect(page.locator('#admin-link')).toBeHidden();
+  await page.locator('#locale-select').selectOption('en');
+  await expect(page.locator('#settings-status')).toContainText('Settings changed');
+  await expect(page.locator('#create-code')).toHaveText('Recreate install code');
+  for (const [lang, status, action] of [
+    ['ja', '設定が変更されました。', '設置コードを再作成'],
+    ['zh-CN', '设置已更改', '重新生成安装代码'],
+  ]) {
+    await page.locator('#locale-select').selectOption(lang);
+    await expect(page.locator('#settings-status')).toContainText(status);
+    await expect(page.locator('#create-code')).toHaveText(action);
+  }
+  await page.locator('#blog-url').fill('javascript:alert(1)');
+  await page.locator('#create-code').click();
+  await expect(page.locator('#settings-status')).toContainText('设置已更改');
+  await expect(page.locator('#install-result')).toBeHidden();
+  await page.locator('#blog-url').fill('example.tistory.com');
+  await page.locator('#create-code').click();
+  await expect(page.locator('#settings-status')).toBeEmpty();
+  expect(await page.locator('#install-code').inputValue()).toContain('season="spring"');
+});
+
+test('design polish keeps enabled advanced settings and their warning visible when collapsed',async({page},testInfo)=>{
+  await page.setViewportSize({width:375,height:667});
+  await page.goto('/install.html?lang=ko');
+  await expect(page.locator('#advanced-settings')).not.toHaveAttribute('open');
+  await expect(page.locator('#refresh-warning')).toBeHidden();
+  await expect(page.locator('#install-refresh')).toHaveAccessibleDescription('마을이 화면에 보일 때 같은 블로그의 HTML을 읽습니다.');
+  await page.locator('#advanced-settings summary').click();
+  await page.locator('#install-refresh').check();
+  await expect(page.locator('#install-refresh')).toHaveAccessibleDescription(/검증하지 않았습니다/);
+  await page.locator('#advanced-settings summary').click();
+  await expect(page.locator('#refresh-enabled')).toBeVisible();
+  await expect(page.locator('#refresh-warning')).toBeVisible();
+  await expect(page.locator('#refresh-warning')).toContainText('검증하지 않았습니다');
+  await page.locator('#locale-select').selectOption('en');
+  await expect(page.locator('#refresh-enabled')).toHaveText('Auto-check on');
+  await expect(page.locator('#refresh-warning')).toContainText('has not been verified');
+  await page.locator('#blog-url').fill('example.tistory.com');
+  await page.locator('#create-code').click();
+  await expect(page.locator('#copy-title')).toBeFocused();
+  expect(await page.locator('#create-code').evaluate(el=>getComputedStyle(el.parentElement!).position)).toBe('static');
+  await page.locator('#copy-code').focus();
+  const copy=await page.locator('#copy-code').boundingBox();
+  expect(copy!.y).toBeGreaterThanOrEqual(0);expect(copy!.y+copy!.height).toBeLessThanOrEqual(667);
+  await page.locator('input[name="season"][value="spring"]').check();
+  expect(await page.locator('#create-code').evaluate(el=>getComputedStyle(el.parentElement!).position)).toBe('fixed');
+  await page.locator('#advanced-settings summary').focus();
+  const summary=await page.locator('#advanced-settings summary').boundingBox();
+  const action=await page.locator('#create-code').boundingBox();
+  expect(summary!.y+summary!.height).toBeLessThanOrEqual(action!.y);
+  await page.locator('#refresh-warning').evaluate(el=>el.scrollIntoView({block:'center'}));
+  const warning=await page.locator('#refresh-warning').boundingBox();
+  expect(warning!.y).toBeGreaterThanOrEqual(0);
+  expect(warning!.y+warning!.height).toBeLessThanOrEqual(action!.y);
+  await page.screenshot({path:testInfo.outputPath('install-mobile-dirty-warning.png')});
+});
+
+test('design polish shares brand and control metrics across light installation and dark demo',async({page},testInfo)=>{
+  const metrics=async()=>page.locator('.brand-mark').evaluate(el=>({
+    width:getComputedStyle(el).width,height:getComputedStyle(el).height,shape:getComputedStyle(el).clipPath,
+  }));
+  for(const width of [1440,520,375]){
+    await page.setViewportSize({width,height:1000});
+    await page.goto('/install.html?lang=ko');const installMark=await metrics();
+    await page.goto('/');expect(await metrics()).toEqual(installMark);
+    for(const control of ['#pause','#season','#visitors']) expect(await page.locator(control).evaluate(el=>el.getBoundingClientRect().height)).toBe(48);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    if(width===1440)await page.screenshot({path:testInfo.outputPath('demo-dark-desktop.png'),fullPage:true});
+  }
+});
+
+test('design polish limits only the installer repository link to its visible badge',async({page,context})=>{
+  await context.route('https://github.com/hyunolike/pixel-visitor-village',route=>route.fulfill({body:'Repository test destination',contentType:'text/html'}));
+  await page.goto('/install.html?lang=en');
+  await page.waitForFunction(()=>(document.querySelector('#preview-village') as any)?.ready);
+  const stage=await page.locator('#preview-stage').boundingBox();
+  const link=page.locator('#preview-village .repository');const badge=await link.boundingBox();
+  expect(badge!.width).toBeLessThan(stage!.width/2);
+  let opened=0;page.on('popup',()=>{opened++;});
+  await page.locator('#preview-stage').click({position:{x:20,y:100}});
+  await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))));
+  expect(opened).toBe(0);
+  await link.focus();const popupPromise=page.waitForEvent('popup');await page.keyboard.press('Enter');
+  const popup=await popupPromise;await popup.waitForLoadState();expect(popup.url()).toContain('github.com/hyunolike/pixel-visitor-village');await popup.close();
+});
+
+test('design polish removes inactive visitor notices from the accessibility tree after a language switch',async({page})=>{
+  await page.clock.install();await page.goto('/install.html?lang=ko');
+  await page.waitForFunction(()=>(document.querySelector('#preview-village') as any)?.ready);
+  const notice=page.locator('#preview-village .notice');
+  await expect(notice).toHaveAttribute('data-open','true');
+  await page.clock.fastForward(3100);
+  await expect(notice).toHaveAttribute('aria-hidden','true');
+  await page.locator('#locale-select').selectOption('en');
+  expect(await page.locator('#preview-village').ariaSnapshot()).not.toContain('오늘 방문');
+});
+
+test('design polish preserves a mobile click from address editing to advanced settings',async({page})=>{
+  await page.setViewportSize({width:375,height:667});
+  await page.goto('/install.html?lang=en');
+  await page.locator('#blog-url').fill('example.tistory.com');
+  await page.locator('#advanced-settings summary').click();
+  await expect(page.locator('#advanced-settings')).toHaveAttribute('open','');
+  await page.locator('#install-refresh').check();
+  await expect(page.locator('#refresh-warning')).toBeVisible();
+  await page.waitForFunction(()=>(document.querySelector('#preview-village') as any)?.ready);
+  await page.locator('#blog-url').fill('example.tistory.com');
+  await page.locator('#preview-pause').click();
+  await expect(page.locator('#preview-pause')).toHaveAttribute('aria-pressed','true');
+});

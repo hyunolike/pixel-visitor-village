@@ -45,7 +45,7 @@ export class VisitorVillage extends HTMLElement {
   constructor() {
     super();
     const shadow=this.attachShadow({mode:'open'});
-    shadow.innerHTML=`<style>${styles}</style><section class="village" aria-label="방문자 마을"><p class="name"></p><p class="notice" aria-live="polite" aria-atomic="true" data-open="false"></p><a class="repository" href="https://github.com/hyunolike/pixel-visitor-village" target="_blank" rel="noopener noreferrer" aria-label="Pixel Visitor Village 저장소 보기 (새 탭)"><span>GitHub에서 보기 ↗</span></a><div class="status" role="status" aria-live="polite"></div></section>`;
+    shadow.innerHTML=`<style>${styles}</style><section class="village" aria-label="방문자 마을"><p class="name"></p><p class="notice" aria-hidden="true" aria-live="polite" aria-atomic="true" data-open="false"></p><a class="repository" href="https://github.com/hyunolike/pixel-visitor-village" target="_blank" rel="noopener noreferrer" aria-label="Pixel Visitor Village 저장소 보기 (새 탭)"><span>GitHub에서 보기 ↗</span></a><div class="status" role="status" aria-live="polite"></div></section>`;
     this.frame=shadow.querySelector('.village')!;this.status=shadow.querySelector('.status')!;this.nameLabel=shadow.querySelector('.name')!;
     this.notice=shadow.querySelector('.notice')!;
   }
@@ -64,6 +64,7 @@ export class VisitorVillage extends HTMLElement {
     repository.querySelector('span')!.textContent=labels.repository;
     this.nameLabel.textContent=labels.seasons[this.model.season];
     if(this.shownNotice)this.renderNotice(this.shownNotice);
+    else this.notice.textContent='';
     this.showStatus();
   }
   private detail(){return {count:this.visitorCount,season:this.season,paused:this.hasAttribute('paused')||this.motionReduced};}
@@ -146,13 +147,13 @@ export class VisitorVillage extends HTMLElement {
     const current=this.pendingNotice;this.pendingNotice=null;this.shownNotice=current;this.lastNotice=current.snapshot;
     // A paused notice is not a fresh reading: don't relabel yesterday's count as today's.
     this.renderNotice(current);
-    this.notice.dataset.open='true';this.frame.classList.add('notice-open');
+    this.notice.dataset.open='true';this.notice.setAttribute('aria-hidden','false');this.frame.classList.add('notice-open');
     clearTimeout(this.noticeTimer);
     this.noticeTimer=setTimeout(()=>this.closeNotice(),3000);
   }
   private closeNotice() {
     clearTimeout(this.noticeTimer);this.noticeTimer=undefined;this.shownNotice=null;
-    this.notice.dataset.open='false';this.frame.classList.remove('notice-open');
+    this.notice.dataset.open='false';this.notice.setAttribute('aria-hidden','true');this.frame.classList.remove('notice-open');
   }
   private renderNotice(current:PendingNotice) {
     this.notice.textContent=current.snapshot.day===koreanDay(new Date())

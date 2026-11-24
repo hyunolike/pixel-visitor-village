@@ -6,6 +6,8 @@ import type { VisitorVillage } from './visitor-village';
 
 const find = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
 const form = find<HTMLFormElement>('#install-form');
+const formAction = find<HTMLElement>('.form-action');
+const createCode = find<HTMLButtonElement>('#create-code');
 const address = find<HTMLInputElement>('#blog-url');
 const refresh = find<HTMLInputElement>('#install-refresh');
 const language = find<HTMLSelectElement>('#locale-select');
@@ -24,10 +26,25 @@ let origin = '';
 let errorCode: InstallErrorCode | 'unexpectedError' | undefined;
 let copyStatus: 'copySuccess' | 'copyFallback' | undefined;
 let resultGeneration = 0;
+let installState: 'pristine' | 'ready' | 'dirty' = 'pristine';
 let preview: VisitorVillage | undefined;
 let previewState: 'loading' | 'ready' | 'failed' = 'loading';
 let previewGeneration = 0;
 let paused = false;
+
+function renderResultState() {
+  const t = messages[locale];
+  formAction.dataset.state = installState;
+  createCode.textContent = installState === 'dirty' ? t.regenerateCode : t.createCode;
+  const status = find('#settings-status');
+  const statusText = installState === 'dirty' ? t.settingsChanged : '';
+  if (status.textContent !== statusText) status.textContent = statusText;
+  find('#code-pending').textContent = installState === 'dirty' ? t.settingsChanged : t.codePending;
+  find('#refresh-enabled').hidden = !refresh.checked;
+  find('#refresh-warning').hidden = !refresh.checked;
+  const description = refresh.checked ? 'refresh-help refresh-warning' : 'refresh-help';
+  if (refresh.getAttribute('aria-describedby') !== description) refresh.setAttribute('aria-describedby', description);
+}
 
 function renderPreviewText() {
   const t = messages[locale];
@@ -59,10 +76,12 @@ function renderLocale() {
   error.textContent = errorCode ? errorCode === 'unexpectedError' ? t.unexpectedError : t.errors[errorCode] : '';
   copyState.textContent = copyStatus ? t[copyStatus] : '';
   if (preview) preview.labels = t.village;
+  renderResultState();
   renderPreviewText();
 }
 
-function clearResult() {
+function clearResult(invalidate = false) {
+  if (invalidate && installState !== 'pristine') installState = 'dirty';
   ++resultGeneration;
   origin = '';
   result.hidden = true;
@@ -73,22 +92,39 @@ function clearResult() {
   find('#admin-pending').hidden = false;
   copyStatus = undefined;
   copyState.textContent = '';
+  renderResultState();
 }
 
 address.addEventListener('input', () => {
-  clearResult();
+  clearResult(true);
   errorCode = undefined;
   error.textContent = '';
   address.removeAttribute('aria-invalid');
 });
+// A focus-driven layout change must wait until the pointer's click has been dispatched.
+let pointerActive = false;
+function syncActionFocus() {
+  if (pointerActive) return;
+  if (document.activeElement === address) formAction.dataset.editing = 'true';
+  else if (document.activeElement !== createCode) delete formAction.dataset.editing;
+}
+document.addEventListener('pointerdown', () => { pointerActive = true; }, true);
+const finishPointer = () => {
+  pointerActive = false;
+  requestAnimationFrame(syncActionFocus);
+};
+document.addEventListener('pointerup', finishPointer, true);
+document.addEventListener('pointercancel', finishPointer, true);
+document.addEventListener('focusin', syncActionFocus);
+form.addEventListener('focusout', () => { requestAnimationFrame(syncActionFocus); });
 form.addEventListener('change', event => {
   const input = event.target;
   if (!(input instanceof HTMLInputElement)) return;
   if (input.name === 'season') {
     selectedSeason = input.value as Season;
     preview?.setAttribute('season', selectedSeason);
-    clearResult();
-  } else if (input === refresh) clearResult();
+    clearResult(true);
+  } else if (input === refresh) clearResult(true);
 });
 
 language.addEventListener('change', () => {
@@ -111,6 +147,7 @@ form.addEventListener('submit', event => {
     admin.href = blog.adminUrl;
     admin.hidden = false;
     result.hidden = false;
+    installState = 'ready';
     find('#code-pending').hidden = true;
     find('#admin-pending').hidden = true;
     errorCode = undefined;
@@ -166,6 +203,7 @@ async function loadPreview() {
     preview.labels = messages[locale].village;
     preview.setAttribute('count', '24');
     preview.setAttribute('season', selectedSeason);
+    preview.setAttribute('repository-link', 'badge');
     preview.toggleAttribute('paused', paused);
     preview.addEventListener('village-ready', () => {
       if (generation !== previewGeneration) return;

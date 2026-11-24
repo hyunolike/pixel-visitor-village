@@ -6,6 +6,7 @@ canvas{display:block!important;width:100%!important;height:100%!important;image-
 .status{position:absolute;z-index:4;left:12px;right:12px;bottom:12px;padding:10px 12px;background:#17352ded;color:#fff5da;border-radius:0;font-size:13px;line-height:1.6;overflow-wrap:anywhere;pointer-events:none}
 .status:empty{display:none}
 .repository{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:flex-end;padding:10px 12px;color:#f4edd5;text-decoration:none;border-radius:0;touch-action:auto}
+:host([repository-link="badge"]) .repository{inset:auto;right:12px;bottom:10px;padding:0}
 .repository span{padding:4px 7px;background:#11262ae8;border:1px solid #67877c;font-size:10px;line-height:1.5}
 .repository:hover span{background:#28473f}
 .repository:focus-visible{outline:3px solid #f5d282;outline-offset:-5px}

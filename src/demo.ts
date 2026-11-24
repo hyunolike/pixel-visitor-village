@@ -6,13 +6,13 @@ import type { VisitorVillage } from './visitor-village';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML=`
 <article class="page">
-  <header class="top"><span class="tree-mark" aria-hidden="true"></span><span class="brand">작은 방문자 마을</span><nav class="top-links" aria-label="프로젝트 안내"><a class="preview-label" href="#intro-film">소개 영상</a><a class="preview-label" href="./install.html">블로그에 설치하기</a></nav></header>
+  <header class="top"><span class="tree-mark brand-mark" aria-hidden="true"></span><span class="brand brand-title">작은 방문자 마을</span><nav class="top-links" aria-label="프로젝트 안내"><a class="preview-label" href="#intro-film">소개 영상</a><a class="preview-label" href="./install.html">블로그에 설치하기</a></nav></header>
   <div class="intro"><div><h1>오늘도, 여기 모였어요.</h1><p>큰 나무 아래에서 만나는 작은 방문자들.</p></div><div class="count"><span>오늘의 방문자 · 시연</span><strong id="visitor-count">24<small>명</small></strong></div></div>
   <div class="stage"><visitor-village count="24" season="christmas"></visitor-village></div>
   <section class="tools" aria-label="마을 꾸미기">
     <div class="field"><label for="season">나무 꾸미기</label><select id="season"><option value="christmas">크리스마스</option><option value="spring">봄 · 꽃나무</option><option value="summer">여름 · 푸른 나무</option><option value="autumn">가을 · 단풍나무</option><option value="winter">겨울 · 눈꽃나무</option></select></div>
     <div class="field"><label for="visitors">시연 방문자 수</label><div class="visitor-inputs"><input id="visitors" type="text" value="24" inputmode="numeric" autocomplete="off" spellcheck="false"><input id="visitor-range" type="range" value="24" min="0" max="200" aria-label="0명에서 200명까지 빠른 방문자 수 조절"></div></div>
-    <div class="actions"><button id="glow" type="button" aria-pressed="true">빛 번짐 켜짐</button><button id="pause" type="button" aria-pressed="false">움직임 멈추기</button></div>
+    <div class="actions"><button id="glow" class="button button-secondary" type="button" aria-pressed="true">빛 번짐 켜짐</button><button id="pause" class="button button-secondary" type="button" aria-pressed="false">움직임 멈추기</button></div>
   </section>
   <section class="intro-film" id="intro-film" aria-labelledby="intro-film-title">
     <div class="film-heading"><div><span class="film-label">20초 소개 영상</span><h2 id="intro-film-title">방문자가 모이면, 마을이 됩니다.</h2><p id="intro-video-description">캐릭터가 걷고 계절이 바뀌는 작은 방문자 마을을 만나 보세요.</p></div><a class="film-file" href="./media/intro.mp4" target="_blank" rel="noopener">영상 파일 열기</a></div>

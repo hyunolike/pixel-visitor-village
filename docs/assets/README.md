@@ -50,3 +50,7 @@
 ## 자동 인사와 말풍선
 
 2026-11-25 손 인사는 [characters.ts](../../src/characters.ts)의 기존 캐릭터에 추가한 자체 두 자세입니다. [social-art.ts](../../src/social-art.ts)의 18×14px 말풍선 세 종류(점 세 개, 하트, 반짝임)도 자체 RGBA 코드이며 외부 에셋이나 폰트를 사용하지 않습니다. 실제 방문자 간 메시지나 신원을 나타내지 않습니다. [데스크톱](social-desktop.png)과 [320px 화면](social-mobile.png)은 로컬 배포 번들의 실제 Pixi 장면을 Chrome으로 캡처한 검증 화면이며 시연 숫자는 80입니다.
+
+## 설치 화면 디자인 시스템 개선
+
+[데스크톱](install-desktop.png)은 1440px 너비의 전체 페이지, [모바일](install-mobile.png)은 375×667px의 첫 화면이다. 2026-11-25 로컬 production 빌드의 `/install.html?lang=ko`를 Chrome으로 촬영했다. 공통 브랜드/각진 컨트롤, 한국어 어절과 모바일 하단 생성 버튼을 확인할 수 있다. 미리보기 방문자 24명은 시연용이며 실제 티스토리 설치 화면을 촬영한 것이 아니다. [검토와 검증 기록](../features/visitor-village/reviews/design-system-polish-2026-11-25.md)을 함께 참고한다.
