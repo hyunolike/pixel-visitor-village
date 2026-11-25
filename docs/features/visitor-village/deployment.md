@@ -4,6 +4,8 @@
 
 ## 공개 주소와 배포 상태
 
+자동화 후속 작업은 [GitHub Actions 배포와 릴리즈](ci-release.md)에 기록한다. 기존 아래 항목은 실제 완료된 수동 배포 기록이다. 자동화의 API 토큰/실행 검증이 끝나기 전에는 병합만으로 공개 반영됐다고 해석하지 않는다.
+
 - 마을: https://pixel-visitor-village.pages.dev/
 - 설치 도우미: https://pixel-visitor-village.pages.dev/install.html
 - 독립 모듈: https://pixel-visitor-village.pages.dev/widget/visitor-village.js

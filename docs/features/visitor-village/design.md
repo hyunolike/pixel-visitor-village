@@ -1,5 +1,9 @@
 # 방문자 픽셀 위젯 설계 초안
 
+## 2026-11-25 자동 배포와 릴리즈
+
+기존 Pages Direct Upload는 유지하고 GitHub Actions에서 CI→검증 산출물 업로드→production 업로드→공개 해시 검사→GitHub Release로 이어진다. 대안인 새 Git 통합 Pages 프로젝트는 URL/설정 이전이 필요해 채택하지 않는다. PR/main 공통 verify job은 contents:read만 가진다. main publish job만 배포 Secret과 contents:write를 쓰며 단일 concurrency로 순차 처리한다. 빌드별 deployment.json으로 메인 별칭을 식별하고 manifest의 모든 배포 파일을 고유 URL에서 검사한다. 계정 OAuth는 CI에 저장하지 않는다. [구현/검증 계획](ci-release-plan.md)을 따른다.
+
 ## Claude Code brag 재제작과 README 정리
 
 사용자 요청으로 실제 Claude Code brag 스킬을 실행해 새 소개 영상을 만들고 README4개를 짧게 정리한다. 기존 상단 썸네일과 체험 이미지 버튼은 유지하고 상세 사용/개발 정보는 문서로 보존한다. [실행 계획](brag-remake-plan.md)을 따른다.

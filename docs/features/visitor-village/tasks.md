@@ -1,5 +1,13 @@
 # 진행 상태
 
+## 2026-11-25 자동 배포와 GitHub 릴리즈
+
+- [x] 기존 Direct Upload/인증/Actions와 독립 폰트 PR 상태 확인, VV-CI-001~004와 [계획](ci-release-plan.md) 작성.
+- [x] workflow와 배포 산출물/공개 검증/릴리즈 스크립트, 도구14/14와 기존 단위146/146, 타입/빌드/브라우저79/79 검증.
+- [x] 독립 검토의 태그 커밋 지적 해결과 재검토. [기록](reviews/ci-release-2026-11-25.md).
+- [ ] 실제 PR/Linux Actions 검증.
+- [ ] 배포용 API 토큰 등록 후 main 배포와 첫 릴리즈 확인. 현재 계정 ID만 등록했고 API 토큰은 없어 미완료다.
+
 ## Claude Code brag 재제작과 README 정리
 
 사용자 요청으로 실제 Claude Code brag 스킬을 실행해 새 소개 영상을 만들고 README4개를 짧게 정리한다. 기존 상단 썸네일과 체험 이미지 버튼은 유지하고 상세 사용/개발 정보는 문서로 보존한다. [실행 계획](brag-remake-plan.md)을 따른다.

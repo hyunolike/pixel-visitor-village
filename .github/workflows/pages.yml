@@ -1,0 +1,127 @@
+name: Verify and publish Pages
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  verify:
+    name: Tests and production build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        with:
+          version: 10.17.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
+      - run: pnpm test:release
+      - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e
+      - name: Preserve failed browser traces
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: browser-failure-${{ github.run_id }}
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore
+          overwrite: true
+      - name: Prepare verified release files
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: node scripts/release/prepare.mjs
+      - name: Preserve the exact verified build
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pages-${{ github.sha }}
+          path: release/
+          retention-days: 14
+          if-no-files-found: error
+          overwrite: true
+
+  publish:
+    name: Deploy, verify and record release
+    needs: verify
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: pages-${{ github.sha }}
+          path: release/
+      - name: Check main and previously published releases
+        id: guard
+        run: node scripts/release/guard.mjs
+      - name: Check deployment credentials
+        if: steps.guard.outputs.publish == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo '::error::Register the repository secret CLOUDFLARE_API_TOKEN (this account, Pages Edit).'; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo '::error::Register the repository secret CLOUDFLARE_ACCOUNT_ID.'; exit 1; }
+      - name: Restore the exact verified distribution
+        if: steps.guard.outputs.publish == 'true'
+        run: |
+          cd release
+          sha256sum --check SHA256SUMS
+          cd ..
+          mkdir -p dist
+          tar -xzf release/site.tar.gz -C dist
+          node scripts/release/verify.mjs --local
+      - name: Deploy to existing Cloudflare Pages production
+        if: steps.guard.outputs.publish == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npm exec --yes --package=wrangler@4.166.0 -- wrangler pages deploy dist --project-name pixel-visitor-village --branch main --commit-hash "$GITHUB_SHA" --commit-dirty=false
+      - name: Verify public files and production alias
+        if: steps.guard.outputs.publish == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node scripts/release/verify.mjs
+      - name: Publish GitHub release and downloadable files
+        if: steps.guard.outputs.publish == 'true'
+        run: node scripts/release/publish.mjs
+      - name: Preserve deployment receipt on failure
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: deployment-diagnostics-${{ github.run_id }}
+          path: |
+            release/manifest.json
+            release/deployment-receipt.json
+          retention-days: 14
+          if-no-files-found: ignore
+          overwrite: true
