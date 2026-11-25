@@ -1,65 +1,71 @@
-# Pixel Visitor Village
+# 작은 방문자 마을
 
-**English** | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
+**한국어** | [English](README.en.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-**Turn today's blog visitor count into a lively little pixel village.**
+[![티스토리 로고와 작은 방문자 마을의 픽셀 캐릭터를 함께 그린 소개 썸네일](docs/assets/readme-tistory-village.png)](https://pixel-visitor-village.pages.dev/)
 
-A web widget for Tistory blogs that creates one pixel character for each visitor counted today. Characters walk and rest around a large tree, with Christmas and four seasonal themes to choose from.
+**오늘 블로그에 다녀간 사람 수만큼, 작은 마을이 북적입니다.**
 
-[Explore the village](https://pixel-visitor-village.pages.dev/) | [Install on Tistory](https://pixel-visitor-village.pages.dev/install.html) | [Embed snippet](examples/tistory-snippet.html) | [Usage guide (Korean)](https://pixel-visitor-village.pages.dev/docs/)
+티스토리의 오늘 방문자 수를 픽셀 캐릭터로 보여 주는 웹 위젯입니다. 커다란 나무 주변에서 캐릭터들이 걷고 쉬며, 크리스마스부터 사계절까지 마을 분위기를 바꿀 수 있습니다.
 
-A browsable HTML guide covers installation, widget options, counting rules and troubleshooting. The new home and guide are live on Cloudflare Pages and have passed public-site checks.
+[마을 구경하기](https://pixel-visitor-village.pages.dev/) · [티스토리 설치하기](https://pixel-visitor-village.pages.dev/install.html) · [설치 코드](examples/tistory-snippet.html) | [사용 문서](https://pixel-visitor-village.pages.dev/docs/)
 
-[![Animated preview of a pixel village filling with characters as the visitor count grows](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
+설치 방법과 위젯 설정, 방문 수 집계와 문제 해결을 HTML 문서로 제공합니다. 새 홈과 문서를 Cloudflare Pages에 배포하고 공개 사이트에서 확인했습니다.
 
-**20-second introduction** — The GIF plays in the README. Click it to open the video section of the demo. [Poster](public/media/intro-poster.jpg) | [MP4](public/media/intro.mp4) | [Production and music credits](docs/features/visitor-village/intro-media.md)
+[![방문자 수가 늘며 캐릭터가 모이는 작은 방문자 마을 소개 영상 미리보기](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
 
-*Created with Claude Code's brag skill using the project's village artwork and movement code. The 24 visitors in the video are a demo value. The video is available on the live site and is a fixed render from before the scenery update.*
+**20초 소개 영상** — 위 미리보기는 README에서 자동으로 움직입니다. 클릭하면 데모의 영상 영역으로 이동합니다. [썸네일](public/media/intro-poster.jpg) · [MP4](public/media/intro.mp4) · [제작과 음원 출처](docs/features/visitor-village/intro-media.md)
 
-> The redesigned installation helper supports Korean, English, Japanese, and Simplified Chinese, with a live seasonal preview. The update is live on Cloudflare Pages and has passed public-site checks. The main demo, introduction video, and technical documents remain in Korean. Translated READMEs are linked above.
+*실제 마을 그림과 이동 코드를 사용해 Claude Code의 brag 스킬로 제작했습니다. 영상 속 방문자 24명은 시연용 숫자입니다. 소개 영상은 운영 사이트에서 재생할 수 있습니다. 영상은 환경 에셋 개선 전 버전의 고정 렌더입니다.*
 
-[Features](#features) | [Seasonal villages](#seasonal-villages) | [Tistory installation](#tistory-installation) | [How it works](#how-it-works) | [Configuration](#widget-configuration) | [Visitor notices](#visitor-notices-and-optional-refresh) | [Development](#local-development) | [Docs](#documentation-and-assets)
+> 개편한 설치 도우미는 계절별 마을 미리보기와 한국어, 영어, 일본어, 중국어 간체를 지원합니다. 개편 내용을 Cloudflare Pages에 배포하고 공개 사이트에서 확인했습니다. 메인 데모와 소개 영상, 상세 기술 문서는 한국어로 제공됩니다. 기본 문서는 한국어이며 [English](README.en.md)에서 영어 설명을 볼 수 있습니다.
 
-## Features
+[주요 기능](#주요-기능) · [계절별 마을](#계절별-마을) · [티스토리 설치](#티스토리-설치) · [동작 구조](#동작-구조) · [위젯 설정](#위젯-설정) · [방문 수 팻말](#방문-수-팻말과-선택적-갱신) · [로컬 개발](#로컬-개발) · [문서](#문서와-에셋)
 
-- **One character per visitor** — Accepts 0–5,000 visitors. Characters walk around the tree, avoid its trunk, and take breaks.
-- **Five tree themes** — Choose Christmas, spring, summer, autumn, or winter. Switching themes preserves the visitor count and character positions.
-- **Embed with HTML** — Uses a `<visitor-village>` Web Component, Shadow DOM for style isolation, and PixiJS for rendering.
-- **Motion while visible** — Pauses in hidden tabs and outside the viewport. Respects the system's reduced motion preference and manual pause.
-- **Fits into your blog** — A responsive, bounded canvas that lets readers use article links and scroll on mobile.
+## 주요 기능
 
-There are **eight 20×28px character designs**, with distinct outfits and expressions, front/side/back views, four-frame walk cycles, and blinking. The updated characters are available on the live site. See the [enlarged sprite sheet](docs/assets/characters-v2.png) and [village screenshot](docs/assets/village-characters-v2.png).
+- **방문자 수만큼 캐릭터 생성** — 0~5,000명을 지원하며, 캐릭터들이 나무를 피해 움직이고 잠시 쉬기도 합니다.
+- **계절별 큰 나무** — 크리스마스, 봄, 여름, 가을, 겨울 중 선택합니다. 테마를 바꿔도 방문자 수와 위치를 유지합니다.
+- **HTML로 삽입하는 독립 위젯** — iframe 대신 `<visitor-village>` 웹 컴포넌트를 사용합니다. Shadow DOM으로 내부 스타일을 분리하고 PixiJS로 그립니다.
+- **화면에 보일 때 움직임 재생** — 숨겨진 탭과 화면 밖에서는 멈춥니다. 운영체제의 모션 줄이기 설정과 수동 정지도 반영합니다.
+- **블로그 안의 정해진 영역에 표시** — 반응형 크기를 지원하고, 캔버스가 본문 링크나 모바일 스크롤을 가로채지 않습니다.
 
-The seasonal screenshots below are local captures of the updated scenery. The same scenery assets are also available on the live site.
+의상과 표정이 다른 **20×28px 캐릭터 8종**, 앞/옆/뒤 방향과 4프레임 걷기, 눈 깜박임이 들어 있습니다. 캐릭터 개선은 운영 사이트에 반영됐습니다. [확대 시트](docs/assets/characters-v2.png)와 [실제 마을 적용 화면](docs/assets/village-characters-v2.png)을 볼 수 있습니다. 아래 계절별 이미지는 주변 환경을 개선한 버전의 로컬 캡처입니다. 같은 환경 에셋은 공개 마을에도 반영됐습니다.
 
-## Seasonal villages
+## 계절별 마을
 
-**Christmas** is the default theme, regardless of the date. Use the demo's tree customization panel (나무 꾸미기) to switch themes.
+기본 테마는 날짜와 관계없이 **크리스마스**입니다. 데모의 ‘나무 꾸미기’에서 바로 바꿔 볼 수 있습니다.
 
-The updated scenery includes tiled roofs, window frames, shop awnings, stone paths, and benches. Flowers, fruit, fallen leaves, and snow distinguish the seasons. Houses and props are sorted in front of or behind characters by foot position. See the [tree and scenery sheet](docs/assets/environment-v2.png) for details.
+집의 기와 지붕과 창틀, 가게 차양, 돌길과 벤치를 새로 그렸습니다. 꽃과 열매, 낙엽과 눈으로 계절을 구분하고, 집과 소품은 캐릭터의 발 위치에 따라 앞뒤로 표시합니다. [나무와 소품 확대 시트](docs/assets/environment-v2.png)에서 디테일을 볼 수 있습니다.
 
 <table>
-  <tr><th>Spring</th><th>Summer</th></tr>
   <tr>
-    <td><img src="docs/assets/village-spring.png" alt="Spring village with a pink flowering tree and petals" width="480"></td>
-    <td><img src="docs/assets/village-summer.png" alt="Summer village with a large leafy green tree" width="480"></td>
+    <th>봄 · spring</th>
+    <th>여름 · summer</th>
   </tr>
-  <tr><th>Autumn</th><th>Winter</th></tr>
   <tr>
-    <td><img src="docs/assets/village-autumn.png" alt="Autumn village with orange foliage and fallen leaves" width="480"></td>
-    <td><img src="docs/assets/village-winter.png" alt="Snow-covered winter village with a frosted tree" width="480"></td>
+    <td><img src="docs/assets/village-spring.png" alt="분홍 꽃나무와 꽃잎이 있는 봄 마을" width="480"></td>
+    <td><img src="docs/assets/village-summer.png" alt="푸른 잎이 무성한 큰 나무와 여름 마을" width="480"></td>
+  </tr>
+  <tr>
+    <th>가을 · autumn</th>
+    <th>겨울 · winter</th>
+  </tr>
+  <tr>
+    <td><img src="docs/assets/village-autumn.png" alt="주황 단풍나무와 낙엽이 있는 가을 마을" width="480"></td>
+    <td><img src="docs/assets/village-winter.png" alt="눈꽃나무와 눈 덮인 겨울 마을" width="480"></td>
   </tr>
 </table>
 
-## Tistory installation
+## 티스토리 설치
 
-1. Open the [installation helper](https://pixel-visitor-village.pages.dev/install.html), enter your blog URL, choose a starting theme, and copy the code.
-2. Back up your current skin. In Tistory administration, open **꾸미기 → 스킨 편집 → HTML 편집** (Appearance → Edit skin → Edit HTML).
-3. Paste the code where the village should appear and save. Check the visitor count and mobile layout on your actual blog.
+1. [설치 도우미](https://pixel-visitor-village.pages.dev/install.html)에 블로그 주소와 처음 보여 줄 테마를 입력하고 코드를 복사합니다.
+2. 사용 중인 스킨을 백업한 뒤, 티스토리 관리자 → **꾸미기 → 스킨 편집 → HTML 편집**을 엽니다.
+3. 마을을 표시할 위치에 코드를 붙여 넣고 저장합니다. 실제 블로그에서 방문자 수와 모바일 화면을 확인합니다.
 
-The helper generates an embed snippet and a link to your blog's administration page. **The blog owner must paste the code into the skin once.**
+주소를 입력하면 설치 코드와 해당 블로그의 관리자 링크가 만들어집니다. **최초 한 번은 소유자가 스킨에 코드를 붙여 넣어야 합니다.**
 
-For manual installation, use:
+직접 설치하려면 아래 코드를 사용합니다.
 
 ```html
 <script
@@ -74,153 +80,165 @@ For manual installation, use:
 ></visitor-village>
 ```
 
-Tistory replaces `[##_count_today_##]` with today's visitor count **inside the skin HTML**. Placing it in an external JavaScript file or a regular blog post is unsupported. If the placeholder remains on the published page, check its location in the skin. If you use Tistory's automatic mobile skin, check whether it needs a separate installation.
+`[##_count_today_##]`는 **티스토리 스킨 HTML에서** 오늘 방문자 수로 치환됩니다. 외부 JavaScript 파일이나 일반 글 본문에 넣는 방식은 지원하지 않습니다. 실제 페이지에 치환자가 그대로 보이면 스킨의 삽입 위치를 확인해야 합니다. 자동 모바일 스킨을 사용하는 경우에도 별도 적용 여부를 확인합니다.
 
-Public deployment and loading the widget from another origin have been verified. **Installation in an actual Tistory account's skin still needs verification.** See the [deployment and installation guide (Korean)](docs/features/visitor-village/deployment.md).
+Cloudflare Pages 공개 배포와 다른 출처에서의 위젯 로드는 확인했습니다. **실제 티스토리 계정의 스킨 설치 검증은 아직 남아 있습니다.** 자세한 확인 순서는 [배포와 설치 안내](docs/features/visitor-village/deployment.md)를 참고하세요.
 
-## How it works
+## 동작 구조
 
-The widget reads the visitor count supplied when Tistory renders the page. No separate visitor tracking server or database is required.
+티스토리가 페이지를 만들 때 넣어 준 방문자 수를 입력으로 사용합니다. 별도 방문자 집계 서버나 데이터베이스는 필요하지 않습니다.
 
 ```mermaid
 flowchart TD
-    T["Tistory skin HTML<br/>Today's visitor count"] -->|count attribute| W["visitor-village<br/>Validation and lifecycle"]
-    V["Cloudflare Pages static hosting<br/>visitor-village.js"] -->|ES module| W
-    W --> M["VillageModel<br/>Character count and movement"]
-    M --> R["PixiJS renderer<br/>WebGL village"]
-    A["Seasonal pixel art<br/>Tree PNG and Canvas artwork"] --> R
-    R --> C["Canvas inside Shadow DOM<br/>Bounded area in the blog"]
+    T["티스토리 스킨 HTML<br/>오늘 방문자 수 치환"] -->|count 속성| W["visitor-village<br/>입력 검증과 생명주기 관리"]
+    V["Cloudflare Pages 정적 호스팅<br/>visitor-village.js"] -->|ES 모듈 로드| W
+    W --> M["VillageModel<br/>캐릭터 수와 이동 상태 계산"]
+    M --> R["PixiJS 렌더러<br/>WebGL로 마을 그리기"]
+    A["계절별 픽셀 그림<br/>나무 PNG와 Canvas 그림"] --> R
+    R --> C["Shadow DOM 내부 Canvas<br/>블로그에 지정한 영역에 표시"]
 ```
 
-| Responsibility | Technology and source |
+| 역할 | 기술과 파일 |
 | --- | --- |
-| Embedding and style isolation | Web Components, Shadow DOM — [visitor-village.ts](src/visitor-village.ts) |
-| Input validation and movement | TypeScript — [model.ts](src/model.ts) |
-| Rendering | PixiJS 8, WebGL — [renderer.ts](src/renderer.ts) |
-| Tree artwork | Christmas PNG and original Canvas pixel art — [art.ts](src/art.ts), [themes.ts](src/themes.ts) |
-| Scenery and layout | Shared atlases for ground, houses, and props — [environment.ts](src/environment.ts), [environment-layout.ts](src/environment-layout.ts), [pixel-art.ts](src/pixel-art.ts) |
-| Characters and motion | Original RGBA pixel frames and shared atlas — [characters.ts](src/characters.ts), [character-motion.ts](src/character-motion.ts) |
-| Installation snippets | URL normalization and code generation in the browser — [install-model.ts](src/install-model.ts) |
-| Build and hosting | Vite, Cloudflare Pages — [vite.widget.config.ts](vite.widget.config.ts), [wrangler.jsonc](wrangler.jsonc), [_headers](public/_headers) |
+| 삽입과 스타일 분리 | Web Components, Shadow DOM · [visitor-village.ts](src/visitor-village.ts) |
+| 입력 검증과 이동 계산 | TypeScript · [model.ts](src/model.ts) |
+| 화면 그리기 | PixiJS 8, WebGL · [renderer.ts](src/renderer.ts) |
+| 나무 그림 | 크리스마스 PNG와 자체 Canvas 픽셀 그림 · [art.ts](src/art.ts), [themes.ts](src/themes.ts) |
+| 마을 환경과 배치 | 바닥, 집과 소품의 공유 아틀라스 · [environment.ts](src/environment.ts), [environment-layout.ts](src/environment-layout.ts), [pixel-art.ts](src/pixel-art.ts) |
+| 캐릭터 그림과 동작 | 자체 RGBA 픽셀 프레임과 공유 아틀라스 · [characters.ts](src/characters.ts), [character-motion.ts](src/character-motion.ts) |
+| 설치 코드 생성 | 브라우저 안에서 주소 정규화와 코드 생성 · [install-model.ts](src/install-model.ts) |
+| 빌드와 배포 | Vite, Cloudflare Pages · [vite.widget.config.ts](vite.widget.config.ts), [wrangler.jsonc](wrangler.jsonc), [_headers](public/_headers) |
 
 <details>
-<summary>Repository layout</summary>
+<summary>저장소 구조</summary>
 
 ```text
 pixel-visitor-village/
-├── README.md / README.ko.md / README.ja.md / README.zh-CN.md
-├── index.html / install.html   # Demo and installation helper
-├── src/                       # Widget, model, renderer, artwork, and helper
-├── tests/widget.spec.ts        # Browser integration checks
-├── examples/                  # Tistory embed snippet
-├── public/embed-example.html  # Standalone embedding example
-├── public/_headers / 404.html # Pages headers and missing-page handling
-├── wrangler.jsonc             # Pages project and output settings
-├── assets/concepts/           # Original tree concepts and generation notes
+├── README.md / README.en.md / README.ja.md / README.zh-CN.md
+├── index.html / install.html    # 데모와 설치 도우미 진입점
+├── src/
+│   ├── visitor-village.ts       # 공개 웹 컴포넌트
+│   ├── model.ts                # 방문자 수 검증과 이동 모델
+│   ├── renderer.ts             # PixiJS 화면과 자원 관리
+│   ├── art.ts / themes.ts      # 계절 나무와 테마 설정
+│   ├── environment.ts          # 지형, 집과 거리 소품 그림
+│   ├── environment-layout.ts   # 반응형 소품 배치
+│   ├── pixel-art.ts            # 공통 픽셀 그리기 도구
+│   ├── characters.ts          # 8종 캐릭터의 픽셀 프레임
+│   ├── character-motion.ts    # 방향, 걷기와 표정 선택
+│   ├── demo.ts / demo.css      # 마을 시연 화면
+│   ├── install*.ts / *.css     # 설치 도우미와 스타일
+│   └── assets/                 # 배포용 크리스마스 나무
+├── tests/widget.spec.ts        # 브라우저 통합 검증
+├── examples/                   # 티스토리 삽입 코드
+├── public/embed-example.html   # 독립 삽입 예제
+├── public/_headers / 404.html   # Pages 헤더와 없는 경로 처리
+├── wrangler.jsonc              # Pages 프로젝트와 출력 설정
+├── assets/concepts/            # 나무 원본 시안과 생성 기록
 └── docs/
-    ├── assets/                # Screenshots of the actual widget
-    └── features/visitor-village/ # Spec, design, tasks, and review records
+    ├── assets/                 # 실제 화면 캡처
+    └── features/visitor-village/ # 명세, 설계, 작업과 검토 기록
 ```
 
 </details>
 
-## Widget configuration
+## 위젯 설정
 
-| Attribute | Default | Behavior |
+| 속성 | 기본값 | 동작 |
 | --- | --- | --- |
-| `count` | `0` | Integer from 0 to 5,000; valid comma formatting such as `1,234` is accepted. Invalid or out-of-range input reports an error and preserves the last valid state. |
-| `season` | `christmas` | `christmas`, `spring`, `summer`, `autumn`, or `winter`. Invalid input preserves the current season. |
-| `paused` | Absent | Its presence pauses animation, including `paused="false"`. Remove the attribute to resume. |
-| `glow` | Enabled | Set `glow="false"` to disable the Christmas tree's glow effect. Bulb colors painted into the image remain. |
-| `refresh-interval` | `0` | Optional checking interval in seconds: `0` disables it; integers from `60` to `3600` enable it. Invalid values preserve the last valid setting. |
+| `count` | `0` | 0~5,000의 정수. `1,234`처럼 올바른 쉼표 표기도 허용합니다. 잘못된 값이나 범위 초과는 안내하고 마지막 정상 상태를 유지합니다. |
+| `season` | `christmas` | `christmas`, `spring`, `summer`, `autumn`, `winter`. 잘못된 값은 기존 계절을 유지합니다. |
+| `paused` | 없음 | 속성이 존재하면 정지합니다. `paused="false"`도 정지이므로, 재생하려면 속성을 제거합니다. |
+| `glow` | 켜짐 | `glow="false"`로 크리스마스 나무의 빛 번짐을 끕니다. 이미지에 그려진 전구색은 유지합니다. |
+| `refresh-interval` | `0` | 선택적 확인 주기(초). `0`은 끄기이며 `60`부터 `3600`까지의 정수를 지원합니다. 잘못된 값은 마지막 정상 설정을 유지합니다. |
 
-## Visitor notices and optional refresh
+## 방문 수 팻말과 선택적 갱신
 
-A small wooden sign drops into the village to show today's count. An increase shows the difference, such as “Today 13 (+3)” (the widget currently uses Korean labels). Repeated values do not replay the sign, and a new Korean calendar day does not count as an arrival. Clicking anywhere in the village opens the project repository in a new tab; keyboard navigation and mobile scrolling remain available.
+작은 나무 팻말이 위에서 내려와 오늘 방문 수를 알립니다. 숫자가 늘면 “오늘 방문 13 (+3)”처럼 증가분을 표시합니다. 같은 숫자는 다시 알리지 않으며 한국 날짜가 바뀐 뒤의 수를 새 방문으로 오인하지 않습니다. 마을 어디를 클릭해도 프로젝트 저장소가 새 탭으로 열립니다. 키보드 탐색과 모바일 스크롤도 유지합니다.
 
-Automatic checking is **off by default**. Add `refresh-interval="60"` to the existing tag, or select the one-minute option in the installation helper. Use `refresh-interval="0"` to disable it. The widget reads the current blog origin's home-page HTML while visible. That page must contain at least one widget with a valid count, and all widget counts on that page must agree. It does not execute the fetched page's scripts or load its images. Visible widgets in the same document share one request; failures preserve the last valid village and retry less often.
+자동 확인은 **기본으로 꺼져 있습니다.** 기존 태그에 `refresh-interval="60"`을 추가하거나 설치 도우미의 1분 확인 옵션을 선택합니다. `refresh-interval="0"`은 확인을 끕니다. 화면에 보일 때 같은 블로그 출처의 홈페이지 HTML을 읽습니다. 홈페이지에 정상 방문 수를 가진 위젯이 있어야 하며 여러 위젯의 수가 다르면 오류로 처리합니다. 읽어 온 페이지의 스크립트나 이미지는 실행/로드하지 않습니다. 같은 문서의 보이는 위젯들은 한 요청을 공유하며 실패 시 마지막 정상 마을을 보존하고 재시도 간격을 늘립니다.
 
-This checks the daily aggregate periodically, rather than receiving individual arrival events. Tistory's aggregation delay and the effect of repeated HTML requests on its statistics have **not been verified**. Enable checking only with that limitation in mind. The sign, link, and refresh option are available in the published widget. Existing installations may retain the previous module for up to five minutes.
+이 기능은 오늘 집계의 주기 확인이며 개별 방문의 도착 이벤트를 받는 방식은 아닙니다. 티스토리 집계 지연과 반복 HTML 조회가 집계에 미치는 영향은 **아직 검증하지 않았습니다.** 이 경계를 확인하고 선택해 사용합니다. 팻말과 링크, 갱신 옵션은 공개 위젯에 반영했습니다. 기존 설치에서는 이전 모듈이 최대 5분간 캐시될 수 있습니다.
 
 
 <details>
-<summary>JavaScript API and events</summary>
+<summary>JavaScript API와 이벤트</summary>
 
-`visitorCount`, `season`, `ready`, and `motionReduced` are read-only. `getVisitors()` returns a copy of the `{ id, x, y }` array.
+`visitorCount`, `season`, `ready`, `motionReduced`는 읽기 전용입니다. `getVisitors()`는 `{ id, x, y }` 배열의 복사본을 반환합니다.
 
-| Event | `detail` |
+| 이벤트 | `detail` |
 | --- | --- |
 | `village-ready` | `{ count, season, paused }` |
 | `village-change` | `{ count, season, paused }` |
 | `village-error` | `{ attribute, message }` |
 
-Events use `bubbles: true` and `composed: true`. The reported `paused` state includes the reduced motion preference. See the [public API contract (Korean)](docs/features/visitor-village/design.md#첫-버전-공개-계약).
+이벤트는 `bubbles: true`, `composed: true`로 전파됩니다. `paused` 상태에는 모션 줄이기 설정도 반영됩니다. 전체 계약은 [공개 API 설계](docs/features/visitor-village/design.md#첫-버전-공개-계약)에 있습니다.
 
 </details>
 
-## Local development
+## 로컬 개발
 
-Use **Node.js 22.12+**, **pnpm 10**, and **Google Chrome** for browser checks.
+Node.js **22.12 이상**, pnpm **10**, 브라우저 검증용 **Google Chrome**을 사용합니다.
 
 ```bash
 pnpm install
 pnpm dev --port 5174
 ```
 
-Development URL: <http://127.0.0.1:5174/>
+개발 화면: <http://127.0.0.1:5174/>
 
 ```bash
-pnpm test       # Unit tests for input, models, and installation snippets
-pnpm typecheck  # TypeScript checks
-pnpm build     # Typecheck, then build the demo and standalone widget
-pnpm test:e2e  # Check the built output in Chrome
+pnpm test       # 입력과 모델, 설치 코드의 단위 테스트
+pnpm typecheck  # TypeScript 검사
+pnpm build     # 타입 검사 후 데모와 독립 위젯 빌드
+pnpm test:e2e  # 빌드 결과를 Chrome에서 검증
 pnpm preview   # http://127.0.0.1:4178/
 ```
 
-The build writes the demo and installation helper to `dist/`, and the standalone ES module to `dist/widget/visitor-village.js`. The module includes PixiJS, internal styles, and the tree image. Open `/embed-example.html` on the preview server to check embedding on a separate page.
+`dist/`에 데모와 설치 도우미, `dist/widget/visitor-village.js`에 독립 ES 모듈이 생성됩니다. 모듈에는 PixiJS와 내부 스타일, 나무 이미지가 포함됩니다. 미리보기 서버의 `/embed-example.html`에서 별도 페이지 삽입을 확인할 수 있습니다.
 
-Browser tests run installed Chrome in headless mode; mobile checks use emulation. Install Chrome or adjust `channel` in [playwright.config.ts](playwright.config.ts) for another browser setup.
+브라우저 테스트는 설치된 Chrome을 headless로 실행하며 모바일은 에뮬레이션으로 확인합니다. Chrome이 없는 환경은 설치하거나 [playwright.config.ts](playwright.config.ts)의 `channel`을 조정합니다.
 
-For self-hosting, serve over HTTPS and allow cross-origin loading of the widget module. The `public/_headers` file adds CORS and five-minute cache/revalidation headers to `/widget/*`. Deployment uses Wrangler Direct Upload; automatic deployment from GitHub is not configured. See the [deployment guide (Korean)](docs/features/visitor-village/deployment.md) for configuration and verification records.
+직접 호스팅할 때는 HTTPS와 위젯 모듈의 교차 출처 로드를 허용해야 합니다. Pages의 `public/_headers`는 `/widget/*`에 CORS와 5분 캐시/재검증 헤더를 제공합니다. 배포는 Wrangler로 직접 업로드하며 GitHub 자동 배포는 아직 설정하지 않았습니다. 상세 설정과 배포 확인 기록은 [배포 문서](docs/features/visitor-village/deployment.md)에 있습니다.
 
-## Current scope
+## 현재 범위
 
-- **Visitor count:** Uses today's count supplied when the page opens. Characters do not represent concurrent users or individual identities.
-- **Rendering:** Requires WebGL; a Canvas 2D fallback renderer is not implemented.
-- **Tree customization:** Supports seasonal themes and Christmas glow control. Christmas decorations are part of a single PNG and cannot be edited individually.
-- **Verification:** Public deployment and cross-origin embedding have been checked. Actual Tistory skin installation and testing on physical mobile devices remain.
-- **License:** A distribution license for this repository has not yet been selected.
+- **방문자 집계:** 페이지가 열릴 때 전달된 오늘 방문자 수를 사용합니다. 실시간 동시 접속자나 개별 방문자의 신원을 나타내지 않습니다.
+- **렌더링:** 위젯은 WebGL을 사용합니다. WebGL을 사용할 수 없는 환경을 위한 Canvas 2D 대체 렌더러는 구현하지 않았습니다.
+- **나무 꾸미기:** 계절 테마 선택과 크리스마스 빛 번짐 조절을 지원합니다. 크리스마스 장식은 하나의 PNG여서 장식별 편집은 지원하지 않습니다.
+- **확인 범위:** 공개 배포와 교차 출처 삽입은 검증했으며, 실제 티스토리 스킨 설치와 모바일 실기기 검증은 남아 있습니다.
+- **라이선스:** 이 저장소의 배포 라이선스는 아직 정하지 않았습니다.
 
-## Documentation and assets
+## 문서와 에셋
 
-The detailed documents linked here are in Korean.
+아래 상세 문서는 한국어로 작성되어 있습니다.
 
-| Document | Contents |
+| 문서 | 내용 |
 | --- | --- |
-| [Requirements](docs/features/visitor-village/spec.md) | Feature scope and acceptance criteria |
-| [Design](docs/features/visitor-village/design.md) | Architecture and public contracts |
-| [Implementation plan](docs/features/visitor-village/implementation-plan.md) / [Progress](docs/features/visitor-village/tasks.md) | Work sequence and remaining tasks |
-| [Deployment and installation](docs/features/visitor-village/deployment.md) | Cloudflare Pages configuration and installation checks |
-| [Independent reviews](docs/features/visitor-village/reviews/) | Code and installation flow review records |
-| [Tree concepts and generation notes](assets/concepts/README.md) | AI-generated Christmas tree concepts and prompts |
-| [Introduction video credits](docs/features/visitor-village/intro-media.md) | Claude Code brag production, video details, and music license |
-| [Screenshot notes](docs/assets/README.md) | Sources and capture conditions for README images |
+| [요구사항](docs/features/visitor-village/spec.md) | 기능 범위와 수용 기준 |
+| [설계](docs/features/visitor-village/design.md) | 구현 구조와 공개 계약 |
+| [구현 계획](docs/features/visitor-village/implementation-plan.md) / [진행 상태](docs/features/visitor-village/tasks.md) | 작업 순서와 남은 일 |
+| [배포와 설치](docs/features/visitor-village/deployment.md) | Cloudflare Pages 설정과 설치 확인 기록 |
+| [독립 검토 기록](docs/features/visitor-village/reviews/) | 코드와 설치 흐름 검토 결과 |
+| [나무 원본과 생성 기록](assets/concepts/README.md) | AI로 생성한 크리스마스 트리 시안과 프롬프트 |
+| [소개 영상 제작과 출처](docs/features/visitor-village/intro-media.md) | Claude Code brag 실행, 영상 정보와 음악 라이선스 |
+| [화면 캡처 안내](docs/assets/README.md) | 이 README에 사용한 실제 화면의 출처와 촬영 조건 |
 
-The production Christmas tree image is [src/assets/christmas-tree.png](src/assets/christmas-tree.png). Other seasonal trees are drawn in `src/art.ts`, scenery in `src/environment.ts`, and updated characters in `src/characters.ts`. No external game assets are used.
+크리스마스 트리의 배포용 이미지는 [src/assets/christmas-tree.png](src/assets/christmas-tree.png)입니다. 다른 계절의 나무는 `src/art.ts`, 지형과 집, 거리 소품은 `src/environment.ts`, 개선 캐릭터는 `src/characters.ts`에서 직접 그립니다. 외부 게임 에셋은 사용하지 않았습니다.
 
-## Square frames and Christmas guests
+## 직각 프레임과 크리스마스 손님
 
-The widget and demo use square corners. In the Christmas theme, an original pixel Santa or Rudolph occasionally appears for 5–8 seconds, then disappears. Only one decorative guest appears at a time; these guests never change the actual visitor count. Their clock pauses offscreen, in hidden tabs, or during manual pause. Reduced motion and other seasons hide them.
+위젯과 데모의 모서리는 직각으로 표시합니다. 크리스마스 테마에서는 자체 제작 픽셀 산타나 루돌프가 가끔 나타나 5~8초 머문 뒤 사라집니다. 동시에 한 명만 표시하며 실제 방문자 수에는 포함하지 않습니다. 화면 밖이나 숨긴 탭, 수동 정지에서는 연출 시계도 멈춥니다. 모션 줄이기 설정과 다른 계절에서는 손님을 숨깁니다.
 
-Nearby characters occasionally stop, face each other, wave, and exchange a tiny icon balloon before walking again. Up to three pairs interact at once (one on small screens). These are decorative reactions, independent of real visitor identities. Pausing freezes the interaction; reduced motion disables it.
+가까운 캐릭터는 가끔 멈춰 서로 보고 손을 흔든 뒤 작은 아이콘 말풍선으로 반응하고 다시 걷습니다. 동시에 최대 세 쌍, 작은 화면에서는 한 쌍만 상호작용합니다. 실제 방문자의 신원과 관계없는 장식 연출입니다. 정지하면 인사도 멈추고 모션 줄이기 설정에서는 표시하지 않습니다.
 
-These additions are available in the published widget.
+이 변경은 공개 위젯에 반영했습니다.
 
-## README references
+## README 구성 참고
 
-- [Day.js](https://github.com/iamkun/dayjs#readme): English default with language links at the top.
-- [Mermaid](https://github.com/mermaid-js/mermaid#readme): Separate translated READMEs with a route back to English.
-- [PixiJS](https://github.com/pixijs/pixijs#readme): Introduction and features followed by setup and usage.
-- [dotLottie Web](https://github.com/LottieFiles/dotlottie-web#readme): Prominent demo links, quick start, and links to detailed documentation.
+- [Day.js README](https://github.com/iamkun/dayjs#readme): 상단 언어 선택과 언어별 README 연결 방식을 참고했습니다.
+- [Mermaid README](https://github.com/mermaid-js/mermaid#readme): 번역 문서와 기본 문서를 서로 연결하는 방식을 참고했습니다.
+- [PixiJS README](https://github.com/pixijs/pixijs#readme): 소개와 핵심 기능 다음에 설치와 사용 예제를 배치하는 흐름을 참고했습니다.
+- [dotLottie Web README](https://github.com/LottieFiles/dotlottie-web#readme): 상단의 실행 링크, 빠른 시작과 상세 문서 분리를 참고했습니다.
 
-These references informed the document structure. Screenshots and product descriptions come from this project's implementation.
+위 레퍼런스의 정보 배치를 참고했습니다. 본문의 실행 화면은 실제 구현의 캡처이고, 상단 썸네일은 별도로 생성한 프로젝트 소개용 일러스트입니다. [이미지 출처와 생성 기록](docs/assets/README.md)을 참고하세요.

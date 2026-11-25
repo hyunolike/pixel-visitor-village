@@ -1,6 +1,8 @@
 # Pixel Visitor Village
 
-[English](README.md) | [한국어](README.ko.md) | **日本語** | [简体中文](README.zh-CN.md)
+[한국어](README.md) | [English](README.en.md) | **日本語** | [简体中文](README.zh-CN.md)
+
+[![Tistoryロゴとピクセルキャラクターの紹介イラスト](docs/assets/readme-tistory-village.png)](https://pixel-visitor-village.pages.dev/)
 
 **今日のブログ訪問者数が、小さなピクセルの村をにぎやかにします。**
 
@@ -16,7 +18,7 @@ Tistoryブログの今日の訪問者数を、1人につき1体のピクセル�
 
 *プロジェクトの村の画像と移動コードを使い、Claude Codeのbragスキルで制作しました。動画内の訪問者24人はデモ用の数値です。公開サイトで再生できます。動画は背景の改良前に制作した固定レンダリングです。*
 
-> 新しい設置ヘルパーは季節のプレビューと韓国語、英語、日本語、簡体字中国語に対応しています。この改修はCloudflare Pagesに公開し、公開サイトでも確認しました。メインデモ、紹介動画、詳細な技術文書は韓国語です。このREADMEは[英語版](README.md)の日本語訳です。
+> 新しい設置ヘルパーは季節のプレビューと韓国語、英語、日本語、簡体字中国語に対応しています。この改修はCloudflare Pagesに公開し、公開サイトでも確認しました。メインデモ、紹介動画、詳細な技術文書は韓国語です。基本の[韓国語版](README.md)と[英語版](README.en.md)も参照できます。
 
 [主な機能](#主な機能) | [季節ごとの村](#季節ごとの村) | [Tistoryへの設置](#tistoryへの設置) | [仕組み](#仕組み) | [設定](#ウィジェットの設定) | [訪問数の通知](#訪問数の木製プレートと任意の更新) | [開発](#ローカル開発) | [ドキュメント](#ドキュメントと素材)
 
@@ -108,7 +110,7 @@ flowchart TD
 
 ```text
 pixel-visitor-village/
-├── README.md / README.ko.md / README.ja.md / README.zh-CN.md
+├── README.md / README.en.md / README.ja.md / README.zh-CN.md
 ├── index.html / install.html   # デモと設置ヘルパー
 ├── src/                       # ウィジェット、モデル、描画、画像、ヘルパー
 ├── tests/widget.spec.ts        # ブラウザー統合テスト
@@ -223,4 +225,4 @@ pnpm preview   # http://127.0.0.1:4178/
 - [PixiJS](https://github.com/pixijs/pixijs#readme): 紹介と主な機能の後に、セットアップと使用例を置く流れ。
 - [dotLottie Web](https://github.com/LottieFiles/dotlottie-web#readme): 目立つデモリンク、クイックスタート、詳細文書へのリンク。
 
-これらは文書構成の参考にしました。画像と製品説明は、このプロジェクトの実装に基づいています。
+これらは文書構成の参考にしました。実行画面は実装のキャプチャで、上部のサムネイルは別途生成した紹介イラストです。[画像と生成記録](docs/assets/README.md)も参照してください。

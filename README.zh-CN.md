@@ -1,6 +1,8 @@
 # Pixel Visitor Village
 
-[English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | **简体中文**
+[한국어](README.md) | [English](README.en.md) | [日本語](README.ja.md) | **简体中文**
+
+[![Tistory 标志与像素角色的项目介绍插图](docs/assets/readme-tistory-village.png)](https://pixel-visitor-village.pages.dev/)
 
 **让今天的博客访客数，变成热闹的像素小村庄。**
 
@@ -16,7 +18,7 @@ HTML 文档包含安装方法、组件设置、统计规则和问题排查。新
 
 *使用项目本身的村庄画面与移动代码，通过 Claude Code 的 brag 技能制作。视频中的 24 位访客是演示数据。视频可在公开站点播放，是场景素材更新前制作的固定渲染版本。*
 
-> 新版安装助手提供四季预览，支持韩语、英语、日语和简体中文。本次改版已发布到 Cloudflare Pages，并完成公开站点验证。主演示页面、介绍视频和详细技术文档仍为韩语。本 README 是[英文默认文档](README.md)的简体中文译本。
+> 新版安装助手提供四季预览，支持韩语、英语、日语和简体中文。本次改版已发布到 Cloudflare Pages，并完成公开站点验证。主演示页面、介绍视频和详细技术文档仍为韩语。本项目以[韩语文档](README.md)为主，并提供[英文文档](README.en.md)。
 
 [主要功能](#主要功能) | [四季村庄](#四季村庄) | [安装到 Tistory](#安装到-tistory) | [工作原理](#工作原理) | [配置](#组件配置) | [访客数木牌](#访客数木牌与可选更新) | [开发](#本地开发) | [文档](#文档与素材)
 
@@ -108,7 +110,7 @@ flowchart TD
 
 ```text
 pixel-visitor-village/
-├── README.md / README.ko.md / README.ja.md / README.zh-CN.md
+├── README.md / README.en.md / README.ja.md / README.zh-CN.md
 ├── index.html / install.html   # 演示与安装助手
 ├── src/                       # 组件、模型、渲染器、图像和安装助手
 ├── tests/widget.spec.ts        # 浏览器集成测试
@@ -223,4 +225,4 @@ pnpm preview   # http://127.0.0.1:4178/
 - [PixiJS](https://github.com/pixijs/pixijs#readme)：先介绍项目与功能，再提供安装和使用示例。
 - [dotLottie Web](https://github.com/LottieFiles/dotlottie-web#readme)：突出展示演示链接、快速开始和详细文档入口。
 
-以上项目仅用于参考文档结构。截图与产品说明均来自本项目的实际实现。
+以上项目仅用于参考文档结构。运行截图来自实际实现，顶部缩略图是单独生成的项目介绍插图。请参阅[图片与生成记录](docs/assets/README.md)。
