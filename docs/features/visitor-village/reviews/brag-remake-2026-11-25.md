@@ -28,3 +28,8 @@ Claude Code CLI의 실제 Skill 도구 호출 `brag:brag --tone polished --durat
 별도 문맥 brag_remake_review가 네 README/참고 문서,실제스킬호출,장면표/자막,파일규격/해시와인증정보비노출을확인했다. Critical/Important/Minor에해당하는실질적문제는없었다. 검토자는공개배포,실제티스토리설치,오디오청감과외부라이선스원문재검증을판단범위밖으로명시했다. 전체EGM다중심사로확장하지않는다.
 
 이전 PR #9가 별도로 병합되어 현재 main 기준 후속 브랜치 feat/brag-readme-refresh에서 전달한다. 직전 PR/배포 승인 범위의 후속 수정으로 PR 생성과 기존 Pages 공개 반영까지 진행하며,PR 병합은 수행하지 않는다.
+
+
+## 최종 전달과 공개 확인
+
+소스f05d3f6를원격에올리고 [PR #10](https://github.com/hyunolike/pixel-visitor-village/pull/10)을 생성했다. production2e1378ac에35파일 고정묶음을반영했다. 공개34개파일SHA일치,새영상재생,5계절/24명,네언어320px설치코드/실제클립보드,4개이미지버튼이동,외부출처37명의7개범주를통과했다. pageerror0이며공개데스크톱/모바일캡처도보존했다. 원래상단썸네일은변경되지않았다. PR은미병합상태다. 이이후배포기록용커밋은실행코드/영상/배포파일을바꾸지않는다.

@@ -17,3 +17,5 @@
 - [x] 제작출처/실제검토/결과기록과 로컬 전달
 
 로컬 제작/검증 완료: 실제 ClaudeCodeOpus5.5 brag호출/번들slim분기,20초600프레임,AAC,네README44줄,단위146/Chrome79/타입/빌드와독립검토통과. PR/공개배포 결과는최종검증후추가한다.
+
+공개전달완료: PR #10,소스f05d3f6,production2e1378ac. 고정35파일8,196,967bytes,공개34파일SHA/7범주/pageerror0확인. PR미병합.

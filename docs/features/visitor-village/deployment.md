@@ -7,10 +7,21 @@
 - 마을: https://pixel-visitor-village.pages.dev/
 - 설치 도우미: https://pixel-visitor-village.pages.dev/install.html
 - 독립 모듈: https://pixel-visitor-village.pages.dev/widget/visitor-village.js
-- 이번 고유 배포: https://18cb4021.pixel-visitor-village.pages.dev/
+- 이번 고유 배포: https://2e1378ac.pixel-visitor-village.pages.dev/
 - 프로젝트: `pixel-visitor-village`, production branch: `main`, 방식: Wrangler Direct Upload.
 - 계정 ID: `96dc7e6d07c8cb414af597acfec30146`. 인증은 사용자 OAuth를 사용하며 인증 값은 저장소와 명령 인자에 넣지 않는다.
-- 최신 배포 소스: `c76257b24495d66e90794cc34b01b9a7e2396508` (`feat/village-entry-media`), [PR #9](https://github.com/hyunolike/pixel-visitor-village/pull/9). 고정 dist35개 파일과 커밋의 빌드 입력58개를 대조했다. GitHub 자동 배포는 구성하지 않았다.
+- 최신 배포 소스: `f05d3f61f7e0065411a2ddbcb963e40768637b38` (`feat/brag-readme-refresh`), [PR #10](https://github.com/hyunolike/pixel-visitor-village/pull/10). 실제 Claude Code brag 제작 영상과 간결한 README 수정본이다. GitHub 자동 배포는 구성하지 않았다.
+
+## 2026-11-25 Claude Code brag 재제작 공개 반영
+
+직전 PR/배포 승인 범위의 후속 요청으로 소개 영상을 실제 Claude Code brag로 다시 제작하고 네 README를 각각44줄로 정리했다. PR #9 병합 뒤 현재 main 기준 후속 [PR #10](https://github.com/hyunolike/pixel-visitor-village/pull/10)을 만들었다. 기존 상단 썸네일과 이미지 체험 버튼은 유지한다. PR병합은 수행하지 않았다.
+
+- Production/main: `2e1378ac-05cb-423b-824e-38402505bbc3`, https://2e1378ac.pixel-visitor-village.pages.dev/ . 기존 공개 별칭에도 반영됐다. 직전 production은18cb4021이다.
+- 소스 `f05d3f61f7e0065411a2ddbcb963e40768637b38`,commit-dirty=false. 커밋한 빌드 입력58개와 고정묶음35파일/8,196,967bytes를 대조했다. _headers별도처리 후34개 중3개 업로드/31개재사용.
+- 단위146/146,타입/빌드,전체Chrome79/79(42.1초),독립검토와원본썸네일일치/네언어링크보존검사통과.
+- 공개7개 범주를 통과했다.34개파일SHA,새20초영상의디코딩/재생,5계절과24명/작은조형물,320px네언어설치/클립보드,4개이미지버튼이동과외부HTTP출처37명위젯을확인했다. pageerror0.
+- 영상SHA-256:`a81f6f53e9071bee6c77d70d95c5c04dbe5d280d5549ca2f9364411b2e3f02d7`. 위젯은이전과같은f3a5147f…이다.
+- [제작과 검증](reviews/brag-remake-2026-11-25.md),[실제배포파일/해시](reviews/brag-remake-evidence.json). 이번제작은모델분기에따른brag-slim이며HyperFrames새실행으로기록하지않는다.
 
 ## 2026-11-25 이미지 버튼과 소개 미디어 커밋 기준 배포
 
