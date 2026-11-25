@@ -246,3 +246,7 @@ The user selected Living Village Square and authorized implementation. These req
 - VV-HOME-005: Keyboard, touch scrolling, 320px screens, reduced motion, loading/failure and offscreen sleep remain usable. Desktop/mobile browser evidence, unit boundaries, full regression checks and independent review are required before handoff.
 
 Implementation and acceptance checks: [interactive-home-plan.md](interactive-home-plan.md).
+
+## 2026-11-26 Unified installation and guide
+
+The user requested all pages match the selected Living Village Square homepage. VV-UNIFY-001–004 in [unified-pages-plan.md](unified-pages-plan.md) define shared chrome, four-locale installation compatibility, a static readable guide and responsive verification. This extends the existing visual system without a new concept selection.

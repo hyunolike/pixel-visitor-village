@@ -397,3 +397,7 @@ Readme Typing SVG의 설정→미리보기→복사, giscus의 설치 전제와 
 The selected concept replaces the article-first homepage with a full-width village, concise text over its sky and a cream season/action dock. Existing production sprites remain authoritative. Homepage-only interactive mode enables direct greetings and demo invitations; embedded widgets retain their current link behavior. The model owns active-time greeting state and arrivals, while the homepage supplies keyboard actions and live announcements. Installer receives only a validated season query, never the synthetic count.
 
 The detailed file boundaries, contracts, lifecycle and verification plan are in [interactive-home-plan.md](interactive-home-plan.md). References researched on 2026-11-25: Tossface (scene-first product entry), Samsung Design (image hierarchy), Townscaper official product description (immediate input/world response) and The Pudding music experiment (participation-led explanation). No third-party art or code is imported.
+
+## 2026-11-26 Shared village chrome
+
+The user requested design consistency across home, installer and docs. Shared CSS owns the forest header, actual tree brand, gold action and cream surface tokens. Installer retains its live workspace and four-language state; documentation remains a static guide. Detailed file boundaries and verification are in [unified-pages-plan.md](unified-pages-plan.md).

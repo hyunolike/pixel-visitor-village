@@ -9,6 +9,32 @@ const waitReady=async(page:Page)=> {
 };
 const state=async(page:Page)=>page.locator('visitor-village').first().evaluate((el:any)=>({count:el.visitorCount,season:el.season,people:el.getVisitors()}));
 
+test('unified village chrome connects home, installation and static guide',async({page,browser,request})=>{
+  const headers=[];
+  for(const path of ['/','/install.html?lang=ko','/docs/']){
+    await page.goto(path);await page.evaluate(()=>document.fonts.ready);
+    await expect(page.locator('.service-header .brand-mark')).toHaveAttribute('src',/tree-summer/);
+    headers.push(await page.locator('.service-header').evaluate(el=>({color:getComputedStyle(el).backgroundColor,brand:getComputedStyle(el.querySelector('.brand-title')!).fontFamily})));
+    const icon=await page.locator('link[rel=icon]').getAttribute('href');expect((await request.get(new URL(icon!,page.url()).href)).status()).toBe(200);
+    expect(await page.locator('.service-header .install-action').evaluate(el=>getComputedStyle(el).borderRadius)).toBe('0px');
+    expect(await page.locator('.service-header .install-action').evaluate(el=>{
+      const style=getComputedStyle(el),luminance=(color:string)=>{
+        const rgb=color.match(/[\d.]+/g)!.slice(0,3).map(Number).map(c=>c/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4);
+        return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;
+      };
+      const pair=[luminance(style.color),luminance(style.backgroundColor)].sort((a,b)=>a-b);return (pair[1]+.05)/(pair[0]+.05);
+    })).toBeGreaterThanOrEqual(4.5);
+  }
+  expect(headers[0].color).toBe('rgb(18, 59, 62)');expect(headers[1]).toEqual(headers[0]);expect(headers[2]).toEqual(headers[0]);
+  const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:320,height:850}});
+  try{
+    const docs=await context.newPage();await docs.goto(`${appOrigin()}/docs/`);
+    await expect(docs.locator('.service-header')).toBeVisible();await expect(docs.locator('#quick-start')).toContainText('시연');
+    await docs.locator('.docs-toc a[href="#credits"]').click();await expect(docs.locator('#credits')).toBeInViewport();
+    expect(await docs.evaluate(()=>document.documentElement.scrollWidth)).toBe(320);
+  }finally{await context.close();}
+});
+
 test.describe('interactive homepage',()=>{
   const home=async(page:Page)=>{await page.goto('/');await page.waitForFunction(()=>Boolean((document.querySelector('visitor-village') as any)?.ready));};
   // Compositor pixels, excluding HTML feedback, prove that the sprites themselves react.
@@ -1079,6 +1105,10 @@ test('atelier menu stays accessible in four languages and returns focus on Escap
     for(const step of await page.locator('.install-progress li').all()) expect(await step.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
     await page.locator('#navigation-toggle').click();
     await expect(page.locator('#project-navigation')).toBeVisible();
+    const headerBox=(await page.locator('.site-header').boundingBox())!,menuBox=(await page.locator('#project-navigation').boundingBox())!;
+    expect(Math.abs(menuBox.y-headerBox.y-headerBox.height)).toBeLessThanOrEqual(1);
+    expect(await page.evaluate(()=>scrollY)).toBe(0);
+    await expect(page.locator('#project-navigation')).toBeInViewport();
     await expect(page.locator('#navigation-toggle')).toHaveAttribute('aria-expanded','true');
     await expect(page.locator('#project-navigation a').first()).toBeFocused();
     await page.keyboard.press('Tab');await expect(page.locator('#project-navigation a').nth(1)).toBeFocused();

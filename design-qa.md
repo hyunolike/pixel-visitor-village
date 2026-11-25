@@ -1,3 +1,34 @@
+# Unified village pages QA (2026-11-26)
+
+final result: passed
+
+**Visual truth:** the selected Living Village Square concept and the deployed homepage before this task, captured at /private/tmp/pvv-unify-qa/before/home-desktop.png and home-full.png. This iteration extends that visual language to installation and documentation; their content layouts remain task-specific. Source/implementation CSS viewports1440×1024,390×844 and320×850, deviceScaleFactor1; source and actual pixels match those dimensions with no resampling.
+
+**Comparison evidence:** [three common headers](docs/assets/unified-pages/headers.png), [guide before/after](docs/assets/unified-pages/docs-before-after.png), [paper and typography](docs/assets/unified-pages/paper-and-type.png), [installer](docs/assets/unified-pages/install-desktop.png), [guide](docs/assets/unified-pages/docs-desktop.png), [compact installer](docs/assets/unified-pages/install-small.png), [compact guide](docs/assets/unified-pages/docs-small.png), [English menu open](docs/assets/unified-pages/install-en-menu.png). Full before/after images were composited into one2880×1024 input and opened; header and body crops were opened as combined comparison inputs. State: homepage summer12, installer Christmas24/paused, guide at top. Demo numbers and page task differ intentionally.
+
+**Comparison history and fixes:**
+
+- Initial P1: selected installer navigation used cream text on gold, measured1.17:1 contrast. Scoped the active action color to dark ink; shared regression now requires at least4.5:1.
+- Initial P2: English compact brand inherited a taller line height, making the header89px. Restored compact1.25 line-height; latest English header77px, other installer locales65px, within the80px constraint.
+- Independent review P1: removing duplicated header CSS lost the mobile menu's positioning context and stacking. Restored position:relative/z-index12 on the common header. A new assertion first reproduced a715px placement error; final four-locale checks pass with menu top within1px of the header bottom, scrollY0 and menu inside the viewport. Recaptured open menus show the fix.
+- Removed obsolete white outer document frame and separate CSS brand drawing. All service headers now use the same actual tree PNG, forest surface and gold action. Moved repeated homepage paper colors into the shared design token block.
+
+No actionable P0/P1/P2 visual findings remain. No unresolved product questions.
+
+**Required fidelity surfaces:**
+
+- Fonts: existing locally hosted NeoDunggeunmo display/brand and Pretendard UI remain; guide/installer heading48px desktop32px compact, body16px and guide line height1.8. JA/CN retain their existing locale stacks. Korean words, long English copy and code keep readable wrapping/overflow.
+- Layout: full-width forest introduction, consistent header gutters and angular actions, cream work/reading surface. Installer retains narrow desktop controls/large preview and mobile preview-before-settings with a fixed create action. Guide retains sticky desktop contents and wrapped compact anchors; tables/code scroll locally. Different mobile header row counts support optional language/menu controls, rather than imposing a nonfunctional identical layout.
+- Colors: forest#123b3e, gold#f6c55d, paper#fff8e7, ink#193c32, input boundary#697a5e. Tokens and shared chrome own the palette. Selected/error/focus and disabled states remain distinct; text/action and field-boundary contrast regressions pass.
+- Imagery: real source summer-tree brand/favicon, source five-season thumbnails and unchanged production village. No placeholder imagery, inline SVG, CSS artwork or emoji substitutions. Supplied original README thumbnail and introduction video hashes remain unchanged.
+- Copy: existing labels and four installer translations are preserved; guide explains synthetic demos without stale fixed counts, and release copy reflects the checked repository workflow. All original guide section IDs remain.
+
+**Verification:** unit151/151, release tooling14/14, type/app/widget build and full Chrome85/85 pass. The first attempted full browser run collided with another runner's artifact folder; it is not counted as passing. Final85-test run was sequential and passed in1.6minutes. Includes no-JS320px guide, four-locale menu/focus/installation, canvas interactions, touch scrolling and local overflow. Nine main captures have pageerror0/console error0 and viewport-width scrollWidth. Extra700/701/820/1024px boundary checks show no overflow; all compact locale menus stay beneath the header without scroll. Source-only final review re-audited the fix and found no remaining Critical/Important issues.
+
+**Residual P3:** optional language/menu controls create minor header-height differences; brand, palette, typography and actions remain shared. No further visual changes required for acceptance. Preview remains at http://127.0.0.1:5199/install.html and /docs/. This iteration is local and uncommitted; no public deployment or real Tistory validation is claimed.
+
+---
+
 # Living Village Square — interactive homepage QA (2026-11-26)
 
 final result: passed

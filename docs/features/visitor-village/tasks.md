@@ -355,3 +355,14 @@ https://pixel-visitor-village.vercel.app/install.html 에서 블로그 주소를
 - [x] Full regression, desktop/mobile visual QA, independent final review and local preview.
 
 PR follow-up: the user requested a pull request on 2026-11-26. Commit and push the verified scope to feat/interactive-village-home and open against main; do not merge or deploy in this step.
+
+## 2026-11-26 Unified pages
+
+- [x] Confirm deployed homepage as the selected design source and capture existing pages.
+- [x] Prepare VV-UNIFY-001–004 and the scoped implementation plan.
+- [x] Independent readiness review and failing chrome check.
+- [x] Shared header/tokens, installer styling and static guide layout.
+- [x] Four-locale/mobile/no-JS regression and visual comparison.
+- [x] Independent final review, actual results and local preview handoff.
+
+Unified-pages PR follow-up: the user requested a pull request on 2026-11-26. Commit and push the verified scope to feat/unified-village-pages and open against main; keep merge/deployment separate.
