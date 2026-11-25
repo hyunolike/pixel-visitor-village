@@ -544,6 +544,38 @@ test('resuming a notice after Korean midnight never replays yesterday arrival de
   await expect(notice).toHaveText('오늘 방문 25');
 });
 
+for(const reading of ['pending','expired','updated while detached'] as const){
+  test(`reconnecting after Korean midnight preserves the reading date: ${reading}`,async({page})=>{
+    await page.clock.install({time:new Date('2026-11-24T14:59:00Z')});await waitReady(page);
+    const village=page.locator('visitor-village').first(),notice=village.locator('.notice');
+    await village.evaluate(el=>el.setAttribute('count','25'));
+    await expect(notice).toHaveText('오늘 방문 25 (+1)');
+    if(reading==='expired'){
+      await page.clock.fastForward(3100);await expect(notice).toHaveAttribute('data-open','false');
+    }
+    await village.evaluate(el=>{
+      (window as any).__detachedVillage=el;(window as any).__detachedVillageParent=el.parentElement;el.remove();
+    });
+    await page.clock.setSystemTime(new Date('2026-11-24T15:01:00Z'));
+    await page.evaluate(updated=>{
+      const el=(window as any).__detachedVillage;
+      if(updated)el.setAttribute('count','3');
+      (window as any).__detachedVillageParent.append(el);
+    },reading==='updated while detached');
+    await page.waitForFunction(()=>Boolean((document.querySelector('#demo visitor-village') as any)?.ready));
+    if(reading==='expired')await expect(notice).toHaveAttribute('data-open','false');
+    else{
+      await expect(notice).toHaveAttribute('data-open','true');
+      await expect(notice).toHaveText(reading==='pending'?'최근 확인 25':'오늘 방문 3');
+    }
+    if(reading!=='updated while detached'){
+      await village.evaluate(el=>el.setAttribute('count','25'));
+      await expect(notice).toHaveText('오늘 방문 25');
+      await expect(notice).toHaveAttribute('data-open','true');
+    }
+  });
+}
+
 test('short hosts keep actual input error text inside the visible village',async({page})=>{
   await waitReady(page);
   const village=page.locator('visitor-village').first(),status=village.locator('[role=status]');

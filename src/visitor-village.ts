@@ -86,7 +86,7 @@ export class VisitorVillage extends HTMLElement {
         const previous=this.visitorCount;
         this.model.setCount(parseCount(value));
         this.errors.delete('count');
-        if(this.isConnected&&(previous!==this.visitorCount||!this.lastNotice||this.lastNotice.day!==koreanDay(new Date())))this.queueNotice(previous);
+        if(previous!==this.visitorCount||!this.lastNotice||this.lastNotice.day!==koreanDay(new Date()))this.queueNotice(previous);
       }
       if(attribute==='season')this.model.setSeason(value??'christmas');
       if(attribute==='refresh-interval') {
@@ -116,7 +116,8 @@ export class VisitorVillage extends HTMLElement {
       this.view=view;view.setLabels(this.labels);view.setGlow(this.getAttribute('glow')!=='false');
       this.resizeObserver=new ResizeObserver(()=>{view.resize();this.applyPlayback();});this.resizeObserver.observe(this);
       this.intersectionObserver=new IntersectionObserver(entries=>{this.visible=entries[0]?.isIntersecting??true;this.applyPlayback();});this.intersectionObserver.observe(this);
-      this.queueNotice();this.showStatus();this.applyPlayback();this.emit('village-ready');this.emit('village-change');
+      if(!this.lastNotice&&!this.pendingNotice)this.queueNotice();
+      this.showStatus();this.applyPlayback();this.emit('village-ready');this.emit('village-change');
       this.reportArtWarning();
     }).catch(error=>{
       if(generation!==this.generation||!this.isConnected)return;
