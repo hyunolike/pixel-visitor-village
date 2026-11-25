@@ -7,12 +7,24 @@
 - 마을: https://pixel-visitor-village.pages.dev/
 - 설치 도우미: https://pixel-visitor-village.pages.dev/install.html
 - 독립 모듈: https://pixel-visitor-village.pages.dev/widget/visitor-village.js
-- 이번 고유 배포: https://0f6d4807.pixel-visitor-village.pages.dev/
+- 이번 고유 배포: https://18cb4021.pixel-visitor-village.pages.dev/
 - 프로젝트: `pixel-visitor-village`, production branch: `main`, 방식: Wrangler Direct Upload.
 - 계정 ID: `96dc7e6d07c8cb414af597acfec30146`. 인증은 사용자 OAuth를 사용하며 인증 값은 저장소와 명령 인자에 넣지 않는다.
-- 최신 배포 기준: `e9db2c5` 이후 `feat/village-entry-media`의 미커밋 미디어 수정본. 고정 dist35개 파일과 소스 입력 해시를 검증했다. GitHub 자동 배포는 구성하지 않았다.
+- 최신 배포 소스: `c76257b24495d66e90794cc34b01b9a7e2396508` (`feat/village-entry-media`), [PR #9](https://github.com/hyunolike/pixel-visitor-village/pull/9). 고정 dist35개 파일과 커밋의 빌드 입력58개를 대조했다. GitHub 자동 배포는 구성하지 않았다.
 
-## 2026-11-25 작은 조형물과 소개 영상 공개 반영
+## 2026-11-25 이미지 버튼과 소개 미디어 커밋 기준 배포
+
+사용자가 후속으로 풀리퀘스트와 배포를 요청해 소스 `c76257b24495d66e90794cc34b01b9a7e2396508`을 원격 브랜치에 올리고 [PR #9](https://github.com/hyunolike/pixel-visitor-village/pull/9)를 생성했다. 기존 상단 썸네일은 원본을 유지한다. PR 병합은 수행하지 않았다.
+
+- Production/main: `18cb4021-03d6-4bfb-b72c-2613c49f741c`, https://18cb4021.pixel-visitor-village.pages.dev/ . 기존 별칭에도 반영됐다. 직전 production은0f6d4807이다.
+- 커밋한 빌드 입력58개와 고정 배포 묶음35파일/6,837,943bytes를 대조해 일치를 확인했다.34개 파일은 모두 기존 업로드를 재사용하고 _headers를 별도 반영했다. `--commit-dirty=false`로 소스 커밋을 명시했다.
+- 단위146/146과타입/빌드를다시통과했다. 새빌드는직전전체Chrome79/79,HyperFrames오류0/경고0과공개검증을통과한묶음과바이트단위로동일하다.
+- 재배포 후 공개7개 범주를 다시 통과했다.34개 파일SHA,5계절과작은조형물/24명,새영상시간진행,320px네언어설치코드와실제클립보드,4개이미지버튼의실제체험이동,외부HTTP출처37명을확인했다. pageerror0.
+- 위젯SHA와MP4SHA는아래초기공개반영과같다. [현재근거](reviews/entry-media-evidence.json)에배포ID/소스커밋/파일별해시를보존한다.
+
+첫 Git push가HTTP400으로중단돼원격브랜치미생성을확인한뒤,해당명령에서만HTTP/1.1과8MiB전송버퍼로재시도해성공했다. 원격ref가소스커밋과같음을확인했다. 전역Git설정은변경하지않았다.
+
+## 2026-11-25 작은 조형물과 소개 영상 공개 반영 — 초기 작업 공간 배포
 
 사용자가 README 이미지 버튼과 전체 갱신을 요청해 기존 production에 반영했다. 소스 기준 e9db2c5와 미커밋 미디어 수정본을 `--commit-dirty=true`로 배포했으며 새 Git 커밋/푸시는 수행하지 않았다. 아래 이전 커밋/배포 기록과 구분한다.
 

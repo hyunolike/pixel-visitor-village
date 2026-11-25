@@ -253,11 +253,10 @@
     "sha256": "b6c8955e5a9202bc585cde996905a288ea99beeb1d14fc3d4967f2ab264fd4f9"
   },
   "production": {
-    "id": "0f6d4807-05dc-40ac-b0da-4e8cb9d611bf",
-    "url": "https://0f6d4807.pixel-visitor-village.pages.dev",
+    "id": "18cb4021-03d6-4bfb-b72c-2613c49f741c",
+    "url": "https://18cb4021.pixel-visitor-village.pages.dev/",
     "alias": "https://pixel-visitor-village.pages.dev",
-    "baseCommit": "e9db2c50f2bf8ddd83a6290baeae3778653924e8",
-    "dirtyWorkingTree": true,
+    "dirtyWorkingTree": false,
     "checks": {
       "checks": [
         "SHA256 matches for 34 public build files",
@@ -448,6 +447,14 @@
         "sha256": "f3a5147f707bb400f27cbd1671a0694af323485919ca333cd32fd1c6a83ea164"
       }
     },
-    "bytes": 6837943
+    "bytes": 6837943,
+    "sourceCommit": "c76257b24495d66e90794cc34b01b9a7e2396508",
+    "pullRequest": "https://github.com/hyunolike/pixel-visitor-village/pull/9"
+  },
+  "initialWorkingTreeProduction": {
+    "id": "0f6d4807-05dc-40ac-b0da-4e8cb9d611bf",
+    "url": "https://0f6d4807.pixel-visitor-village.pages.dev",
+    "baseCommit": "e9db2c50f2bf8ddd83a6290baeae3778653924e8",
+    "dirtyWorkingTree": true
   }
 }
