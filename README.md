@@ -8,15 +8,17 @@
 
 티스토리의 오늘 방문자 수를 픽셀 캐릭터로 보여 주는 웹 위젯입니다. 커다란 나무 주변에서 캐릭터들이 걷고 쉬며, 크리스마스부터 사계절까지 마을 분위기를 바꿀 수 있습니다.
 
-[마을 구경하기](https://pixel-visitor-village.pages.dev/) · [티스토리 설치하기](https://pixel-visitor-village.pages.dev/install.html) · [설치 코드](examples/tistory-snippet.html) | [사용 문서](https://pixel-visitor-village.pages.dev/docs/)
+<a href="https://pixel-visitor-village.pages.dev/#demo"><img src="docs/assets/entry/visit-village-ko.svg" alt="마을 구경하기 — 최신 마을을 직접 체험하세요." width="640"></a>
 
-설치 방법과 위젯 설정, 방문 수 집계와 문제 해결을 HTML 문서로 제공합니다. 새 홈과 문서를 Cloudflare Pages에 배포하고 공개 사이트에서 확인했습니다.
+[티스토리 설치하기](https://pixel-visitor-village.pages.dev/install.html) · [설치 코드](examples/tistory-snippet.html) | [사용 문서](https://pixel-visitor-village.pages.dev/docs/)
+
+설치 도우미와 사용 문서는 Cloudflare Pages에서 제공합니다.
 
 [![방문자 수가 늘며 캐릭터가 모이는 작은 방문자 마을 소개 영상 미리보기](docs/assets/intro-preview.gif)](public/media/intro.mp4)
 
 **20초 소개 영상** — 위 미리보기는 README에서 자동으로 움직입니다. 클릭하면 갱신한 MP4를 엽니다. [썸네일](public/media/intro-poster.jpg) · [MP4](public/media/intro.mp4) · [제작과 음원 출처](docs/features/visitor-village/intro-media.md)
 
-*현재 코드의 실제 PixiJS 마을과 마을 작업실을 캡처해 HyperFrames로 다시 편집했습니다. 인사와 말풍선, 산타, 다섯 계절을 담았습니다. 0~24명은 시연 입력입니다. 갱신본은 위 MP4에서 확인할 수 있으며 공개 사이트 반영은 별도 배포가 필요합니다.*
+*작은 티스토리 조형물이 있는 최신 PixiJS 마을과 설치 작업실을 실제로 촬영했습니다. 인사와 말풍선, 산타와 다섯 계절을 담았으며 0~24명은 시연 입력입니다.*
 
 > 개편한 설치 도우미는 계절별 마을 미리보기와 한국어, 영어, 일본어, 중국어 간체를 지원합니다. 개편 내용을 Cloudflare Pages에 배포하고 공개 사이트에서 확인했습니다. 메인 데모와 소개 영상, 상세 기술 문서는 한국어로 제공됩니다. 기본 문서는 한국어이며 [English](README.en.md)에서 영어 설명을 볼 수 있습니다.
 
@@ -30,7 +32,7 @@
 - **화면에 보일 때 움직임 재생** — 숨겨진 탭과 화면 밖에서는 멈춥니다. 운영체제의 모션 줄이기 설정과 수동 정지도 반영합니다.
 - **블로그 안의 정해진 영역에 표시** — 반응형 크기를 지원하고, 캔버스가 본문 링크나 모바일 스크롤을 가로채지 않습니다.
 
-의상과 표정이 다른 **20×28px 캐릭터 8종**과 앞/옆/뒤, 걷기/깜박임/손 인사가 있습니다. 작은 화면은 16×22px 아틀라스를 사용합니다. [최신 캐릭터 시트](docs/assets/cozy-village/characters-front.png)를 확인할 수 있습니다. 아래 계절별 이미지는 2026-11-25 첨부 콘셉트로 개편한 로컬 준비본이며 공개 반영은 별도 배포 단계입니다.
+의상과 표정이 다른 **20×28px 캐릭터 8종**과 앞/옆/뒤, 걷기/깜박임/손 인사가 있습니다. 작은 화면은 16×22px 아틀라스를 사용합니다. [최신 캐릭터 시트](docs/assets/cozy-village/characters-front.png)를 확인할 수 있습니다. 아래 계절별 이미지는 작은 티스토리 조형물을 적용한 실제 마을입니다.
 
 ## 계절별 마을
 

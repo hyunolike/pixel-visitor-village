@@ -8,15 +8,17 @@
 
 这是一个为 Tistory 博客制作的网页组件，将今天的访客数转换为相同数量的像素角色。角色会在大树周围散步、休息，你还可以选择圣诞节或四季主题。
 
-[逛逛村庄](https://pixel-visitor-village.pages.dev/) | [安装到 Tistory](https://pixel-visitor-village.pages.dev/install.html) | [嵌入代码](examples/tistory-snippet.html) | [使用文档（韩语）](https://pixel-visitor-village.pages.dev/docs/)
+<a href="https://pixel-visitor-village.pages.dev/#demo"><img src="docs/assets/entry/visit-village-zh-CN.svg" alt="逛逛小村庄 — 体验最新的像素村庄。" width="640"></a>
 
-HTML 文档包含安装方法、组件设置、统计规则和问题排查。新版首页和文档已发布到 Cloudflare Pages，并完成公开站点验证。
+[安装到 Tistory](https://pixel-visitor-village.pages.dev/install.html) | [嵌入代码](examples/tistory-snippet.html) | [使用文档（韩语）](https://pixel-visitor-village.pages.dev/docs/)
+
+安装助手和使用文档通过Cloudflare Pages提供。
 
 [![随着访客数增加，像素角色逐渐聚集到村庄中的动画预览](docs/assets/intro-preview.gif)](public/media/intro.mp4)
 
 **20 秒介绍视频** — GIF 会在 README 中播放，点击后可打开更新后的MP4。[封面](public/media/intro-poster.jpg) | [MP4](public/media/intro.mp4) | [制作信息与音乐来源](docs/features/visitor-village/intro-media.md)
 
-*使用当前PixiJS组件和安装工作室的真实画面，在HyperFrames中更新了视频，包含打招呼、气泡、圣诞老人和五种季节。0至24人为演示输入。更新版见上方MP4，公开网站需要另行部署。*
+*视频录制自最新的PixiJS村庄和安装工作室，包含缩小的Tistory装饰、打招呼、气泡、圣诞老人和五种季节。0至24人为演示输入。*
 
 > 新版安装助手提供四季预览，支持韩语、英语、日语和简体中文。本次改版已发布到 Cloudflare Pages，并完成公开站点验证。主演示页面、介绍视频和详细技术文档仍为韩语。本项目以[韩语文档](README.md)为主，并提供[英文文档](README.en.md)。
 
@@ -32,7 +34,7 @@ HTML 文档包含安装方法、组件设置、统计规则和问题排查。新
 
 8种20×28px角色保留正面/侧面/背面及行走/眨眼/挥手动作，小屏幕使用16×22px图集。请查看[当前角色图集](docs/assets/cozy-village/characters-front.png)。
 
-下方截图展示2026-11-25按附件概念改进的本地版本，公开上线需要另行部署。
+下方截图展示缩小Tistory装饰后的实际村庄。
 
 ## 四季村庄
 

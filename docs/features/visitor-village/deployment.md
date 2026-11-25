@@ -7,10 +7,24 @@
 - 마을: https://pixel-visitor-village.pages.dev/
 - 설치 도우미: https://pixel-visitor-village.pages.dev/install.html
 - 독립 모듈: https://pixel-visitor-village.pages.dev/widget/visitor-village.js
-- 이번 고유 배포: https://1a1111e3.pixel-visitor-village.pages.dev/
+- 이번 고유 배포: https://0f6d4807.pixel-visitor-village.pages.dev/
 - 프로젝트: `pixel-visitor-village`, production branch: `main`, 방식: Wrangler Direct Upload.
 - 계정 ID: `96dc7e6d07c8cb414af597acfec30146`. 인증은 사용자 OAuth를 사용하며 인증 값은 저장소와 명령 인자에 넣지 않는다.
-- 최신 소스: `2a4e2b567ac90857c0cf4ec701449b3e7283a138` (`feat/visitor-notice`). 최초 Pages 이전은 `234e854` 기반으로 진행했고 이후 `main`에 병합되었다. 이번 기능 커밋은 기능 브랜치에 푸시했으며 GitHub 자동 배포는 구성하지 않았다.
+- 최신 배포 기준: `e9db2c5` 이후 `feat/village-entry-media`의 미커밋 미디어 수정본. 고정 dist35개 파일과 소스 입력 해시를 검증했다. GitHub 자동 배포는 구성하지 않았다.
+
+## 2026-11-25 작은 조형물과 소개 영상 공개 반영
+
+사용자가 README 이미지 버튼과 전체 갱신을 요청해 기존 production에 반영했다. 소스 기준 e9db2c5와 미커밋 미디어 수정본을 `--commit-dirty=true`로 배포했으며 새 Git 커밋/푸시는 수행하지 않았다. 아래 이전 커밋/배포 기록과 구분한다.
+
+- 배포: `0f6d4807-05dc-40ac-b0da-4e8cb9d611bf`,Production/main. 고유 주소 https://0f6d4807.pixel-visitor-village.pages.dev/ . 직전 production은1a1111e3다.
+- 고정 묶음:35파일/6,837,943bytes. _headers 별도 처리 후34개 중28개 업로드,6개 재사용.
+- 범위: 최신5계절 아트/작은 티스토리 조형물/재연결 수정 위젯,실제 현재 PixiJS 소개 영상/포스터,네 언어 이미지 버튼. 홈/설치/문서는 기존 제품 구조를 유지한다.
+- 단위146/146,타입/빌드,전체Chrome79/79과HyperFrames 오류0/경고0. 공개7개 범주,34개 파일SHA,5계절24명/작은 조형물,영상 재생,320px 네 언어 설치/클립보드,버튼 이동과 외부HTTP출처37명 확인. pageerror0.
+- 위젯 SHA-256: `f3a5147f707bb400f27cbd1671a0694af323485919ca333cd32fd1c6a83ea164`.
+- 소개 MP4 SHA-256: `347f390992648799bb8e9ac778e03cf7b1c969f62d5ad41d77f83d2e1fcafa5f`.
+- README4개의 이미지 버튼/작은 조형물 썸네일/갱신 GIF와 설명은 작업 공간에 반영되어 있다. GitHub 문서 반영용 새 커밋/PR은 이번 단계에서 생성하지 않았다. [상세 검증](reviews/entry-media-2026-11-25.md)과 [배포 파일 해시](reviews/entry-media-evidence.json)를 본다.
+
+실제 티스토리 스킨 편집이나 방문자 개인정보 수집은 하지 않았다. 기존 위젯 URL을 사용하는 블로그는 최대5분의 캐시 뒤 새 위젯을 받는다.
 
 ## 2026-11-25 마을 작업실 개편 배포 완료
 

@@ -8,15 +8,17 @@
 
 A web widget for Tistory blogs that creates one pixel character for each visitor counted today. Characters walk and rest around a large tree, with Christmas and four seasonal themes to choose from.
 
-[Explore the village](https://pixel-visitor-village.pages.dev/) | [Install on Tistory](https://pixel-visitor-village.pages.dev/install.html) | [Embed snippet](examples/tistory-snippet.html) | [Usage guide (Korean)](https://pixel-visitor-village.pages.dev/docs/)
+<a href="https://pixel-visitor-village.pages.dev/#demo"><img src="docs/assets/entry/visit-village-en.svg" alt="Explore the village — Try the current village." width="640"></a>
 
-A browsable HTML guide covers installation, widget options, counting rules and troubleshooting. The new home and guide are live on Cloudflare Pages and have passed public-site checks.
+[Install on Tistory](https://pixel-visitor-village.pages.dev/install.html) | [Embed snippet](examples/tistory-snippet.html) | [Usage guide (Korean)](https://pixel-visitor-village.pages.dev/docs/)
+
+The installation helper and usage guide are available on Cloudflare Pages.
 
 [![Animated preview of a pixel village filling with characters as the visitor count grows](docs/assets/intro-preview.gif)](public/media/intro.mp4)
 
 **20-second introduction** — The GIF plays in the README. Click it to open the updated MP4. [Poster](public/media/intro-poster.jpg) | [MP4](public/media/intro.mp4) | [Production and music credits](docs/features/visitor-village/intro-media.md)
 
-*Refreshed in HyperFrames using captures of the current PixiJS widget and installation workshop: greetings, bubbles, Santa and five seasons. Counts 0–24 are demo inputs. The updated MP4 is linked above; publishing it to the live site requires a separate deployment.*
+*Recorded from the current PixiJS village and installation workshop, including the smaller Tistory landmark, greetings, bubbles, Santa and five seasons. Counts 0–24 are demonstration inputs.*
 
 > The redesigned installation helper supports Korean, English, Japanese, and Simplified Chinese, with a live seasonal preview. The update is live on Cloudflare Pages and has passed public-site checks. The main demo, introduction video, and technical documents remain in Korean. Translated READMEs are linked above.
 
@@ -32,13 +34,13 @@ A browsable HTML guide covers installation, widget options, counting rules and t
 
 Eight 20×28px characters retain front, side and back views with walking, blinking and greeting poses. Compact screens use a 16×22px atlas. See the [current character sheet](docs/assets/cozy-village/characters-front.png).
 
-The seasonal screenshots below show the2026-11-25 local artwork rebuild based on the supplied concept. Public rollout is a separate deployment step.
+The seasonal screenshots below show the actual village with the smaller Tistory landmark.
 
 ## Seasonal villages
 
 **Christmas** is the default theme, regardless of the date. Use the demo's tree customization panel (나무 꾸미기) to switch themes.
 
-The gallery shows the rebuilt local artwork from November 25, 2026; public deployment is a separate step. The updated scenery includes tiled roofs, window frames, shop awnings, stone paths, and benches. Flowers, fruit, fallen leaves, and snow distinguish the seasons. Houses and props are sorted in front of or behind characters by foot position. See the [tree and scenery sheet](docs/assets/cozy-village/props.png) for details.
+The gallery shows the rebuilt artwork with the smaller landmark. The updated scenery includes tiled roofs, window frames, shop awnings, stone paths, and benches. Flowers, fruit, fallen leaves, and snow distinguish the seasons. Houses and props are sorted in front of or behind characters by foot position. See the [tree and scenery sheet](docs/assets/cozy-village/props.png) for details.
 
 <table>
   <tr><th>Spring</th><th>Summer</th></tr>

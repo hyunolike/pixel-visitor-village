@@ -8,15 +8,17 @@
 
 Tistoryブログの今日の訪問者数を、1人につき1体のピクセルキャラクターで表すWebウィジェットです。キャラクターは大きな木の周りを歩いたり休んだりします。クリスマスと四季のテーマを選べます。
 
-[村を見てみる](https://pixel-visitor-village.pages.dev/) | [Tistoryに設置する](https://pixel-visitor-village.pages.dev/install.html) | [埋め込みコード](examples/tistory-snippet.html) | [使い方（韓国語）](https://pixel-visitor-village.pages.dev/docs/)
+<a href="https://pixel-visitor-village.pages.dev/#demo"><img src="docs/assets/entry/visit-village-ja.svg" alt="村を見に行く — 最新の村を体験しましょう。" width="640"></a>
 
-設置方法、ウィジェット設定、集計とトラブル対処をHTML文書で案内します。新しいホームと文書はCloudflare Pagesに公開し、公開サイトでも確認しました。
+[Tistoryに設置する](https://pixel-visitor-village.pages.dev/install.html) | [埋め込みコード](examples/tistory-snippet.html) | [使い方（韓国語）](https://pixel-visitor-village.pages.dev/docs/)
+
+設置ヘルパーと使い方の文書をCloudflare Pagesで提供しています。
 
 [![訪問者数が増えるにつれてキャラクターが集まる、ピクセルの村のアニメーションプレビュー](docs/assets/intro-preview.gif)](public/media/intro.mp4)
 
 **20秒の紹介動画** — README内ではGIFが再生されます。クリックすると更新したMP4が開きます。[ポスター](public/media/intro-poster.jpg) | [MP4](public/media/intro.mp4) | [制作情報と音楽の出典](docs/features/visitor-village/intro-media.md)
 
-*現在のPixiJSウィジェットとインストール画面をキャプチャし、HyperFramesで更新しました。あいさつ、吹き出し、サンタ、5つの季節を収録しています。0〜24人はデモ入力です。更新版は上のMP4から確認でき、公開サイトへの反映には別途デプロイが必要です。*
+*小さくしたTistoryのモニュメントがある最新のPixiJSの村と設置画面を実際に撮影しました。あいさつ、吹き出し、サンタと5つの季節を収録しています。0〜24人はデモ入力です。*
 
 > 新しい設置ヘルパーは季節のプレビューと韓国語、英語、日本語、簡体字中国語に対応しています。この改修はCloudflare Pagesに公開し、公開サイトでも確認しました。メインデモ、紹介動画、詳細な技術文書は韓国語です。基本の[韓国語版](README.md)と[英語版](README.en.md)も参照できます。
 
@@ -32,7 +34,7 @@ Tistoryブログの今日の訪問者数を、1人につき1体のピクセル�
 
 20×28pxのキャラクター8種類は正面/側面/背面と歩行/まばたき/手振りを保ちます。小さな画面は16×22pxアトラスを使います。[現在のスプライトシート](docs/assets/cozy-village/characters-front.png)をご覧ください。
 
-以下は2026-11-25の添付コンセプトに合わせたローカル改良版です。公開反映は別のデプロイ手順です。
+以下は、小さくしたTistoryのモニュメントがある実際の村の画面です。
 
 ## 季節ごとの村
 
