@@ -19,6 +19,10 @@ const admin = find<HTMLAnchorElement>('#admin-link');
 const stage = find<HTMLElement>('#preview-stage');
 const retry = find<HTMLButtonElement>('#preview-retry');
 const pause = find<HTMLButtonElement>('#preview-pause');
+const navigation = find<HTMLElement>('#project-navigation');
+const navigationToggle = find<HTMLButtonElement>('#navigation-toggle');
+const compactNavigation = matchMedia('(max-width: 700px)');
+let navigationOpen = false;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let locale = resolveLocale(location.search, () => localStorage.getItem(LOCALE_STORAGE_KEY), navigator.languages);
 let selectedSeason: Season = 'christmas';
@@ -44,7 +48,38 @@ function renderResultState() {
   find('#refresh-warning').hidden = !refresh.checked;
   const description = refresh.checked ? 'refresh-help refresh-warning' : 'refresh-help';
   if (refresh.getAttribute('aria-describedby') !== description) refresh.setAttribute('aria-describedby', description);
+  find('#copy-step').hidden = installState === 'pristine';
+  const currentStep = installState !== 'ready' ? '1' : copyStatus === 'copySuccess' ? '3' : '2';
+  document.querySelectorAll<HTMLElement>('[data-install-step]').forEach(step => {
+    if (step.dataset.installStep === currentStep) step.setAttribute('aria-current', 'step');
+    else step.removeAttribute('aria-current');
+  });
 }
+
+function renderNavigation() {
+  navigationToggle.hidden = !compactNavigation.matches;
+  navigation.hidden = compactNavigation.matches && !navigationOpen;
+  navigationToggle.setAttribute('aria-expanded', String(compactNavigation.matches && navigationOpen));
+}
+navigationToggle.addEventListener('click', () => {
+  navigationOpen = !navigationOpen;
+  renderNavigation();
+  if (navigationOpen) navigation.querySelector<HTMLAnchorElement>('a')?.focus();
+});
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || !compactNavigation.matches || !navigationOpen) return;
+  navigationOpen = false;
+  renderNavigation();
+  navigationToggle.focus();
+});
+compactNavigation.addEventListener('change', () => {
+  const focusedInMenu = navigation.contains(document.activeElement);
+  const focusedToggle = document.activeElement === navigationToggle;
+  navigationOpen = false;
+  renderNavigation();
+  if (compactNavigation.matches && focusedInMenu) navigationToggle.focus();
+  else if (!compactNavigation.matches && focusedToggle) navigation.querySelector<HTMLAnchorElement>('a')?.focus();
+});
 
 function renderPreviewText() {
   const t = messages[locale];
@@ -62,7 +97,8 @@ function renderLocale() {
   document.documentElement.lang = locale;
   document.title = t.pageTitle;
   document.querySelector('meta[name="description"]')?.setAttribute('content', t.introBody);
-  document.querySelector('nav')?.setAttribute('aria-label', t.brand);
+  navigation.setAttribute('aria-label', t.navigationLabel);
+  find('.install-progress').setAttribute('aria-label', t.stepsLabel);
   language.value = locale;
   document.querySelectorAll<HTMLElement>('[data-i18n]').forEach(element => {
     element.textContent = t[element.dataset.i18n as TextKey];
@@ -148,6 +184,7 @@ form.addEventListener('submit', event => {
     admin.hidden = false;
     result.hidden = false;
     installState = 'ready';
+    find<HTMLDetailsElement>('#install-instructions').open = true;
     find('#code-pending').hidden = true;
     find('#admin-pending').hidden = true;
     errorCode = undefined;
@@ -176,6 +213,7 @@ find('#copy-code').addEventListener('click', async () => {
     copyStatus = 'copyFallback';
   }
   copyState.textContent = messages[locale][copyStatus];
+  renderResultState();
 });
 
 async function loadPreview() {
@@ -226,4 +264,5 @@ pause.addEventListener('click', () => {
 retry.addEventListener('click', () => { void loadPreview(); });
 reducedMotion.addEventListener('change', renderPreviewText);
 renderLocale();
+renderNavigation();
 void loadPreview();

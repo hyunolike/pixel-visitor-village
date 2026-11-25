@@ -47,6 +47,7 @@ test('installer docs navigation stays translated and preserves generated code',a
   const code=await page.locator('#install-code').inputValue();
   for(const [locale,label] of [['en','Docs (Korean)'],['ja','使い方（韓国語）'],['zh-CN','文档（韩语）'],['ko','사용 문서']]){
     await page.locator('#locale-select').selectOption(locale);
+    if(await page.locator('#project-navigation').isHidden()) await page.locator('#navigation-toggle').click();
     await expect(page.locator('#usage-docs-link')).toHaveText(label);
     await expect(page.locator('#usage-docs-link')).toHaveAttribute('href','./docs/');
     await expect(page.locator('#install-code')).toHaveValue(code);
@@ -626,8 +627,8 @@ test('installation languages preserve the generated code, selected season and fo
 });
 
 for (const [lang, heading, emptyError] of [
-  ['ko', '내 블로그에 작은 마을을 초대하세요.', '티스토리 주소를 입력해 주세요.'],
-  ['en', 'A little village. A home on your blog.', 'Enter your Tistory blog address.'],
+  ['ko', '내 블로그에, 작은 마을 하나.', '티스토리 주소를 입력해 주세요.'],
+  ['en', 'A little village, at home on your blog.', 'Enter your Tistory blog address.'],
   ['ja', 'あなたのブログに、小さな村を。', 'Tistoryのブログアドレスを入力してください。'],
   ['zh-CN', '给你的博客，添一座小村庄。', '请输入 Tistory 博客地址。'],
 ] as const) {
@@ -758,12 +759,13 @@ test('installer retries a failed graphics module without losing form values', as
 
 test('installer settings and code generation work with the keyboard', async ({page}) => {
   await page.goto('/install.html?lang=en');
-  await page.locator('#blog-url').focus();
-  await page.keyboard.type('example.tistory.com');
-  await page.keyboard.press('Tab');
+  await page.locator('input[name="season"][value="christmas"]').focus();
   await expect(page.locator('input[name="season"][value="christmas"]')).toBeFocused();
   await page.keyboard.press('ArrowRight');
   await expect(page.locator('input[name="season"][value="spring"]')).toBeChecked();
+  await page.keyboard.press('Tab');
+  await expect(page.locator('#blog-url')).toBeFocused();
+  await page.keyboard.type('example.tistory.com');
   await page.keyboard.press('Tab');
   await expect(page.locator('#create-code')).toBeFocused();
   await page.keyboard.press('Tab');
@@ -932,4 +934,87 @@ test('design polish preserves a mobile click from address editing to advanced se
   await page.locator('#blog-url').fill('example.tistory.com');
   await page.locator('#preview-pause').click();
   await expect(page.locator('#preview-pause')).toHaveAttribute('aria-pressed','true');
+});
+
+test('atelier desktop prioritizes a large live village beside concise season settings',async({page})=>{
+  await page.setViewportSize({width:1487,height:1058});
+  await page.goto('/install.html?lang=ko');
+  await page.waitForFunction(()=>(document.querySelector('#preview-village') as any)?.ready);
+  await expect(page.locator('#page-title')).toHaveText('내 블로그에, 작은 마을 하나.');
+  await expect(page.locator('.intro-copy p')).toHaveText('오늘 방문자 수만큼 픽셀 캐릭터가 마을에 모여요.');
+  const settings=await page.locator('#setup').boundingBox(),preview=await page.locator('.preview-panel').boundingBox();
+  expect(preview!.x).toBeGreaterThan(settings!.x+settings!.width-1);
+  expect(preview!.width).toBeGreaterThan(settings!.width*1.7);
+  const season=await page.locator('#install-season').boundingBox(),address=await page.locator('#blog-url').boundingBox();
+  expect(season!.y+season!.height).toBeLessThan(address!.y);
+  await expect(page.locator('.install-progress [aria-current="step"]')).toHaveAttribute('data-install-step','1');
+  await expect(page.locator('#install-instructions')).not.toHaveAttribute('open');
+});
+
+test('atelier mobile keeps the header compact and the actual preview before settings',async({page})=>{
+  await page.setViewportSize({width:375,height:667});await page.goto('/install.html?lang=ko');
+  await page.waitForFunction(()=>(document.querySelector('#preview-village') as any)?.ready);
+  expect((await page.locator('.site-header').boundingBox())!.height).toBeLessThanOrEqual(80);
+  const preview=await page.locator('#preview-stage').boundingBox(),settings=await page.locator('#setup').boundingBox();
+  expect(preview!.y).toBeLessThan(settings!.y);expect(preview!.y+preview!.height).toBeLessThanOrEqual(595);
+  const create=await page.locator('#create-code').boundingBox();expect(create!.y+create!.height).toBeLessThanOrEqual(667);
+  expect(await page.locator('#preview-stage').evaluate(el=>Boolean(el.compareDocumentPosition(document.querySelector('#setup')!)&Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
+});
+
+test('atelier menu stays accessible in four languages and returns focus on Escape',async({page})=>{
+  await page.setViewportSize({width:320,height:780});
+  for(const locale of ['ko','en','ja','zh-CN']){
+    await page.goto(`/install.html?lang=${locale}`);
+    await expect(page.locator('#project-navigation')).toBeHidden();
+    expect((await page.locator('#navigation-toggle').boundingBox())!.height).toBeLessThanOrEqual(48);
+    for(const step of await page.locator('.install-progress li').all()) expect(await step.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
+    await page.locator('#navigation-toggle').click();
+    await expect(page.locator('#project-navigation')).toBeVisible();
+    await expect(page.locator('#navigation-toggle')).toHaveAttribute('aria-expanded','true');
+    await expect(page.locator('#project-navigation a').first()).toBeFocused();
+    await page.keyboard.press('Tab');await expect(page.locator('#project-navigation a').nth(1)).toBeFocused();
+    await expect(page.locator('#project-navigation a[href*=github]')).toHaveAccessibleName(/GitHub.+/);
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#navigation-toggle')).toBeFocused();await expect(page.locator('#project-navigation')).toBeHidden();
+    expect((await page.locator('.site-header').boundingBox())!.height).toBeLessThanOrEqual(80);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  }
+  await page.locator('#navigation-toggle').click();await page.locator('#usage-docs-link').click();
+  await expect(page.getByRole('heading',{name:'마을 사용 문서',exact:true})).toBeVisible();
+});
+
+test('atelier code handoff tracks preparation and copying without claiming installation',async({page,context})=>{
+  await context.grantPermissions(['clipboard-read','clipboard-write']);
+  await page.goto('/install.html?lang=ko');
+  await expect(page.locator('#copy-step')).toBeHidden();
+  await page.locator('#blog-url').fill('example.tistory.com');await page.locator('#create-code').click();
+  await expect(page.locator('.preview-panel #copy-step')).toBeVisible();await expect(page.locator('#copy-title')).toBeFocused();
+  await expect(page.locator('.install-progress [aria-current="step"]')).toHaveAttribute('data-install-step','2');
+  await expect(page.locator('#install-instructions')).toHaveAttribute('open','');
+  await page.locator('#install-instructions summary').click();await page.locator('#locale-select').selectOption('en');
+  await expect(page.locator('#install-instructions')).not.toHaveAttribute('open');
+  await page.locator('#copy-code').click();
+  await expect(page.locator('.install-progress [aria-current="step"]')).toHaveAttribute('data-install-step','3');
+  expect(await page.evaluate(()=>navigator.clipboard.readText())).toContain('count="[##_count_today_##]"');
+  await page.locator('input[name=season][value=spring]').check();
+  await expect(page.locator('#install-result')).toBeHidden();await expect(page.locator('#copy-step')).toBeVisible();
+  await expect(page.locator('.install-progress [aria-current="step"]')).toHaveAttribute('data-install-step','1');
+  await expect(page.locator('#settings-status')).toContainText('Settings changed');
+});
+
+
+test('atelier field boundaries retain non-text contrast on light and dark surfaces',async({page})=>{
+  for(const [path,selector] of [['/install.html?lang=ko','#blog-url'],['/','#visitors']]){
+    await page.goto(path);
+    const ratio=await page.locator(selector).evaluate(el=>{
+      const style=getComputedStyle(el);
+      const luminance=(color:string)=>{
+        const rgb=color.match(/[\d.]+/g)!.slice(0,3).map(Number).map(c=>c/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4);
+        return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;
+      };
+      const pair=[luminance(style.borderTopColor),luminance(style.backgroundColor)].sort((a,b)=>a-b);
+      return (pair[1]+.05)/(pair[0]+.05);
+    });
+    expect(ratio).toBeGreaterThanOrEqual(3);
+  }
 });

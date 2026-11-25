@@ -58,3 +58,7 @@
 ## 홈과 사용 문서 화면
 
 2026-11-25 로컬 production 빌드의 [홈 데스크톱](home-desktop.png), [홈 320px](home-mobile.png), [문서 데스크톱](docs-desktop.png), [문서 320px](docs-mobile.png)을 Chrome으로 캡처했다. 데스크톱은 1440×1000, 모바일은 320×850 viewport의 첫 화면이며 공개 사이트나 실제 블로그 설치 화면으로 설명하지 않는다. 홈의 24명은 시연 값이다. 원본의 캐릭터/나무를 사용하는 실제 Pixi 화면과 정적 문서 레이아웃이다.
+
+## 마을 작업실 시안과 구현 비교
+
+`install-atelier-reference.png`는 사용자가 선택한 생성 시안이며 실제 제품 캡처와 구분한다. `install-atelier-desktop.png`(1487×1058)와 `install-atelier-mobile.png`(375×667)는 2026-11-25 로컬 production 빌드의 Chrome/DPR1 실제 화면이다. `install-atelier-comparison.png`와 `install-atelier-focus-settings.png`는 원본과 구현을 브라우저에 같은 크기로 나란히 배치한 비교 자료다. 미리보기24명은 시연 값이며 제품은 기존 실제 렌더러와 source 로고를 재사용한다. `install-rebuild-audit/`는 개편 전 공개 설치 화면의 조사 캡처다. [조사 출처](../features/visitor-village/reviews/install-rebuild-research-2026-11-25.md)와 [최종 시각 QA](../../design-qa.md)를 함께 본다.

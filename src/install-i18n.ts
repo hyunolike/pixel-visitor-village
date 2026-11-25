@@ -35,13 +35,14 @@ export function saveLocale(locale: Locale, write: (value: string) => void): void
 }
 
 const ko = {
+  workshopName: '마을 작업실', menu: '메뉴', navigationLabel: '주 메뉴', stepsLabel: '설치 순서', customizeStep: '마을 꾸미기', copyStep: '코드 복사', pasteStep: '스킨에 붙여넣기', nextStep: '다음 단계', handoffSummary: '만든 설치 코드를 복사해 티스토리 스킨의 HTML 편집에 붙여넣어야 해요.', showGuide: '설치 방법 보기',
   brand: '작은 방문자 마을', pageTitle: '블로그에 설치하기 | 작은 방문자 마을',
   installLink: '설치하기', docsLink: '사용 문서', checkDocs: '설치 후 문제 해결 보기', newTab: ' (새 탭)',
   language: '언어', demoLink: '마을 둘러보기', skipLink: '마을 설정으로 건너뛰기',
-  introTitle: '내 블로그에 작은 마을을 초대하세요.',
-  introBody: '주소와 계절을 정하고, 나만의 마을을 설치해 보세요.',
-  settingsTitle: '마을 설정', addressLabel: '티스토리 주소',
-  addressHelp: '티스토리 주소나 연결한 개인 도메인을 입력하세요.',
+  introTitle: '내 블로그에, 작은 마을 하나.',
+  introBody: '오늘 방문자 수만큼 픽셀 캐릭터가 마을에 모여요.',
+  settingsTitle: '계절 선택', addressLabel: '티스토리 주소',
+  addressHelp: '관리자 바로가기를 만드는 데 사용해요.',
   seasonLabel: '처음 보여 줄 계절', refreshLabel: '오늘 방문 수를 1분마다 확인',
   refreshHelp: '마을이 화면에 보일 때 같은 블로그의 HTML을 읽습니다.',
   advancedSettings: '고급 설정', refreshEnabled: '자동 확인 켜짐',
@@ -80,12 +81,13 @@ export type Messages = typeof ko;
 export type TextKey = { [K in keyof Messages]: Messages[K] extends string ? K : never }[keyof Messages];
 
 const en: Messages = {
+  workshopName: 'Village studio', menu: 'Menu', navigationLabel: 'Main navigation', stepsLabel: 'Installation steps', customizeStep: 'Customize', copyStep: 'Copy code', pasteStep: 'Add to your skin', nextStep: 'Next step', handoffSummary: 'Copy the generated code and paste it into your Tistory skin’s HTML.', showGuide: 'View install guide',
   brand: 'Little Visitor Village', pageTitle: 'Install on your blog | Little Visitor Village',
   installLink: 'Install', docsLink: 'Docs (Korean)', checkDocs: 'Troubleshooting guide (Korean)', newTab: ' (new tab)',
   language: 'Language', demoLink: 'Explore the village (Korean)', skipLink: 'Skip to village settings',
-  introTitle: 'A little village. A home on your blog.', introBody: 'Choose a season, preview your village, and make it yours.',
-  settingsTitle: 'Village settings', addressLabel: 'Tistory blog address',
-  addressHelp: 'Enter your Tistory address or connected custom domain.', seasonLabel: 'Starting season',
+  introTitle: 'A little village, at home on your blog.', introBody: 'Turn today’s accumulated visits into a gathering of pixel characters.',
+  settingsTitle: 'Choose a season', addressLabel: 'Tistory blog address',
+  addressHelp: 'Used to create your blog admin shortcut.', seasonLabel: 'Starting season',
   refreshLabel: 'Check today’s visitor count every minute',
   refreshHelp: 'Reads the same blog’s HTML while the village is visible.',
   advancedSettings: 'Advanced settings', refreshEnabled: 'Auto-check on',
@@ -128,12 +130,13 @@ const en: Messages = {
 };
 
 const ja: Messages = {
+  workshopName: '村のアトリエ', menu: 'メニュー', navigationLabel: 'メインメニュー', stepsLabel: '設置の手順', customizeStep: '村を設定', copyStep: 'コードをコピー', pasteStep: 'スキンに貼り付け', nextStep: '次の手順', handoffSummary: '作成したコードをコピーして、TistoryのスキンHTMLに貼り付けてください。', showGuide: '設置方法を見る',
   brand: '小さな訪問者の村', pageTitle: 'ブログに設置する | 小さな訪問者の村',
   installLink: '設置する', docsLink: '使い方（韓国語）', checkDocs: '設置後のトラブル対処（韓国語）', newTab: '（新しいタブ）',
   language: '言語', demoLink: '村を見てみる（韓国語）', skipLink: '村の設定へスキップ',
-  introTitle: 'あなたのブログに、小さな村を。', introBody: '季節を選んで村を確認したら、ブログに設置しましょう。',
-  settingsTitle: '村の設定', addressLabel: 'Tistoryのブログアドレス',
-  addressHelp: 'Tistoryのアドレスか、接続済みの独自ドメインを入力してください。', seasonLabel: '最初に表示する季節',
+  introTitle: 'あなたのブログに、小さな村を。', introBody: '今日の累計訪問者数が、村に集まるピクセルキャラクターになります。',
+  settingsTitle: '季節を選ぶ', addressLabel: 'Tistoryのブログアドレス',
+  addressHelp: '管理画面へのリンク作成に使います。', seasonLabel: '最初に表示する季節',
   refreshLabel: '今日の訪問者数を1分ごとに確認する',
   refreshHelp: '村が表示されている間、同じブログのHTMLを取得します。',
   advancedSettings: '詳細設定', refreshEnabled: '自動確認オン',
@@ -174,11 +177,12 @@ const ja: Messages = {
 };
 
 const zh: Messages = {
+  workshopName: '村庄工作室', menu: '菜单', navigationLabel: '主菜单', stepsLabel: '安装步骤', customizeStep: '设置村庄', copyStep: '复制代码', pasteStep: '粘贴到皮肤', nextStep: '下一步', handoffSummary: '复制生成的代码，将其粘贴到 Tistory 皮肤的 HTML 编辑页面。', showGuide: '查看安装方法',
   brand: '小小访客村庄', pageTitle: '安装到博客 | 小小访客村庄',
   installLink: '安装', docsLink: '文档（韩语）', checkDocs: '安装后问题排查（韩语）', newTab: '（新标签页）',
   language: '语言', demoLink: '探索村庄（韩语）', skipLink: '跳转到村庄设置',
-  introTitle: '给你的博客，添一座小村庄。', introBody: '选择季节，预览村庄，再把它安装到你的博客。',
-  settingsTitle: '村庄设置', addressLabel: 'Tistory 博客地址', addressHelp: '请输入 Tistory 地址或已绑定的自定义域名。',
+  introTitle: '给你的博客，添一座小村庄。', introBody: '今天累计的访问次数，化作聚在村庄里的像素角色。',
+  settingsTitle: '选择季节', addressLabel: 'Tistory 博客地址', addressHelp: '用于生成博客管理页面的快捷链接。',
   seasonLabel: '初始显示的季节', refreshLabel: '每分钟查看一次今日访客数',
   refreshHelp: '村庄可见时读取当前博客的 HTML。',
   advancedSettings: '高级设置', refreshEnabled: '自动查看已开启',
