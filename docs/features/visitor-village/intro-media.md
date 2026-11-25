@@ -3,7 +3,20 @@
 2026-11-20 요청: “claude code로 brag 스킬 사용해 썸네일, 소개 영상 바로 재생되게 추가해줘”.
 
 
-## 현재 버전: 작은 티스토리 조형물
+## 현재 버전: Claude Code brag 재제작
+
+사용자의 명시적 요청으로 Claude Code에서 `brag:brag --tone polished --duration 20 --format landscape`를 실제 실행했다. 모델 Claude Opus5.5는 공식 스킬의 분기 규칙에 따라 brag-slim으로 진행했다. 이번 영상은 HyperFrames 재촬영본이 아니라 Vite/Playwright/Chrome/FFmpeg로 새로 구성한20초 영상이다.
+
+방문 수0→24,캐릭터 인사 근접 장면,루돌프,계절 전환,실제 설치 작업실과 마무리의6장면이다. source Web Component를 직접 실행하고 실제 마을/캐릭터/효과를 캡처했다. 시연 숫자와 카메오 등장 시점은 연출이며 실제 방문자의 기록이 아니다. 긴 하단 설명은 훅의 시연 배지와 끝의 짧은 문구로 줄였다. 기존 상단 README썸네일은 유지한다.
+
+- 최종MP4:1920×1080,30fps,600프레임,20.000초,H.264/AAC,5,202,133bytes.
+- SHA-256:`a81f6f53e9071bee6c77d70d95c5c04dbe5d280d5549ca2f9364411b2e3f02d7`.
+- 포스터:정착된마무리f585를선택했고영상frame0을교체해구웠다. 프레임을추가하지않았다.
+- GIF:7초,720×406,12fps. frame0 포스터를지나0.0667초부터추출했다.
+- 음원:Sascha Ende,Happy Beats(Business Moves Vol.10),ende.app,CC BY4.0.20초편집/음량0.75/끝1.2초페이드와CC0효과음혼합. 기존음원크레딧은유지한다. 내레이션과유료생성은없다.
+- 원본:[기획과편집소스](../../../assets/concepts/brag-remake/README.md),[검증근거](reviews/brag-remake-evidence.json). 원시Claude로그는인증/사용자환경정보가들어갈수있어ignored작업폴더에보관하고공개문서에는모델/스킬/버전/산출물만기록한다.
+
+## 이전 갱신: 작은 티스토리 조형물
 
 사용자의 전체 갱신 요청으로 작은 조형물이 있는 최신 PixiJS 위젯과 실제 설치 작업실을 다시 촬영했다. 기존20초 편집과음악/효과음/출처를 유지하며 아래 이전 갱신본을 대체한다. 촬영 모듈SHA-256은 `f3a5147f707bb400f27cbd1671a0694af323485919ca333cd32fd1c6a83ea164`다.
 

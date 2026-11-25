@@ -1,0 +1,74 @@
+{
+  "creator": "Claude Code",
+  "model": "claude-opus-5-5",
+  "skillInvocation": {
+    "name": "brag:brag",
+    "args": "--tone polished --duration 20 --format landscape",
+    "pluginVersion": "0.6.0",
+    "sourceCommit": "06379432a9243c951dfcc051153be18d2d261044",
+    "dispatch": "bundled brag-slim, per Opus5.5 dispatch rule"
+  },
+  "video": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 600,
+    "durationSeconds": 20,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "sampleRate": 48000,
+    "channels": 2
+  },
+  "poster": {
+    "selectedFrame": 585,
+    "replacesFrameZero": true
+  },
+  "gif": {
+    "durationSeconds": 7,
+    "width": 720,
+    "height": 406,
+    "fps": 12,
+    "frames": 84,
+    "actualDurationMs": 7000
+  },
+  "files": {
+    "public/media/intro.mp4": {
+      "bytes": 5202133,
+      "sha256": "a81f6f53e9071bee6c77d70d95c5c04dbe5d280d5549ca2f9364411b2e3f02d7"
+    },
+    "public/media/intro-poster.jpg": {
+      "bytes": 292954,
+      "sha256": "5cbd0450dd0213da4654a5c1316866e25fc70c9c8207e07af16bdfc2ec7055b4"
+    },
+    "docs/assets/intro-preview.gif": {
+      "bytes": 3666251,
+      "sha256": "f142765bc8517b523f8a78019d616b1eb30610daff5153fc758f0dd4d7393db4"
+    }
+  },
+  "source": "Actual source Web Component via Vite and existing actual installer capture; fixed seed and stepped model; holiday entrance staged for film",
+  "readmeLines": {
+    "README.md": 44,
+    "README.en.md": 44,
+    "README.ja.md": 44,
+    "README.zh-CN.md": 44
+  },
+  "originalThumbnailUnchanged": true,
+  "posterVerification": {
+    "meanAbsolutePixelDifference": 1.7469540895061728,
+    "sameSize": true
+  },
+  "localReadmeLayout": {
+    "issues": [],
+    "note": "Local Markdown layout approximation; actual GitHub rendering not asserted."
+  },
+  "verification": {
+    "unitTests": 146,
+    "browserTests": 79,
+    "browserSeconds": 42.1,
+    "typecheck": true,
+    "siteAndWidgetBuild": true,
+    "relativeLinkDocuments": 10,
+    "missingLocalLinks": 0,
+    "independentReview": "No material findings; not public/Tistory/listening/license-source review"
+  }
+}

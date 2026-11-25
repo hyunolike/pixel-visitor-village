@@ -1,3 +1,15 @@
+# Claude Code brag 영상과 간결한 README 검증
+
+final result: passed
+
+Claude Code의 실제 brag 실행으로 새20초 영상을 제작했다. [장면표](docs/assets/brag-remake/video-contact-sheet.png),[375px README](docs/assets/brag-remake/readme-ko-375.png),[데스크톱 README](docs/assets/brag-remake/readme-ko-1280.png)와네언어화면을확인했다. 기존상단썸네일과이미지CTA는그대로다.
+
+조판은짧은장면별카피와읽을수있는홀드로,배치는넓은마을/인사근접/설치분할/마무리6장면으로구성했다. 청록/크림색과실제픽셀원화를사용하고작은티스토리장식비율을유지한다. 긴하단문구를줄이고시연표시를훅과끝으로모았다. 네README는44줄로정리하고상세설정/API/설치정보는참고문서에보존했다. 로컬Markdown근사렌더링이며GitHub실제레이아웃검증은아니다.
+
+단위146/타입/빌드/Chrome79,20초/600프레임/전체디코드와포스터frame0확인,네언어링크보존검사통과. 독립검토에서실질적문제가없었다. [검증기록](docs/features/visitor-village/reviews/brag-remake-2026-11-25.md)을따른다. 아래는이전단계의이력이다.
+
+---
+
 # 이미지 버튼과 최신 마을 미디어 검증
 
 final result: passed
