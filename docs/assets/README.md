@@ -1,5 +1,9 @@
 # README 이미지와 화면 캡처
 
+## 서비스 글꼴
+
+제목과 브랜드는 Neo둥근모 v1.600, 본문과 조작 UI는 Pretendard Variable v1.3.9를 자체 제공한다. 원본 WOFF2를 수정하지 않았으며 [출처와 OFL 전문](../../public/fonts/README.md)을 함께 보존한다. [PC 화면](typography/home-1440-viewport.png), [모바일 화면](typography/home-375-viewport.png), [한국어 설치](typography/install-ko-375.png), [일본어 설치](typography/install-ja-320.png), [중국어 설치](typography/install-zh-CN-320.png)는 실제 빌드의 Chrome 캡처다. [검증 데이터](typography/result.json)에 실제 사용 글꼴과 네 언어/폭 결과가 있다. 기존 README 상단 썸네일과 소개 영상은 변경하지 않는다.
+
 ## Claude Code brag 재제작과 간결한 README
 
 상단 소개 썸네일과 네 언어 체험 이미지 버튼은 유지한다. 소개 MP4/포스터/GIF는 Claude Code의 실제 brag 실행으로 새로 제작했다. [새 장면표](brag-remake/video-contact-sheet.png),[제작 원본](../../assets/concepts/brag-remake/README.md),[영상 출처](../features/visitor-village/intro-media.md)를 본다. 현재 파일 정보는 brag-remake-evidence.json이 기준이며 아래 이전 미디어 갱신 기록과 구분한다. README4개는 각각44줄로 정리했고 상세내용은 docs/reference/widget.*.md로 보존했다.

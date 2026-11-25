@@ -997,6 +997,7 @@ test('atelier menu stays accessible in four languages and returns focus on Escap
   await page.setViewportSize({width:320,height:780});
   for(const locale of ['ko','en','ja','zh-CN']){
     await page.goto(`/install.html?lang=${locale}`);
+    await page.evaluate(()=>document.fonts.ready);
     await expect(page.locator('#project-navigation')).toBeHidden();
     expect((await page.locator('#navigation-toggle').boundingBox())!.height).toBeLessThanOrEqual(48);
     for(const step of await page.locator('.install-progress li').all()) expect(await step.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);

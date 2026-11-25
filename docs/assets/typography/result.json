@@ -1,0 +1,387 @@
+{
+  "evidence": [
+    {
+      "home": {
+        "heading": [
+          {
+            "familyName": "NeoDunggeunmo",
+            "postScriptName": "NeoDunggeunmo-Regular",
+            "isCustomFont": true,
+            "glyphCount": 18
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Pretendard Variable",
+            "postScriptName": "PretendardVariable-Regular",
+            "isCustomFont": true,
+            "glyphCount": 65
+          }
+        ]
+      }
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "NeoDunggeunmo",
+            "postScriptName": "NeoDunggeunmo-Regular",
+            "isCustomFont": true,
+            "glyphCount": 16
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Pretendard Variable",
+            "postScriptName": "PretendardVariable-Regular",
+            "isCustomFont": true,
+            "glyphCount": 27
+          }
+        ]
+      }
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "NeoDunggeunmo",
+            "postScriptName": "NeoDunggeunmo-Regular",
+            "isCustomFont": true,
+            "glyphCount": 37
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Pretendard Variable",
+            "postScriptName": "PretendardVariable-Regular",
+            "isCustomFont": true,
+            "glyphCount": 68
+          }
+        ]
+      }
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "Hiragino Kaku Gothic ProN",
+            "postScriptName": "HiraKakuProN-W6",
+            "isCustomFont": false,
+            "glyphCount": 15
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Hiragino Kaku Gothic ProN",
+            "postScriptName": "HiraKakuProN-W3",
+            "isCustomFont": false,
+            "glyphCount": 32
+          }
+        ]
+      }
+    },
+    {
+      "width": 320,
+      "lang": "zh-CN",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "PingFang SC",
+            "postScriptName": "PingFangSC-Semibold",
+            "isCustomFont": false,
+            "glyphCount": 13
+          }
+        ],
+        "body": [
+          {
+            "familyName": "PingFang SC",
+            "postScriptName": "PingFangSC-Regular",
+            "isCustomFont": false,
+            "glyphCount": 23
+          }
+        ]
+      }
+    },
+    {
+      "width": 375,
+      "lang": "ko",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "NeoDunggeunmo",
+            "postScriptName": "NeoDunggeunmo-Regular",
+            "isCustomFont": true,
+            "glyphCount": 16
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Pretendard Variable",
+            "postScriptName": "PretendardVariable-Regular",
+            "isCustomFont": true,
+            "glyphCount": 27
+          }
+        ]
+      }
+    },
+    {
+      "width": 375,
+      "lang": "en",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "NeoDunggeunmo",
+            "postScriptName": "NeoDunggeunmo-Regular",
+            "isCustomFont": true,
+            "glyphCount": 38
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Pretendard Variable",
+            "postScriptName": "PretendardVariable-Regular",
+            "isCustomFont": true,
+            "glyphCount": 68
+          }
+        ]
+      }
+    },
+    {
+      "width": 375,
+      "lang": "ja",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "Hiragino Kaku Gothic ProN",
+            "postScriptName": "HiraKakuProN-W6",
+            "isCustomFont": false,
+            "glyphCount": 15
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Hiragino Kaku Gothic ProN",
+            "postScriptName": "HiraKakuProN-W3",
+            "isCustomFont": false,
+            "glyphCount": 32
+          }
+        ]
+      }
+    },
+    {
+      "width": 375,
+      "lang": "zh-CN",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "PingFang SC",
+            "postScriptName": "PingFangSC-Semibold",
+            "isCustomFont": false,
+            "glyphCount": 13
+          }
+        ],
+        "body": [
+          {
+            "familyName": "PingFang SC",
+            "postScriptName": "PingFangSC-Regular",
+            "isCustomFont": false,
+            "glyphCount": 23
+          }
+        ]
+      }
+    },
+    {
+      "width": 720,
+      "lang": "ko",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "NeoDunggeunmo",
+            "postScriptName": "NeoDunggeunmo-Regular",
+            "isCustomFont": true,
+            "glyphCount": 17
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Pretendard Variable",
+            "postScriptName": "PretendardVariable-Regular",
+            "isCustomFont": true,
+            "glyphCount": 27
+          }
+        ]
+      }
+    },
+    {
+      "width": 720,
+      "lang": "en",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "NeoDunggeunmo",
+            "postScriptName": "NeoDunggeunmo-Regular",
+            "isCustomFont": true,
+            "glyphCount": 39
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Pretendard Variable",
+            "postScriptName": "PretendardVariable-Regular",
+            "isCustomFont": true,
+            "glyphCount": 69
+          }
+        ]
+      }
+    },
+    {
+      "width": 720,
+      "lang": "ja",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "Hiragino Kaku Gothic ProN",
+            "postScriptName": "HiraKakuProN-W6",
+            "isCustomFont": false,
+            "glyphCount": 15
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Hiragino Kaku Gothic ProN",
+            "postScriptName": "HiraKakuProN-W3",
+            "isCustomFont": false,
+            "glyphCount": 32
+          }
+        ]
+      }
+    },
+    {
+      "width": 720,
+      "lang": "zh-CN",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "PingFang SC",
+            "postScriptName": "PingFangSC-Semibold",
+            "isCustomFont": false,
+            "glyphCount": 13
+          }
+        ],
+        "body": [
+          {
+            "familyName": "PingFang SC",
+            "postScriptName": "PingFangSC-Regular",
+            "isCustomFont": false,
+            "glyphCount": 23
+          }
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "NeoDunggeunmo",
+            "postScriptName": "NeoDunggeunmo-Regular",
+            "isCustomFont": true,
+            "glyphCount": 17
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Pretendard Variable",
+            "postScriptName": "PretendardVariable-Regular",
+            "isCustomFont": true,
+            "glyphCount": 27
+          }
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "NeoDunggeunmo",
+            "postScriptName": "NeoDunggeunmo-Regular",
+            "isCustomFont": true,
+            "glyphCount": 39
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Pretendard Variable",
+            "postScriptName": "PretendardVariable-Regular",
+            "isCustomFont": true,
+            "glyphCount": 69
+          }
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "Hiragino Kaku Gothic ProN",
+            "postScriptName": "HiraKakuProN-W6",
+            "isCustomFont": false,
+            "glyphCount": 15
+          }
+        ],
+        "body": [
+          {
+            "familyName": "Hiragino Kaku Gothic ProN",
+            "postScriptName": "HiraKakuProN-W3",
+            "isCustomFont": false,
+            "glyphCount": 32
+          }
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "lang": "zh-CN",
+      "actual": {
+        "heading": [
+          {
+            "familyName": "PingFang SC",
+            "postScriptName": "PingFangSC-Semibold",
+            "isCustomFont": false,
+            "glyphCount": 13
+          }
+        ],
+        "body": [
+          {
+            "familyName": "PingFang SC",
+            "postScriptName": "PingFangSC-Regular",
+            "isCustomFont": false,
+            "glyphCount": 23
+          }
+        ]
+      }
+    },
+    {
+      "fontFailure": "readable/code generation/no overflow"
+    }
+  ],
+  "pageErrors": [],
+  "checks": [
+    "Chrome actual platform fonts",
+    "16 locale/width generated states",
+    "home/docs mobile",
+    "720 CSSpx reflow equivalent to200% on1440",
+    "font download failure fallback"
+  ]
+}
