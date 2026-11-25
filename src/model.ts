@@ -1,9 +1,10 @@
+import { SocialModel } from './social';
 export const MAX_VISITORS = 5000;
 export const SEASONS = ['christmas', 'spring', 'summer', 'autumn', 'winter'] as const;
 export type Season = typeof SEASONS[number];
 export interface Visitor { id:number; x:number; y:number; vx:number; vy:number; phase:number }
 const hash = (n:number) => { const value=Math.sin(n*127.1+31.7)*43758.5453;return value-Math.floor(value); };
-const trunk = (x:number,y:number) => x>.46 && x<.54 && y>.73 && y<.83;
+const trunk = (x:number,y:number) => (x>.46&&x<.54&&y>.73&&y<.83)||(x>.39&&x<.48&&y>.80&&y<.84);
 
 export function parseCount(raw:string|null):number {
   if(raw===null||raw==='') return 0;
@@ -22,8 +23,22 @@ export function getTreeLayout(width:number,height:number) {
   return {x:w/2,base:h*.80,size:Math.min(w*.74,h*.69)};
 }
 
+/** Separate foreground landmark; positive even in a not-yet-measured host. */
+export function getMonumentLayout(width:number,height:number) {
+  const w=Math.max(1,width),h=Math.max(1,height),size=Math.max(1,Math.min(w*.16,h*.22));
+  return {x:Math.max(size/2,Math.min(w-size/2,w*.435)),base:Math.max(size,Math.min(h,h*.83)),size};
+}
+
+/** Keep the complete anchored sprite visible, including in very small hosts. */
+export function getVisitorSpriteLayout(width:number,height:number,x:number,y:number,spriteWidth=20,spriteHeight=28) {
+  const w=Math.max(1,width),h=Math.max(1,height);
+  const scale=Math.min(1,w/spriteWidth,h/spriteHeight),half=spriteWidth*scale/2,tall=spriteHeight*scale;
+  return {x:Math.max(half,Math.min(w-half,Math.round(x*w))),y:Math.max(tall,Math.min(h,Math.round(y*h))),scale};
+}
+
 export class VillageModel {
   readonly visitors:Visitor[]=[];
+  readonly social=new SocialModel();
   season:Season='christmas';
   elapsed=0;
   setCount(count:number):void {
@@ -32,19 +47,24 @@ export class VillageModel {
       const id=this.visitors.length;
       let x=.04+hash(id+1)*.92;
       const y=.52+hash(id+301)*.40;
-      if(trunk(x,y)) x=x<.5?.44:.56;
+      if(trunk(x,y)) x=x<.445?.38:.56;
       this.visitors.push({id,x,y,vx:(hash(id+3)>.5?1:-1)*(.012+hash(id+7)*.012),vy:(hash(id+5)>.5?1:-1)*(.004+hash(id+9)*.006),phase:hash(id+39)*Math.PI*2});
     }
     this.visitors.length=count;
+    this.social.reconcile(this.visitors);
   }
+  setViewport(width:number,height:number) {this.social.setViewport(width,height);}
   setSeason(value:string):void {
     if(!(SEASONS as readonly string[]).includes(value)) throw new Error('선택할 수 없는 계절이에요. christmas, spring, summer, autumn, winter 중 하나를 사용해 주세요.');
+    if(this.season!==value)this.social.reset();
     this.season=value as Season;
   }
   step(seconds:number):void {
     if(!Number.isFinite(seconds)||seconds<=0) return;
     const dt=Math.min(.05,seconds);this.elapsed+=dt;
+    this.social.step(this.visitors,dt);
     for(const p of this.visitors) {
+      if(this.social.getPartner(p.id))continue;
       if(Math.sin(this.elapsed*.7+p.phase)<-.45) continue;
       let x=p.x+p.vx*dt,y=p.y+p.vy*dt;
       if(x<.035||x>.965) {p.vx*=-1;x=Math.max(.035,Math.min(.965,x));}

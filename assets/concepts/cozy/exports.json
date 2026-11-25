@@ -1,0 +1,29 @@
+{
+  "method": "Browser Canvas2D nearest export at180x180 from unmodified generated masters;alpha preserved;no repainting",
+  "files": {
+    "tistory-monument.png": {
+      "bytes": 30708,
+      "sha256": "54ae39d5bfeac6f60e4b1655c4e579f279af79402ec43e9e0ed4313fb26d58b8"
+    },
+    "tree-autumn.png": {
+      "bytes": 39421,
+      "sha256": "6977d4c0563d4809e0add03f9be8305ab887a9c1e596c86e6529c8ff551c50f0"
+    },
+    "tree-christmas.png": {
+      "bytes": 33676,
+      "sha256": "fb3f983c4ee090274d84429f65c70ade9e9c419c94b8539a2a4dcc8ea384d41f"
+    },
+    "tree-spring.png": {
+      "bytes": 33072,
+      "sha256": "c83b60486c7288a49a5bc367da64b36f849507dfa11801476c2f4c424e1cfbdf"
+    },
+    "tree-summer.png": {
+      "bytes": 32424,
+      "sha256": "2cd08fa9659acfa15275337599ae627772ef8ceaf5ca8bbe357c15ae5e851cf8"
+    },
+    "tree-winter.png": {
+      "bytes": 38702,
+      "sha256": "a352a0b5f7522ed465a77a45828c5c2043b3eb1a46ca7ba597d84b40b88346ec"
+    }
+  }
+}

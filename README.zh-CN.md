@@ -1,22 +1,26 @@
 # Pixel Visitor Village
 
-[English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | **简体中文**
+[한국어](README.md) | [English](README.en.md) | [日本語](README.ja.md) | **简体中文**
+
+[![Tistory 标志与像素角色的项目介绍插图](docs/assets/readme-tistory-village.png)](https://pixel-visitor-village.pages.dev/)
 
 **让今天的博客访客数，变成热闹的像素小村庄。**
 
 这是一个为 Tistory 博客制作的网页组件，将今天的访客数转换为相同数量的像素角色。角色会在大树周围散步、休息，你还可以选择圣诞节或四季主题。
 
-[逛逛村庄](https://pixel-visitor-village.pages.dev/) | [安装到 Tistory](https://pixel-visitor-village.pages.dev/install.html) | [嵌入代码](examples/tistory-snippet.html)
+[逛逛村庄](https://pixel-visitor-village.pages.dev/) | [安装到 Tistory](https://pixel-visitor-village.pages.dev/install.html) | [嵌入代码](examples/tistory-snippet.html) | [使用文档（韩语）](https://pixel-visitor-village.pages.dev/docs/)
 
-[![随着访客数增加，像素角色逐渐聚集到村庄中的动画预览](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
+HTML 文档包含安装方法、组件设置、统计规则和问题排查。新版首页和文档已发布到 Cloudflare Pages，并完成公开站点验证。
 
-**20 秒介绍视频** — GIF 会在 README 中播放，点击后可进入演示页面的视频区域。[封面](public/media/intro-poster.jpg) | [MP4](public/media/intro.mp4) | [制作信息与音乐来源](docs/features/visitor-village/intro-media.md)
+[![随着访客数增加，像素角色逐渐聚集到村庄中的动画预览](docs/assets/intro-preview.gif)](public/media/intro.mp4)
 
-*使用项目本身的村庄画面与移动代码，通过 Claude Code 的 brag 技能制作。视频中的 24 位访客是演示数据。视频可在公开站点播放，是场景素材更新前制作的固定渲染版本。*
+**20 秒介绍视频** — GIF 会在 README 中播放，点击后可打开更新后的MP4。[封面](public/media/intro-poster.jpg) | [MP4](public/media/intro.mp4) | [制作信息与音乐来源](docs/features/visitor-village/intro-media.md)
 
-> 演示页面、安装助手、介绍视频和详细技术文档目前为韩语。本 README 是[英文默认文档](README.md)的简体中文译本。
+*使用当前PixiJS组件和安装工作室的真实画面，在HyperFrames中更新了视频，包含打招呼、气泡、圣诞老人和五种季节。0至24人为演示输入。更新版见上方MP4，公开网站需要另行部署。*
 
-[主要功能](#主要功能) | [四季村庄](#四季村庄) | [安装到 Tistory](#安装到-tistory) | [工作原理](#工作原理) | [配置](#组件配置) | [开发](#本地开发) | [文档](#文档与素材)
+> 新版安装助手提供四季预览，支持韩语、英语、日语和简体中文。本次改版已发布到 Cloudflare Pages，并完成公开站点验证。主演示页面、介绍视频和详细技术文档仍为韩语。本项目以[韩语文档](README.md)为主，并提供[英文文档](README.en.md)。
+
+[主要功能](#主要功能) | [四季村庄](#四季村庄) | [安装到 Tistory](#安装到-tistory) | [工作原理](#工作原理) | [配置](#组件配置) | [访客数木牌](#访客数木牌与可选更新) | [开发](#本地开发) | [文档](#文档与素材)
 
 ## 主要功能
 
@@ -26,26 +30,26 @@
 - **可见时播放动画** — 标签页隐藏或组件离开可视区域时暂停，支持系统的减少动态效果设置和手动暂停。
 - **融入博客布局** — 在指定区域内响应式显示，不妨碍正文链接操作或手机滚动。
 
-提供 **8 种 20×28px 角色**，拥有不同的服装和表情，支持正面、侧面、背面、四帧行走和眨眼。更新后的角色已上线，可查看[放大精灵图](docs/assets/characters-v2.png)和[村庄中的显示效果](docs/assets/village-characters-v2.png)。
+8种20×28px角色保留正面/侧面/背面及行走/眨眼/挥手动作，小屏幕使用16×22px图集。请查看[当前角色图集](docs/assets/cozy-village/characters-front.png)。
 
-下方的季节截图是改进场景后的本地截图，同一套场景素材已在公开站点上线。
+下方截图展示2026-11-25按附件概念改进的本地版本，公开上线需要另行部署。
 
 ## 四季村庄
 
 默认主题始终是**圣诞节**，不随日期自动切换。可以在演示页面的树木装饰面板（나무 꾸미기）中更换主题。
 
-改进后的场景包含瓦屋顶、窗框、商店遮阳棚、石板路和长椅。花朵、果实、落叶和积雪区分四季。房屋、道具与角色之间的前后遮挡关系，根据脚部位置排序。细节见[树木与场景放大图](docs/assets/environment-v2.png)。
+改进后的场景包含瓦屋顶、窗框、商店遮阳棚、石板路和长椅。花朵、果实、落叶和积雪区分四季。房屋、道具与角色之间的前后遮挡关系，根据脚部位置排序。细节见[树木与场景放大图](docs/assets/cozy-village/props.png)。
 
 <table>
   <tr><th>春</th><th>夏</th></tr>
   <tr>
-    <td><img src="docs/assets/village-spring.png" alt="盛开粉色花朵的大树与花瓣点缀的春日村庄" width="480"></td>
-    <td><img src="docs/assets/village-summer.png" alt="绿叶繁茂的大树与夏日村庄" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-spring.png" alt="盛开粉色花朵的大树与花瓣点缀的春日村庄" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-summer.png" alt="绿叶繁茂的大树与夏日村庄" width="480"></td>
   </tr>
   <tr><th>秋</th><th>冬</th></tr>
   <tr>
-    <td><img src="docs/assets/village-autumn.png" alt="橙色树叶和落叶点缀的秋日村庄" width="480"></td>
-    <td><img src="docs/assets/village-winter.png" alt="覆雪大树与银装素裹的冬日村庄" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-autumn.png" alt="橙色树叶和落叶点缀的秋日村庄" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-winter.png" alt="覆雪大树与银装素裹的冬日村庄" width="480"></td>
   </tr>
 </table>
 
@@ -80,22 +84,29 @@ Tistory 会在**皮肤 HTML 内**将 `[##_count_today_##]` 替换为今天的访
 
 组件使用 Tistory 生成页面时提供的访客数，无需额外的访客统计服务器或数据库。
 
+[![带有标志和数据流的架构图](docs/assets/architecture/architecture-en.png)](docs/assets/architecture/architecture-en.svg)
+
+<details>
+<summary>架构文字版</summary>
+
 ```mermaid
 flowchart TD
     T["Tistory 皮肤 HTML<br/>今天的访客数"] -->|count 属性| W["visitor-village<br/>输入校验与生命周期"]
     V["Cloudflare Pages 静态托管<br/>visitor-village.js"] -->|ES 模块| W
-    W --> M["VillageModel<br/>角色数量与移动计算"]
+    W --> M["VillageModel + SocialModel<br/>角色数量与移动计算"]
     M --> R["PixiJS 渲染器<br/>通过 WebGL 绘制村庄"]
     A["季节像素画<br/>树木 PNG 与 Canvas 图像"] --> R
     R --> C["Shadow DOM 内的 Canvas<br/>博客中的指定区域"]
 ```
+
+</details>
 
 | 职责 | 技术与源码 |
 | --- | --- |
 | 嵌入与样式隔离 | Web Components、Shadow DOM — [visitor-village.ts](src/visitor-village.ts) |
 | 输入校验与移动计算 | TypeScript — [model.ts](src/model.ts) |
 | 画面渲染 | PixiJS 8、WebGL — [renderer.ts](src/renderer.ts) |
-| 树木绘制 | 圣诞树 PNG 与原创 Canvas 像素画 — [art.ts](src/art.ts)、[themes.ts](src/themes.ts) |
+| 树木与Tistory纪念碑 | 五种季节PNG和Canvas备用图像 — [village-art.ts](src/village-art.ts)、[art.ts](src/art.ts) |
 | 场景与布局 | 地面、房屋和道具的共享图集 — [environment.ts](src/environment.ts)、[environment-layout.ts](src/environment-layout.ts)、[pixel-art.ts](src/pixel-art.ts) |
 | 角色与动作 | 原创 RGBA 像素帧和共享图集 — [characters.ts](src/characters.ts)、[character-motion.ts](src/character-motion.ts) |
 | 安装代码生成 | 在浏览器内规范化地址并生成代码 — [install-model.ts](src/install-model.ts) |
@@ -106,7 +117,7 @@ flowchart TD
 
 ```text
 pixel-visitor-village/
-├── README.md / README.ko.md / README.ja.md / README.zh-CN.md
+├── README.md / README.en.md / README.ja.md / README.zh-CN.md
 ├── index.html / install.html   # 演示与安装助手
 ├── src/                       # 组件、模型、渲染器、图像和安装助手
 ├── tests/widget.spec.ts        # 浏览器集成测试
@@ -130,6 +141,16 @@ pixel-visitor-village/
 | `season` | `christmas` | `christmas`、`spring`、`summer`、`autumn`、`winter`。无效值会保留当前季节。 |
 | `paused` | 无 | 只要属性存在就会暂停，包括 `paused="false"`。恢复播放时需移除该属性。 |
 | `glow` | 开启 | 设为 `glow="false"` 可关闭圣诞树的辉光效果，图片中原有的灯泡颜色仍会保留。 |
+| `refresh-interval` | `0` | 可选检查间隔（秒）。`0` 为关闭，支持 `60` 至 `3600` 的整数。无效值会保留上一次有效设置。 |
+
+## 访客数木牌与可选更新
+
+小木牌会从上方落下，显示今天的访客数。增加时显示差值，例如“今日访问 13 (+3)”（组件目前使用韩语标签）。数值相同不会重复通知，韩国时间跨日后的数值也不会被当作新访客。点击村庄任意位置，可在新标签页打开项目仓库，同时保留键盘操作和手机滚动。
+
+自动检查**默认关闭**。可在现有标签中添加 `refresh-interval="60"`，或在安装助手中勾选每分钟检查。使用 `refresh-interval="0"` 可关闭。组件仅在可见时读取当前博客同源的首页 HTML。首页必须包含访客数有效的组件，若有多个组件，其数值必须一致。读取的页面不会执行脚本或加载图片。同一文档中可见的组件共享一次请求；失败时保留最后有效状态，并延长重试间隔。
+
+这是一项定期检查每日统计的功能，不会接收每位访客到达的事件。Tistory 的统计延迟以及重复读取 HTML 是否影响统计，**尚未验证**。请了解这一限制后再启用。木牌、仓库链接和更新选项已包含在公开组件中。已安装的博客可能会将旧模块缓存最多 5 分钟。
+
 
 <details>
 <summary>JavaScript API 与事件</summary>
@@ -191,10 +212,18 @@ pnpm preview   # http://127.0.0.1:4178/
 | [部署与安装](docs/features/visitor-village/deployment.md) | Cloudflare Pages 配置和安装验证记录 |
 | [独立评审](docs/features/visitor-village/reviews/) | 代码和安装流程的评审记录 |
 | [树木原案与生成记录](assets/concepts/README.md) | AI 生成的圣诞树方案及提示词 |
-| [介绍视频制作信息](docs/features/visitor-village/intro-media.md) | Claude Code brag 制作记录、视频信息和音乐许可证 |
+| [介绍视频制作信息](docs/features/visitor-village/intro-media.md) | 最新画面、HyperFrames编辑、视频信息和音乐许可证 |
 | [截图说明](docs/assets/README.md) | README 图片来源与拍摄条件 |
 
-分发用圣诞树图片为 [src/assets/christmas-tree.png](src/assets/christmas-tree.png)。其他季节的树木由 `src/art.ts` 绘制，场景由 `src/environment.ts` 绘制，改进后的角色由 `src/characters.ts` 绘制。未使用外部游戏素材。
+五种季节树木和 Tistory 雕塑使用[src/assets/cozy](src/assets/cozy/)中的透明PNG。[制作记录](assets/concepts/cozy/README.md)保存生成原图和提示词。备用图案位于`src/art.ts`，场景和道具位于`src/environment.ts`，角色位于`src/characters.ts`。未使用外部游戏素材。
+
+## 直角边框与圣诞访客
+
+组件和演示页面改用直角边框。在圣诞主题中，原创像素圣诞老人或鲁道夫会偶尔出现，停留 5–8 秒后消失。同一时间只显示一个装饰角色，不会计入实际访客数。离开可视区域、标签页隐藏或手动暂停时，演出计时也会暂停。启用减少动态效果或切换到其他季节后隐藏。
+
+相近的角色会偶尔停下，面对彼此挥手，再通过小图标气泡互动，然后继续行走。同时最多3对，小屏幕最多1对。这些是与真实访客身份无关的装饰效果。暂停时互动也会停止，启用减少动态效果后禁用互动。
+
+这些改动已包含在公开组件中。
 
 ## README 参考
 
@@ -203,4 +232,4 @@ pnpm preview   # http://127.0.0.1:4178/
 - [PixiJS](https://github.com/pixijs/pixijs#readme)：先介绍项目与功能，再提供安装和使用示例。
 - [dotLottie Web](https://github.com/LottieFiles/dotlottie-web#readme)：突出展示演示链接、快速开始和详细文档入口。
 
-以上项目仅用于参考文档结构。截图与产品说明均来自本项目的实际实现。
+以上项目仅用于参考文档结构。运行截图来自实际实现，顶部缩略图是单独生成的项目介绍插图。请参阅[图片与生成记录](docs/assets/README.md)。

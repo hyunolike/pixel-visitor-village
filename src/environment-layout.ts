@@ -16,7 +16,7 @@ export function getVillageLayout(width:number,height:number):VillageObjectLayout
   };
   place('cottage',.13,.63);
   place('shop',.87,.60);
-  if(w>=340)place('cabin',.925,.81,.78);
+  if(w>=340)place('cabin',.925,.81,.92);
   place('lamp',.27,.755);place('lamp',.73,.755,1,1);
   if(w>=200){place('bench',.24,.88);place('bench',.77,.865,1,1);}
   if(w>=230)place('sign',.075,.81);

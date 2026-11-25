@@ -1,22 +1,26 @@
 # Pixel Visitor Village
 
-[English](README.md) | [한국어](README.ko.md) | **日本語** | [简体中文](README.zh-CN.md)
+[한국어](README.md) | [English](README.en.md) | **日本語** | [简体中文](README.zh-CN.md)
+
+[![Tistoryロゴとピクセルキャラクターの紹介イラスト](docs/assets/readme-tistory-village.png)](https://pixel-visitor-village.pages.dev/)
 
 **今日のブログ訪問者数が、小さなピクセルの村をにぎやかにします。**
 
 Tistoryブログの今日の訪問者数を、1人につき1体のピクセルキャラクターで表すWebウィジェットです。キャラクターは大きな木の周りを歩いたり休んだりします。クリスマスと四季のテーマを選べます。
 
-[村を見てみる](https://pixel-visitor-village.pages.dev/) | [Tistoryに設置する](https://pixel-visitor-village.pages.dev/install.html) | [埋め込みコード](examples/tistory-snippet.html)
+[村を見てみる](https://pixel-visitor-village.pages.dev/) | [Tistoryに設置する](https://pixel-visitor-village.pages.dev/install.html) | [埋め込みコード](examples/tistory-snippet.html) | [使い方（韓国語）](https://pixel-visitor-village.pages.dev/docs/)
 
-[![訪問者数が増えるにつれてキャラクターが集まる、ピクセルの村のアニメーションプレビュー](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
+設置方法、ウィジェット設定、集計とトラブル対処をHTML文書で案内します。新しいホームと文書はCloudflare Pagesに公開し、公開サイトでも確認しました。
 
-**20秒の紹介動画** — README内ではGIFが再生されます。クリックするとデモの動画セクションに移動します。[ポスター](public/media/intro-poster.jpg) | [MP4](public/media/intro.mp4) | [制作情報と音楽の出典](docs/features/visitor-village/intro-media.md)
+[![訪問者数が増えるにつれてキャラクターが集まる、ピクセルの村のアニメーションプレビュー](docs/assets/intro-preview.gif)](public/media/intro.mp4)
 
-*プロジェクトの村の画像と移動コードを使い、Claude Codeのbragスキルで制作しました。動画内の訪問者24人はデモ用の数値です。公開サイトで再生できます。動画は背景の改良前に制作した固定レンダリングです。*
+**20秒の紹介動画** — README内ではGIFが再生されます。クリックすると更新したMP4が開きます。[ポスター](public/media/intro-poster.jpg) | [MP4](public/media/intro.mp4) | [制作情報と音楽の出典](docs/features/visitor-village/intro-media.md)
 
-> デモ、設置ヘルパー、紹介動画、詳細な技術文書は現在、韓国語で提供しています。このREADMEは[英語版](README.md)の日本語訳です。
+*現在のPixiJSウィジェットとインストール画面をキャプチャし、HyperFramesで更新しました。あいさつ、吹き出し、サンタ、5つの季節を収録しています。0〜24人はデモ入力です。更新版は上のMP4から確認でき、公開サイトへの反映には別途デプロイが必要です。*
 
-[主な機能](#主な機能) | [季節ごとの村](#季節ごとの村) | [Tistoryへの設置](#tistoryへの設置) | [仕組み](#仕組み) | [設定](#ウィジェットの設定) | [開発](#ローカル開発) | [ドキュメント](#ドキュメントと素材)
+> 新しい設置ヘルパーは季節のプレビューと韓国語、英語、日本語、簡体字中国語に対応しています。この改修はCloudflare Pagesに公開し、公開サイトでも確認しました。メインデモ、紹介動画、詳細な技術文書は韓国語です。基本の[韓国語版](README.md)と[英語版](README.en.md)も参照できます。
+
+[主な機能](#主な機能) | [季節ごとの村](#季節ごとの村) | [Tistoryへの設置](#tistoryへの設置) | [仕組み](#仕組み) | [設定](#ウィジェットの設定) | [訪問数の通知](#訪問数の木製プレートと任意の更新) | [開発](#ローカル開発) | [ドキュメント](#ドキュメントと素材)
 
 ## 主な機能
 
@@ -26,26 +30,26 @@ Tistoryブログの今日の訪問者数を、1人につき1体のピクセル�
 - **表示中にアニメーションを再生** — 非表示のタブや画面外では停止します。OSの動きを減らす設定と手動の一時停止にも対応します。
 - **ブログ内の指定領域に収まる表示** — レスポンシブなキャンバスで、記事のリンク操作やモバイルでのスクロールを妨げません。
 
-服装や表情が異なる**20×28pxのキャラクター8種類**があります。正面・側面・背面、4フレームの歩行、まばたきに対応します。改良したキャラクターは公開サイトに反映済みです。[拡大スプライトシート](docs/assets/characters-v2.png)と[村での表示例](docs/assets/village-characters-v2.png)をご覧ください。
+20×28pxのキャラクター8種類は正面/側面/背面と歩行/まばたき/手振りを保ちます。小さな画面は16×22pxアトラスを使います。[現在のスプライトシート](docs/assets/cozy-village/characters-front.png)をご覧ください。
 
-以下の季節別スクリーンショットは、背景を改良したバージョンのローカルキャプチャです。同じ背景素材は公開サイトにも反映済みです。
+以下は2026-11-25の添付コンセプトに合わせたローカル改良版です。公開反映は別のデプロイ手順です。
 
 ## 季節ごとの村
 
 日付にかかわらず、初期テーマは**クリスマス**です。デモの木のカスタマイズパネル（나무 꾸미기）で切り替えられます。
 
-改良した背景には瓦屋根、窓枠、店の日よけ、石畳、ベンチを描いています。花、実、落ち葉、雪で季節を表現します。家や小物とキャラクターの前後関係は、足元の位置で決まります。[木と背景の拡大シート](docs/assets/environment-v2.png)で細部を確認できます。
+改良した背景には瓦屋根、窓枠、店の日よけ、石畳、ベンチを描いています。花、実、落ち葉、雪で季節を表現します。家や小物とキャラクターの前後関係は、足元の位置で決まります。[木と背景の拡大シート](docs/assets/cozy-village/props.png)で細部を確認できます。
 
 <table>
   <tr><th>春</th><th>夏</th></tr>
   <tr>
-    <td><img src="docs/assets/village-spring.png" alt="ピンクの花が咲く木と花びらのある春の村" width="480"></td>
-    <td><img src="docs/assets/village-summer.png" alt="緑の葉が茂る大きな木のある夏の村" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-spring.png" alt="ピンクの花が咲く木と花びらのある春の村" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-summer.png" alt="緑の葉が茂る大きな木のある夏の村" width="480"></td>
   </tr>
   <tr><th>秋</th><th>冬</th></tr>
   <tr>
-    <td><img src="docs/assets/village-autumn.png" alt="オレンジ色に紅葉した木と落ち葉のある秋の村" width="480"></td>
-    <td><img src="docs/assets/village-winter.png" alt="雪をまとった木と雪景色の冬の村" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-autumn.png" alt="オレンジ色に紅葉した木と落ち葉のある秋の村" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-winter.png" alt="雪をまとった木と雪景色の冬の村" width="480"></td>
   </tr>
 </table>
 
@@ -80,22 +84,29 @@ Tistoryブログの今日の訪問者数を、1人につき1体のピクセル�
 
 Tistoryがページを生成するときに渡す訪問者数を使います。専用の訪問者集計サーバーやデータベースは不要です。
 
+[![ロゴとデータの流れを示す構成図](docs/assets/architecture/architecture-en.png)](docs/assets/architecture/architecture-en.svg)
+
+<details>
+<summary>構成のテキスト版</summary>
+
 ```mermaid
 flowchart TD
     T["TistoryスキンHTML<br/>今日の訪問者数"] -->|count属性| W["visitor-village<br/>入力検証とライフサイクル"]
     V["Cloudflare Pages静的ホスティング<br/>visitor-village.js"] -->|ESモジュール| W
-    W --> M["VillageModel<br/>キャラクター数と移動の計算"]
+    W --> M["VillageModel + SocialModel<br/>キャラクター数と移動の計算"]
     M --> R["PixiJSレンダラー<br/>WebGLで村を描画"]
     A["季節のピクセルアート<br/>木のPNGとCanvas画像"] --> R
     R --> C["Shadow DOM内のCanvas<br/>ブログ内の指定領域"]
 ```
+
+</details>
 
 | 役割 | 技術とソース |
 | --- | --- |
 | 埋め込みとスタイル分離 | Web Components、Shadow DOM — [visitor-village.ts](src/visitor-village.ts) |
 | 入力検証と移動計算 | TypeScript — [model.ts](src/model.ts) |
 | 描画 | PixiJS 8、WebGL — [renderer.ts](src/renderer.ts) |
-| 木の画像 | クリスマスPNGと自作Canvasピクセルアート — [art.ts](src/art.ts)、[themes.ts](src/themes.ts) |
+| 木とティストリーのモニュメント | 5つの季節のPNGとCanvas代替画像 — [village-art.ts](src/village-art.ts)、[art.ts](src/art.ts) |
 | 背景と配置 | 地面、家、小物の共有アトラス — [environment.ts](src/environment.ts)、[environment-layout.ts](src/environment-layout.ts)、[pixel-art.ts](src/pixel-art.ts) |
 | キャラクターと動作 | 自作RGBAピクセルフレームと共有アトラス — [characters.ts](src/characters.ts)、[character-motion.ts](src/character-motion.ts) |
 | 設置コード生成 | ブラウザー内でURLを正規化しコードを生成 — [install-model.ts](src/install-model.ts) |
@@ -106,7 +117,7 @@ flowchart TD
 
 ```text
 pixel-visitor-village/
-├── README.md / README.ko.md / README.ja.md / README.zh-CN.md
+├── README.md / README.en.md / README.ja.md / README.zh-CN.md
 ├── index.html / install.html   # デモと設置ヘルパー
 ├── src/                       # ウィジェット、モデル、描画、画像、ヘルパー
 ├── tests/widget.spec.ts        # ブラウザー統合テスト
@@ -130,6 +141,16 @@ pixel-visitor-village/
 | `season` | `christmas` | `christmas`、`spring`、`summer`、`autumn`、`winter`。不正な値では現在の季節を維持します。 |
 | `paused` | なし | 属性が存在すると停止します。`paused="false"`でも停止するため、再開するには属性を削除します。 |
 | `glow` | 有効 | `glow="false"`でクリスマスツリーのグロー効果を無効にします。画像に描かれた電球の色は残ります。 |
+| `refresh-interval` | `0` | 任意の確認間隔（秒）。`0`で無効、`60`から`3600`までの整数で有効になります。不正な値では最後の有効な設定を維持します。 |
+
+## 訪問数の木製プレートと任意の更新
+
+小さな木製プレートが上から降りて、今日の訪問数を表示します。増加時は「今日の訪問 13 (+3)」のように差分を表示します（ウィジェットの表示言語は現在、韓国語です）。同じ数では繰り返し通知せず、韓国時間で日付が変わった場合も新しい訪問として扱いません。村のどこをクリックしても、プロジェクトのリポジトリが新しいタブで開きます。キーボード操作とモバイルのスクロールも維持します。
+
+自動確認は**初期状態では無効**です。既存のタグに`refresh-interval="60"`を追加するか、設置ヘルパーの1分ごとの確認を選びます。`refresh-interval="0"`で無効にできます。表示中に同じブログのオリジンのホームページHTMLを読みます。そのページに有効な訪問数を持つウィジェットが必要で、複数ある場合はすべて同じ数である必要があります。取得したページのスクリプトや画像は実行・読み込みしません。同じ文書内の表示中ウィジェットは1つのリクエストを共有します。失敗時は最後の正常な状態を保ち、再試行間隔を延ばします。
+
+これは日次集計の定期確認であり、個々の訪問イベントを受信する機能ではありません。Tistoryの集計遅延とHTMLの繰り返し取得が統計に与える影響は**未検証**です。この制限を踏まえて有効にしてください。プレート、リンク、更新オプションは公開ウィジェットに反映済みです。既存の設置では以前のモジュールが最大5分間キャッシュされる場合があります。
+
 
 <details>
 <summary>JavaScript APIとイベント</summary>
@@ -191,10 +212,18 @@ pnpm preview   # http://127.0.0.1:4178/
 | [デプロイと設置](docs/features/visitor-village/deployment.md) | Cloudflare Pages設定と設置の検証記録 |
 | [独立レビュー](docs/features/visitor-village/reviews/) | コードと設置フローのレビュー記録 |
 | [木の原案と生成記録](assets/concepts/README.md) | AIで生成したクリスマスツリーの原案とプロンプト |
-| [紹介動画の制作情報](docs/features/visitor-village/intro-media.md) | Claude Codeのbragによる制作、動画情報、音楽ライセンス |
+| [紹介動画の制作情報](docs/features/visitor-village/intro-media.md) | 最新画面のキャプチャ、HyperFrames編集、動画情報と音楽ライセンス |
 | [スクリーンショットについて](docs/assets/README.md) | README画像の出典と撮影条件 |
 
-配布用のクリスマスツリー画像は[src/assets/christmas-tree.png](src/assets/christmas-tree.png)です。他の季節の木は`src/art.ts`、背景は`src/environment.ts`、改良したキャラクターは`src/characters.ts`で描いています。外部のゲーム素材は使用していません。
+季節の木5種類とティストリーのモニュメントは[src/assets/cozy](src/assets/cozy/)の透過PNGです。生成原画とプロンプトは[制作記録](assets/concepts/cozy/README.md)にあります。代替画像は`src/art.ts`、背景と小物は`src/environment.ts`、キャラクターは`src/characters.ts`で編集します。外部ゲーム素材は使用していません。
+
+## 直角のフレームとクリスマスのゲスト
+
+ウィジェットとデモの角を直角にしています。クリスマステーマでは、自作ピクセルアートのサンタかルドルフが時々現れ、5〜8秒後に消えます。同時に表示するのは1体のみで、実際の訪問者数には含めません。画面外、非表示タブ、手動停止中は演出の時計も止まります。動きを減らす設定や他の季節では表示しません。
+
+近くのキャラクターは時々立ち止まり、向かい合って手を振り、小さなアイコンの吹き出しで反応してから歩き出します。同時に最大3組、小さい画面では1組が交流します。実際の訪問者の身元とは無関係な装飾です。一時停止中は交流も止まり、動きを減らす設定では無効になります。
+
+これらの変更は公開ウィジェットに反映済みです。
 
 ## READMEの参考資料
 
@@ -203,4 +232,4 @@ pnpm preview   # http://127.0.0.1:4178/
 - [PixiJS](https://github.com/pixijs/pixijs#readme): 紹介と主な機能の後に、セットアップと使用例を置く流れ。
 - [dotLottie Web](https://github.com/LottieFiles/dotlottie-web#readme): 目立つデモリンク、クイックスタート、詳細文書へのリンク。
 
-これらは文書構成の参考にしました。画像と製品説明は、このプロジェクトの実装に基づいています。
+これらは文書構成の参考にしました。実行画面は実装のキャプチャで、上部のサムネイルは別途生成した紹介イラストです。[画像と生成記録](docs/assets/README.md)も参照してください。
