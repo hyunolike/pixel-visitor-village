@@ -13,6 +13,8 @@
 
 ## 첨부 콘셉트로 개편한 현재 마을 (2026-11-25)
 
+후속 요청으로 티스토리 조형물을 작은 우물 크기로 줄인 화면을 다시 촬영했다. `cozy-village/scene-summer-large-monument.png`는 축소 전 이력이다. 소개 영상은 비율 축소 이전 촬영본이다.
+
 현재 README 계절 갤러리는 [cozy-village/](cozy-village/)의 실제 로컬 production 화면을 사용한다. 크리스마스/봄/여름/가을/겨울은 각각935×476px이고 데스크톱은1487×1058px,모바일은320/375×780px 뷰포트다. Google Chrome headless/DPR1에서 준비 완료 후 움직임을 멈추고 시연24명 상태로 테마를 바꿨다. 이미지로 위젯을 대체하지 않았다.
 
 [전체 비교](cozy-village/comparison.png)는 사용자 포스터와 실제 여름 위젯을 같은1179px 표시 폭으로 놓았다. [상세 비교](cozy-village/focus-landmarks.png)는 두 원본을 리샘플링하지 않은430×390px 크롭이다. 서로 다른 포스터/동적 카메라이므로 픽셀 단위 복제나 동일 인원 배치 비교가 아니다.
