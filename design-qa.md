@@ -1,4 +1,16 @@
-# Unified village pages QA (2026-11-26)
+# Shared header correction QA (2026-11-26)
+
+final result: passed
+
+The user's screenshot exposed a remaining layout inconsistency in the previous iteration. Its acceptance of different mobile row counts and heights below is superseded. Home, installer and guide now share brand/navigation/toggle slots, layout styles and the same progressive menu controller. Installer language selection remains accessible in its settings panel. The static guide keeps visible links when JavaScript is disabled.
+
+Actual comparison inputs: [desktop headers](docs/assets/shared-header/desktop.png), [390px pages](docs/assets/shared-header/mobile.png), [390px menus open](docs/assets/shared-header/mobile-menu.png). Each combined input was opened and inspected. All Korean headers have identical geometry at320/390/700/701/1440px; active-page state is the intentional difference. Eight viewport widths ×four installer locales also pass non-overlap, width and header-height checks. Headers are65px compact or77px desktop including their divider. The translated701px wrap discovered during review was reproduced before shortening the navigation labels and protecting the brand gutter.
+
+Verification and independent source review: [record](docs/features/visitor-village/reviews/header-consistency-2026-11-26.md). Unit151/151, release14/14, type/app/widget build and final full Chrome87/87 pass. No asset or product-logic changes. The user requested this verified correction be committed, pushed and submitted as a PR; no public deployment is claimed in this step.
+
+---
+
+# Unified village pages QA (2026-11-26, historical PR #14)
 
 final result: passed
 
@@ -25,7 +37,7 @@ No actionable P0/P1/P2 visual findings remain. No unresolved product questions.
 
 **Verification:** unit151/151, release tooling14/14, type/app/widget build and full Chrome85/85 pass. The first attempted full browser run collided with another runner's artifact folder; it is not counted as passing. Final85-test run was sequential and passed in1.6minutes. Includes no-JS320px guide, four-locale menu/focus/installation, canvas interactions, touch scrolling and local overflow. Nine main captures have pageerror0/console error0 and viewport-width scrollWidth. Extra700/701/820/1024px boundary checks show no overflow; all compact locale menus stay beneath the header without scroll. Source-only final review re-audited the fix and found no remaining Critical/Important issues.
 
-**Residual P3:** optional language/menu controls create minor header-height differences; brand, palette, typography and actions remain shared. No further visual changes required for acceptance. Preview remains at http://127.0.0.1:5199/install.html and /docs/. This iteration is local and uncommitted; no public deployment or real Tistory validation is claimed.
+**Superseded acceptance:** optional language/menu controls previously created header-height and row-count differences. The user rejected this inconsistency; the header correction above replaces that acceptance. The record below describes the historical PR #14 iteration, which was later merged and deployed. No real Tistory validation is claimed.
 
 ---
 

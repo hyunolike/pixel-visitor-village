@@ -12,10 +12,11 @@
 <body class="docs-body">
   <a class="skip-link" href="#main-content">문서 본문으로 건너뛰기</a>
   <div class="docs-shell">
-    <header class="docs-header service-header service-header-inner">
+    <header class="service-header"><div class="service-header-inner">
       <a class="project-brand" href="../index.html" aria-label="작은 방문자 마을 홈"><img class="brand-mark" src="../src/assets/cozy/tree-summer.png" alt="" width="32" height="32"><span class="brand-title">작은 방문자 마을</span></a>
-      <nav class="project-nav" aria-label="프로젝트 안내"><a href="../index.html#demo">마을 체험</a><a href="./" aria-current="page">사용 문서</a><a href="https://github.com/hyunolike/pixel-visitor-village" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (새 탭)</span></a><a class="button install-action" href="../install.html">설치하기</a></nav>
-    </header>
+      <nav id="project-navigation" class="project-nav" aria-label="주 메뉴"><a href="../index.html#demo">마을 체험</a><a href="./" aria-current="page">사용 문서</a><a href="https://github.com/hyunolike/pixel-visitor-village" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (새 탭)</span></a><a class="button install-action" href="../install.html">설치하기</a></nav>
+      <button id="navigation-toggle" class="button button-secondary button-sm" type="button" aria-controls="project-navigation" aria-expanded="false" hidden>메뉴</button>
+    </div></header>
     <main id="main-content" tabindex="-1">
       <div class="docs-intro"><div class="docs-intro-copy"><h1>마을 사용 문서</h1><p>설치부터 숫자 확인까지. 내 블로그에 마을을 놓을 때 필요한 내용을 모았습니다.</p><a class="button button-accent" href="../install.html">설치 작업실 열기</a></div><img class="docs-tree" src="../src/assets/cozy/tree-summer.png" alt="" width="144" height="144"></div>
       <div class="docs-layout">
@@ -73,5 +74,6 @@ pnpm test:e2e</code></pre></div>
     </main>
     <footer class="docs-footer service-footer"><span>한국어 사용 문서</span><a class="button button-primary" href="../install.html">설치 코드 만들기</a></footer>
   </div>
+  <script type="module" src="../src/docs.ts"></script>
 </body>
 </html>

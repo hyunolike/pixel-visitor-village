@@ -1,4 +1,5 @@
 import './install.css';
+import { setupServiceHeader } from './service-header';
 import { buildInstallSnippet, InstallError, normalizeBlogUrl, type InstallErrorCode } from './install-model';
 import { LOCALE_STORAGE_KEY, messages, normalizeLocale, resolveLocale, saveLocale, type TextKey } from './install-i18n';
 import { SEASONS, type Season } from './model';
@@ -20,9 +21,6 @@ const stage = find<HTMLElement>('#preview-stage');
 const retry = find<HTMLButtonElement>('#preview-retry');
 const pause = find<HTMLButtonElement>('#preview-pause');
 const navigation = find<HTMLElement>('#project-navigation');
-const navigationToggle = find<HTMLButtonElement>('#navigation-toggle');
-const compactNavigation = matchMedia('(max-width: 700px)');
-let navigationOpen = false;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let locale = resolveLocale(location.search, () => localStorage.getItem(LOCALE_STORAGE_KEY), navigator.languages);
 const requestedSeason=new URLSearchParams(location.search).get('season');
@@ -57,31 +55,6 @@ function renderResultState() {
     else step.removeAttribute('aria-current');
   });
 }
-
-function renderNavigation() {
-  navigationToggle.hidden = !compactNavigation.matches;
-  navigation.hidden = compactNavigation.matches && !navigationOpen;
-  navigationToggle.setAttribute('aria-expanded', String(compactNavigation.matches && navigationOpen));
-}
-navigationToggle.addEventListener('click', () => {
-  navigationOpen = !navigationOpen;
-  renderNavigation();
-  if (navigationOpen) navigation.querySelector<HTMLAnchorElement>('a')?.focus();
-});
-document.addEventListener('keydown', event => {
-  if (event.key !== 'Escape' || !compactNavigation.matches || !navigationOpen) return;
-  navigationOpen = false;
-  renderNavigation();
-  navigationToggle.focus();
-});
-compactNavigation.addEventListener('change', () => {
-  const focusedInMenu = navigation.contains(document.activeElement);
-  const focusedToggle = document.activeElement === navigationToggle;
-  navigationOpen = false;
-  renderNavigation();
-  if (compactNavigation.matches && focusedInMenu) navigationToggle.focus();
-  else if (!compactNavigation.matches && focusedToggle) navigation.querySelector<HTMLAnchorElement>('a')?.focus();
-});
 
 function renderPreviewText() {
   const t = messages[locale];
@@ -266,5 +239,5 @@ pause.addEventListener('click', () => {
 retry.addEventListener('click', () => { void loadPreview(); });
 reducedMotion.addEventListener('change', renderPreviewText);
 renderLocale();
-renderNavigation();
+setupServiceHeader();
 void loadPreview();

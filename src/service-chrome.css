@@ -1,10 +1,10 @@
-/* Shared service identity. Layout inside each page remains task-specific. */
+/* Header layout belongs here; all pages use the same slots and controller. */
 .service-header { position:relative;z-index:12;background:var(--village-forest);color:var(--village-cream);border-bottom:1px solid #55736b; }
-.service-header-inner { display:flex;align-items:center;gap:32px;min-height:76px;width:100%;padding:12px 40px; }
-.service-header :is(.brand,.project-brand) { display:inline-flex;align-items:center;gap:12px;min-width:0;color:var(--village-cream);text-decoration:none; }
+.service-header-inner { display:flex;align-items:center;gap:32px;min-height:76px;width:100%;padding:12px 40px;font:16px/1.5 var(--font-ui); }
+.service-header .project-brand { display:inline-flex;align-items:center;gap:12px;flex:none;min-width:0;color:var(--village-cream);text-decoration:none; }
 .service-header .brand-mark { display:block;width:32px;height:32px;flex:0 0 32px;object-fit:contain;background:none;clip-path:none;image-rendering:pixelated; }
-.service-header .brand-title { font-size:24px;line-height:1.5; }
-.service-header .project-nav { margin-left:auto;gap:28px; }
+.service-header .brand-title { font-size:24px;line-height:1.5;white-space:nowrap; }
+.service-header .project-nav { display:flex;align-items:center;margin-left:auto;gap:28px; }
 .service-header .project-nav>a { color:var(--village-cream);font-size:14px; }
 .service-header .project-nav>a:hover,.service-header .project-nav>a[aria-current=page] { color:var(--village-cream); }
 .service-header .install-action,.button-accent { background:var(--village-gold);color:var(--village-ink);border:2px solid #a27425;box-shadow:0 3px 0 #674c24;font-size:16px;padding-inline:24px; }
@@ -15,6 +15,7 @@
 .service-header :is(a,button,select):focus-visible { outline:3px solid var(--village-gold);outline-offset:4px; }
 .service-header :is(select,#navigation-toggle) { background:var(--village-forest);color:var(--village-cream);border-color:#89ab94; }
 .service-header #navigation-toggle:hover { background:#214e47; }
+.service-header #navigation-toggle { flex:none;margin-left:auto;min-height:48px;padding:8px 12px;font-size:14px;white-space:nowrap; }
 .service-footer { font-size:14px;color:var(--color-muted);border-top:1px solid var(--color-divider); }
 .service-footer a { text-underline-offset:4px; }
 @media(max-width:1200px) {
@@ -23,17 +24,15 @@
   .service-header .project-nav { gap:20px; }
 }
 @media(max-width:700px) {
-  .service-header-inner { min-height:64px;padding:8px 16px;gap:8px; }
-  .service-header :is(.brand,.project-brand) { gap:8px; }
+  .service-header-inner { min-height:64px;padding:8px 16px;gap:8px;flex-wrap:wrap; }
+  .service-header .project-brand { gap:8px; }
   .service-header .brand-mark { width:20px;height:28px;flex-basis:20px; }
-  .service-header .brand-title { font-size:16px; }
+  .service-header .brand-title { font-size:16px;line-height:1.25; }
   .service-header .install-action { min-height:44px;padding:8px 12px;font-size:14px; }
   .service-header .project-nav>a.install-action { font-size:14px; }
-  .site-header.service-header .brand-title { line-height:1.25; }
-  .home-header,.docs-header { flex-wrap:wrap; }
-  .home-header .install-action { margin-left:auto; }
-  .home-header .project-nav,.docs-header .project-nav { order:3;flex-basis:100%;margin-left:0;gap:20px;justify-content:flex-end; }
-  .home-header .project-nav>a,.docs-header .project-nav>a { font-size:12px; }
-  .home-header .project-nav>a:first-child { margin-right:auto; }
-  .docs-header .project-nav { gap:12px;justify-content:space-between; }
+  .service-header .project-nav { flex-basis:100%;margin:0;gap:0;flex-direction:column;align-items:stretch; }
+  .service-header .project-nav>a { display:flex;align-items:center;min-height:44px;padding:8px 12px; }
+  .service-header .project-nav>.install-action { justify-content:center;margin-block:8px; }
+  .service-header[data-menu-enhanced] .service-header-inner { flex-wrap:nowrap; }
+  .service-header[data-menu-enhanced] .project-nav { position:absolute;inset:100% 0 auto;padding:8px 16px;background:var(--village-forest);border-bottom:1px solid #55736b; }
 }

@@ -1,6 +1,7 @@
 import './visitor-village';
 import './demo.css';
 import { setupIntroVideo } from './intro-video';
+import { setupServiceHeader } from './service-header';
 import { MAX_VISITORS, type Season } from './model';
 import { themes } from './themes';
 import type { VisitorVillage } from './visitor-village';
@@ -20,11 +21,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML=`
 <article class="page">
   <a class="skip-link" href="#village-controls">마을 조작으로 건너뛰기</a>
   <section class="playground" aria-labelledby="home-title">
-    <header class="top home-header service-header service-header-inner">
+    <header class="service-header"><div class="service-header-inner">
       <a class="project-brand" href="./index.html" aria-label="작은 방문자 마을 홈"><img class="brand-mark" src="${summer}" alt="" width="32" height="32"><span class="brand-title">작은 방문자 마을</span></a>
-      <nav class="project-nav" aria-label="프로젝트 안내"><a href="#demo" aria-current="page">마을 체험</a><a href="./docs/">사용 문서</a><a href="https://github.com/hyunolike/pixel-visitor-village" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (새 탭)</span></a></nav>
-      <a id="home-install" class="button install-action" data-install href="./install.html?season=summer"><span class="install-prefix">이 마을 </span>설치하기</a>
-    </header>
+      <nav id="project-navigation" class="project-nav" aria-label="주 메뉴"><a href="#demo" aria-current="page">마을 체험</a><a href="./docs/">사용 문서</a><a href="https://github.com/hyunolike/pixel-visitor-village" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (새 탭)</span></a><a id="home-install" class="button install-action" data-install href="./install.html?season=summer">설치하기</a></nav>
+      <button id="navigation-toggle" class="button button-secondary button-sm" type="button" aria-controls="project-navigation" aria-expanded="false" hidden>메뉴</button>
+    </div></header>
     <section id="demo" class="stage" tabindex="-1" aria-label="직접 만나는 픽셀 마을" aria-busy="true">
       <div class="scene-intro"><div><h1 id="home-title">오늘의 방문이,<br>작은 마을로.</h1><p class="hero-description">오늘 방문자 수만큼 캐릭터가 모여요.</p></div><div class="count"><span>시연 방문</span><strong id="visitor-count">12<small>명</small></strong><p>실제 방문 정보가 아닌 체험용 숫자예요.</p></div></div>
       <visitor-village interactive repository-link="badge" count="12" season="summer"></visitor-village>
@@ -89,5 +90,6 @@ const sync=()=>{
   if(widget.ready){find('#scene-loading').hidden=true;find('#demo').setAttribute('aria-busy','false');}
 };
 widget.addEventListener('village-change',sync);widget.addEventListener('village-ready',sync);sync();
+setupServiceHeader();
 setupIntroVideo(find<HTMLVideoElement>('#intro-video'),find('#intro-video-status'));
 if(location.hash==='#intro-film'||location.hash==='#demo')document.querySelector(location.hash)?.scrollIntoView({block:'start'});
