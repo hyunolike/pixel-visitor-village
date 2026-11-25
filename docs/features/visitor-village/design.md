@@ -392,3 +392,8 @@ Readme Typing SVG의 설정→미리보기→복사, giscus의 설치 전제와 
 [소개 영상 갱신 계획](intro-refresh-plan.md)의 VV-MEDIA-001~003을 따른다. 실제 production Web Component를 시연 count0~24와 고정30fps ticker로 캡처하고 실제 설치 작업실에서 주소/계절/코드 생성을 수행한다. HyperFrames는 이 로컬 미디어에 문구와 음악을 얹는 편집기이며 별도 Canvas2D 마을 재현기를 사용하지 않는다. 공개 origin의 설치 HTML은 로컬 빌드 바이트로 응답해 생성 URL을 Pages와 맞춘다.
 
 [scripts/media/draw-architecture.mjs](../../../scripts/media/draw-architecture.mjs)가 공식 로고를 내장한 한글/영문 SVG와 PNG를 만든다. 기본 count 입력과 정적 모듈, 모델/사회적 동작, PixiJS/장식, ShadowDOM 출력과 선택 HTML조회 경로를 구분한다. 네 README는 PNG를 먼저 보여 주고 Mermaid를 텍스트 대안으로 유지한다. 기존 재생기/설치 API/제품 로직은 이 미디어 요청에서 수정하지 않는다.
+# 2026-11-26 Living Village Square
+
+The selected concept replaces the article-first homepage with a full-width village, concise text over its sky and a cream season/action dock. Existing production sprites remain authoritative. Homepage-only interactive mode enables direct greetings and demo invitations; embedded widgets retain their current link behavior. The model owns active-time greeting state and arrivals, while the homepage supplies keyboard actions and live announcements. Installer receives only a validated season query, never the synthetic count.
+
+The detailed file boundaries, contracts, lifecycle and verification plan are in [interactive-home-plan.md](interactive-home-plan.md). References researched on 2026-11-25: Tossface (scene-first product entry), Samsung Design (image hierarchy), Townscaper official product description (immediate input/world response) and The Pudding music experiment (participation-led explanation). No third-party art or code is imported.

@@ -4,17 +4,92 @@ const appOrigin=()=>new URL(test.info().project.use.baseURL!).origin;
 const waitReady=async(page:Page)=> {
   await page.goto('/');
   await page.waitForFunction(()=>Boolean((document.querySelector('visitor-village') as any)?.ready));
+  // Legacy widget-contract tests use their original embedded fixture explicitly.
+  await page.locator('visitor-village').first().evaluate(el=>{el.removeAttribute('interactive');el.removeAttribute('repository-link');el.setAttribute('count','24');el.setAttribute('season','christmas');});
 };
 const state=async(page:Page)=>page.locator('visitor-village').first().evaluate((el:any)=>({count:el.visitorCount,season:el.season,people:el.getVisitors()}));
 
+test.describe('interactive homepage',()=>{
+  const home=async(page:Page)=>{await page.goto('/');await page.waitForFunction(()=>Boolean((document.querySelector('visitor-village') as any)?.ready));};
+  // Compositor pixels, excluding HTML feedback, prove that the sprites themselves react.
+  const scenePixels=(page:Page)=>page.locator('visitor-village canvas').screenshot({style:'.scene-bottom { visibility:hidden !important; }'});
+  test('puts the real scene first and carries selected season into localized installation',async({page})=>{
+    await page.setViewportSize({width:1440,height:1024});await home(page);
+    expect(await state(page)).toMatchObject({count:12,season:'summer'});
+    const stage=await page.locator('.stage').boundingBox();expect(stage!.y).toBeLessThan(100);expect(stage!.width).toBe(1440);
+    await expect(page.locator('#invite')).toBeInViewport();
+    await page.getByRole('button',{name:'가을',exact:true}).click();
+    expect((await state(page)).season).toBe('autumn');
+    await page.locator('#home-install').click();await expect(page).toHaveURL(/install.html\?season=autumn$/);
+    await expect(page.locator('input[name=season][value=autumn]')).toBeChecked();
+    await page.locator('#locale-select').selectOption('en');
+    await page.locator('#blog-url').fill('example.tistory.com');await page.locator('#create-code').click();
+    expect(await page.locator('#install-code').inputValue()).toContain('season="autumn"');
+    expect(await page.locator('#install-code').inputValue()).not.toContain('count="12"');
+  });
+  test('invites a real guest and lets pointer and keyboard greetings change the paused canvas',async({page})=>{
+    await home(page);await page.locator('#pause').click();
+    const before=await state(page);await page.locator('#invite').click();
+    const after=await state(page);expect(after.count).toBe(13);expect(after.people.slice(0,12)).toEqual(before.people);
+    expect(after.people[12]).toMatchObject({id:12,x:.5,y:.94});
+    const canvas=page.locator('visitor-village canvas'),box=(await canvas.boundingBox())!;
+    const snapshot=await scenePixels(page);
+    let popups=0;page.on('popup',()=>popups++);
+    await canvas.click({position:{x:box.width*.5,y:box.height*.94-12}});
+    await expect(page.locator('#interaction-status')).toContainText('인사');
+    expect((await scenePixels(page)).equals(snapshot)).toBe(false);expect(popups).toBe(0);
+    await page.locator('#greet').focus();await page.keyboard.press('Enter');
+    await expect(page.locator('#interaction-status')).toContainText('인사');
+    await canvas.click({position:{x:25,y:25}});expect(popups).toBe(0);
+    const link=await page.locator('visitor-village .repository').boundingBox();expect(link!.width).toBeLessThan(box.width/2);
+  });
+  test('keeps reduced-motion feedback usable, rejects empty greetings and respects the population cap',async({page})=>{
+    await page.emulateMedia({reducedMotion:'reduce'});await home(page);
+    const before=await scenePixels(page);
+    await page.locator('#greet').click();expect((await scenePixels(page)).equals(before)).toBe(false);
+    await expect(page.locator('#pause')).toBeDisabled();
+    await page.locator('visitor-village').evaluate(el=>el.setAttribute('count','0'));await expect(page.locator('#greet')).toBeDisabled();
+    expect(await page.locator('visitor-village').evaluate((el:any)=>el.greetVisitor())).toBe(false);
+    await page.locator('#invite').click();expect((await state(page)).count).toBe(1);
+    await page.locator('visitor-village').evaluate(el=>el.setAttribute('count','5000'));await expect(page.locator('#invite')).toBeDisabled();
+    expect(await page.locator('visitor-village').evaluate((el:any)=>el.inviteVisitor())).toBe(false);
+  });
+  test('keeps all controls reachable at 320px and rejects an invalid installer season',async({page})=>{
+    await page.setViewportSize({width:320,height:850});await home(page);
+    for(const season of ['봄','여름','가을','겨울','크리스마스'])await page.getByRole('button',{name:season,exact:true}).click();
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(320);
+    await page.locator('#invite').click();expect((await state(page)).count).toBe(13);
+    await page.goto('/install.html?season=%3Cscript%3E');await expect(page.locator('input[name=season][value=christmas]')).toBeChecked();
+  });
+  test('clears explicit greetings across opt-out, seasons, count removal and reconnect',async({page})=>{
+    await page.emulateMedia({reducedMotion:'reduce'});await home(page);
+    const village=page.locator('visitor-village');
+    expect(await village.evaluate((el:any)=>el.greetVisitor(99))).toBe(false);
+    const plain=await scenePixels(page);await village.evaluate((el:any)=>el.greetVisitor(0));
+    expect((await scenePixels(page)).equals(plain)).toBe(false);
+    await village.evaluate(el=>el.removeAttribute('interactive'));
+    expect(await village.evaluate((el:any)=>el.greetVisitor())).toBe(false);
+    // Compare the same presentation; opting out also restores embedded labels.
+    await village.evaluate(el=>el.setAttribute('interactive',''));
+    expect((await scenePixels(page)).equals(plain)).toBe(true);
+    await village.evaluate((el:any)=>{el.setAttribute('interactive','');el.greetVisitor(0);el.setAttribute('season','spring');el.setAttribute('season','summer');});
+    expect((await scenePixels(page)).equals(plain)).toBe(true);
+    await village.evaluate((el:any)=>{el.greetVisitor(11);el.setAttribute('count','11');el.setAttribute('count','12');});
+    expect((await scenePixels(page)).equals(plain)).toBe(true);
+    expect(await village.evaluate((el:any)=>{el.greetVisitor(0);el.remove();const result=el.greetVisitor();document.querySelector('.stage')!.append(el);return result;})).toBe(false);
+    await page.waitForFunction(()=>Boolean((document.querySelector('visitor-village') as any)?.ready));
+    expect((await scenePixels(page)).equals(plain)).toBe(true);
+  });
+});
+
 test('site pages connect the product explanation, live demo, installer and usage docs',async({page})=>{
   await waitReady(page);
-  await expect(page.locator('#home-install')).toHaveAttribute('href','./install.html');
+  await expect(page.locator('#home-install')).toHaveAttribute('href','./install.html?season=christmas');
   await expect(page.locator('.hero-description')).toContainText('오늘 방문자 수');
   await page.locator('.project-nav a[href="#demo"]').click();await expect(page).toHaveURL(/#demo$/);
   await expect(page.locator('visitor-village').first()).toBeInViewport();
   await page.locator('#season').selectOption('spring');expect((await state(page)).season).toBe('spring');
-  await page.locator('#home-install').click();await expect(page).toHaveURL(/install.html$/);
+  await page.locator('#home-install').click();await expect(page).toHaveURL(/install.html\?season=spring$/);
   await page.locator('#usage-docs-link').click();await expect(page).toHaveURL(/\/docs\/$/);
   await expect(page.getByRole('heading',{name:'마을 사용 문서',exact:true})).toBeVisible();
   await page.locator('.docs-toc a[href="#troubleshooting"]').click();
@@ -334,7 +409,7 @@ test('rapid reconnect cancels stale generations before GPU creation',async({page
 });
 test('missing Christmas image falls back to a basic tree without breaking other seasons',async({page})=>{
   await page.route('**/tree-christmas-*.png',route=>route.abort());
-  await page.goto('/');
+  await waitReady(page);
   await expect(page.locator('visitor-village canvas')).toBeVisible();
   await expect(page.locator('visitor-village [role=status]')).toContainText('기본 그림');
   await page.locator('visitor-village').evaluate(el=>el.setAttribute('season','summer'));
@@ -914,14 +989,15 @@ test('design polish keeps enabled advanced settings and their warning visible wh
   await page.screenshot({path:testInfo.outputPath('install-mobile-dirty-warning.png')});
 });
 
-test('design polish shares brand and control metrics across light installation and dark demo',async({page},testInfo)=>{
+test('design polish keeps readable brand and controls across installation and immersive homepage',async({page},testInfo)=>{
   const metrics=async()=>page.locator('.brand-mark').evaluate(el=>({
     width:getComputedStyle(el).width,height:getComputedStyle(el).height,shape:getComputedStyle(el).clipPath,
   }));
   for(const width of [1440,520,375]){
     await page.setViewportSize({width,height:1000});
     await page.goto('/install.html?lang=ko');const installMark=await metrics();
-    await page.goto('/');expect(await metrics()).toEqual(installMark);
+    await page.goto('/');const homeMark=await metrics();expect(parseFloat(homeMark.width)).toBeGreaterThanOrEqual(parseFloat(installMark.width));expect(parseFloat(homeMark.height)).toBeGreaterThanOrEqual(parseFloat(installMark.height));
+    await expect(page.locator('.brand-mark')).toHaveAttribute('src',/tree-summer/);
     for(const control of ['#pause','#season','#visitors']) expect(await page.locator(control).evaluate(el=>el.getBoundingClientRect().height)).toBe(48);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
     if(width===1440)await page.screenshot({path:testInfo.outputPath('demo-dark-desktop.png'),fullPage:true});
@@ -1062,7 +1138,7 @@ test('cozy art retries a failed monument for a new village without losing either
   await page.evaluate(()=>{const village=document.createElement('visitor-village');village.id='cozy-second';village.setAttribute('count','37');village.style.cssText='display:block;height:420px';document.body.append(village);});
   await page.waitForFunction(()=>(document.querySelector('#cozy-second') as any)?.ready);
   expect(await page.evaluate(()=>(window as any).artErrors[0].attribute)).toBe('monument');
-  expect(requests).toBe(2);expect(await page.locator('visitor-village').first().evaluate(el=>(el as any).visitorCount)).toBe(24);
+  expect(requests).toBe(2);expect(await page.locator('visitor-village').first().evaluate(el=>(el as any).visitorCount)).toBe(12);
   expect(await page.locator('#cozy-second').evaluate(el=>(el as any).visitorCount)).toBe(37);await expect(page.locator('#cozy-second [role=status]')).toBeEmpty();
 });
 

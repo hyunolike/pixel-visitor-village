@@ -8,7 +8,8 @@ import { defaultVillageLabels, type VillageLabels } from './village-labels';
 interface PendingNotice {snapshot:CountSnapshot;notice:CountNotice}
 
 export class VisitorVillage extends HTMLElement {
-  static observedAttributes=['count','season','paused','glow','refresh-interval'];
+  static observedAttributes=['count','season','paused','glow','refresh-interval','interactive'];
+  private greetingCursor=0;
   private model=new VillageModel();
   private view:VillageRenderer|undefined;
   private frame:HTMLElement;
@@ -48,12 +49,27 @@ export class VisitorVillage extends HTMLElement {
     shadow.innerHTML=`<style>${styles}</style><section class="village" aria-label="방문자 마을"><p class="name"></p><p class="notice" aria-hidden="true" aria-live="polite" aria-atomic="true" data-open="false"></p><a class="repository" href="https://github.com/hyunolike/pixel-visitor-village" target="_blank" rel="noopener noreferrer" aria-label="Pixel Visitor Village 저장소 보기 (새 탭)"><span>GitHub에서 보기 ↗</span></a><div class="status" role="status" aria-live="polite"></div></section>`;
     this.frame=shadow.querySelector('.village')!;this.status=shadow.querySelector('.status')!;this.nameLabel=shadow.querySelector('.name')!;
     this.notice=shadow.querySelector('.notice')!;
+    this.frame.addEventListener('click',event=>{
+      if(!this.hasAttribute('interactive')||!(event.target instanceof HTMLCanvasElement))return;
+      const id=this.view?.greetAt(event.clientX,event.clientY);
+      if(id!==undefined)this.greetVisitor(id);
+    });
   }
   get visitorCount(){return this.model.visitors.length;}
   get season(){return this.model.season;}
   get ready(){return Boolean(this.view);}
   get motionReduced(){return this.motion?.matches??false;}
   getVisitors(){return this.model.visitors.map(({id,x,y})=>({id,x,y}));}
+  greetVisitor(id?:number):boolean {
+    if(!this.hasAttribute('interactive')||!this.isConnected||!this.view||!this.visitorCount)return false;
+    const target=id??this.greetingCursor%this.visitorCount;
+    if(!this.model.greet(target))return false;
+    this.greetingCursor=target+1;this.view.renderOnce();this.emit('village-greet',{id:target});return true;
+  }
+  inviteVisitor():boolean {
+    if(!this.hasAttribute('interactive')||!this.isConnected||!this.view||!this.model.invite())return false;
+    this.setAttribute('count',String(this.visitorCount));this.view.renderOnce();this.emit('village-invite',{count:this.visitorCount});return true;
+  }
   get labels():VillageLabels{return this.localizedLabels??defaultVillageLabels;}
   set labels(labels:VillageLabels) {
     this.localizedLabels=labels;
@@ -97,6 +113,7 @@ export class VisitorVillage extends HTMLElement {
       this.errors.delete(attribute);this.nameLabel.textContent=this.labels.seasons[this.model.season];
       if(attribute==='season'){this.view?.setTheme();this.reportArtWarning();}
       if(attribute==='glow')this.view?.setGlow(value!=='false');
+      if(attribute==='interactive'&&value===null)this.model.greeting=null;
       this.showStatus();this.applyPlayback();this.view?.renderOnce();this.emit('village-change');
     } catch(error) {
       const message=error instanceof Error?error.message:String(error);this.errors.set(attribute,message);this.showStatus();this.emit('village-error',{attribute,message});
@@ -165,6 +182,7 @@ export class VisitorVillage extends HTMLElement {
       ?this.labels.today(current.snapshot.count,current.notice.delta):this.labels.recent(current.snapshot.count);
   }
   disconnectedCallback() {
+    this.model.greeting=null;this.greetingCursor=0;
     this.model.social.reset();
     visitorRefresh.unsubscribe(this.onRefresh);
     this.pendingNotice??=this.shownNotice;this.closeNotice();

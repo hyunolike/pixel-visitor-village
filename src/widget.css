@@ -7,6 +7,9 @@ canvas{display:block!important;width:100%!important;height:100%!important;image-
 .status:empty{display:none}
 .repository{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:flex-end;padding:10px 12px;color:#f4edd5;text-decoration:none;border-radius:0;touch-action:auto}
 :host([repository-link="badge"]) .repository{inset:auto;right:12px;bottom:10px;padding:0}
+:host([interactive]) .repository{inset:auto;right:12px;bottom:10px;padding:0}
+:host([interactive]) canvas{pointer-events:auto;cursor:pointer}
+:host([interactive]) .name,:host([interactive]) .notice{display:none}
 .repository span{padding:4px 7px;background:#11262ae8;border:1px solid #67877c;font-size:10px;line-height:1.5}
 .repository:hover span{background:#28473f}
 .repository:focus-visible{outline:3px solid #f5d282;outline-offset:-5px}

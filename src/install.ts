@@ -1,7 +1,7 @@
 import './install.css';
 import { buildInstallSnippet, InstallError, normalizeBlogUrl, type InstallErrorCode } from './install-model';
 import { LOCALE_STORAGE_KEY, messages, normalizeLocale, resolveLocale, saveLocale, type TextKey } from './install-i18n';
-import type { Season } from './model';
+import { SEASONS, type Season } from './model';
 import type { VisitorVillage } from './visitor-village';
 
 const find = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
@@ -25,7 +25,9 @@ const compactNavigation = matchMedia('(max-width: 700px)');
 let navigationOpen = false;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let locale = resolveLocale(location.search, () => localStorage.getItem(LOCALE_STORAGE_KEY), navigator.languages);
-let selectedSeason: Season = 'christmas';
+const requestedSeason=new URLSearchParams(location.search).get('season');
+let selectedSeason: Season=SEASONS.includes(requestedSeason as Season)?requestedSeason as Season:'christmas';
+document.querySelectorAll<HTMLInputElement>('input[name="season"]').forEach(input=>{input.checked=input.value===selectedSeason;});
 let origin = '';
 let errorCode: InstallErrorCode | 'unexpectedError' | undefined;
 let copyStatus: 'copySuccess' | 'copyFallback' | undefined;

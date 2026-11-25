@@ -1,3 +1,37 @@
+# Living Village Square — interactive homepage QA (2026-11-26)
+
+final result: passed
+
+**Visual truth:** /Users/hyuno/.codex/generated_images/01a20dd3-dda2-7ad3-9bc3-4e9e31b44af9/exec-58851b0c-d838-44e5-86cd-7d194ba78f52.png, the first displayed option selected by the user. Source pixels1487×1058. Local Chrome at http://127.0.0.1:5199/, CSS viewport1487×1058, deviceScaleFactor1, screenshot1487×1058; no density resampling. Additional1440×1024,390×844 and320×850 views use density1. Native source size is used rather than stretching the image to the initially requested1440px.
+
+**Comparison evidence:** [full side-by-side](docs/assets/interactive-home/comparison.png), [typography](docs/assets/interactive-home/type-comparison.png), [dock](docs/assets/interactive-home/dock-comparison.png), [actual desktop](docs/assets/interactive-home/desktop.png), [390px](/private/tmp/pvv-interactive-qa/mobile.png), [320px](docs/assets/interactive-home/small.png). The full source and implementation were composited into one2974×1058 input and opened together; focused crops were also composited and opened. State: summer,12 synthetic visitors, explicit greeting, paused to permit a stable comparison. The implementation greets an actual existing visitor; generated visitor placement/count illustrations are not authoritative.
+
+**Findings and fixes:**
+
+- Initial P1: numeric range overflowed small screens by84px because the shared range input used flex:0 0 auto with width:100%. Added a shrinking flex basis within visitor-inputs. Recaptured390px and320px now have scrollWidth equal to viewport width.
+- Initial P2:48px display was too small beside the selected concept; increased desktop heading to64px, preserving actual NeoDunggeunmo and using32px mobile. Reopened focused type comparison.
+- P2: moving clouds crossed the description, and feedback covered the repository badge. Gave the description an opaque sky surface and raised feedback above the badge. Latest native capture shows readable copy and independent link.
+- P2: pressed pause inherited pale dark-theme colors on cream. Scoped the pressed state to the dock; checked current dark forest/cream state. Matched control height48px after increasing desktop UI type to16px.
+- P2: advanced input border initially failed3:1 non-text contrast. Changed the local border token to#697a5e; the existing contrast test now passes in the focused checks.
+
+No actionable P0/P1/P2 visual issues remain after recapture. No unresolved product questions.
+
+**Required fidelity surfaces:**
+
+- Fonts: real self-hosted NeoDunggeunmo display/brand and Pretendard UI;64px desktop heading,48px tablet,32px mobile. Controls remain14–16px, normal Korean word wrapping, readable descriptions and12px supplemental demo note. The generated glyph shapes are approximations; actual licensed fonts take precedence.
+- Layout: full-width scene begins under the compact header; desktop stage and dock fill the first viewport. Mobile uses normal flow and puts direct actions before wrapped seasons. No outer article frame or nested card grid. Original widget scene coordinates and actual sprites are retained rather than redrawing generative scenery.
+- Color: forest/cream/gold semantic tokens, high-contrast primary action, distinct season selection and keyboard focus. Flat sky intentionally replaces the generated mock's gradient; square borders follow the existing user constraint.
+- Imagery: source PNG trees and monument, production cottages/people/heart art and Pixi nearest-neighbor rendering. No replacement inline SVG, div art, emoji, stock placeholders or screenshot-as-interface. The tiny monument stays under roughly a third of the canopy; actual art has precedence over generative variations in cottage sizes, fences and foliage. README thumbnail/video files are unchanged.
+- Copy: concise product-led headline, synthetic-demo label and actual cumulative-visit explanation. The keyboard greeting is a deliberate accessible addition to the mock; the pause control uses words. No live-online claim, identity data or new accounts.
+
+**Interaction evidence:** actual canvas sprite pixels change after pointer/key greetings, with HTML feedback hidden only during pixel assertions. Invite adds exactly one existing-model visitor at the path, not a decorative overlay. All seasons change the renderer; validated selection reaches installer preview/code and survives locale changes. Test cases cover paused/reduced feedback, zero/5000 limits, blank ground, opt-out, count removal, season changes and reconnect. Existing browser tests cover touch scrolling, legacy embedded links, offscreen sleep, media fallback and four installer languages. Full-suite results are recorded in the feature review after execution.
+
+**Console:** four captured viewports, pageerror0, console error0 and no horizontal overflow; /private/tmp/pvv-interactive-qa/result.json. Browser screenshots were opened, not inferred from build status. The local preview stays running. No public deployment or real Tistory skin verification is claimed.
+
+**Implementation checklist:** selected visual mapped; supplied source art placed; real interactions connected; desktop/mobile captured; full/focused comparisons repeated; P0/P1/P2 fixes recaptured. Residual P3: the generated mock depicts denser illustrative scenery; the implementation deliberately retains source sprites and the exact requested model count.
+
+---
+
 # Claude Code brag 영상과 간결한 README 검증
 
 final result: passed

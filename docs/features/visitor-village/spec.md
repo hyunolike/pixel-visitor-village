@@ -235,3 +235,14 @@
 ## PR #7 검토: 자정 이후 재연결된 집계 날짜
 
 - VV-NOTICE-RECONNECT-001: count 재입력/새 조회 없이 한국 자정을 지나 위젯을 다시 연결해도 마지막 집계 날짜를 바꾸지 않는다. 진행 중이던 팻말은 최근 확인 값으로 표시하고 이미 끝난 팻말을 오늘의 새 집계처럼 재생하지 않는다. 분리 중 유효한 count 입력은 그 입력 시점의 새 집계로 처리한다. 실제 count 재입력은 같은 숫자여도 날짜가 바뀌면 오늘 집계로 갱신한다.
+# 2026-11-26 Interactive homepage requirements
+
+The user selected Living Village Square and authorized implementation. These requirements supersede the homepage-only full-canvas repository link and static hero layout; the default embedded widget remains compatible.
+
+- VV-HOME-001: First desktop viewport presents the real village as the main surface, with source pixel assets, NeoDunggeunmo/Pretendard typography, angular forest/cream/gold controls and the existing small monument. README thumbnail remains unchanged.
+- VV-HOME-002: Homepage character taps and a keyboard greeting button produce an actual wave/heart response; blank ground never opens GitHub. Opt-in interaction must not change default embedded links. Pause/reduced motion still allow static explicit feedback.
+- VV-HOME-003: Inviting a synthetic guest adds exactly one at the foreground path, retains existing people, updates the demo count and refuses overflow. Zero visitors disables greetings. No real visitor data is collected.
+- VV-HOME-004: All five seasons immediately change the real scene, remain selected across homepage controls, and carry into installer preview and generated code. Invalid query input falls back safely; four installer locales remain usable.
+- VV-HOME-005: Keyboard, touch scrolling, 320px screens, reduced motion, loading/failure and offscreen sleep remain usable. Desktop/mobile browser evidence, unit boundaries, full regression checks and independent review are required before handoff.
+
+Implementation and acceptance checks: [interactive-home-plan.md](interactive-home-plan.md).
