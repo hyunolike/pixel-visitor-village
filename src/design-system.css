@@ -2,13 +2,17 @@
 
 :root {
   --village-forest:#123b3e;--village-cream:#fff0c7;--village-gold:#f6c55d;--village-ink:#173c2c;
+}
+:root, .service-paper {
   color-scheme: light;
-  --color-page: #f2f7f8; --color-surface: #fff; --color-surface-subtle: #e8f0ed;
-  --color-ink: #18322f; --color-muted: #58706b;
-  --color-action: #1c5d56; --color-action-hover: #154a44; --color-action-ink: #fff;
-  --color-selection: #e4efeb; --color-divider: #cedcd8; --color-input-border: #7a918a;
+  --color-page: #fff8e7; --color-surface: #fff8e7; --color-surface-subtle: #eee7ce;
+  --color-ink: #193c32; --color-muted: #4d6759;
+  --color-action: #214d39; --color-action-hover: #173c2a; --color-action-ink: #fff0c7;
+  --color-selection: #e2eace; --color-divider: #cbd1b5; --color-input-border: #697a5e;
   --color-error: #b42336; --color-success: #216344;
   --color-warning-ink: #774a0b; --color-warning-surface: #fff7e6; --color-warning-border: #b77715;
+}
+:root {
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px;
   --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px;
   --radius-control: 0px; --radius-panel: 0px;

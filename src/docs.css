@@ -1,0 +1,43 @@
+@import './site-pages.css';
+
+.docs-body { padding:0;background:var(--color-page); }
+.docs-shell { width:100%;margin:0; }
+.docs-header { justify-content:space-between; }
+.docs-intro { background:var(--village-forest);color:var(--village-cream);display:flex;align-items:center;justify-content:space-between;gap:40px;padding:48px max(40px,calc((100% - 1200px)/2)); }
+.docs-intro-copy { max-width:740px; }
+.docs-intro h1 { font-family:var(--font-display);font-size:48px;font-weight:var(--weight-display);letter-spacing:0;line-height:1.5; }
+.docs-intro p { color:#d5dfc9;margin-top:16px;font-size:18px;line-height:1.7;max-width:55ch; }
+.docs-intro .button { margin-top:24px; }
+.docs-tree { width:144px;height:144px;object-fit:contain;image-rendering:pixelated;flex:none; }
+.docs-layout { display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1280px;margin:auto;padding:48px 40px 0; }
+.docs-toc { align-self:start;position:sticky;top:24px;display:flex;flex-direction:column;gap:4px;padding-right:24px;border-right:1px solid var(--color-divider);font-size:14px; }
+.docs-toc>span { color:var(--color-muted);font-weight:600;margin-bottom:12px; }
+.docs-toc>a { display:block;padding:10px 12px;color:var(--color-ink);text-decoration:none;border-left:2px solid transparent; }
+.docs-toc>a:hover,.docs-toc>a:focus-visible { background:var(--color-selection);border-left-color:var(--color-action); }
+.docs-content { min-width:0; }
+.docs-content section { scroll-margin-top:24px;padding-bottom:40px;margin-bottom:40px;border-bottom:1px solid var(--color-divider); }
+.docs-content h2 { font-size:28px;margin-bottom:20px;letter-spacing:-.02em; }
+.docs-content h3 { font-size:18px;margin:28px 0 12px; }
+.docs-content :is(p,li) { max-width:66ch;font-size:16px;line-height:1.8;overflow-wrap:break-word; }
+.docs-content p+p { margin-top:16px; }.docs-content li+li { margin-top:12px; }
+.docs-content ol,.docs-content ul { padding-left:24px;margin-block:24px; }
+.docs-content li::marker { color:var(--color-action);font-weight:600; }
+.docs-content code { font-size:.9em;overflow-wrap:anywhere; }.docs-content .message { margin-block:24px;font-size:14px; }
+.docs-table,.docs-code { overflow-x:auto;border:1px solid var(--color-divider);background:var(--color-surface-subtle);margin-block:24px; }
+.docs-code pre { margin:0;padding:20px;font-size:14px;line-height:1.7; }.docs-code code { overflow-wrap:normal; }
+.docs-table table { width:100%;min-width:560px;border-collapse:collapse;font-size:14px;text-align:left; }.docs-table th,.docs-table td { padding:16px;border-bottom:1px solid var(--color-divider);vertical-align:top; }.docs-table th { background:var(--color-surface); }.docs-table tr:last-child td { border-bottom:0; }
+.docs-footer { max-width:1200px;margin:0 auto;padding:24px 0 32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap; }
+@media(max-width:1280px) { .docs-footer { margin-inline:40px; } }
+@media(max-width:1000px) { .docs-layout { grid-template-columns:180px minmax(0,1fr);gap:32px; }.docs-tree { width:112px;height:112px; } }
+@media(max-width:760px) {
+  .docs-intro { padding:32px 24px;gap:16px; }.docs-intro h1 { font-size:32px; }.docs-intro p { font-size:16px; }.docs-tree { width:80px;height:80px;align-self:flex-start; }
+  .docs-layout { grid-template-columns:minmax(0,1fr);padding:24px 24px 0;gap:32px; }
+  .docs-toc { position:static;flex-direction:row;flex-wrap:wrap;gap:4px 8px;padding:0 0 20px;border-right:0;border-bottom:1px solid var(--color-divider); }.docs-toc>span { flex-basis:100%;margin:0 0 8px; }.docs-toc>a { padding:8px 12px;border:1px solid var(--color-divider); }
+  .docs-content h2 { font-size:24px; }.docs-content h3 { font-size:18px; }
+  .docs-footer { margin-inline:24px; }
+}
+@media(max-width:480px) {
+  .docs-intro { padding:24px 16px 28px; }.docs-tree { display:none; }.docs-intro h1 { font-size:32px; }.docs-intro p { margin-top:12px; }
+  .docs-layout { padding:24px 16px 0;gap:28px; }.docs-toc>a { font-size:14px; }
+  .docs-footer { margin-inline:16px;flex-direction:column;align-items:flex-start;gap:16px; }.docs-footer .button { width:100%; }
+}
