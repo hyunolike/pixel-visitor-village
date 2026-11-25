@@ -4,7 +4,7 @@ export const SEASONS = ['christmas', 'spring', 'summer', 'autumn', 'winter'] as 
 export type Season = typeof SEASONS[number];
 export interface Visitor { id:number; x:number; y:number; vx:number; vy:number; phase:number }
 const hash = (n:number) => { const value=Math.sin(n*127.1+31.7)*43758.5453;return value-Math.floor(value); };
-const trunk = (x:number,y:number) => x>.46 && x<.54 && y>.73 && y<.83;
+const trunk = (x:number,y:number) => (x>.46&&x<.54&&y>.73&&y<.83)||(x>.39&&x<.48&&y>.80&&y<.84);
 
 export function parseCount(raw:string|null):number {
   if(raw===null||raw==='') return 0;
@@ -23,6 +23,19 @@ export function getTreeLayout(width:number,height:number) {
   return {x:w/2,base:h*.80,size:Math.min(w*.74,h*.69)};
 }
 
+/** Separate foreground landmark; positive even in a not-yet-measured host. */
+export function getMonumentLayout(width:number,height:number) {
+  const w=Math.max(1,width),h=Math.max(1,height),size=Math.max(1,Math.min(w*.16,h*.22));
+  return {x:Math.max(size/2,Math.min(w-size/2,w*.435)),base:Math.max(size,Math.min(h,h*.83)),size};
+}
+
+/** Keep the complete anchored sprite visible, including in very small hosts. */
+export function getVisitorSpriteLayout(width:number,height:number,x:number,y:number,spriteWidth=20,spriteHeight=28) {
+  const w=Math.max(1,width),h=Math.max(1,height);
+  const scale=Math.min(1,w/spriteWidth,h/spriteHeight),half=spriteWidth*scale/2,tall=spriteHeight*scale;
+  return {x:Math.max(half,Math.min(w-half,Math.round(x*w))),y:Math.max(tall,Math.min(h,Math.round(y*h))),scale};
+}
+
 export class VillageModel {
   readonly visitors:Visitor[]=[];
   readonly social=new SocialModel();
@@ -34,7 +47,7 @@ export class VillageModel {
       const id=this.visitors.length;
       let x=.04+hash(id+1)*.92;
       const y=.52+hash(id+301)*.40;
-      if(trunk(x,y)) x=x<.5?.44:.56;
+      if(trunk(x,y)) x=x<.445?.38:.56;
       this.visitors.push({id,x,y,vx:(hash(id+3)>.5?1:-1)*(.012+hash(id+7)*.012),vy:(hash(id+5)>.5?1:-1)*(.004+hash(id+9)*.006),phase:hash(id+39)*Math.PI*2});
     }
     this.visitors.length=count;

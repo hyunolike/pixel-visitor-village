@@ -7,12 +7,13 @@ export const HOLIDAY_HEIGHT=36;
 export function holidayPixels(kind:HolidayKind,frame:number):Uint8ClampedArray {
   const pixels=new Uint8ClampedArray(HOLIDAY_WIDTH*HOLIDAY_HEIGHT*4);
   const r=(x:number,y:number,w:number,h:number,color:string)=>{
+    if(kind==='rudolph'&&frame%2&&y<26)y-=1;
     const rgba=[parseInt(color.slice(1,3),16),parseInt(color.slice(3,5),16),parseInt(color.slice(5,7),16),color.length===9?parseInt(color.slice(7,9),16):255];
     for(let row=Math.max(0,y);row<Math.min(HOLIDAY_HEIGHT,y+h);row++)for(let col=Math.max(0,x);col<Math.min(HOLIDAY_WIDTH,x+w);col++) {
       pixels.set(rgba,(row*HOLIDAY_WIDTH+col)*4);
     }
   };
-  const ink='#3c363b',white='#fff3dc',red='#c94f4c',light='#ed8070',brown='#a7754d';
+  const ink='#293d36',white='#fff0c9',red='#cf6252',light='#f09171',brown='#ac7a48';
   r(5,34,23,1,'#233e3848');
   if(kind==='santa') {
     // Gift sack and its stitched top sit behind the coat.
@@ -39,7 +40,8 @@ export function holidayPixels(kind:HolidayKind,frame:number):Uint8ClampedArray {
     // Four legs alternate slightly while the body stays on a fixed foot baseline.
     const step=frame%2;
     for(const [x,y] of [[6,26+step],[12,27-step],[22,26-step],[26,27+step]]) {
-      r(x,y,3,33-y,ink);r(x,y,2,31-y,brown);r(x,32,4,2,ink);
+      const leg=x+(step?(x<16?1:-1):0);
+      r(leg,y,3,33-y,ink);r(leg,y,2,31-y,brown);r(leg,32,4,2,ink);
     }
     r(4,19,22,10,ink);r(5,20,20,8,brown);r(7,20,12,3,'#c89461');
     r(9,25,12,3,'#e5c89b');r(2,20,3,4,'#f2dbb2');

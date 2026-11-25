@@ -1,0 +1,296 @@
+{
+  "source": {
+    "bundleSha256": "25226667af0c764d7390bd245c91666abf98a827d446600ddca10d1090c49184",
+    "fps": 30,
+    "seed": 0.25,
+    "description": "Built Web Component; paused ticker stepped at 30fps. Synthetic count 0–24. Actual workshop actions.",
+    "observations": [
+      {
+        "frame": 0,
+        "count": 0,
+        "season": "christmas",
+        "elapsed": 0.03333333333333333,
+        "pairs": 0,
+        "guest": null,
+        "notice": "오늘 방문 0"
+      },
+      {
+        "frame": 30,
+        "count": 12,
+        "season": "christmas",
+        "elapsed": 1.0333333333333332,
+        "pairs": 0,
+        "guest": null,
+        "notice": "오늘 방문 12 (+1)"
+      },
+      {
+        "frame": 60,
+        "count": 24,
+        "season": "christmas",
+        "elapsed": 2.0333333333333297,
+        "pairs": 1,
+        "guest": null,
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 90,
+        "count": 24,
+        "season": "christmas",
+        "elapsed": 3.033333333333339,
+        "pairs": 1,
+        "guest": null,
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 120,
+        "count": 24,
+        "season": "christmas",
+        "elapsed": 4.033333333333348,
+        "pairs": 3,
+        "guest": null,
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 150,
+        "count": 24,
+        "season": "christmas",
+        "elapsed": 5.033333333333345,
+        "pairs": 2,
+        "guest": "santa",
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 180,
+        "count": 24,
+        "season": "christmas",
+        "elapsed": 6.033333333333341,
+        "pairs": 2,
+        "guest": "santa",
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 210,
+        "count": 24,
+        "season": "christmas",
+        "elapsed": 7.033333333333338,
+        "pairs": 1,
+        "guest": "santa",
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 240,
+        "count": 24,
+        "season": "spring",
+        "elapsed": 8.033333333333333,
+        "pairs": 0,
+        "guest": null,
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 270,
+        "count": 24,
+        "season": "spring",
+        "elapsed": 9.03333333333333,
+        "pairs": 0,
+        "guest": null,
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 300,
+        "count": 24,
+        "season": "summer",
+        "elapsed": 10.033333333333326,
+        "pairs": 0,
+        "guest": null,
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 330,
+        "count": 24,
+        "season": "autumn",
+        "elapsed": 11.033333333333323,
+        "pairs": 0,
+        "guest": null,
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 360,
+        "count": 24,
+        "season": "autumn",
+        "elapsed": 12.033333333333319,
+        "pairs": 0,
+        "guest": null,
+        "notice": "오늘 방문 24 (+1)"
+      },
+      {
+        "frame": 390,
+        "count": 24,
+        "season": "winter",
+        "elapsed": 13.033333333333315,
+        "pairs": 0,
+        "guest": null,
+        "notice": "오늘 방문 24 (+1)"
+      }
+    ],
+    "code": "<script type=\"module\" src=\"https://pixel-visitor-village.pages.dev/widget/visitor-village.js\"></script>\n<visitor-village\n  count=\"[##_count_today_##]\"\n  season=\"autumn\"\n  style=\"display: block; width: 100%; height: 420px;\"\n></visitor-village>"
+  },
+  "delivery": {
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "r_frame_rate": "30/1",
+          "nb_frames": "600"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "r_frame_rate": "0/0",
+          "nb_frames": "939"
+        }
+      ],
+      "format": {
+        "duration": "20.000000",
+        "size": "3817264"
+      }
+    },
+    "files": {
+      "public/media/intro.mp4": {
+        "bytes": 3817264,
+        "sha256": "b7b02ae192a63cb8b78a8dcec8a405ffc0ff838917ad77e39f3d2da1968124c4"
+      },
+      "public/media/intro-poster.jpg": {
+        "bytes": 184327,
+        "sha256": "b5c9ca50c3129d759da9c8f925c6a2fc34fa45c32f3213e103b65281afe4ec73"
+      },
+      "docs/assets/intro-preview.gif": {
+        "bytes": 1592209,
+        "sha256": "9ac359e8c462dbdbf931976908f37c8f0ebb585e766a24992a134a752ef0a313"
+      },
+      "docs/assets/architecture/architecture-ko.png": {
+        "bytes": 205037,
+        "sha256": "a43e8c23289e7191fcfa78d4782702958637264bfacbdde06df774f80fb35a92"
+      },
+      "docs/assets/architecture/architecture-en.png": {
+        "bytes": 210993,
+        "sha256": "683e6deed1b657340bf20fa17070215cfdf1a3d630facba51d1bd00b4ccefcb6"
+      }
+    }
+  },
+  "audio": {
+    "file": "public/media/intro.mp4",
+    "ref": null,
+    "element": null,
+    "placement": null,
+    "timebase": "file",
+    "window": {
+      "from": 0,
+      "to": 20
+    },
+    "duration": 20,
+    "sampleRate": 48000,
+    "channels": 2,
+    "provenance": {
+      "loudness": "signal",
+      "silence": "signal"
+    },
+    "warnings": [],
+    "loudness": {
+      "lufsIntegrated": -21.9,
+      "lufsShortTermMax": -20.7,
+      "samplePeakDb": -10.1,
+      "truePeakDb": -10,
+      "clipping": {
+        "count": 0,
+        "firstAt": null
+      }
+    },
+    "silence": []
+  },
+  "hyperframesCheck": {
+    "lint": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "findings": [],
+      "filesScanned": 6
+    },
+    "runtime": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "findings": []
+    },
+    "layout": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "findings": [],
+      "duration": 20,
+      "samples": [
+        1.111,
+        3.333,
+        5.556,
+        7.778,
+        10,
+        12.222,
+        14.444,
+        16.667,
+        18.889
+      ],
+      "transitionSamples": [],
+      "transitionSamplesDropped": 0,
+      "tolerance": 2,
+      "totalIssueCount": 0,
+      "truncated": false,
+      "faceCheck": {
+        "ran": true,
+        "candidates": 0,
+        "faces": 0
+      }
+    },
+    "contrast": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "findings": [],
+      "enabled": true,
+      "samples": [
+        1.111,
+        5.556,
+        10,
+        14.444,
+        18.889
+      ],
+      "checked": 16,
+      "passed": 16
+    },
+    "craft": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "findings": [],
+      "enabled": true,
+      "step": 0.125,
+      "samples": 160
+    },
+    "audio": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "findings": []
+    }
+  },
+  "scope": "Local media/docs refresh, no commit/push/deployment. Audio measured, not auditioned."
+}

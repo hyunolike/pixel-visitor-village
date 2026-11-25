@@ -12,67 +12,52 @@ function branch(r:PixelBrush,x1:number,y1:number,x2:number,y2:number,width:numbe
 
 export function seasonalTree(season:Season):HTMLCanvasElement{
   const {canvas,ctx}=surface(180,180),r=brush(ctx),t=themes[season];
-  ellipse(r,90,175,39,4,'#2a4a3b28',1);
-  branch(r,88,168,89,112,13,season==='winter');
-  branch(r,87,163,71,176,5,season==='winter');branch(r,94,164,110,176,5,season==='winter');
-  r(85,139,2,28,'#654c3e');r(92,151,2,17,'#654c3e');r(87,142,2,13,'#bd9163');
-
+  const ink='#263e38',bark='#9b6a3d',barkLight='#d09b59';
+  ellipse(r,90,174,33,4,'#274b3528',1);
+  branch(r,90,168,88,103,14);branch(r,88,130,54,94,7);branch(r,92,126,128,86,7);
+  r(84,123,4,43,barkLight);r(94,142,3,26,'#76512f');
   if(season==='winter'){
-    // Bare boughs support individual snow cushions, with air between the branches.
-    for(const b of [[89,120,86,55,8],[89,111,58,87,8],[58,87,37,61,5],[58,87,30,85,4],[37,61,19,54,3],[86,78,69,53,6],[69,53,55,26,4],[69,53,86,35,3],[89,105,119,84,8],[119,84,142,55,5],[119,84,153,82,4],[142,55,160,43,3],[119,84,115,48,5],[115,48,126,27,3],[86,62,98,27,5],[98,27,93,14,3]]){
-      branch(r,b[0],b[1],b[2],b[3],b[4],true);
+    for(const [x1,y1,x2,y2,w] of [[88,108,78,33,6],[80,69,52,44,5],[54,46,29,36,3],[91,118,132,62,6],[130,65,153,50,3],[87,119,39,93,5],[42,94,22,78,3],[104,99,144,102,5]])branch(r,x1,y1,x2,y2,w,true);
+    for(const [x,y,rx,ry] of [[29,34,17,7],[62,45,21,9],[81,30,20,8],[142,49,23,9],[34,78,20,8],[58,95,22,7],[134,101,26,9]]){
+      ellipse(r,x,y+2,rx,ry,ink,2);ellipse(r,x,y,rx-2,ry-1,'#91afa1',2);ellipse(r,x-2,y-2,rx-3,ry-2,'#f5e8c9',2);
     }
-    for(const [x,y,rx,ry] of [[22,55,12,5],[45,58,17,6],[58,27,16,6],[83,37,13,6],[95,16,12,5],[121,28,14,6],[141,55,19,7],[154,82,14,5],[112,83,19,6],[60,86,21,6],[85,65,18,6]]){
-      ellipse(r,x,y+2,rx,ry,'#78989c');ellipse(r,x-1,y,rx-1,ry,'#d3e2dd');ellipse(r,x-3,y-2,rx-3,Math.max(2,ry-2),'#f0f3e7');
-      r(x+rx*.55,y+ry,1,3,'#d5e5df');
-    }
-    ellipse(r,91,176,26,3,'#e3ede5',1);r(76,174,11,1,'#f4f6e9');
     return canvas;
   }
   if(season==='christmas'){
-    // Asset-load fallback only: the normal Christmas landmark remains its PNG.
-    for(let tier=0;tier<6;tier++){
-      const top=22+tier*19,spread=16+tier*10;
-      for(let row=0;row<17;row+=2){const half=spread*.35+row*.55;r(90-half,top+row,half*2,3,tier%2?'#35684e':'#3d7553');}
-      r(90-spread*.85,top+17,spread*1.7,3,'#dce7d8');
-    }
-    for(let i=0;i<20;i++){const y=48+hash(i+12)*92,x=90+(hash(i+51)-.5)*(y-10)*.7;r(x,y,3,3,i%2?'#db9b48':'#bd5d55');r(x,y,1,1,'#ffe7a3');}
-    r(87,8,6,13,'#e1ac4f');r(83,12,14,5,'#e1ac4f');r(88,10,4,9,'#ffe7a3');
+    for(let y=28;y<143;y+=2){const tier=Math.floor((y-28)/29),half=9+tier*11+(y-28-tier*29)*.6;r(90-half,y,half*2+1,3,ink);r(93-half,y,half*2-5,2,y%6?'#39734b':'#5f914e');}
+    for(const [x,y] of [[73,61],[111,94],[58,121],[126,131]]){r(x-3,y-3,7,7,ink);r(x-2,y-2,5,5,'#e5b65a');r(x-1,y-2,2,2,'#fff0bf');}
+    for(const [x,y] of [[90,76],[103,123]]){r(x-6,y-2,5,5,'#d76e54');r(x+1,y-2,5,5,'#d76e54');r(x-1,y-1,3,4,'#a4493b');}
+    r(87,12,6,18,ink);r(82,18,16,6,ink);r(88,14,4,14,'#efbf61');r(84,19,12,4,'#efbf61');r(89,16,2,8,'#fff0bf');
+    for(const [x,y,c] of [[65,155,'#ca6049'],[110,157,'#5b8757']] as const){r(x-9,y-1,18,15,ink);r(x-8,y,16,13,c);r(x-1,y,3,13,'#f3dfae');r(x-8,y+3,16,2,'#f3dfae');}
     return canvas;
   }
-
-  branch(r,88,137,59,105,8);branch(r,91,136,123,102,8);branch(r,89,120,81,75,7);
-  const foliage=surface(180,180),leaf=brush(foliage.ctx);
-  const dark=blend(t.leaf,'#4a4439',.35),outline=blend(dark,'#35443d',.3),middle=blend(t.leaf,t.leaf2,.25),light=blend(t.leaf2,'#f5dfaa',.15);
-  const lobes=[[46,77,29,27],[134,75,29,26],[68,105,37,24],[113,104,37,24],[90,64,54,46],[62,47,31,28],[112,43,34,29]];
-  for(const [x,y,rx,ry] of lobes)ellipse(leaf,x,y,rx,ry,outline);
-  for(const [x,y,rx,ry] of lobes)ellipse(leaf,x,y-1,rx-2,ry-2,dark);
-  foliage.ctx.globalCompositeOperation='source-atop';
-  for(const [x,y,rx,ry] of [[45,71,22,20],[72,90,33,23],[126,76,28,21],[91,60,46,34],[62,45,25,22],[111,40,28,23]])ellipse(leaf,x,y,rx,ry,middle);
-  for(const [x,y,rx,ry] of [[51,58,18,12],[71,36,20,14],[112,28,19,12],[125,61,20,12],[88,67,23,13]])ellipse(leaf,x,y,rx,ry,light);
-  for(let i=0;i<64;i++){
-    const x=21+hash(i+31)*139,y=17+hash(i+79)*105;
-    ellipse(leaf,x,y,3+hash(i+13)*5,2+hash(i+111)*2,i%3?middle:light,1);
-    if(i%4===0)leaf(x-1,y-2,3,1,blend(light,'#f7e7bb',.15));
+  const dark=blend(t.leaf,ink,.32),light=blend(t.leaf2,'#f5dfad',.12);
+  const masses=[[48,83,31,25],[127,89,33,26],[80,100,43,28],[93,60,52,36],[65,43,30,26],[118,40,29,22]];
+  for(const [x,y,rx,ry] of masses)ellipse(r,x,y,rx,ry,ink,3);
+  for(const [x,y,rx,ry] of masses){ellipse(r,x,y-1,rx-2,ry-3,dark,3);ellipse(r,x-3,y-5,rx-3,ry-5,t.leaf,3);ellipse(r,x-8,y-11,rx*.6,ry*.45,light,3);}
+  for(const [x,y] of [[55,72],[112,48],[130,92]]){
+    if(season==='summer'){r(x-3,y-2,6,6,'#d96649');r(x-2,y-2,2,2,'#f4c48b');}
+    else if(season==='spring'){r(x-4,y,9,3,'#f9dfc3');r(x-1,y-3,3,9,'#f9dfc3');}
+    else{r(x-2,y,6,2,'#eac16f');r(x,y-2,2,6,'#eac16f');}
   }
-  if(season==='spring')for(let i=0;i<38;i++){
-    const x=25+hash(i+391)*129,y=19+hash(i+112)*98,c=i%3?'#f8d7d6':'#fff0de';
-    leaf(x-2,y,5,1,c);leaf(x,y-2,1,5,c);leaf(x,y,1,1,'#ddac80');
-  }
-  if(season==='summer')for(let i=0;i<9;i++){
-    const x=36+hash(i+223)*112,y=46+hash(i+113)*64;
-    leaf(x,y,4,3,'#af6251');leaf(x+1,y-1,3,4,'#cf8060');leaf(x+1,y,1,1,'#f6c48c');leaf(x+2,y-2,1,1,'#4c6750');
-  }
-  if(season==='autumn')for(let i=0;i<23;i++){
-    const x=24+hash(i+223)*132,y=24+hash(i+113)*94;
-    leaf(x,y,3,1,i%2?'#e5b367':'#a55e40');leaf(x+1,y-1,1,3,i%2?'#e5b367':'#a55e40');
-  }
-  ctx.drawImage(foliage.canvas,0,0);
-  for(let i=0;i<6;i++){const x=64+hash(i+20)*52,y=173+hash(i+13)*4;r(x,y,3,1,season==='autumn'?'#d3a05c':season==='spring'?'#eac1b8':'#759358');}
   return canvas;
 }
 
 export function treeGlow(){
-  const {canvas,ctx}=surface(100,100),gradient=ctx.createRadialGradient(50,50,2,50,50,50);
-  gradient.addColorStop(0,'#ffd67a38');gradient.addColorStop(1,'#ffd67a00');ctx.fillStyle=gradient;ctx.fillRect(0,0,100,100);return canvas;
+  const {canvas,ctx}=surface(100,100),r=brush(ctx);
+  ellipse(r,50,50,45,38,'#ffe3a00a',2);ellipse(r,50,50,34,29,'#ffe3a00c',2);ellipse(r,50,50,22,19,'#ffe3a012',2);return canvas;
+}
+
+
+/** Recovery silhouette for the independently loaded Tistory landmark. */
+export function monumentArt():HTMLCanvasElement {
+  const {canvas,ctx}=surface(180,180),r=brush(ctx);
+  ellipse(r,90,157,57,14,'#263e38',2);ellipse(r,90,154,54,12,'#83937e',2);
+  r(35,153,110,13,'#71816e');r(38,156,104,3,'#b7b99c');
+  for(const x of [47,74,106,132])r(x,155,2,13,'#425e51');
+  ellipse(r,90,144,57,10,'#a5ad91',2);ellipse(r,90,141,52,7,'#d7d0a5',2);
+  ellipse(r,90,77,60,66,'#263e38',2);ellipse(r,90,76,56,62,'#c64e3d',2);
+  ellipse(r,88,72,53,59,'#ef6149',2);
+  for(const [x,y] of [[69,60],[90,60],[111,60],[90,83],[90,106]])ellipse(r,x,y,7,7,'#fff0c9',1);
+  return canvas;
 }

@@ -1,7 +1,7 @@
 import { Application, Container, Graphics, Rectangle, Sprite, Texture } from 'pixi.js';
-import treeUrl from './assets/christmas-tree.png';
-import { hash, seasonalTree, surface, treeGlow } from './art';
-import { getTreeLayout, VillageModel, type Season } from './model';
+import { loadVillageArt } from './village-art';
+import { hash, seasonalTree, surface, treeGlow, monumentArt } from './art';
+import { getTreeLayout, getMonumentLayout, getVisitorSpriteLayout, VillageModel, type Season } from './model';
 import { themes } from './themes';
 import { createVillageScene,type VillageScenery } from './environment';
 import { CHARACTER_WIDTH, CHARACTER_HEIGHT, CHARACTER_FRAMES, VISITOR_STYLES, VISITOR_FACINGS, visitorPixels } from './characters';
@@ -11,18 +11,18 @@ import { getHolidayLayout, HolidayCameoModel, type HolidayKind } from './holiday
 import { HOLIDAY_WIDTH, HOLIDAY_HEIGHT, holidayPixels } from './holiday-art';
 import { defaultVillageLabels, type VillageLabels } from './village-labels';
 
-async function christmasArt() {
-  const image=new Image();
-  await new Promise<void>((resolve,reject)=>{image.onload=()=>resolve();image.onerror=()=>reject(new Error('크리스마스 나무 이미지를 불러오지 못했어요.'));image.src=treeUrl;});
-  const {canvas,ctx}=surface(image.naturalWidth,image.naturalHeight);ctx.drawImage(image,0,0);return canvas;
-}
-
 export class VillageRenderer {
-  assetWarning='';
+  private artFailures=new Set<string>();
+  get assetErrorAttribute(){return this.artFailures.has('monument')?'monument':this.artFailures.has(this.model.season)?'tree':undefined;}
+  get assetWarning(){return this.assetErrorAttribute?'일부 마을 그림을 불러오지 못해 기본 그림을 보여드려요.':'';}
   private app=new Application();
   private background=new Sprite();
   private objects=new Container();
   private tree=new Sprite();
+  private monument=new Sprite();
+  private monumentTexture:Texture|undefined;
+  private compactFrames:Texture[][][]=[];
+  private compactAtlas:Texture|undefined;
   private glow=new Sprite();
   private weather=new Graphics();
   private trees=new Map<Season,Texture>();
@@ -53,15 +53,17 @@ export class VillageRenderer {
   static async create(frame:HTMLElement,model:VillageModel,isCurrent:()=>boolean=()=>true) {
     const view=new VillageRenderer(frame,model);
     try {
-      let christmas:HTMLCanvasElement|undefined;
-      try {christmas=await christmasArt();} catch {view.assetWarning='나무 이미지를 불러오지 못해 기본 나무를 보여드려요.';}
+      const art=await loadVillageArt();
       if(!isCurrent()){view.destroy();return;}
-      christmas??=seasonalTree('christmas');
+      view.artFailures=new Set(art.failed);
       await view.app.init({preference:['webgl'],width:1,height:1,resolution:1,backgroundAlpha:0,antialias:false,autoStart:false,sharedTicker:false,powerPreference:'low-power'});
       view.initialized=true;
       if(!isCurrent()){view.destroy();return;}
-      view.trees.set('christmas',Texture.from(christmas));
-      for(const season of ['spring','summer','autumn','winter'] as const) view.trees.set(season,Texture.from(seasonalTree(season)));
+      // A source Canvas may be shared; each instance owns its disposable textures.
+      const ownTexture=(source:HTMLCanvasElement)=>{const copy=surface(source.width,source.height);copy.ctx.drawImage(source,0,0);return Texture.from(copy.canvas);};
+      for(const season of ['christmas','spring','summer','autumn','winter'] as const)view.trees.set(season,ownTexture(art.trees[season]??seasonalTree(season)));
+      view.monumentTexture=ownTexture(art.monument??monumentArt());view.monumentTexture.source.scaleMode='nearest';
+      view.monument.texture=view.monumentTexture;view.monument.anchor.set(.5,1);
       const atlas=surface(CHARACTER_WIDTH*CHARACTER_FRAMES,CHARACTER_HEIGHT*VISITOR_FACINGS.length*VISITOR_STYLES.length);
       view.characterAtlas=Texture.from(atlas.canvas);
       view.characterAtlas.source.scaleMode='nearest';
@@ -80,6 +82,14 @@ export class VillageRenderer {
         view.frames.push(facings);
       }
       view.characterAtlas.source.update();
+      const compact=surface(16*CHARACTER_FRAMES,22*VISITOR_FACINGS.length*VISITOR_STYLES.length);
+      for(let style=0;style<VISITOR_STYLES.length;style++)for(let direction=0;direction<VISITOR_FACINGS.length;direction++)for(let pose=0;pose<CHARACTER_FRAMES;pose++){
+        const row=style*VISITOR_FACINGS.length+direction;
+        compact.ctx.drawImage(atlas.canvas,pose*20,row*28,20,28,pose*16,row*22,16,22);
+      }
+      view.compactAtlas=Texture.from(compact.canvas);view.compactAtlas.source.scaleMode='nearest';
+      view.compactFrames=view.frames.map((directions,style)=>directions.map((poses,direction)=>poses.map((_,pose)=>new Texture({source:view.compactAtlas!.source,frame:new Rectangle(pose*16,(style*3+direction)*22,16,22)}))));
+
       const balloons=surface(BUBBLE_WIDTH*SOCIAL_EMOTES.length,BUBBLE_HEIGHT);
       view.bubbleAtlas=Texture.from(balloons.canvas);view.bubbleAtlas.source.scaleMode='nearest';
       SOCIAL_EMOTES.forEach((kind,index)=>{
@@ -107,7 +117,7 @@ export class VillageRenderer {
       for(const texture of view.trees.values())texture.source.scaleMode='nearest';
       view.glowTexture=Texture.from(treeGlow());view.glow.texture=view.glowTexture;
       view.tree.anchor.set(.5,1);view.glow.anchor.set(.5);view.objects.sortableChildren=true;
-      view.objects.addChild(view.tree,view.glow);
+      view.objects.addChild(view.tree,view.monument,view.glow);
       view.app.stage.addChild(view.background,view.objects,view.weather);
       view.app.canvas.setAttribute('role','img');frame.prepend(view.app.canvas);
       view.app.ticker.maxFPS=30;
@@ -136,6 +146,8 @@ export class VillageRenderer {
     this.tree.texture=this.trees.get(this.model.season)!;
     const layout=getTreeLayout(width,height);
     this.tree.position.set(layout.x,layout.base);this.tree.width=layout.size;this.tree.height=layout.size;this.tree.zIndex=layout.base;
+    const monument=getMonumentLayout(width,height);
+    this.monument.position.set(monument.x,monument.base);this.monument.width=monument.size;this.monument.height=monument.size;this.monument.zIndex=monument.base;
     this.glow.position.set(layout.x,layout.base-layout.size*.35);this.glow.width=layout.size*.85;this.glow.height=layout.size*.85;this.glow.zIndex=layout.base+.01;
     this.renderState();this.app.render();
   }
@@ -188,16 +200,18 @@ export class VillageRenderer {
       const pose=interaction&&partner
         ?interactionPose((partner.x-p.x)*width,(partner.y-p.y)*height,interaction.pair.age,this.pose)
         :visitorPose(p,this.model.elapsed,width,height,this.pose);
-      sprite.texture=this.frames[p.id%VISITOR_STYLES.length][VISITOR_FACINGS.indexOf(pose.facing)][pose.frame];
-      sprite.position.set(Math.round(p.x*width),Math.round(p.y*height));sprite.scale.x=pose.flip?-1:1;sprite.zIndex=sprite.y;
+      sprite.texture=(width<=210||height<110?this.compactFrames:this.frames)[p.id%VISITOR_STYLES.length][VISITOR_FACINGS.indexOf(pose.facing)][pose.frame];
+      const point=getVisitorSpriteLayout(width,height,p.x,p.y,sprite.texture.width,sprite.texture.height);
+      sprite.position.set(point.x,point.y);sprite.scale.set(pose.flip?-point.scale:point.scale,point.scale);sprite.zIndex=point.y;
     });
     this.bubbles.forEach((sprite,index)=>{
       const pair=this.model.social.pairs[index];sprite.visible=Boolean(pair&&pair.age>=1.2);
       if(!sprite.visible)return;
       const person=this.model.visitors[pair.age<2.1?pair.firstId:pair.secondId];
-      const layout=getBubbleLayout(width,height,person.x,person.y);
+      const point=this.people[person.id].position;
+      const layout=getBubbleLayout(width,height,point.x/width,point.y/height);
       sprite.texture=this.bubbleFrames[SOCIAL_EMOTES.indexOf(pair.emote)];
-      sprite.position.set(layout.x,layout.y);sprite.scale.set(layout.scale);sprite.zIndex=Math.round(person.y*height)+.1;
+      sprite.position.set(layout.x,layout.y);sprite.scale.set(layout.scale);sprite.zIndex=point.y+.1;
     });
     const guest=this.cameo.guest;
     this.guestSprite.visible=Boolean(guest);
@@ -221,7 +235,9 @@ export class VillageRenderer {
       for(let i=0;i<(snowy?45:17);i++) {
         const y=(hash(i+12)*height+this.model.elapsed*(5+hash(i+17)*5))%height;
         const x=(hash(i+74)*width+Math.sin(this.model.elapsed*.3+i)*5+width)%width;
-        this.weather.rect(Math.round(x),Math.round(y),i%5===0?2:1,i%5===0?2:1);
+        const px=Math.round(x),py=Math.round(y);
+        this.weather.rect(px,py,i%5===0?2:1,1);
+        if(!snowy&&i%3===0)this.weather.rect(px+1,py-1,1,2);
       }
       this.weather.fill({color:snowy?0xf0f8ee:this.model.season==='spring'?0xf3c4cd:0xa66b45,alpha:snowy?.65:1});
     }
@@ -236,6 +252,8 @@ export class VillageRenderer {
     this.backgroundTexture?.destroy(true);this.glowTexture?.destroy(true);
     for(const texture of this.frames.flat(2))texture.destroy();
     this.characterAtlas?.destroy(true);
+    for(const texture of this.compactFrames.flat(2))texture.destroy();
+    this.compactAtlas?.destroy(true);this.monumentTexture?.destroy(true);
     for(const texture of this.bubbleFrames)texture.destroy();
     this.bubbleAtlas?.destroy(true);this.bubbleFrames=[];this.bubbles=[];
     for(const texture of Object.values(this.guestFrames).flat())texture.destroy();

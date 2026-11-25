@@ -1,0 +1,79 @@
+[
+  {
+    "source_record": "cozy-tree-summer-spring.json",
+    "content": {
+      "generator": "built-in image_gen",
+      "dimensions": "Both assets are original 1254x1254 PNG with alpha, confirmed using sips; copied without pixel edits.",
+      "reference": "1-붙여넣은-이미지-1.jpg",
+      "assets": [
+        {
+          "path": "src/assets/cozy/tree-summer.png",
+          "source": "exec-e25cd319-d3ae-4978-9459-1e00698a0078.png",
+          "prompt": "Use case: stylized-concept. Asset type: production transparent pixel-art tree sprite for a cozy visitor village. Input image 1 is ONLY an art-direction reference for its warm chunky pixel style; do not reproduce its poster or scene. Generate exactly ONE isolated complete summer apple tree on genuine transparent alpha, no backdrop. A broad rounded ASYMMETRIC leafy crown with organic stepped angular clusters, visible warm brown trunk branching naturally into the crown, and just a few orange-red apples. Palette foliage #39734b #589453 #8eae56, trunk #9b6a3c #cf9a58, dark teal outline #243d34. Upper-left light. Simple 3–4 tone ramps. Render as deliberately low-resolution, chunky crisp pixel art, approximately 128x128 logical pixel grid enlarged 8x to a 1024x1024 square image. Every visible pixel cluster has hard stair-step square edges, one logical pixel dark outline (8 output px), no fine texture, no small high-res detail, no gradients, no blur, no smooth painterly edges or antialias. Tree centered horizontally, trunk bottom at 90% canvas height, entire crown inside frame with at least 8% empty padding. No ground whatsoever, no cast shadow, no grass, no pot, no scenery, no red monument, no buildings, no person, no text, no watermark. Background MUST be genuinely transparent, not white or a drawn checkerboard."
+        },
+        {
+          "path": "src/assets/cozy/tree-spring.png",
+          "source": "exec-152b36b8-f836-4953-b53e-3654a6c26652.png",
+          "prompt": "Use case: lighting-weather. Asset type: production transparent pixel-art spring tree sprite for cozy visitor village. Input image 1 is ONLY the warm chunky pixel-art direction reference, NOT a scene to copy. Input image 2 is the selected summer tree: keep its exact overall trunk, branch layout, large asymmetric stepped canopy silhouette, scale, framing and dark teal outline. Change only its summer foliage into soft pink SPRING BLOSSOM clusters with a few small green leaf accents; remove all orange apples. Keep the original natural open forked warm brown trunk and upper-left lighting. Blossom colors dark dusty rose #ad6677, middle warm pink #e6a0ae, light creamy pink #f5c8cd, plus sparse warm green #589453. Trunk #9b6a3c #cf9a58, outline #243d34. Clusters must be angular irregular pixel masses, NOT round bubble or circle lobes. Exactly ONE isolated complete tree, no other objects. Flat limited 3–4 tone color ramps, broad crisp square pixel clusters and hard stair-step edges, one logical pixel dark outline, roughly128x128 logical pixel structure enlarged eightfold. Request 1024x1024 square source, trunk bottom at90% canvas height, whole tree with at least8% transparent clear padding. Preserve genuine alpha transparency. No gradients, no painterly shading, no smoothing, no antialias, no tiny pixel noise, no ground, no cast shadow, no grass, no scenery, no red monument, no houses or people, no text, no watermark, no drawn checkerboard."
+        }
+      ],
+      "limitations": [
+        "Generated original dimensions differ from requested 1024 square (see metadata); original pixels and alpha preserved without resizing.",
+        "Visually chunky stepped clusters; exact 8px grid and flat limited palette not guaranteed by generator; subtle tonal variation remains."
+      ]
+    }
+  },
+  {
+    "source_record": "cozy-tree-seasons.json",
+    "content": {
+      "tool": "built-in image_gen__imagegen",
+      "transparent_background": true,
+      "pixel_edits": false,
+      "reference": "1-붙여넣은-이미지-1.jpg",
+      "assets": [
+        {
+          "season": "christmas",
+          "path": "src/assets/cozy/tree-christmas.png",
+          "source": "exec-b548458c-2829-4687-9d88-03b4d63f3e14.png",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "prompt": "Use case: stylized-concept. Asset type: production pixel-art tree sprite for a cozy village web game.\nInput image: supplied village artwork is STYLE REFERENCE ONLY; match its warmly handcrafted chunky pixel shapes and earthy limited palette. Do not recreate its scene or typography.\nCreate ONE isolated whole Christmas tree on a genuinely transparent background. Square 1024x1024 PNG. Rounded layered evergreen, warm golden star at top, restrained brick-red ribbons and gold baubles, one short garland, a handful of small simple gifts beside its foot. Broad flat clustered needle shapes, welcoming handmade silhouette. Dark teal outline #243d34, forest green 3-4-tone flat color ramp, warm brown trunk #9b6a3c and #cf9a58. Upper-left lighting. Very chunky square pixel clusters: approximately 128 logical pixels enlarged to 1024 with apparent 8x8px blocks. Large clean shapes with few detail marks; no fine dithering, no tiny needles, no smooth gradients or painterly texture. Front view with slight visible top surfaces, matching the reference apple tree.\nComposition: centered, consistent tree scale, full crown and star entirely inside canvas with at least 8% clear margin at top and sides. Feet at around 90% of canvas height. Include only tree and its few gifts; no ground patch, shadow ellipse, scene, people, houses, monument, lettering, watermark or border. Transparency is actual alpha, not a checkerboard pattern."
+        },
+        {
+          "season": "winter",
+          "path": "src/assets/cozy/tree-winter.png",
+          "source": "exec-1cd9519c-6c2b-4cea-b84b-906c39a9f129.png",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "prompt": "Use case: stylized-concept. Asset type: production pixel-art tree sprite for a cozy village web game.\nInput image 1 is STYLE REFERENCE ONLY: match village apple tree's warmly handcrafted chunky pixel shapes and earthy limited palette, no scene or typography. Input image 2 is a sibling Christmas tree STYLE/SCALE reference only: use similarly large flat clusters, dark teal outline, warm trunk and simple details.\nCreate ONE isolated whole WINTER BARE BROADLEAF TREE on a genuinely transparent background. Requested output square 1024x1024 PNG. A naturally tapered, slightly asymmetric branching deciduous tree with irregular organic boughs holding uneven thick cushions of snow. Large warm brown trunk #9b6a3c and #cf9a58, branches taper naturally and meander with asymmetry. Snow has cream highlights and quiet pale blue-green shadows, only 3-4 flat shades. Dark teal #243d34 outline. Upper-left light. Clearly winter, bare branches without leaves. Quiet cozy sturdy character.\nVery chunky pixel art, apparent 8x8px blocks at 1024 square (about128 logical pixels). Large square pixel clusters, flat3-4-tone ramps, simple sparse detailing, crisp stair-step shapes, as in the village reference; no thin realistic twigs, no tiny dithering, gradients, smooth painting, intricate bark, or evenly repeated mechanical Y-shaped branches.\nComposition: one entire tree centered, same overall subject scale as sibling; branch crown fully inside canvas with at least8% transparent margin on top and sides, trunk feet around90% of canvas height. Only the tree and attached snow. No ground patch or shadow ellipse, people, houses, scenery, monument, text, watermark, frame. Background is actual transparent alpha, not a painted checkerboard."
+        },
+        {
+          "season": "autumn",
+          "path": "src/assets/cozy/tree-autumn.png",
+          "source": "exec-f69499f8-7332-4da7-abcd-5bdf75be2840.png",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "prompt": "Use case: stylized-concept. Asset type: production pixel-art tree sprite for a cozy village web game.\nInput image1 is STYLE AND TREE-SHAPE REFERENCE ONLY: use the village central apple tree's large rounded asymmetric broadleaf canopy, irregular clusters, cozy warm earthy style. Do not recreate the scene or lettering. Input image2 is a sibling Christmas sprite STYLE reference only: match its chunky flat color clusters and dark teal outline.\nCreate ONE isolated whole AUTUMN BROADLEAF TREE on genuinely transparent background. Square1024x1024 PNG requested. Large rounded slightly asymmetric canopy like the reference apple tree, rich burnt-orange, warm ochre and muted golden clustered leaves. Big broad flat lobed clusters with a few gaps revealing interior branches. A few attached or nearby falling leaves only, no extensive scattered foliage. Natural warm brown forked trunk #9b6a3c/#cf9a58 with irregular subtly tapered branches, firmly planted visible feet. Dark teal outline #243d34, upper-left lighting, each material uses3-4 flat shades. Friendly sturdy natural silhouette, full and autumnal.\nHandcrafted chunky square pixel art, apparent8x8px blocks at1024 source, about128logical pixels. Large simple pixel clusters, few details, hard stair-stepped edges. No painterly shading, gradients, fine dithering, tiny texture, individual fine leaves or smooth detailed raster treatment.\nComposition: exactly one centered complete tree. Crown entirely inside frame, at least8% clear top and side margin. Feet around90% canvas height. Similar overall sprite scale and trunk style to sibling. Only tree and a few leaves. No ground patch, shadow ellipse, scene, house, person, monument, words, watermark, frame. Background must be true transparent alpha, no painted checkerboard."
+        }
+      ],
+      "limits": [
+        "Requested1024x1024, built-in returned1254x1254 originals, preserved without resampling.",
+        "Subject fully framed visually, but8% margins and feet90% placement are approximate, not exact.",
+        "Read-only alpha inspection found very low-alpha pixels beyond visible silhouette; originals preserved, not cleaned."
+      ]
+    }
+  },
+  {
+    "asset": "tistory-monument",
+    "source": "exec-79609fc9-e181-4cfc-a303-d85d851bd76c.png",
+    "tool": "built-in image_gen",
+    "transparent_background": true,
+    "prompt": "Isolated coral-red Tistory round medallion,exactly5 cream dots in3+1+1 T arrangement,on2course gray-green stone plinth. Cozy chunky pixelart,dark teal outline,upper-left light,3tone ramps. User attached concept as reference. No trees/people/text/scene;genuinely transparent background. Original requested1024/128logical grid;returned1254square retained."
+  }
+]

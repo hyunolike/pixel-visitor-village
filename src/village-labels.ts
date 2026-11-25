@@ -21,7 +21,7 @@ export const defaultVillageLabels: VillageLabels = {
   repository: 'GitHub에서 보기 ↗',
   repositoryLabel: 'Pixel Visitor Village 저장소 보기 (새 탭)',
   loadError: '마을 그래픽을 시작하지 못했어요. WebGL을 지원하는 브라우저에서 다시 열어 주세요.',
-  assetWarning: '나무 이미지를 불러오지 못해 기본 나무를 보여드려요.',
+  assetWarning: '일부 마을 그림을 불러오지 못해 기본 그림을 보여드려요.',
   seasons: {
     christmas: themes.christmas.name, spring: themes.spring.name,
     summer: themes.summer.name, autumn: themes.autumn.name, winter: themes.winter.name,

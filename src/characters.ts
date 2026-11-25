@@ -7,18 +7,18 @@ export const VISITOR_FACINGS=['front','side','back'] as const;
 
 // Original designs. Every costume uses the same anatomy and foot baseline.
 export const VISITOR_STYLES=[
-  {name:'딸기 우편배달부',hat:'beret',coat:'#d36372',light:'#ee9192',shade:'#9d405d',accent:'#ffe3a8',hair:'#754a44',skin:'#f3c6a0',skinShade:'#d79b7e'},
-  {name:'민트 산책가',hat:'beanie',coat:'#4b9b99',light:'#80c7b5',shade:'#326771',accent:'#f5d49a',hair:'#594645',skin:'#eab88b',skinShade:'#c38b6a'},
-  {name:'노란 우비 친구',hat:'hood',coat:'#e3ac4f',light:'#ffda78',shade:'#ad743d',accent:'#fff2c8',hair:'#825748',skin:'#c88b65',skinShade:'#a86c55'},
-  {name:'라벤더 리본',hat:'bow',coat:'#9a78ad',light:'#c3a4d0',shade:'#69577f',accent:'#f7b6bc',hair:'#4c414f',skin:'#f3c6a0',skinShade:'#d79b7e'},
-  {name:'숲속 정원사',hat:'cap',coat:'#6a9963',light:'#a6bd7c',shade:'#456851',accent:'#f7d497',hair:'#a16e45',skin:'#eab88b',skinShade:'#c38b6a'},
-  {name:'밤색 책방지기',hat:'hair',coat:'#b77a59',light:'#d7a17a',shade:'#80564e',accent:'#9dd4cd',hair:'#473b40',skin:'#c88b65',skinShade:'#a86c55'},
-  {name:'크림 곰돌이',hat:'bear',coat:'#c5bb9c',light:'#f2e9ce',shade:'#8e927d',accent:'#e6a3a1',hair:'#79594d',skin:'#f3c6a0',skinShade:'#d79b7e'},
-  {name:'밤하늘 털모자',hat:'pompom',coat:'#617da1',light:'#97b3cb',shade:'#425570',accent:'#d8b1c9',hair:'#a8754e',skin:'#eab88b',skinShade:'#c38b6a'},
+  {name:'딸기 우편배달부',hat:'beret',coat:'#ce655b',light:'#f08b73',shade:'#984e48',accent:'#ffe3a8',hair:'#754a44',skin:'#edc29a',skinShade:'#d79b7e'},
+  {name:'민트 산책가',hat:'beanie',coat:'#4e927d',light:'#90bd94',shade:'#315f54',accent:'#f5d49a',hair:'#594645',skin:'#e8b88f',skinShade:'#c38b6a'},
+  {name:'노란 우비 친구',hat:'hood',coat:'#d9a94a',light:'#f8d779',shade:'#a6733d',accent:'#fff2c8',hair:'#825748',skin:'#c88b65',skinShade:'#a86c55'},
+  {name:'라벤더 리본',hat:'bow',coat:'#a281aa',light:'#cfadd0',shade:'#6d5a7c',accent:'#f7b6bc',hair:'#4c414f',skin:'#edc29a',skinShade:'#d79b7e'},
+  {name:'숲속 정원사',hat:'cap',coat:'#719760',light:'#b1bc77',shade:'#466b4d',accent:'#f7d497',hair:'#a16e45',skin:'#e8b88f',skinShade:'#c38b6a'},
+  {name:'밤색 책방지기',hat:'hair',coat:'#ac7756',light:'#d5a173',shade:'#755340',accent:'#9dd4cd',hair:'#473b40',skin:'#c88b65',skinShade:'#a86c55'},
+  {name:'크림 곰돌이',hat:'bear',coat:'#d8caa4',light:'#f5e7bf',shade:'#a39c78',accent:'#e6a3a1',hair:'#79594d',skin:'#edc29a',skinShade:'#d79b7e'},
+  {name:'밤하늘 털모자',hat:'pompom',coat:'#638b99',light:'#a6bfbc',shade:'#3f6371',accent:'#d8b1c9',hair:'#a8754e',skin:'#e8b88f',skinShade:'#c38b6a'},
 ] as const;
 
-const ink='#34434b';
-const boots='#434354';
+const ink='#263e38';
+const boots='#2c3c3a';
 const colors=new Map<string,readonly number[]>();
 
 /** Pixel buffers keep art testable without a DOM or a GPU. No smoothing. */
@@ -58,6 +58,7 @@ export function visitorPixels(style:number,facing:VisitorFacing,frame:number):Ui
   r(side?7:5,y(15),side?7:10,7,outfit.shade);
   r(side?8:6,y(16),side?5:8,5,outfit.coat);
   r(side?8:6,y(16),side?2:3,3,outfit.light);
+  if(!back){r(side?9:7,y(17),side?3:6,4,'#f5dfb0');r(side?9:7,y(17),side?1:2,3,'#fff0c9');}
   r(side?7:5,y(22),side?7:10,1,ink);
   const leftArm=stride||(!stepping?0:frame===2?-1:1);
   if(!side){
@@ -82,12 +83,12 @@ export function visitorPixels(style:number,facing:VisitorFacing,frame:number):Ui
     r(4,y(6),5,7,outfit.hair);r(7,y(11),2,3,outfit.hair);
     r(16,y(9),2,2,outfit.skinShade);r(16,y(9),1,1,outfit.skin);
     r(13,y(blink?10:9),2,blink?1:3,ink);
-    if(!blink)r(13,y(9),1,1,'#fff5de');
+    if(!blink)r(13,y(9),1,1,'#f9e7bc');
     r(12,y(12),2,1,'#d98583');r(15,y(12),1,1,'#9b6159');
   }else{
     r(6,y(blink?10:9),2,blink?1:3,ink);r(12,y(blink?10:9),2,blink?1:3,ink);
-    if(!blink){r(6,y(9),1,1,'#fff5de');r(12,y(9),1,1,'#fff5de');}
-    r(5,y(12),2,1,'#e19791');r(13,y(12),2,1,'#e19791');r(9,y(13),2,1,'#a36b64');
+    if(!blink){r(6,y(9),1,1,'#f9e7bc');r(12,y(9),1,1,'#f9e7bc');}
+    r(5,y(12),2,1,'#d98e75');r(13,y(12),2,1,'#d98e75');r(9,y(13),2,1,'#a36b64');
     r(8,y(6),2,1,outfit.hair);r(12,y(7),2,1,outfit.hair);
   }
 
@@ -122,10 +123,10 @@ export function visitorPixels(style:number,facing:VisitorFacing,frame:number):Ui
     if(!back){
       if(side){
         r(12,y(9),4,3,outfit.accent);r(13,y(10),2,1,ink);
-        if(!blink)r(13,y(10),1,1,'#fff5de');
+        if(!blink)r(13,y(10),1,1,'#f9e7bc');
       }else{
         r(5,y(9),4,3,outfit.accent);r(11,y(9),4,3,outfit.accent);r(9,y(10),2,1,outfit.accent);r(6,y(10),2,1,ink);r(12,y(10),2,1,ink);
-        if(!blink){r(6,y(10),1,1,'#fff5de');r(12,y(10),1,1,'#fff5de');}
+        if(!blink){r(6,y(10),1,1,'#f9e7bc');r(12,y(10),1,1,'#f9e7bc');}
       }
     }
   }

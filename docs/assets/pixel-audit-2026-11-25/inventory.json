@@ -1,0 +1,163 @@
+{
+  "source": "30d4f58",
+  "inventory": {
+    "characters": {
+      "styles": [
+        "딸기 우편배달부",
+        "민트 산책가",
+        "노란 우비 친구",
+        "라벤더 리본",
+        "숲속 정원사",
+        "밤색 책방지기",
+        "크림 곰돌이",
+        "밤하늘 털모자"
+      ],
+      "facings": [
+        "front",
+        "side",
+        "back"
+      ],
+      "frames": 8,
+      "size": [
+        20,
+        28
+      ]
+    },
+    "png": {
+      "width": 420,
+      "height": 420,
+      "visibleColors": 51566,
+      "alphaLevels": 256,
+      "opaque": 1014,
+      "partial": 70071
+    },
+    "trees": [
+      {
+        "season": "spring",
+        "width": 180,
+        "height": 180,
+        "visibleColors": 13,
+        "alphaLevels": 3,
+        "opaque": 14365,
+        "partial": 237
+      },
+      {
+        "season": "summer",
+        "width": 180,
+        "height": 180,
+        "visibleColors": 14,
+        "alphaLevels": 3,
+        "opaque": 14365,
+        "partial": 237
+      },
+      {
+        "season": "autumn",
+        "width": 180,
+        "height": 180,
+        "visibleColors": 12,
+        "alphaLevels": 3,
+        "opaque": 14365,
+        "partial": 237
+      },
+      {
+        "season": "winter",
+        "width": 180,
+        "height": 180,
+        "visibleColors": 12,
+        "alphaLevels": 3,
+        "opaque": 7811,
+        "partial": 140
+      },
+      {
+        "season": "christmas",
+        "width": 180,
+        "height": 180,
+        "visibleColors": 11,
+        "alphaLevels": 3,
+        "opaque": 5956,
+        "partial": 241
+      }
+    ],
+    "props": {
+      "cottage": [
+        72,
+        80
+      ],
+      "shop": [
+        76,
+        76
+      ],
+      "cabin": [
+        62,
+        68
+      ],
+      "lamp": [
+        18,
+        46
+      ],
+      "bench": [
+        38,
+        24
+      ],
+      "sign": [
+        24,
+        30
+      ],
+      "fence": [
+        100,
+        18
+      ]
+    }
+  },
+  "metrics": [
+    {
+      "display": {
+        "x": 32,
+        "y": 282.59375,
+        "width": 311,
+        "height": 200,
+        "top": 282.59375,
+        "right": 343,
+        "bottom": 482.59375,
+        "left": 32
+      },
+      "canvas": [
+        156,
+        100
+      ]
+    },
+    {
+      "display": {
+        "x": 32,
+        "y": 282.59375,
+        "width": 256,
+        "height": 200,
+        "top": 282.59375,
+        "right": 288,
+        "bottom": 482.59375,
+        "left": 32
+      },
+      "canvas": [
+        128,
+        100
+      ]
+    }
+  ],
+  "captured": [
+    "01-scene-christmas",
+    "01-scene-spring",
+    "01-scene-summer",
+    "01-scene-autumn",
+    "01-scene-winter",
+    "02-mobile-375",
+    "02-mobile-320",
+    "03-characters-front",
+    "03-characters-side",
+    "03-characters-back",
+    "04-trees",
+    "05-props",
+    "06-guests-bubbles-ground",
+    "07-marketing"
+  ],
+  "pageErrors": []
+}

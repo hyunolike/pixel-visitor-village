@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { getTreeLayout, MAX_VISITORS, parseCount, VillageModel } from './model';
+import { getTreeLayout, getMonumentLayout, getVisitorSpriteLayout, MAX_VISITORS, parseCount, VillageModel } from './model';
 import { koreanDay, noticeForCount } from './visitor-notice';
 import { parseRefreshInterval, SharedVisitorRefresh } from './visitor-refresh';
 import { getHolidayLayout, HolidayCameoModel } from './holiday-cameo';
@@ -337,5 +337,44 @@ describe('automatic visitor greetings',()=>{
       expect(bubble.y-14*bubble.scale).toBeGreaterThanOrEqual(0);
       expect(bubble.y).toBeLessThanOrEqual(Math.max(1,height));
     }
+  });
+});
+
+
+describe('cozy village landmark placement',()=>{
+  it.each([[468,238],[156,100],[128,100],[80,30],[1,1],[0,0]])('keeps the complete monument in a %sx%s world',(width,height)=>{
+    const w=Math.max(1,width),h=Math.max(1,height),m=getMonumentLayout(width,height);
+    expect(m.size).toBeGreaterThan(0);expect(m.x-m.size/2).toBeGreaterThanOrEqual(0);
+    expect(m.x+m.size/2).toBeLessThanOrEqual(w);expect(m.base-m.size).toBeGreaterThanOrEqual(0);expect(m.base).toBeLessThanOrEqual(h);
+  });
+  it.each([[468,238],[156,100],[128,100]])('keeps the monument well-sized beneath the main tree at %sx%s',(width,height)=>{
+    const tree=getTreeLayout(width,height),monument=getMonumentLayout(width,height);
+    expect(monument.size/tree.size).toBeLessThanOrEqual(.33);
+    expect(monument.size/tree.size).toBeGreaterThan(.25);
+  });
+  it('preserves all requested visitors without spawning or walking through the monument plinth',()=>{
+    const model=new VillageModel();model.setCount(1000);
+    const blocked=(p:{x:number;y:number})=>p.x>.39&&p.x<.48&&p.y>.80&&p.y<.84;
+    expect(model.visitors).toHaveLength(1000);expect(model.visitors.some(blocked)).toBe(false);
+    expect(model.visitors.some(p=>p.x>.34&&p.x<.39&&p.y>.76&&p.y<.84)).toBe(true);
+    for(let i=0;i<200;i++)model.step(.05);
+    expect(model.visitors).toHaveLength(1000);expect(model.visitors.some(blocked)).toBe(false);
+  });
+});
+
+
+describe('complete visitor sprite display bounds',()=>{
+  it.each([[128,100],[156,100],[210,100],[211,100],[80,30],[1,1],[0,0]])('keeps both atlas sizes fully visible at %sx%s',(width,height)=>{
+    const w=Math.max(1,width),h=Math.max(1,height);
+    for(const [sw,sh] of [[16,22],[20,28]])for(const [x,y] of [[.035,.51],[.965,.94],[0,0],[1,1]]){
+      const p=getVisitorSpriteLayout(width,height,x,y,sw,sh);
+      expect(p.scale).toBeGreaterThan(0);expect(p.scale).toBeLessThanOrEqual(1);
+      expect(p.x-sw*p.scale/2).toBeGreaterThanOrEqual(-.000001);expect(p.x+sw*p.scale/2).toBeLessThanOrEqual(w+.000001);
+      expect(p.y-sh*p.scale).toBeGreaterThanOrEqual(-.000001);expect(p.y).toBeLessThanOrEqual(h+.000001);
+    }
+  });
+  it('keeps interior display points unchanged and pins the compact edge to eight pixels',()=>{
+    expect(getVisitorSpriteLayout(128,100,.5,.8,16,22)).toEqual({x:64,y:80,scale:1});
+    expect(getVisitorSpriteLayout(128,100,.035,.51,16,22)).toEqual({x:8,y:51,scale:1});
   });
 });

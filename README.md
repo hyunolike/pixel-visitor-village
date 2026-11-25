@@ -12,11 +12,11 @@
 
 설치 방법과 위젯 설정, 방문 수 집계와 문제 해결을 HTML 문서로 제공합니다. 새 홈과 문서를 Cloudflare Pages에 배포하고 공개 사이트에서 확인했습니다.
 
-[![방문자 수가 늘며 캐릭터가 모이는 작은 방문자 마을 소개 영상 미리보기](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
+[![방문자 수가 늘며 캐릭터가 모이는 작은 방문자 마을 소개 영상 미리보기](docs/assets/intro-preview.gif)](public/media/intro.mp4)
 
-**20초 소개 영상** — 위 미리보기는 README에서 자동으로 움직입니다. 클릭하면 데모의 영상 영역으로 이동합니다. [썸네일](public/media/intro-poster.jpg) · [MP4](public/media/intro.mp4) · [제작과 음원 출처](docs/features/visitor-village/intro-media.md)
+**20초 소개 영상** — 위 미리보기는 README에서 자동으로 움직입니다. 클릭하면 갱신한 MP4를 엽니다. [썸네일](public/media/intro-poster.jpg) · [MP4](public/media/intro.mp4) · [제작과 음원 출처](docs/features/visitor-village/intro-media.md)
 
-*실제 마을 그림과 이동 코드를 사용해 Claude Code의 brag 스킬로 제작했습니다. 영상 속 방문자 24명은 시연용 숫자입니다. 소개 영상은 운영 사이트에서 재생할 수 있습니다. 영상은 환경 에셋 개선 전 버전의 고정 렌더입니다.*
+*현재 코드의 실제 PixiJS 마을과 마을 작업실을 캡처해 HyperFrames로 다시 편집했습니다. 인사와 말풍선, 산타, 다섯 계절을 담았습니다. 0~24명은 시연 입력입니다. 갱신본은 위 MP4에서 확인할 수 있으며 공개 사이트 반영은 별도 배포가 필요합니다.*
 
 > 개편한 설치 도우미는 계절별 마을 미리보기와 한국어, 영어, 일본어, 중국어 간체를 지원합니다. 개편 내용을 Cloudflare Pages에 배포하고 공개 사이트에서 확인했습니다. 메인 데모와 소개 영상, 상세 기술 문서는 한국어로 제공됩니다. 기본 문서는 한국어이며 [English](README.en.md)에서 영어 설명을 볼 수 있습니다.
 
@@ -30,13 +30,13 @@
 - **화면에 보일 때 움직임 재생** — 숨겨진 탭과 화면 밖에서는 멈춥니다. 운영체제의 모션 줄이기 설정과 수동 정지도 반영합니다.
 - **블로그 안의 정해진 영역에 표시** — 반응형 크기를 지원하고, 캔버스가 본문 링크나 모바일 스크롤을 가로채지 않습니다.
 
-의상과 표정이 다른 **20×28px 캐릭터 8종**, 앞/옆/뒤 방향과 4프레임 걷기, 눈 깜박임이 들어 있습니다. 캐릭터 개선은 운영 사이트에 반영됐습니다. [확대 시트](docs/assets/characters-v2.png)와 [실제 마을 적용 화면](docs/assets/village-characters-v2.png)을 볼 수 있습니다. 아래 계절별 이미지는 주변 환경을 개선한 버전의 로컬 캡처입니다. 같은 환경 에셋은 공개 마을에도 반영됐습니다.
+의상과 표정이 다른 **20×28px 캐릭터 8종**과 앞/옆/뒤, 걷기/깜박임/손 인사가 있습니다. 작은 화면은 16×22px 아틀라스를 사용합니다. [최신 캐릭터 시트](docs/assets/cozy-village/characters-front.png)를 확인할 수 있습니다. 아래 계절별 이미지는 2026-11-25 첨부 콘셉트로 개편한 로컬 준비본이며 공개 반영은 별도 배포 단계입니다.
 
 ## 계절별 마을
 
 기본 테마는 날짜와 관계없이 **크리스마스**입니다. 데모의 ‘나무 꾸미기’에서 바로 바꿔 볼 수 있습니다.
 
-집의 기와 지붕과 창틀, 가게 차양, 돌길과 벤치를 새로 그렸습니다. 꽃과 열매, 낙엽과 눈으로 계절을 구분하고, 집과 소품은 캐릭터의 발 위치에 따라 앞뒤로 표시합니다. [나무와 소품 확대 시트](docs/assets/environment-v2.png)에서 디테일을 볼 수 있습니다.
+집의 기와 지붕과 창틀, 가게 차양, 돌길과 벤치를 새로 그렸습니다. 꽃과 열매, 낙엽과 눈으로 계절을 구분하고, 집과 소품은 캐릭터의 발 위치에 따라 앞뒤로 표시합니다. [나무와 소품 확대 시트](docs/assets/cozy-village/props.png)에서 디테일을 볼 수 있습니다.
 
 <table>
   <tr>
@@ -44,16 +44,16 @@
     <th>여름 · summer</th>
   </tr>
   <tr>
-    <td><img src="docs/assets/village-spring.png" alt="분홍 꽃나무와 꽃잎이 있는 봄 마을" width="480"></td>
-    <td><img src="docs/assets/village-summer.png" alt="푸른 잎이 무성한 큰 나무와 여름 마을" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-spring.png" alt="분홍 꽃나무와 꽃잎이 있는 봄 마을" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-summer.png" alt="푸른 잎이 무성한 큰 나무와 여름 마을" width="480"></td>
   </tr>
   <tr>
     <th>가을 · autumn</th>
     <th>겨울 · winter</th>
   </tr>
   <tr>
-    <td><img src="docs/assets/village-autumn.png" alt="주황 단풍나무와 낙엽이 있는 가을 마을" width="480"></td>
-    <td><img src="docs/assets/village-winter.png" alt="눈꽃나무와 눈 덮인 겨울 마을" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-autumn.png" alt="주황 단풍나무와 낙엽이 있는 가을 마을" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-winter.png" alt="눈꽃나무와 눈 덮인 겨울 마을" width="480"></td>
   </tr>
 </table>
 
@@ -88,22 +88,29 @@ Cloudflare Pages 공개 배포와 다른 출처에서의 위젯 로드는 확인
 
 티스토리가 페이지를 만들 때 넣어 준 방문자 수를 입력으로 사용합니다. 별도 방문자 집계 서버나 데이터베이스는 필요하지 않습니다.
 
+[![로고와 화살표로 직접 그린 방문자 마을 동작 구조](docs/assets/architecture/architecture-ko.png)](docs/assets/architecture/architecture-ko.svg)
+
+<details>
+<summary>텍스트로 동작 구조 보기</summary>
+
 ```mermaid
 flowchart TD
     T["티스토리 스킨 HTML<br/>오늘 방문자 수 치환"] -->|count 속성| W["visitor-village<br/>입력 검증과 생명주기 관리"]
     V["Cloudflare Pages 정적 호스팅<br/>visitor-village.js"] -->|ES 모듈 로드| W
-    W --> M["VillageModel<br/>캐릭터 수와 이동 상태 계산"]
+    W --> M["VillageModel + SocialModel<br/>캐릭터 수와 이동 상태 계산"]
     M --> R["PixiJS 렌더러<br/>WebGL로 마을 그리기"]
     A["계절별 픽셀 그림<br/>나무 PNG와 Canvas 그림"] --> R
     R --> C["Shadow DOM 내부 Canvas<br/>블로그에 지정한 영역에 표시"]
 ```
+
+</details>
 
 | 역할 | 기술과 파일 |
 | --- | --- |
 | 삽입과 스타일 분리 | Web Components, Shadow DOM · [visitor-village.ts](src/visitor-village.ts) |
 | 입력 검증과 이동 계산 | TypeScript · [model.ts](src/model.ts) |
 | 화면 그리기 | PixiJS 8, WebGL · [renderer.ts](src/renderer.ts) |
-| 나무 그림 | 크리스마스 PNG와 자체 Canvas 픽셀 그림 · [art.ts](src/art.ts), [themes.ts](src/themes.ts) |
+| 나무와 티스토리 조형물 | 다섯 계절 PNG와 Canvas 대체 그림 · [village-art.ts](src/village-art.ts), [art.ts](src/art.ts) |
 | 마을 환경과 배치 | 바닥, 집과 소품의 공유 아틀라스 · [environment.ts](src/environment.ts), [environment-layout.ts](src/environment-layout.ts), [pixel-art.ts](src/pixel-art.ts) |
 | 캐릭터 그림과 동작 | 자체 RGBA 픽셀 프레임과 공유 아틀라스 · [characters.ts](src/characters.ts), [character-motion.ts](src/character-motion.ts) |
 | 설치 코드 생성 | 브라우저 안에서 주소 정규화와 코드 생성 · [install-model.ts](src/install-model.ts) |
@@ -128,7 +135,7 @@ pixel-visitor-village/
 │   ├── character-motion.ts    # 방향, 걷기와 표정 선택
 │   ├── demo.ts / demo.css      # 마을 시연 화면
 │   ├── install*.ts / *.css     # 설치 도우미와 스타일
-│   └── assets/                 # 배포용 크리스마스 나무
+│   └── assets/                 # 배포용 계절 나무와 조형물
 ├── tests/widget.spec.ts        # 브라우저 통합 검증
 ├── examples/                   # 티스토리 삽입 코드
 ├── public/embed-example.html   # 독립 삽입 예제
@@ -220,11 +227,11 @@ pnpm preview   # http://127.0.0.1:4178/
 | [구현 계획](docs/features/visitor-village/implementation-plan.md) / [진행 상태](docs/features/visitor-village/tasks.md) | 작업 순서와 남은 일 |
 | [배포와 설치](docs/features/visitor-village/deployment.md) | Cloudflare Pages 설정과 설치 확인 기록 |
 | [독립 검토 기록](docs/features/visitor-village/reviews/) | 코드와 설치 흐름 검토 결과 |
-| [나무 원본과 생성 기록](assets/concepts/README.md) | AI로 생성한 크리스마스 트리 시안과 프롬프트 |
-| [소개 영상 제작과 출처](docs/features/visitor-village/intro-media.md) | Claude Code brag 실행, 영상 정보와 음악 라이선스 |
+| [나무 원본과 생성 기록](assets/concepts/README.md) | 현재 원화와 이전 나무 시안의 생성 기록 |
+| [소개 영상 제작과 출처](docs/features/visitor-village/intro-media.md) | 최신 화면 캡처와 HyperFrames 편집, 영상 정보와 음악 라이선스 |
 | [화면 캡처 안내](docs/assets/README.md) | 이 README에 사용한 실제 화면의 출처와 촬영 조건 |
 
-크리스마스 트리의 배포용 이미지는 [src/assets/christmas-tree.png](src/assets/christmas-tree.png)입니다. 다른 계절의 나무는 `src/art.ts`, 지형과 집, 거리 소품은 `src/environment.ts`, 개선 캐릭터는 `src/characters.ts`에서 직접 그립니다. 외부 게임 에셋은 사용하지 않았습니다.
+현재 계절 나무5종과 티스토리 조형물은 [src/assets/cozy](src/assets/cozy/)의 투명 PNG입니다. 첨부 콘셉트로 제작한 생성 원본과 프롬프트는 [원화 기록](assets/concepts/cozy/README.md)에 있습니다. 대체 그림은 `src/art.ts`, 지형과 집/소품은 `src/environment.ts`, 캐릭터는 `src/characters.ts`에서 편집합니다. 외부 게임 에셋은 사용하지 않았습니다.
 
 ## 직각 프레임과 크리스마스 손님
 

@@ -70,9 +70,13 @@ export class VisitorVillage extends HTMLElement {
   private detail(){return {count:this.visitorCount,season:this.season,paused:this.hasAttribute('paused')||this.motionReduced};}
   private emit(name:string,detail:unknown=this.detail()){this.dispatchEvent(new CustomEvent(name,{detail,bubbles:true,composed:true}));}
   private showStatus(){
-    const assetWarning=this.season==='christmas'&&this.view?.assetWarning;
+    const assetWarning=this.view?.assetWarning;
     this.status.textContent=(this.loadError?this.labels.loadError:'')||[...this.errors.values(),this.refreshError,assetWarning?(this.localizedLabels?.assetWarning??assetWarning):''].filter(Boolean).join(' ');
     this.frame.classList.toggle('has-status',Boolean(this.status.textContent));
+  }
+  private reportArtWarning(){
+    const attribute=this.view?.assetErrorAttribute;
+    if(attribute)this.emit('village-error',{attribute,message:this.labels.assetWarning});
   }
 
   attributeChangedCallback(attribute:string,_previous:string|null,value:string|null) {
@@ -91,7 +95,7 @@ export class VisitorVillage extends HTMLElement {
         if(this.isConnected)visitorRefresh.subscribe(this.onRefresh,this.refreshSeconds);
       }
       this.errors.delete(attribute);this.nameLabel.textContent=this.labels.seasons[this.model.season];
-      if(attribute==='season')this.view?.setTheme();
+      if(attribute==='season'){this.view?.setTheme();this.reportArtWarning();}
       if(attribute==='glow')this.view?.setGlow(value!=='false');
       this.showStatus();this.applyPlayback();this.view?.renderOnce();this.emit('village-change');
     } catch(error) {
@@ -113,7 +117,7 @@ export class VisitorVillage extends HTMLElement {
       this.resizeObserver=new ResizeObserver(()=>{view.resize();this.applyPlayback();});this.resizeObserver.observe(this);
       this.intersectionObserver=new IntersectionObserver(entries=>{this.visible=entries[0]?.isIntersecting??true;this.applyPlayback();});this.intersectionObserver.observe(this);
       this.queueNotice();this.showStatus();this.applyPlayback();this.emit('village-ready');this.emit('village-change');
-      if(view.assetWarning&&this.season==='christmas')this.emit('village-error',{attribute:'tree',message:view.assetWarning});
+      this.reportArtWarning();
     }).catch(error=>{
       if(generation!==this.generation||!this.isConnected)return;
       this.loadError='마을 그래픽을 시작하지 못했어요. WebGL을 지원하는 브라우저에서 다시 열어 주세요.';

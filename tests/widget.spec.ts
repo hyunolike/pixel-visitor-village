@@ -333,10 +333,10 @@ test('rapid reconnect cancels stale generations before GPU creation',async({page
   await expect(page.locator('visitor-village canvas')).toHaveCount(1);
 });
 test('missing Christmas image falls back to a basic tree without breaking other seasons',async({page})=>{
-  await page.route('**/christmas-tree-*.png',route=>route.abort());
+  await page.route('**/tree-christmas-*.png',route=>route.abort());
   await page.goto('/');
   await expect(page.locator('visitor-village canvas')).toBeVisible();
-  await expect(page.locator('visitor-village [role=status]')).toContainText('기본 나무');
+  await expect(page.locator('visitor-village [role=status]')).toContainText('기본 그림');
   await page.locator('visitor-village').evaluate(el=>el.setAttribute('season','summer'));
   expect(await state(page)).toMatchObject({count:24,season:'summer'});
   await expect(page.locator('visitor-village [role=status]')).toBeEmpty();
@@ -1016,5 +1016,51 @@ test('atelier field boundaries retain non-text contrast on light and dark surfac
       return (pair[1]+.05)/(pair[0]+.05);
     });
     expect(ratio).toBeGreaterThanOrEqual(3);
+  }
+});
+
+
+test('cozy art retries a failed monument for a new village without losing either visitor total',async({page})=>{
+  let requests=0;
+  await page.addInitScript(()=>{(window as any).artErrors=[];document.addEventListener('village-error',(event:any)=>{if(['tree','monument'].includes(event.detail.attribute))(window as any).artErrors.push(event.detail);});});
+  await page.route('**/tistory-monument-*.png',route=>{requests++;return requests===1?route.abort():route.continue();});
+  await page.goto('/');await page.waitForFunction(()=>(document.querySelector('visitor-village') as any)?.ready);
+  await expect(page.locator('visitor-village').first().locator('[role=status]')).toContainText('기본 그림');
+  await page.evaluate(()=>{const village=document.createElement('visitor-village');village.id='cozy-second';village.setAttribute('count','37');village.style.cssText='display:block;height:420px';document.body.append(village);});
+  await page.waitForFunction(()=>(document.querySelector('#cozy-second') as any)?.ready);
+  expect(await page.evaluate(()=>(window as any).artErrors[0].attribute)).toBe('monument');
+  expect(requests).toBe(2);expect(await page.locator('visitor-village').first().evaluate(el=>(el as any).visitorCount)).toBe(24);
+  expect(await page.locator('#cozy-second').evaluate(el=>(el as any).visitorCount)).toBe(37);await expect(page.locator('#cozy-second [role=status]')).toBeEmpty();
+});
+
+test('cozy seasonal artwork failure remains localized while code creation and counting work',async({page})=>{
+  await page.addInitScript(()=>{(window as any).artErrors=[];document.addEventListener('village-error',(event:any)=>{if(['tree','monument'].includes(event.detail.attribute))(window as any).artErrors.push(event.detail);});});
+  await page.route('**/tree-summer-*.png',route=>route.abort());await page.goto('/install.html?lang=ja');await page.waitForFunction(()=>(document.querySelector('#preview-village') as any)?.ready);
+  await expect(page.locator('#preview-village [role=status]')).toBeEmpty();await page.locator('input[name=season][value=summer]').check();
+  await expect(page.locator('#preview-village [role=status]')).toContainText('代わりの絵');
+  expect(await page.evaluate(()=>(window as any).artErrors)).toEqual([expect.objectContaining({attribute:'tree',message:expect.stringContaining('代わりの絵')})]);
+  expect(await page.locator('#preview-village').evaluate(el=>(el as any).visitorCount)).toBe(24);
+  await page.locator('#blog-url').fill('example.tistory.com');await page.locator('#create-code').click();expect(await page.locator('#install-code').inputValue()).toContain('season="summer"');
+  await page.locator('input[name=season][value=winter]').check();await expect(page.locator('#preview-village [role=status]')).toBeEmpty();
+});
+
+test('cozy shared artwork survives removal of a neighboring widget',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await page.waitForFunction(()=>(document.querySelector('visitor-village') as any)?.ready);
+  await page.evaluate(()=>{const village=document.createElement('visitor-village');village.id='cozy-survivor';village.setAttribute('count','0');village.setAttribute('season','summer');village.setAttribute('paused','');village.setAttribute('glow','false');village.style.cssText='display:block;width:320px;height:420px';document.body.append(village);});
+  await page.waitForFunction(()=>(document.querySelector('#cozy-survivor') as any)?.ready);
+  const before=await page.locator('#cozy-survivor').evaluate(el=>{el.setAttribute('season','summer');return el.shadowRoot!.querySelector('canvas')!.toDataURL();});
+  expect(before.length).toBeGreaterThan(5000);
+  const after=await page.evaluate(()=>{document.querySelector('visitor-village')!.remove();const village=document.querySelector('#cozy-survivor')!;village.setAttribute('season','summer');return village.shadowRoot!.querySelector('canvas')!.toDataURL();});
+  await expect(page.locator('#cozy-survivor [role=status]')).toBeEmpty();expect(after).toBe(before);
+});
+
+
+test('cozy mobile renderer keeps every visitor sprite inside the actual canvas',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});
+  for(const width of [320,375]){
+    await page.setViewportSize({width,height:780});await page.goto('/install.html?lang=ko');await page.waitForFunction(()=>(document.querySelector('#preview-village') as any)?.ready);
+    await page.locator('#preview-village').evaluate(el=>el.setAttribute('count','5000'));
+    const overflow=await page.locator('#preview-village').evaluate(el=>{const view=(el as any).view,{width,height}=view.app.screen;return view.people.map((sprite:any,id:number)=>({id,b:sprite.getBounds()})).filter(({b}:any)=>b.minX<-.001||b.maxX>width+.001||b.minY<-.001||b.maxY>height+.001).map(({id}:any)=>id);});
+    expect(overflow).toEqual([]);expect(await page.locator('#preview-village').evaluate(el=>(el as any).visitorCount)).toBe(5000);
   }
 });

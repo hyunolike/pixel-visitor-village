@@ -12,11 +12,11 @@ A web widget for Tistory blogs that creates one pixel character for each visitor
 
 A browsable HTML guide covers installation, widget options, counting rules and troubleshooting. The new home and guide are live on Cloudflare Pages and have passed public-site checks.
 
-[![Animated preview of a pixel village filling with characters as the visitor count grows](docs/assets/intro-preview.gif)](https://pixel-visitor-village.pages.dev/#intro-film)
+[![Animated preview of a pixel village filling with characters as the visitor count grows](docs/assets/intro-preview.gif)](public/media/intro.mp4)
 
-**20-second introduction** — The GIF plays in the README. Click it to open the video section of the demo. [Poster](public/media/intro-poster.jpg) | [MP4](public/media/intro.mp4) | [Production and music credits](docs/features/visitor-village/intro-media.md)
+**20-second introduction** — The GIF plays in the README. Click it to open the updated MP4. [Poster](public/media/intro-poster.jpg) | [MP4](public/media/intro.mp4) | [Production and music credits](docs/features/visitor-village/intro-media.md)
 
-*Created with Claude Code's brag skill using the project's village artwork and movement code. The 24 visitors in the video are a demo value. The video is available on the live site and is a fixed render from before the scenery update.*
+*Refreshed in HyperFrames using captures of the current PixiJS widget and installation workshop: greetings, bubbles, Santa and five seasons. Counts 0–24 are demo inputs. The updated MP4 is linked above; publishing it to the live site requires a separate deployment.*
 
 > The redesigned installation helper supports Korean, English, Japanese, and Simplified Chinese, with a live seasonal preview. The update is live on Cloudflare Pages and has passed public-site checks. The main demo, introduction video, and technical documents remain in Korean. Translated READMEs are linked above.
 
@@ -30,26 +30,26 @@ A browsable HTML guide covers installation, widget options, counting rules and t
 - **Motion while visible** — Pauses in hidden tabs and outside the viewport. Respects the system's reduced motion preference and manual pause.
 - **Fits into your blog** — A responsive, bounded canvas that lets readers use article links and scroll on mobile.
 
-There are **eight 20×28px character designs**, with distinct outfits and expressions, front/side/back views, four-frame walk cycles, and blinking. The updated characters are available on the live site. See the [enlarged sprite sheet](docs/assets/characters-v2.png) and [village screenshot](docs/assets/village-characters-v2.png).
+Eight 20×28px characters retain front, side and back views with walking, blinking and greeting poses. Compact screens use a 16×22px atlas. See the [current character sheet](docs/assets/cozy-village/characters-front.png).
 
-The seasonal screenshots below are local captures of the updated scenery. The same scenery assets are also available on the live site.
+The seasonal screenshots below show the2026-11-25 local artwork rebuild based on the supplied concept. Public rollout is a separate deployment step.
 
 ## Seasonal villages
 
 **Christmas** is the default theme, regardless of the date. Use the demo's tree customization panel (나무 꾸미기) to switch themes.
 
-The updated scenery includes tiled roofs, window frames, shop awnings, stone paths, and benches. Flowers, fruit, fallen leaves, and snow distinguish the seasons. Houses and props are sorted in front of or behind characters by foot position. See the [tree and scenery sheet](docs/assets/environment-v2.png) for details.
+The gallery shows the rebuilt local artwork from November 25, 2026; public deployment is a separate step. The updated scenery includes tiled roofs, window frames, shop awnings, stone paths, and benches. Flowers, fruit, fallen leaves, and snow distinguish the seasons. Houses and props are sorted in front of or behind characters by foot position. See the [tree and scenery sheet](docs/assets/cozy-village/props.png) for details.
 
 <table>
   <tr><th>Spring</th><th>Summer</th></tr>
   <tr>
-    <td><img src="docs/assets/village-spring.png" alt="Spring village with a pink flowering tree and petals" width="480"></td>
-    <td><img src="docs/assets/village-summer.png" alt="Summer village with a large leafy green tree" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-spring.png" alt="Spring village with a pink flowering tree and petals" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-summer.png" alt="Summer village with a large leafy green tree" width="480"></td>
   </tr>
   <tr><th>Autumn</th><th>Winter</th></tr>
   <tr>
-    <td><img src="docs/assets/village-autumn.png" alt="Autumn village with orange foliage and fallen leaves" width="480"></td>
-    <td><img src="docs/assets/village-winter.png" alt="Snow-covered winter village with a frosted tree" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-autumn.png" alt="Autumn village with orange foliage and fallen leaves" width="480"></td>
+    <td><img src="docs/assets/cozy-village/scene-winter.png" alt="Snow-covered winter village with a frosted tree" width="480"></td>
   </tr>
 </table>
 
@@ -84,22 +84,29 @@ Public deployment and loading the widget from another origin have been verified.
 
 The widget reads the visitor count supplied when Tistory renders the page. No separate visitor tracking server or database is required.
 
+[![Hand-drawn architecture with logos and data flow](docs/assets/architecture/architecture-en.png)](docs/assets/architecture/architecture-en.svg)
+
+<details>
+<summary>Text version of the architecture</summary>
+
 ```mermaid
 flowchart TD
     T["Tistory skin HTML<br/>Today's visitor count"] -->|count attribute| W["visitor-village<br/>Validation and lifecycle"]
     V["Cloudflare Pages static hosting<br/>visitor-village.js"] -->|ES module| W
-    W --> M["VillageModel<br/>Character count and movement"]
+    W --> M["VillageModel + SocialModel<br/>Character count and movement"]
     M --> R["PixiJS renderer<br/>WebGL village"]
     A["Seasonal pixel art<br/>Tree PNG and Canvas artwork"] --> R
     R --> C["Canvas inside Shadow DOM<br/>Bounded area in the blog"]
 ```
+
+</details>
 
 | Responsibility | Technology and source |
 | --- | --- |
 | Embedding and style isolation | Web Components, Shadow DOM — [visitor-village.ts](src/visitor-village.ts) |
 | Input validation and movement | TypeScript — [model.ts](src/model.ts) |
 | Rendering | PixiJS 8, WebGL — [renderer.ts](src/renderer.ts) |
-| Tree artwork | Christmas PNG and original Canvas pixel art — [art.ts](src/art.ts), [themes.ts](src/themes.ts) |
+| Trees and Tistory monument | Five seasonal PNGs and Canvas fallbacks — [village-art.ts](src/village-art.ts), [art.ts](src/art.ts) |
 | Scenery and layout | Shared atlases for ground, houses, and props — [environment.ts](src/environment.ts), [environment-layout.ts](src/environment-layout.ts), [pixel-art.ts](src/pixel-art.ts) |
 | Characters and motion | Original RGBA pixel frames and shared atlas — [characters.ts](src/characters.ts), [character-motion.ts](src/character-motion.ts) |
 | Installation snippets | URL normalization and code generation in the browser — [install-model.ts](src/install-model.ts) |
@@ -179,7 +186,7 @@ pnpm test:e2e  # Check the built output in Chrome
 pnpm preview   # http://127.0.0.1:4178/
 ```
 
-The build writes the demo and installation helper to `dist/`, and the standalone ES module to `dist/widget/visitor-village.js`. The module includes PixiJS, internal styles, and the tree image. Open `/embed-example.html` on the preview server to check embedding on a separate page.
+The build writes the demo and installation helper to `dist/`, and the standalone ES module to `dist/widget/visitor-village.js`. The module includes PixiJS, internal styles, and all six landmark images. Open `/embed-example.html` on the preview server to check embedding on a separate page.
 
 Browser tests run installed Chrome in headless mode; mobile checks use emulation. Install Chrome or adjust `channel` in [playwright.config.ts](playwright.config.ts) for another browser setup.
 
@@ -205,10 +212,10 @@ The detailed documents linked here are in Korean.
 | [Deployment and installation](docs/features/visitor-village/deployment.md) | Cloudflare Pages configuration and installation checks |
 | [Independent reviews](docs/features/visitor-village/reviews/) | Code and installation flow review records |
 | [Tree concepts and generation notes](assets/concepts/README.md) | AI-generated Christmas tree concepts and prompts |
-| [Introduction video credits](docs/features/visitor-village/intro-media.md) | Claude Code brag production, video details, and music license |
+| [Introduction video credits](docs/features/visitor-village/intro-media.md) | Current-screen capture, HyperFrames editing, video details and music license |
 | [Screenshot notes](docs/assets/README.md) | Sources and capture conditions for README images |
 
-The production Christmas tree image is [src/assets/christmas-tree.png](src/assets/christmas-tree.png). Other seasonal trees are drawn in `src/art.ts`, scenery in `src/environment.ts`, and updated characters in `src/characters.ts`. No external game assets are used.
+The five seasonal trees and Tistory monument use transparent PNGs in [src/assets/cozy](src/assets/cozy/). Generated originals and prompts are recorded in [asset provenance](assets/concepts/cozy/README.md). Fallback art remains in `src/art.ts`, scenery in `src/environment.ts`, and characters in `src/characters.ts`. No external game assets are used.
 
 ## Square frames and Christmas guests
 

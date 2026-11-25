@@ -119,7 +119,7 @@ const en: Messages = {
   village: {
     region: 'Visitor village preview', repository: 'View on GitHub ↗', repositoryLabel: 'View the Pixel Visitor Village repository (new tab)',
     loadError: 'The village graphics could not start. Try a browser with WebGL support.',
-    assetWarning: 'The tree image could not load. A fallback tree is shown.',
+    assetWarning: 'Some village artwork could not load. Fallback artwork is shown.',
     seasons: {christmas: 'Christmas square', spring: 'Spring blossoms', summer: 'Summer greenery', autumn: 'Autumn leaves', winter: 'Winter snow'},
     visitors: count => `${count.toLocaleString('en')} visitors`,
     guests: {santa: 'Santa (Christmas decoration)', rudolph: 'Rudolph (Christmas decoration)'},
@@ -166,7 +166,7 @@ const ja: Messages = {
   },
   village: {
     region: '訪問者の村のプレビュー', repository: 'GitHubで見る ↗', repositoryLabel: 'Pixel Visitor Villageのリポジトリを見る（新しいタブ）',
-    loadError: '村の描画を開始できませんでした。WebGL対応ブラウザーでお試しください。', assetWarning: '木の画像を読み込めないため、代わりの木を表示しています。',
+    loadError: '村の描画を開始できませんでした。WebGL対応ブラウザーでお試しください。', assetWarning: '村の画像を一部読み込めないため、代わりの絵を表示しています。',
     seasons: {christmas: 'クリスマスの広場', spring: '春の花咲く広場', summer: '夏の緑の広場', autumn: '秋の紅葉の広場', winter: '冬の雪の広場'},
     visitors: count => `訪問者 ${count.toLocaleString('ja')}人`,
     guests: {santa: 'サンタ（クリスマスの飾り）', rudolph: 'ルドルフ（クリスマスの飾り）'},
@@ -211,7 +211,7 @@ const zh: Messages = {
   },
   village: {
     region: '访客村庄预览', repository: '在 GitHub 上查看 ↗', repositoryLabel: '查看 Pixel Visitor Village 仓库（新标签页）',
-    loadError: '无法启动村庄画面，请使用支持 WebGL 的浏览器。', assetWarning: '无法加载树木图片，已显示备用树木。',
+    loadError: '无法启动村庄画面，请使用支持 WebGL 的浏览器。', assetWarning: '部分村庄图片加载失败，已显示备用图案。',
     seasons: {christmas: '圣诞广场', spring: '春日花开广场', summer: '夏日绿荫广场', autumn: '秋日红叶广场', winter: '冬日雪景广场'},
     visitors: count => `访客 ${count.toLocaleString('zh-CN')}人`,
     guests: {santa: '圣诞老人（圣诞装饰）', rudolph: '鲁道夫（圣诞装饰）'},

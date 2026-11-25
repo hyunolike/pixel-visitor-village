@@ -5,7 +5,7 @@ import { blend,brush,ellipse,hash,surface,type PixelBrush } from './pixel-art';
 
 export interface VillageScenery extends VillageObjectLayout{canvas:HTMLCanvasElement}
 export interface VillageScene{ground:HTMLCanvasElement;objects:VillageScenery[]}
-const wood='#685546',woodLight='#b9976b',ink='#495247';
+const wood='#654d35',woodLight='#c39a60',ink='#2c4539';
 const snowy=(season:Season)=>season==='christmas'||season==='winter';
 
 function pine(r:PixelBrush,x:number,base:number,height:number,color:string,snow=false):void{
@@ -15,6 +15,10 @@ function pine(r:PixelBrush,x:number,base:number,height:number,color:string,snow=
     r(x-spread,base-height+row*height*.12,spread*2+1,height*.17,color);
     if(snow&&row%2===1)r(x-spread+1,base-height+row*height*.12,spread*1.3+1,1,'#d4e4df');
   }
+}
+function shrub(r:PixelBrush,x:number,y:number,size:number,season:Season):void{
+  const t=themes[season],dark=blend(t.pine,'#203e31',.22),light=blend(t.leaf2,'#a2b66a',.35);
+  ellipse(r,x,y,size,size*.52,dark,2);ellipse(r,x-1,y-2,size-2,size*.44,t.pine,2);ellipse(r,x-size*.25,y-size*.2,size*.45,size*.2,snowy(season)?'#e5e7cb':light,2);
 }
 function flowers(r:PixelBrush,x:number,y:number,season:Season):void{
   if(snowy(season)){
@@ -44,12 +48,12 @@ function window(r:PixelBrush,x:number,y:number,width:number,height:number,t:Them
 }
 function house(kind:'cottage'|'shop'|'cabin',season:Season):HTMLCanvasElement{
   const [w,h]=PROP_SIZES[kind],{canvas,ctx}=surface(w,h),r=brush(ctx),t=themes[season];
-  const cold=snowy(season),floor=h-9,roofBase=Math.round(h*.43),cx=Math.floor(w/2);
+  const cold=snowy(season),floor=h-9,roofBase=Math.round(h*(kind==='shop'?.39:kind==='cabin'?.46:.43)),cx=Math.floor(w/2);
   const roof=kind==='cabin'?blend(t.roof,'#466c72',.45):t.roof;
-  const roofDark=blend(roof,'#3c4146',.35),roofLight=blend(roof,'#edbc8a',.27);
+  const roofDark=blend(roof,'#3c4146',.35),roofLight=blend(roof,'#f0bd78',.33);
   ellipse(r,cx,h-3,w*.43,3,'#2c4b3b35',1);
   // Warm front, shaded side wall, stone footing and alternating wall joints.
-  r(9,roofBase-1,w-17,floor-roofBase+2,wood);
+  r(8,roofBase-1,w-16,floor-roofBase+3,ink);
   r(10,roofBase,w-20,floor-roofBase,t.wall);
   r(w-19,roofBase+2,9,floor-roofBase-2,blend(t.wall,wood,.28));
   r(11,roofBase+1,2,floor-roofBase-2,blend(t.wall,'#fff5d8',.55));
@@ -60,11 +64,11 @@ function house(kind:'cottage'|'shop'|'cabin',season:Season):HTMLCanvasElement{
   for(let y=6;y<roofBase-7;y+=4)r(w-23,y,5,1,'#7c6f64');
   r(w-25,2,10,3,cold?'#e5ede2':'#b7aa91');
   if(cold){r(w-22,0,3,1,'#dbe6de88');r(w-20,1,3,1,'#dbe6de66');}
-  for(let y=6;y<=roofBase;y+=2){
+  for(let y=6;y<=roofBase;y+=3){
     const half=Math.round(4+(w/2-6)*(y-6)/(roofBase-6));
-    r(cx-half,y,half*2+1,3,roofDark);r(cx-half+2,y,Math.max(1,half*2-3),2,roof);
+    r(cx-half,y,half*2+1,4,roofDark);r(cx-half+2,y,Math.max(1,half*2-3),3,roof);
     r(cx-half+2,y,Math.max(1,half*.7),1,roofLight);
-    for(let x=cx-half+6+(y%4)*2;x<cx+half-3;x+=9)r(x,y,1,2,roofDark);
+    for(let x=cx-half+7+(y%2)*4;x<cx+half-3;x+=11)r(x,y,1,3,roofDark);
     if(cold&&y%6===0)r(cx-half+1,y-1,Math.max(1,half*.75),2,'#dce8df');
   }
   r(1,roofBase+2,w-2,2,wood);r(3,roofBase+2,w-6,1,woodLight);
@@ -96,6 +100,7 @@ function house(kind:'cottage'|'shop'|'cabin',season:Season):HTMLCanvasElement{
       r(x,floor-2,6,4,'#986f58');r(x-1,floor-3,8,2,'#bd9972');flowers(r,x+3,floor-3,season);
     }
   }
+  if(kind!=='cabin'){shrub(r,6,floor+1,7,season);shrub(r,w-7,floor+1,7,season);}
   if(season==='christmas')for(let x=8;x<w-6;x+=7){r(x,roofBase+5,1,1,'#536b4a');r(x,roofBase+6,1,2,x%3?'#f1cd78':'#d27666');}
   return canvas;
 }
@@ -134,11 +139,11 @@ function fence(width:number,height:number,season:Season):HTMLCanvasElement{
 
 function ground(width:number,height:number,season:Season):HTMLCanvasElement{
   const {canvas,ctx}=surface(width,height),r=brush(ctx),w=canvas.width,h=canvas.height,t=themes[season];
-  const cold=snowy(season),cx=w/2,cy=h*.80,rx=w*.33,ry=Math.max(4,h*.085);
+  const cold=snowy(season),cx=w/2,cy=h*.82,rx=w*.35,ry=Math.max(4,h*.085);
   r(0,0,w,h,t.sky);
   if(t.night){
     for(let i=0;i<46;i++)r(hash(i+12)*w,hash(i+42)*h*.35,i%7===0?2:1,1,i%4?'#91b5b5':'#e5d4a6');
-    r(w*.88,h*.105,8,9,'#e2e6c8');r(w*.88+4,h*.105-1,5,10,t.sky);
+    ellipse(r,w*.88,h*.12,5,6,'#e7e2b4',1);ellipse(r,w*.88+3,h*.12-2,5,6,t.sky,1);
   }else{
     for(const [nx,ny] of [[.14,.14],[.78,.2]]){const c=blend(t.sky,'#fff9e6',.40);ellipse(r,w*nx,h*ny,w*.07,3,c);ellipse(r,w*nx-7,h*ny-2,w*.03,4,c);}
   }
@@ -149,13 +154,14 @@ function ground(width:number,height:number,season:Season):HTMLCanvasElement{
   for(let i=0;i<28;i++)pine(r,w*i/27,h*.435,8+hash(i+45)*Math.min(17,h*.07),blend(t.pine,t.haze,.62));
   r(0,h*.435,w,h,t.ground);
   for(let i=0;i<17;i++)pine(r,w*i/16,h*.49,12+hash(i+88)*Math.min(20,h*.1),blend(t.pine,t.ground,.12),cold);
+  for(let i=0;i<10;i++){const x=w*(i+.5)/10;shrub(r,x,h*.515,5+hash(i+77)*4,season);}
   const nearGrass=blend(t.ground,'#3e7054',cold?.08:.20),lightGrass=blend(t.ground,'#ece5ac',.18);
-  for(let y=Math.round(h*.49);y<h;y+=8)for(let x=2;x<w;x+=11){
+  for(let y=Math.round(h*.49);y<h;y+=13)for(let x=2;x<w;x+=19){
     const seed=x*7+y*13;
     const px=x+hash(seed)*6,py=y+hash(seed+1)*5;
     if(((px-cx)/Math.max(1,rx+4))**2+((py-cy)/Math.max(1,ry+3))**2<1||(py>cy&&Math.abs(px-cx)<w*.055))continue;
     if(cold){if(hash(seed+2)>.65){r(px,py,4,1,'#e5eee6');r(px+2,py-1,2,1,'#c7d9d4');}}
-    else if(hash(seed+2)>.35){r(px,py,1,2,nearGrass);r(px-1,py+1,3,1,lightGrass);if(hash(seed+3)>.6)r(px+2,py,1,1,nearGrass);}
+    else if(hash(seed+2)>.52){r(px,py,1,3,nearGrass);r(px-2,py+2,5,1,lightGrass);r(px+2,py+1,1,2,nearGrass);}
   }
   // A transparent path mask clips staggered paving stones to plaza and entry road.
   const path=surface(w,h),p=brush(path.ctx),edge=blend(t.path,'#687463',.28);
