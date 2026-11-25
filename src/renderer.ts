@@ -1,7 +1,7 @@
 import { Application, Container, Graphics, Rectangle, Sprite, Texture } from 'pixi.js';
 import { loadVillageArt } from './village-art';
 import { hash, seasonalTree, surface, treeGlow, monumentArt } from './art';
-import { getTreeLayout, getMonumentLayout, getVisitorSpriteLayout, VillageModel, type Season } from './model';
+import { hitVisitor, getTreeLayout, getMonumentLayout, getVisitorSpriteLayout, VillageModel, type Season } from './model';
 import { themes } from './themes';
 import { createVillageScene,type VillageScenery } from './environment';
 import { CHARACTER_WIDTH, CHARACTER_HEIGHT, CHARACTER_FRAMES, VISITOR_STYLES, VISITOR_FACINGS, visitorPixels } from './characters';
@@ -31,6 +31,7 @@ export class VillageRenderer {
   private pose:VisitorPose={facing:'front',flip:false,frame:0};
   private people:Sprite[]=[];
   private bubbles:Sprite[]=[];
+  private greetingBubble=new Sprite();
   private bubbleAtlas:Texture|undefined;
   private bubbleFrames:Texture[]=[];
   private backgroundTexture:Texture|undefined;
@@ -102,6 +103,7 @@ export class VillageRenderer {
         const bubble=new Sprite(view.bubbleFrames[0]);bubble.anchor.set(.5,1);bubble.visible=false;
         view.bubbles.push(bubble);view.objects.addChild(bubble);
       }
+      view.greetingBubble.anchor.set(.5,1);view.greetingBubble.visible=false;view.objects.addChild(view.greetingBubble);
       const guests=surface(HOLIDAY_WIDTH*2,HOLIDAY_HEIGHT*2);
       view.guestAtlas=Texture.from(guests.canvas);view.guestAtlas.source.scaleMode='nearest';
       (['santa','rudolph'] as const).forEach((kind,row)=>{
@@ -177,6 +179,14 @@ export class VillageRenderer {
 
   setGlow(enabled:boolean) {this.glowEnabled=enabled;this.renderState();this.app.render();}
   setLabels(labels:VillageLabels) {this.labels=labels;this.renderOnce();}
+  hitVisitor(x:number,y:number) {
+    const bounds=this.app.canvas.getBoundingClientRect();
+    return hitVisitor(this.model.visitors,this.app.screen.width,this.app.screen.height,x,y,bounds.width/this.app.screen.width,bounds.height/this.app.screen.height);
+  }
+  greetAt(clientX:number,clientY:number):number|undefined {
+    const bounds=this.app.canvas.getBoundingClientRect();
+    return this.hitVisitor((clientX-bounds.left)*this.app.screen.width/bounds.width,(clientY-bounds.top)*this.app.screen.height/bounds.height);
+  }
   setMotionReduced(reduced:boolean) {
     if(this.dead)return;
     // A new renderer may inherit a model disabled by a previous connection.
@@ -197,13 +207,24 @@ export class VillageRenderer {
     this.model.visitors.forEach((p,index)=>{
       const sprite=this.people[index];
       const interaction=this.model.social.getPartner(p.id),partner=interaction?this.model.visitors[interaction.partnerId]:undefined;
-      const pose=interaction&&partner
+      const greeting=this.model.greeting?.id===p.id?this.model.greeting:null;
+      const pose=greeting
+        ?{facing:'front' as const,flip:false,frame:this.motionReduced?6:6+Math.floor(greeting.age*4)%2}
+        :interaction&&partner
         ?interactionPose((partner.x-p.x)*width,(partner.y-p.y)*height,interaction.pair.age,this.pose)
         :visitorPose(p,this.model.elapsed,width,height,this.pose);
       sprite.texture=(width<=210||height<110?this.compactFrames:this.frames)[p.id%VISITOR_STYLES.length][VISITOR_FACINGS.indexOf(pose.facing)][pose.frame];
       const point=getVisitorSpriteLayout(width,height,p.x,p.y,sprite.texture.width,sprite.texture.height);
       sprite.position.set(point.x,point.y);sprite.scale.set(pose.flip?-point.scale:point.scale,point.scale);sprite.zIndex=point.y;
     });
+    const greeting=this.model.greeting;
+    this.greetingBubble.visible=Boolean(greeting);
+    if(greeting){
+      const point=this.people[greeting.id].position;
+      const layout=getBubbleLayout(width,height,point.x/width,point.y/height);
+      this.greetingBubble.texture=this.bubbleFrames[SOCIAL_EMOTES.indexOf('heart')];
+      this.greetingBubble.position.set(layout.x,layout.y);this.greetingBubble.scale.set(layout.scale);this.greetingBubble.zIndex=point.y+.1;
+    }
     this.bubbles.forEach((sprite,index)=>{
       const pair=this.model.social.pairs[index];sprite.visible=Boolean(pair&&pair.age>=1.2);
       if(!sprite.visible)return;

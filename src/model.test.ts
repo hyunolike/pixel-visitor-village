@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { getTreeLayout, getMonumentLayout, getVisitorSpriteLayout, MAX_VISITORS, parseCount, VillageModel } from './model';
+import { hitVisitor, getTreeLayout, getMonumentLayout, getVisitorSpriteLayout, MAX_VISITORS, parseCount, VillageModel } from './model';
 import { koreanDay, noticeForCount } from './visitor-notice';
 import { parseRefreshInterval, SharedVisitorRefresh } from './visitor-refresh';
 import { getHolidayLayout, HolidayCameoModel } from './holiday-cameo';
@@ -376,5 +376,52 @@ describe('complete visitor sprite display bounds',()=>{
   it('keeps interior display points unchanged and pins the compact edge to eight pixels',()=>{
     expect(getVisitorSpriteLayout(128,100,.5,.8,16,22)).toEqual({x:64,y:80,scale:1});
     expect(getVisitorSpriteLayout(128,100,.035,.51,16,22)).toEqual({x:8,y:51,scale:1});
+  });
+});
+describe('direct village interaction',()=>{
+  it('hit tests displayed bodies, frontmost overlaps, CSS scale and canvas edges',()=>{
+    const model=new VillageModel();model.setCount(2);
+    for(const person of model.visitors){person.x=.5;person.y=.7;}
+    expect(hitVisitor(model.visitors,500,250,250,165,2,2)).toBe(1);
+    expect(hitVisitor([...model.visitors].reverse(),500,250,250,165,2,2)).toBe(1);
+    expect(hitVisitor(model.visitors,500,250,265,165,2,2)).toBeUndefined();
+    expect(hitVisitor(model.visitors,500,250,265,165,.5,.5)).toBe(1);
+    model.visitors[0].x=0;model.visitors[0].y=0;
+    expect(hitVisitor(model.visitors,80,30,0,0,2,2)).toBe(0);
+    expect(hitVisitor(model.visitors,80,30,-1,0,2,2)).toBeUndefined();
+    expect(hitVisitor(model.visitors,80,30,0,0,0,2)).toBeUndefined();
+    expect(hitVisitor(model.visitors,80,30,NaN,0,2,2)).toBeUndefined();
+  });
+  it('keeps the greeted visitor out of automatic pairs while others can still meet',()=>{
+    const model=new VillageModel();model.setViewport(500,250);model.setCount(4);
+    for(const [i,person] of model.visitors.entries()){person.x=.2+(i%2)*.06;person.y=i<2?.6:.9;person.vx=0;person.vy=0;}
+    model.greet(0);
+    for(let i=0;i<55;i++){model.step(.05);expect(model.social.getPartner(0)).toBeUndefined();}
+    expect(model.social.pairs.some(pair=>pair.firstId===2&&pair.secondId===3)).toBe(true);
+  });
+  it('greets an existing visitor, holds movement, replaces the greeting and expires in active time',()=>{
+    const model=new VillageModel();model.setCount(2);
+    expect(model.greet(-1)).toBe(false);expect(model.greet(2)).toBe(false);
+    expect(model.greet(0)).toBe(true);
+    const before={...model.visitors[0]};
+    for(let i=0;i<20;i++)model.step(.05);
+    expect(model.visitors[0]).toEqual(before);expect(model.greeting?.id).toBe(0);
+    expect(model.greet(1)).toBe(true);expect(model.greeting).toEqual({id:1,age:0});
+    model.step(0);expect(model.greeting?.age).toBe(0);
+    for(let i=0;i<61;i++)model.step(.05);
+    expect(model.greeting).toBeNull();
+  });
+  it('clears removed greetings and season state without changing the count',()=>{
+    const model=new VillageModel();model.setCount(3);model.greet(2);model.setCount(2);
+    expect(model.greeting).toBeNull();model.greet(0);model.setSeason('spring');
+    expect(model.greeting).toBeNull();expect(model.visitors).toHaveLength(2);
+  });
+  it('invites exactly one visitor at the entrance and refuses the capacity boundary',()=>{
+    const model=new VillageModel();model.setCount(2);const people=model.visitors.map(p=>({...p}));
+    expect(model.invite()).toBe(true);expect(model.visitors.slice(0,2)).toEqual(people);
+    expect(model.visitors[2]).toMatchObject({id:2,x:.5,y:.94,vx:0,vy:-.04});
+    for(let i=0;i<20;i++)model.step(.05);
+    expect(model.visitors[2].y).toBeLessThan(.94);
+    model.setCount(MAX_VISITORS);expect(model.invite()).toBe(false);expect(model.visitors).toHaveLength(MAX_VISITORS);
   });
 });

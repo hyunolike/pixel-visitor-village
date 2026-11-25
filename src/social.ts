@@ -43,7 +43,7 @@ export class SocialModel {
     const cap=this.width<220?1:3;
     for(const pair of this.active.slice(cap))this.release(pair);
   }
-  step(people:readonly Visitor[],seconds:number) {
+  step(people:readonly Visitor[],seconds:number,excludedId?:number) {
     if(!this.enabled||!Number.isFinite(seconds)||seconds<=0)return;
     if(people!==this.source||people.length!==this.sourceLength)this.reconcile(people);
     const dt=Math.min(.05,seconds);this.now+=dt;
@@ -53,7 +53,7 @@ export class SocialModel {
     }
     if(this.now+1e-9<this.nextSearch)return;
     this.nextSearch=this.now+.4;
-    if(this.active.length<(this.width<220?1:3))this.search(people);
+    if(this.active.length<(this.width<220?1:3))this.search(people,excludedId);
   }
   private release(pair:SocialPair) {
     this.active=this.active.filter(current=>current!==pair);
@@ -62,10 +62,10 @@ export class SocialModel {
       if(this.people.has(id))this.cooldown.set(id,this.now+18);
     }
   }
-  private search(people:readonly Visitor[]) {
+  private search(people:readonly Visitor[],excludedId?:number) {
     const cells=new Map<string,Candidate[]>();
     for(const person of people){
-      if(this.participants.has(person.id)||(this.cooldown.get(person.id)??0)>this.now)continue;
+      if(person.id===excludedId||this.participants.has(person.id)||(this.cooldown.get(person.id)??0)>this.now)continue;
       const x=person.x*this.width,y=person.y*this.height,key=`${Math.floor(x/42)},${Math.floor(y/42)}`;
       let cell=cells.get(key);if(!cell){cell=[];cells.set(key,cell);}
       if(cell.length<16)cell.push({person,x,y});

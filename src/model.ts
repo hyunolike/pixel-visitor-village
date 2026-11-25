@@ -36,11 +36,35 @@ export function getVisitorSpriteLayout(width:number,height:number,x:number,y:num
   return {x:Math.max(half,Math.min(w-half,Math.round(x*w))),y:Math.max(tall,Math.min(h,Math.round(y*h))),scale};
 }
 
+/** Hit the displayed body, with a 24 CSS-pixel minimum target at any canvas scale. */
+export function hitVisitor(people:readonly Visitor[],width:number,height:number,x:number,y:number,cssScaleX:number,cssScaleY:number):number|undefined {
+  if(![width,height,x,y,cssScaleX,cssScaleY].every(Number.isFinite)||width<=0||height<=0||cssScaleX<=0||cssScaleY<=0||x<0||y<0||x>width||y>height)return;
+  const compact=width<=210||height<110,sw=compact?16:20,sh=compact?22:28;
+  let selected:number|undefined,front=-Infinity;
+  for(const person of people){
+    const point=getVisitorSpriteLayout(width,height,person.x,person.y,sw,sh);
+    const halfWidth=Math.max(sw*point.scale,24/cssScaleX)/2;
+    const halfHeight=Math.max(sh*point.scale,24/cssScaleY)/2;
+    if(Math.abs(x-point.x)<=halfWidth&&Math.abs(y-(point.y-sh*point.scale/2))<=halfHeight&&(point.y>front||(point.y===front&&person.id>(selected??-1)))){selected=person.id;front=point.y;}
+  }
+  return selected;
+}
+
 export class VillageModel {
   readonly visitors:Visitor[]=[];
   readonly social=new SocialModel();
   season:Season='christmas';
   elapsed=0;
+  greeting:{id:number;age:number}|null=null;
+  greet(id:number):boolean {
+    if(!Number.isInteger(id)||!this.visitors[id])return false;
+    this.social.reset();this.greeting={id,age:0};return true;
+  }
+  invite():boolean {
+    if(this.visitors.length>=MAX_VISITORS)return false;
+    this.setCount(this.visitors.length+1);
+    Object.assign(this.visitors.at(-1)!,{x:.5,y:.94,vx:0,vy:-.04});return true;
+  }
   setCount(count:number):void {
     validateCount(count);
     while(this.visitors.length<count) {
@@ -51,19 +75,22 @@ export class VillageModel {
       this.visitors.push({id,x,y,vx:(hash(id+3)>.5?1:-1)*(.012+hash(id+7)*.012),vy:(hash(id+5)>.5?1:-1)*(.004+hash(id+9)*.006),phase:hash(id+39)*Math.PI*2});
     }
     this.visitors.length=count;
+    if(this.greeting&&!this.visitors[this.greeting.id])this.greeting=null;
     this.social.reconcile(this.visitors);
   }
   setViewport(width:number,height:number) {this.social.setViewport(width,height);}
   setSeason(value:string):void {
     if(!(SEASONS as readonly string[]).includes(value)) throw new Error('선택할 수 없는 계절이에요. christmas, spring, summer, autumn, winter 중 하나를 사용해 주세요.');
-    if(this.season!==value)this.social.reset();
+    if(this.season!==value){this.social.reset();this.greeting=null;}
     this.season=value as Season;
   }
   step(seconds:number):void {
     if(!Number.isFinite(seconds)||seconds<=0) return;
     const dt=Math.min(.05,seconds);this.elapsed+=dt;
-    this.social.step(this.visitors,dt);
+    if(this.greeting){this.greeting.age+=dt;if(this.greeting.age>=3-1e-9)this.greeting=null;}
+    this.social.step(this.visitors,dt,this.greeting?.id);
     for(const p of this.visitors) {
+      if(this.greeting?.id===p.id)continue;
       if(this.social.getPartner(p.id))continue;
       if(Math.sin(this.elapsed*.7+p.phase)<-.45) continue;
       let x=p.x+p.vx*dt,y=p.y+p.vy*dt;

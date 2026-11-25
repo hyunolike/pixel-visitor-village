@@ -344,3 +344,14 @@ https://pixel-visitor-village.vercel.app/install.html 에서 블로그 주소를
 - [x] 실제 렌더/문서/단위144/144·타입·빌드·최종 브라우저76/76 확인과 독립 최종 검토 기록. [결과와 해시](reviews/intro-refresh-2026-11-25.md) 참조.
 
 로컬 편집 원본은 brag-output/intro-refresh에 두고 재현 스크립트/출처를 보존한다. 커밋/푸시/공개 배포는 수행하지 않는다.
+# 2026-11-26 Interactive homepage
+
+- [x] Research domestic/foreign references, capture existing homepage and present three independent visual concepts.
+- [x] User selected the recommended first concept; existing assets and small monument preserved in scope.
+- [x] Prepare [implementation plan](interactive-home-plan.md) and VV-HOME-001–005.
+- [x] Independent readiness review and boundary tests before implementation.
+- [x] Actual tap/keyboard greeting and demo arrival, opt-in widget behavior.
+- [x] Scene-first homepage, season dock and installer handoff.
+- [x] Full regression, desktop/mobile visual QA, independent final review and local preview.
+
+PR follow-up: the user requested a pull request on 2026-11-26. Commit and push the verified scope to feat/interactive-village-home and open against main; do not merge or deploy in this step.

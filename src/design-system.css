@@ -1,6 +1,7 @@
 @import './fonts.css';
 
 :root {
+  --village-forest:#123b3e;--village-cream:#fff0c7;--village-gold:#f6c55d;--village-ink:#173c2c;
   color-scheme: light;
   --color-page: #f2f7f8; --color-surface: #fff; --color-surface-subtle: #e8f0ed;
   --color-ink: #18322f; --color-muted: #58706b;
