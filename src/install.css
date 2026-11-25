@@ -8,7 +8,7 @@
 .header-actions { margin-left:auto;flex-wrap:nowrap;gap:var(--space-6); }.header-actions>a { font-size:var(--font-size-body); }
 .language-picker { flex:none; }.language-picker select { min-height:var(--control-size-sm);max-width:128px;padding:var(--space-2) var(--space-3);font-size:var(--font-size-caption); }
 .intro-copy { padding-block:var(--space-10) var(--space-6); }
-h1 { max-width:1100px;font-size:var(--font-size-hero);line-height:1.3;letter-spacing:-.035em;text-wrap:balance; }
+h1 { max-width:1100px;font-family:var(--font-display);font-size:var(--font-size-pixel-title);font-weight:var(--weight-display);line-height:1.5;letter-spacing:0;text-wrap:balance; }
 .intro-copy p { margin-top:var(--space-2);color:var(--color-muted);font-size:var(--font-size-lead); }
 h2 { font-size:var(--font-size-section);line-height:var(--line-heading);letter-spacing:-.02em; }
 .install-progress { display:flex;align-items:center;gap:var(--space-6);padding:0;margin:0 0 var(--space-8);list-style:none; }
@@ -66,8 +66,8 @@ h2 { font-size:var(--font-size-section);line-height:var(--line-heading);letter-s
   #navigation-toggle { flex:none;white-space:nowrap;padding-inline:var(--space-2); }
 }
 @media(max-width:600px) {
-  .header-inner,.install-page { padding-inline:var(--space-4); }.brand-title { max-width:120px;line-height:1.2; }.brand-mark { flex-basis:20px; }.language-picker select { max-width:92px; }
-  .intro-copy { padding-block:var(--space-5) var(--space-4); }h1 { font-size:var(--font-size-title);line-height:1.25; }.intro-copy p { font-size:var(--font-size-caption);line-height:1.5; }
+  .header-inner,.install-page { padding-inline:var(--space-4); }.brand-title { max-width:136px;line-height:1.25; }.brand-mark { flex-basis:20px; }.language-picker select { max-width:92px; }
+  .intro-copy { padding-block:var(--space-5) var(--space-4); }h1 { font-size:var(--font-size-pixel-title);line-height:1.5; }.intro-copy p { font-size:var(--font-size-caption);line-height:1.5; }
   .install-progress { gap:var(--space-3);margin-bottom:var(--space-4); }.install-progress li { flex-direction:column;align-items:flex-start;gap:var(--space-2);font-size:var(--font-size-meta);line-height:1.4; }.install-progress li:not(:last-child)::after { display:none; }.progress-number { width:28px;height:28px; }
   .preview-panel,.settings-panel { padding:var(--space-4); }.preview-heading { gap:var(--space-2);margin-bottom:var(--space-3); }#preview-title { font-size:var(--font-size-body); }.demo-badge { font-size:var(--font-size-meta); }
   .preview-stage { height:200px; }.preview-caption { font-size:var(--font-size-caption);line-height:1.5; }.preview-controls { gap:var(--space-3);margin-top:var(--space-3);align-items:flex-start; }.preview-controls p { font-size:var(--font-size-meta); }

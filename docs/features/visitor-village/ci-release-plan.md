@@ -16,7 +16,7 @@
 - [x] spec/design/tasks에 계약을 연결하고 workflow/산출물/검증/릴리즈 스크립트 작성.
 - [x] 해시 불일치와 누락 파일, 소스/실제 태그 검증, HTTP 오류/헤더, 재시도14개 도구 단위 검사.
 - [x] 로컬 단위146/14, 타입/빌드/브라우저79, 실제 묶음 생성/해시와 독립 검토/태그 지적 보완.
-- [ ] PR을 만들고 실제 Linux Actions 검사.
-- [ ] Cloudflare 배포용 토큰 연결, main 병합/배포/공개 검증/첫 릴리즈 확인. 인증이 없으면 이 항목을 미완료로 남긴다.
+- [x] [PR #12](https://github.com/hyunolike/pixel-visitor-village/pull/12)의 실제 Linux Actions146/14/79 통과와 main 병합.
+- [x] Cloudflare 토큰 연결, main0215eb4 자동 배포/공개35파일 해시/첫 릴리즈 [deploy-2-0215eb4](https://github.com/hyunolike/pixel-visitor-village/releases/tag/deploy-2-0215eb4) 확인.
 
-현재 GitHub Actions는 활성화되어 있고 배포용 API Secret은 없다. 로컬 Cloudflare OAuth에 API Tokens Write 권한이 없으며 Mac이 잠겨 대시보드 조작도 불가하다. 계정 ID Secret은 등록했으며 토큰 값은 채팅/저장소/로그에 기록하지 않는다.
+초기 OAuth 권한/잠금 문제는 사용자 발급 승인과 Mac 잠금 해제 뒤 대시보드 작업으로 해소했다. 기존 계정의 Cloudflare Pages Edit 전용 API 토큰을2027-11-25 만료로 발급해 GitHub Secret에 등록했다. 계정 ID도 등록되어 있다. 토큰 값은 채팅/저장소/로그에 기록하지 않았다. [첫 main 실행](https://github.com/hyunolike/pixel-visitor-village/actions/runs/45621195668)의 verify/publish가 모두 성공했다.

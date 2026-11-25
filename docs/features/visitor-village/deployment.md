@@ -4,7 +4,9 @@
 
 ## 공개 주소와 배포 상태
 
-자동화 후속 작업은 [GitHub Actions 배포와 릴리즈](ci-release.md)에 기록한다. 기존 아래 항목은 실제 완료된 수동 배포 기록이다. 자동화의 API 토큰/실행 검증이 끝나기 전에는 병합만으로 공개 반영됐다고 해석하지 않는다.
+main 병합 후 GitHub Actions가 검사/배포/공개 검증/릴리즈를 자동 실행한다. [운영 방법](ci-release.md)과 [최신 릴리즈](https://github.com/hyunolike/pixel-visitor-village/releases/latest), 공개 [deployment.json](https://pixel-visitor-village.pages.dev/deployment.json)에서 현재 소스를 확인한다. 최초 실행45621195668/소스0215eb4/고유 배포425c90c3/릴리즈deploy-2-0215eb4가 성공했다. 계정의 Pages Edit 전용 토큰은2027-11-25 만료다.
+
+### 자동화 도입 전 수동 배포 기록
 
 - 마을: https://pixel-visitor-village.pages.dev/
 - 설치 도우미: https://pixel-visitor-village.pages.dev/install.html

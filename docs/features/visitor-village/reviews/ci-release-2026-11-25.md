@@ -16,3 +16,9 @@ fresh-context `ci_release_review`가 workflow/배포 도구/명세와 테스트�
 ## 현재 운영 연결 경계
 
 GitHub Actions는 활성화되어 있고 공식 Action의 실제 커밋SHA를 확인해 고정했다. accountID Secret은 등록했다. Cloudflare OAuth를 갱신한 뒤에도 `/user/tokens/permission_groups`가403(code9109, Unauthorized to access requested resource)였다. API Tokens 권한이 없는 사용자 로그인/refresh token을 CI로 복사하지 않았다. Mac 잠금/브라우저 미연결 상태라 대시보드로 발급할 수도 없었다. API 토큰 Secret이 없으므로 실제 자동 production 배포/첫 정식 릴리즈는 미완료다.
+
+후속 연결: 사용자 발급 승인과 Mac 잠금 해제 후 대시보드에서 기존 계정의 Pages Edit 전용 토큰을2027-11-25 만료로 발급하고 GitHub Secret 등록 성공 화면과 Secret 이름을 확인했다. 값은 UI에서 직접 암호화 Secret으로 옮겼고 로그/코드/채팅에는 기록하지 않았다. PR #12의 실제 Linux146/14/79를 확인하고 main0215eb4로 병합했다. 위403/미연결은 최초 준비 시점의 기록이며 첫 production 실행은45621195668이다.
+
+## 최초 자동 production 결과
+
+[main 실행45621195668](https://github.com/hyunolike/pixel-visitor-village/actions/runs/45621195668)의 verify/publish 두 job이 모두 success다. 고유 배포 https://425c90c3.pixel-visitor-village.pages.dev 의35파일 SHA와 위젯 CORS/MIME/404, 공개 메인 별칭의 metadata를 확인한 뒤 [deploy-2-0215eb4](https://github.com/hyunolike/pixel-visitor-village/releases/tag/deploy-2-0215eb4)를 정식 게시했다. source0215eb4를 가리키며5개 첨부(site.tar.gz,위젯,manifest,SHA256SUMS,배포 확인 JSON)가 있다. 별도 HTTP로 메인 `/deployment.json`의 source/tag/run 링크도 대조했다. 인증과 실제 배포/릴리즈의 초기 미완료 상태는 해소되었다.

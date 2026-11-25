@@ -4,6 +4,12 @@
 
 기존 Pages Direct Upload는 유지하고 GitHub Actions에서 CI→검증 산출물 업로드→production 업로드→공개 해시 검사→GitHub Release로 이어진다. 대안인 새 Git 통합 Pages 프로젝트는 URL/설정 이전이 필요해 채택하지 않는다. PR/main 공통 verify job은 contents:read만 가진다. main publish job만 배포 Secret과 contents:write를 쓰며 단일 concurrency로 순차 처리한다. 빌드별 deployment.json으로 메인 별칭을 식별하고 manifest의 모든 배포 파일을 고유 URL에서 검사한다. 계정 OAuth는 CI에 저장하지 않는다. [구현/검증 계획](ci-release-plan.md)을 따른다.
 
+## 2026-11-25 서비스 타이포그래피
+
+사용자가 폰트 변경을 요청했다. 모든 문구를 픽셀체로 바꾸면 긴 설치 안내가 어려워지므로, Neo둥근모 v1.600을 한국어/영어 브랜드16px와 큰 제목32/48px 및 시연 수32px에 한정한다. 공식 가이드에 따라 16px 배수/regular/자간0으로 표시한다. 본문과 조작 UI는 Pretendard Variable v1.3.9를 쓰며 기존14/16/18px와 역할별 굵기를 유지한다. 일본어와 간체 중국어는 한자 일부만 한국어 글리프로 바뀌지 않도록 기존 언어용 시스템 글꼴을 display/body에 함께 쓴다. 한/영 선택과 글꼴 로딩은 CSS로 처리하며 JS/의존성을 추가하지 않는다.
+
+폰트 원본은 src/assets/fonts에서 Vite가 해시 자산으로 빌드하고, public/fonts에 OFL 전문과 출처를 제공한다. font-display:swap, 시스템 fallback과 기존 font-synthesis:none을 유지한다. 사이트만 가져오는 공통 CSS에서 선언해 Shadow DOM 외부 위젯은 폰트 다운로드나 API 변경이 없다. [실행 계획](typography-plan.md).
+
 ## Claude Code brag 재제작과 README 정리
 
 사용자 요청으로 실제 Claude Code brag 스킬을 실행해 새 소개 영상을 만들고 README4개를 짧게 정리한다. 기존 상단 썸네일과 체험 이미지 버튼은 유지하고 상세 사용/개발 정보는 문서로 보존한다. [실행 계획](brag-remake-plan.md)을 따른다.

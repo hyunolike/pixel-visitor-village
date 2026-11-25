@@ -22,7 +22,11 @@ GitHub 저장소 Settings → Secrets and variables → Actions에 다음을 등
 
 토큰은 Cloudflare 대시보드에서 생성한다. 채팅/코드/로그에 값을 붙이지 않는다. 로컬 Wrangler OAuth/refresh token은 장기 CI 토큰으로 옮기지 않는다. GitHub 릴리즈는 Actions가 제공하는 `GITHUB_TOKEN`의 해당 job contents:write 권한으로 만든다.
 
-2026-11-25 현재 기존 로컬 OAuth 갱신 후 토큰 발급 permission_groups API가403 Unauthorized로 거부됐다. Mac 잠금으로 브라우저 대시보드도 사용할 수 없었다. 따라서 API 토큰이 등록되기 전 첫 자동 배포/정식 릴리즈 확인은 미완료다. 인증 값이 없으면 publish job은 명확한 오류로 중단한다.
+2026-11-25 최초 준비 때 로컬 OAuth의 토큰 발급 API가403으로 거부되고 Mac도 잠겨 있었다. 이후 사용자 발급 승인과 잠금 해제 후 대시보드에서 기존 계정의 Cloudflare Pages Edit 전용 토큰을 생성해 GitHub Secret으로 등록했다. 토큰 만료일은2027-11-25다. 토큰 값은 채팅/코드/로그에 기록하지 않았고 OAuth/refresh token을 CI로 복사하지 않았다. 이후 토큰이 만료/누락되면 publish job은 명확한 오류로 중단하므로 동일 권한의 새 토큰으로 Secret을 갱신한다.
+
+실제 실행 상태는 [GitHub Actions](https://github.com/hyunolike/pixel-visitor-village/actions/workflows/pages.yml), 배포별 소스와 파일은 [릴리즈](https://github.com/hyunolike/pixel-visitor-village/releases)에서 확인한다. 공개 `/deployment.json`도 현재 배포 커밋과 실행/태그를 제공한다.
+
+최초 production 실행45621195668은 소스0215eb4를 https://425c90c3.pixel-visitor-village.pages.dev 에 배포하고 공개35파일 SHA/위젯 헤더/404/메인 metadata 검사 후 [deploy-2-0215eb4](https://github.com/hyunolike/pixel-visitor-village/releases/tag/deploy-2-0215eb4)를 게시했다. 묶음/위젯/manifest/SHA256SUMS/배포 확인 JSON의5개 파일을 첨부했다. 이후의 최신 버전은 위 동적 링크와 metadata를 따른다.
 
 ## 다시 실행과 복구
 
