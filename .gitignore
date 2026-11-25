@@ -30,7 +30,7 @@ Thumbs.db
 .wrangler/
 .dev.vars
 .dev.vars.*
-release/
+/release/
 
 # Editable brag composition and full-resolution renders stay local.
 brag-output/
