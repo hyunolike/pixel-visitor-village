@@ -1,0 +1,272 @@
+{
+  "creator": "Claude Code",
+  "model": "claude-opus-5-5",
+  "skillInvocation": {
+    "name": "brag:brag",
+    "args": "--tone polished --duration 20 --format landscape",
+    "pluginVersion": "0.6.0",
+    "sourceCommit": "06379432a9243c951dfcc051153be18d2d261044",
+    "dispatch": "bundled brag-slim, per Opus5.5 dispatch rule"
+  },
+  "video": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 600,
+    "durationSeconds": 20,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "sampleRate": 48000,
+    "channels": 2
+  },
+  "poster": {
+    "selectedFrame": 585,
+    "replacesFrameZero": true
+  },
+  "gif": {
+    "durationSeconds": 7,
+    "width": 720,
+    "height": 406,
+    "fps": 12,
+    "frames": 84,
+    "actualDurationMs": 7000
+  },
+  "files": {
+    "public/media/intro.mp4": {
+      "bytes": 5202133,
+      "sha256": "a81f6f53e9071bee6c77d70d95c5c04dbe5d280d5549ca2f9364411b2e3f02d7"
+    },
+    "public/media/intro-poster.jpg": {
+      "bytes": 292954,
+      "sha256": "5cbd0450dd0213da4654a5c1316866e25fc70c9c8207e07af16bdfc2ec7055b4"
+    },
+    "docs/assets/intro-preview.gif": {
+      "bytes": 3666251,
+      "sha256": "f142765bc8517b523f8a78019d616b1eb30610daff5153fc758f0dd4d7393db4"
+    }
+  },
+  "source": "Actual source Web Component via Vite and existing actual installer capture; fixed seed and stepped model; holiday entrance staged for film",
+  "readmeLines": {
+    "README.md": 44,
+    "README.en.md": 44,
+    "README.ja.md": 44,
+    "README.zh-CN.md": 44
+  },
+  "originalThumbnailUnchanged": true,
+  "posterVerification": {
+    "meanAbsolutePixelDifference": 1.7469540895061728,
+    "sameSize": true
+  },
+  "localReadmeLayout": {
+    "issues": [],
+    "note": "Local Markdown layout approximation; actual GitHub rendering not asserted."
+  },
+  "verification": {
+    "unitTests": 146,
+    "browserTests": 79,
+    "browserSeconds": 42.1,
+    "typecheck": true,
+    "siteAndWidgetBuild": true,
+    "relativeLinkDocuments": 10,
+    "missingLocalLinks": 0,
+    "independentReview": "No material findings; not public/Tistory/listening/license-source review"
+  },
+  "production": {
+    "id": "2e1378ac-05cb-423b-824e-38402505bbc3",
+    "url": "https://2e1378ac.pixel-visitor-village.pages.dev/",
+    "alias": "https://pixel-visitor-village.pages.dev/",
+    "sourceCommit": "f05d3f61f7e0065411a2ddbcb963e40768637b38",
+    "pullRequest": "https://github.com/hyunolike/pixel-visitor-village/pull/10",
+    "files": {
+      "404.html": {
+        "bytes": 390,
+        "sha256": "e8f443b115ec450b11bc0a4366c13baec0dae3cc8834f8e5db35ed27fa82e1ef"
+      },
+      "_headers": {
+        "bytes": 131,
+        "sha256": "1bde82eb61cb55c45c6f80d5a1f11a294c237ce93cad6cf31500c0ae62fd0975"
+      },
+      "assets/CanvasPool-D2E0lTg5.js": {
+        "bytes": 2759,
+        "sha256": "71066a98d9ad45ee61022222bec184612b640de88c45645f41d8b122e7a50c13"
+      },
+      "assets/CanvasRenderer-Sr8qcHx2.js": {
+        "bytes": 17977,
+        "sha256": "3d1cd9bf8a2d693bce3b7518f66d302ec40aaa9e0e0d210bd570727c8a4d8774"
+      },
+      "assets/RenderTargetSystem-B46H_EXc.js": {
+        "bytes": 54956,
+        "sha256": "12397940117a4b088f47aa65774b408e3a77c3c15eaf5cbe679b2d256c888506"
+      },
+      "assets/WebGLRenderer-BG6CHaW6.js": {
+        "bytes": 76913,
+        "sha256": "28ace057bb1398ac4e3058cc3fbf2ba7f9b8940915cd0e2edb3494f7a0f3d82f"
+      },
+      "assets/WebGPURenderer-ClY2aPUL.js": {
+        "bytes": 61562,
+        "sha256": "4d78463bf4d683e19e5d5d0e644d99b03a78e602e52f33d004e324461c695032"
+      },
+      "assets/browserAll-BVQQWAuG.js": {
+        "bytes": 44103,
+        "sha256": "f1035bb530f7b7ddb44a9c477148dfedcdb456fa6b048a83d51d027fad0f7a84"
+      },
+      "assets/canvasUtils-Do6taT83.js": {
+        "bytes": 6064,
+        "sha256": "54e063911b1c1fe1703f0f5d11aa789267219e2ea5d55e9cec01901837b5c7ff"
+      },
+      "assets/getTexelRangeRects-Cr6YrMcA.js": {
+        "bytes": 11503,
+        "sha256": "e498a3c6b8310d6db8a2bde30795b8359f78061a663016b07c26f5d0c68748a6"
+      },
+      "assets/index-BWSPem37.css": {
+        "bytes": 15327,
+        "sha256": "2c6ff497696bab86b70a50491032a444a1d0dfe591bb7101eaf4b313efb92319"
+      },
+      "assets/index-CpzJqsIV.js": {
+        "bytes": 9401,
+        "sha256": "edf2b566c0e474cd33cac9a8556def2266889acf0daaf64b0119c7bbd4c13c51"
+      },
+      "assets/index-DazOISH4.css": {
+        "bytes": 11249,
+        "sha256": "8d3b85fa7481c87ec6a11633df34bb912ff973f2a342b630c7a9f0f3957f6203"
+      },
+      "assets/install-BlgjjH39.js": {
+        "bytes": 26021,
+        "sha256": "d1a01f97b23ae1b88c1df9c8fac8bf1a217814bb494408a63256185baffad963"
+      },
+      "assets/install-DjmfRH4o.css": {
+        "bytes": 22629,
+        "sha256": "384ea3ee05e293f7736d122abe973925eb146ef93fd8d70dee4304f1852742f8"
+      },
+      "assets/tistory-monument-BO1wnXOs.png": {
+        "bytes": 30708,
+        "sha256": "54ae39d5bfeac6f60e4b1655c4e579f279af79402ec43e9e0ed4313fb26d58b8"
+      },
+      "assets/tree-autumn-DXKFVnSR.png": {
+        "bytes": 39421,
+        "sha256": "6977d4c0563d4809e0add03f9be8305ab887a9c1e596c86e6529c8ff551c50f0"
+      },
+      "assets/tree-christmas-CQ-I-w8b.png": {
+        "bytes": 33676,
+        "sha256": "fb3f983c4ee090274d84429f65c70ade9e9c419c94b8539a2a4dcc8ea384d41f"
+      },
+      "assets/tree-spring-BRA5pLKC.png": {
+        "bytes": 33072,
+        "sha256": "c83b60486c7288a49a5bc367da64b36f849507dfa11801476c2f4c424e1cfbdf"
+      },
+      "assets/tree-summer-qjscM1dI.png": {
+        "bytes": 32424,
+        "sha256": "2cd08fa9659acfa15275337599ae627772ef8ceaf5ca8bbe357c15ae5e851cf8"
+      },
+      "assets/tree-winter-Rblnx7_2.png": {
+        "bytes": 38702,
+        "sha256": "a352a0b5f7522ed465a77a45828c5c2043b3eb1a46ca7ba597d84b40b88346ec"
+      },
+      "assets/village-labels-DpHmJOh2.js": {
+        "bytes": 9256,
+        "sha256": "755bfd675d9141976c58ed536fccd6b11661166ff825f16a6f1832eeaa398e83"
+      },
+      "assets/visitor-village-CLlyZxkK.js": {
+        "bytes": 290566,
+        "sha256": "774a44ad8e63f2dc7e4f0bb1ba0429cab43c123a821cfaea715f441579648c72"
+      },
+      "assets/webworkerAll-oBGAOVHK.js": {
+        "bytes": 16077,
+        "sha256": "2963c87c8f290289c0b322a879878fbc916d378594922056ab3e9a9e956769c9"
+      },
+      "docs/index.html": {
+        "bytes": 11800,
+        "sha256": "7a04c16b8a23e646f2068bbfd594b4776b00c12c56b0b9d94b74489a62eb27ab"
+      },
+      "embed-example.html": {
+        "bytes": 737,
+        "sha256": "27b50f81093c13b7a192db5da03a0186c220d1d60cee9cb0f078d22f0c7fedf8"
+      },
+      "index.html": {
+        "bytes": 814,
+        "sha256": "1b5e9c96dd26b8db5795a3e59c7594b487fe3042cea457d639bd9602331b4a52"
+      },
+      "install.html": {
+        "bytes": 10510,
+        "sha256": "4451f56313fd49c58b8073b810b80498c31703b4d89408383eb7facf02238c57"
+      },
+      "media/intro-poster.jpg": {
+        "bytes": 292954,
+        "sha256": "5cbd0450dd0213da4654a5c1316866e25fc70c9c8207e07af16bdfc2ec7055b4"
+      },
+      "media/intro.mp4": {
+        "bytes": 5202133,
+        "sha256": "a81f6f53e9071bee6c77d70d95c5c04dbe5d280d5549ca2f9364411b2e3f02d7"
+      },
+      "media/visit-village-en.svg": {
+        "bytes": 94453,
+        "sha256": "bf0d11c4414938954bc927c4a641085c1fbca727be91ebd08254516d58013a2b"
+      },
+      "media/visit-village-ja.svg": {
+        "bytes": 94475,
+        "sha256": "69bbad79b04c2aaa9c89c29f04e189e6438b1c866ad43fdcce447c700451c0f6"
+      },
+      "media/visit-village-ko.svg": {
+        "bytes": 94471,
+        "sha256": "5c895668ee16617087da8ac3b6dc006a9c539720455187f3bffaa75f9aa3bec5"
+      },
+      "media/visit-village-zh-CN.svg": {
+        "bytes": 94448,
+        "sha256": "14df4041f9c20314f62aaab6f421592df5875a10fc0f4e36aee48816a5bb16b5"
+      },
+      "widget/visitor-village.js": {
+        "bytes": 1415285,
+        "sha256": "f3a5147f707bb400f27cbd1671a0694af323485919ca333cd32fd1c6a83ea164"
+      }
+    },
+    "bytes": 8196967,
+    "checks": {
+      "checks": [
+        "SHA256 matches for 34 public build files",
+        "Widget headers and missing-file404",
+        "Actual five seasons, small monument,24 visitors",
+        "New video decoded and progressed",
+        "Four320px installer languages,real code and clipboard",
+        "Four public image buttons render and open actual demo",
+        "Public widget from independent HTTP origin37 visitors"
+      ],
+      "checksums": [
+        "404.html",
+        "assets/CanvasPool-D2E0lTg5.js",
+        "assets/CanvasRenderer-Sr8qcHx2.js",
+        "assets/RenderTargetSystem-B46H_EXc.js",
+        "assets/WebGLRenderer-BG6CHaW6.js",
+        "assets/WebGPURenderer-ClY2aPUL.js",
+        "assets/browserAll-BVQQWAuG.js",
+        "assets/canvasUtils-Do6taT83.js",
+        "assets/getTexelRangeRects-Cr6YrMcA.js",
+        "assets/index-BWSPem37.css",
+        "assets/index-CpzJqsIV.js",
+        "assets/index-DazOISH4.css",
+        "assets/install-BlgjjH39.js",
+        "assets/install-DjmfRH4o.css",
+        "assets/tistory-monument-BO1wnXOs.png",
+        "assets/tree-autumn-DXKFVnSR.png",
+        "assets/tree-christmas-CQ-I-w8b.png",
+        "assets/tree-spring-BRA5pLKC.png",
+        "assets/tree-summer-qjscM1dI.png",
+        "assets/tree-winter-Rblnx7_2.png",
+        "assets/village-labels-DpHmJOh2.js",
+        "assets/visitor-village-CLlyZxkK.js",
+        "assets/webworkerAll-oBGAOVHK.js",
+        "docs/index.html",
+        "embed-example.html",
+        "index.html",
+        "install.html",
+        "media/intro-poster.jpg",
+        "media/intro.mp4",
+        "media/visit-village-en.svg",
+        "media/visit-village-ja.svg",
+        "media/visit-village-ko.svg",
+        "media/visit-village-zh-CN.svg",
+        "widget/visitor-village.js"
+      ],
+      "pageErrors": []
+    }
+  }
+}

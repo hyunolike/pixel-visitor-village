@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Pixel Visitor Village — 20s</title>
+<style>
+@font-face{font-family:NSR;src:url('fonts/NanumSquareRoundR.ttf');font-weight:400}
+@font-face{font-family:NSR;src:url('fonts/NanumSquareRoundB.ttf');font-weight:700}
+*{box-sizing:border-box;margin:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#10282b}
+body{font-family:NSR,sans-serif;color:#fff4ce;-webkit-font-smoothing:antialiased;word-break:keep-all}
+#stage{position:absolute;inset:0;overflow:hidden;background:#10282b}
+.shot{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden}
+.shot img{position:absolute;left:0;top:0;transform-origin:0 0;image-rendering:pixelated}
+#install img{image-rendering:auto}
+#dip{position:absolute;inset:0;background:#10282b;opacity:0;z-index:20}
+.layer{position:absolute;z-index:10;display:none}
+/* Product palette: sky #10383c, action #1c5d56 / #a4d7c9, cream #f0dba8 / #fff4ce */
+.big{font-weight:700;font-size:76px;line-height:1.18;letter-spacing:-.02em;color:#fff4ce;text-shadow:0 2px 0 #0b1f21}
+.sub{font-size:40px;line-height:1.45;color:#dfeee4}
+.card{background:#10282be6;border-left:8px solid #a4d7c9;padding:30px 44px 32px 40px}
+.card .t{font-weight:700;font-size:56px;line-height:1.3;letter-spacing:-.015em;color:#fff4ce}
+.badge{display:inline-block;font-size:26px;font-weight:700;color:#18322f;background:#f0dba8;padding:6px 14px 5px;vertical-align:middle;letter-spacing:0}
+/* Hook */
+#hook{left:104px;top:92px}
+#hook .label{font-size:30px;color:#a4d7c9;font-weight:700;letter-spacing:.01em;margin-left:4px}
+#counter{display:flex;align-items:baseline;gap:14px;margin:2px 0 18px}
+#counter .num{font-weight:700;font-size:136px;line-height:1.02;font-variant-numeric:tabular-nums;color:#fff4ce;min-width:166px;text-align:left;text-shadow:0 4px 0 #0b1f21}
+#counter .unit{font-weight:700;font-size:56px;color:#fff4ce}
+#counter .badge{align-self:center;margin-left:6px}
+#hook .big{font-size:58px}
+/* Close-up captions */
+#greet,#cameo{left:96px;top:96px;max-width:1100px}
+/* Seasons */
+#seasons{left:104px;top:96px}
+#seasons .big{font-size:58px}
+#chips{display:flex;gap:12px;margin-top:26px}
+.chip{font-size:32px;font-weight:700;padding:12px 26px 11px;border:2px solid #a4d7c9;color:#dfeee4;background:#10282bcc;min-width:120px;text-align:center}
+.chip.on{background:#a4d7c9;color:#18322f}
+/* Install: caption panel left, real installer footage right */
+#install{background:#10282b}
+#installview{position:absolute;left:700px;top:0;width:1220px;height:1080px;overflow:hidden;background:#f2f7f8}
+#installcap{left:104px;top:0;height:1080px;width:560px;display:none;flex-direction:column;justify-content:center}
+#installcap .kicker{font-size:30px;font-weight:700;color:#a4d7c9;margin-bottom:22px}
+#installcap .t{font-weight:700;font-size:60px;line-height:1.3;letter-spacing:-.015em;color:#fff4ce}
+#installcap .steps{margin-top:34px;font-size:30px;line-height:1.7;color:#c9dbd2}
+#installcap .steps b{display:inline-block;width:40px;height:40px;margin-right:14px;background:#1c5d56;color:#fff;text-align:center;font-size:24px;line-height:40px;vertical-align:2px}
+/* Outro */
+#outro{left:104px;top:132px}
+.brandrow{display:flex;align-items:center;gap:26px}
+.mark{width:66px;height:77px;background:#a4d7c9;clip-path:polygon(40% 0,60% 0,60% 16%,80% 16%,80% 36%,100% 36%,100% 68%,60% 68%,60% 100%,40% 100%,40% 68%,0 68%,0 36%,20% 36%,20% 16%,40% 16%)}
+.brand{font-weight:700;font-size:96px;letter-spacing:-.03em;line-height:1.1;color:#fff4ce;text-shadow:0 3px 0 #0b1f21}
+.en{font-size:34px;color:#a4d7c9;margin:10px 0 0 94px;letter-spacing:.02em}
+.url{display:inline-block;margin:34px 0 0 94px;font-weight:700;font-size:44px;color:#18322f;background:#f0dba8;padding:14px 28px 12px}
+.demo{margin:22px 0 0 94px;font-size:28px;color:#c9dbd2}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="shot" id="shotA"><img id="imgA" alt=""></div>
+  <div class="shot" id="shotB"><img id="imgB" alt=""></div>
+  <div class="shot" id="install"><div id="installview"><img id="imgI" alt=""></div></div>
+
+  <div class="layer" id="hook">
+    <div class="label">티스토리 오늘 방문 수</div>
+    <div id="counter"><span class="num" id="num">0</span><span class="unit">명</span><span class="badge">시연</span></div>
+    <div class="big">방문 수만큼<br>캐릭터가 모여요.</div>
+  </div>
+  <div class="layer card" id="greet"><div class="t">가까이 마주치면 손을 흔들고<br>말풍선으로 인사해요.</div></div>
+  <div class="layer card" id="cameo"><div class="t">크리스마스엔<br>산타나 루돌프가 들러요.</div></div>
+  <div class="layer" id="seasons">
+    <div class="big">계절을 고르면<br>풍경이 바뀌어요.</div>
+    <div id="chips"><span class="chip" data-s="spring">봄</span><span class="chip" data-s="summer">여름</span><span class="chip" data-s="autumn">가을</span><span class="chip" data-s="winter">겨울</span></div>
+  </div>
+  <div class="layer" id="installcap"><div class="kicker">마을 작업실</div><div class="t">설치 코드를 만들어<br>티스토리 스킨에<br>붙여 넣으세요.</div><div class="steps"><b>1</b>마을 꾸미기<br><b>2</b>코드 복사<br><b>3</b>스킨에 붙여넣기</div></div>
+  <div class="layer" id="outro">
+    <div class="brandrow"><div class="mark"></div><div class="brand">작은 방문자 마을</div></div>
+    <div class="en">Pixel Visitor Village · 티스토리 방문자 위젯</div>
+    <div class="url">pixel-visitor-village.pages.dev</div>
+    <div class="demo">화면 속 24명은 시연용 숫자예요.</div>
+  </div>
+  <div id="dip"></div>
+</div>
+<script>
+const FPS=30, N=600;
+const pad=n=>String(n).padStart(4,'0');
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ease=t=>{t=clamp(t,0,1);return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;};
+const easeOut=t=>1-Math.pow(1-clamp(t,0,1),3);
+const prog=(f,a,b)=>clamp((f-a)/(b-a),0,1);
+
+// Scene boundaries (frames) on the 88.25 BPM grid.
+const S={hook:[0,102],greet:[102,204],cameo:[204,265],seasons:[265,428],install:[428,510],outro:[510,600]};
+const WIPES=[312,353,394];           // wipe end frames; midpoints land on beats f306/347/388 (spring->summer->autumn->winter)
+const SEASONS=['spring','summer','autumn','winter'];
+const COUNT=[]; // per-frame visitor count of the Christmas take (from capture log)
+
+// Camera: center (cx,cy) in widget fractions, zoom relative to full-frame.
+function place(img,cx,cy,zoom,srcW=1280,srcH=720){
+  const W=1920*zoom,H=1080*zoom;
+  let left=960-cx*W, top=540-cy*H;
+  left=clamp(left,1920-W,0); top=clamp(top,1080-H,0);
+  img.style.width=W+'px';img.style.height=H+'px';
+  img.style.transform=`translate(${left}px,${top}px)`;
+}
+function camChristmas(f){
+  // Hook: slow drift in. Push-in lands on the beat at f102. Then glide toward the cameo.
+  // The hook stays full-frame so the widget's own labels are never cropped.
+  const close={cx:.62,cy:.80,z:3.6};
+  const cameo={cx:.675,cy:.80,z:3.9};
+  if(f<88) return {cx:.5,cy:.5,z:1};
+  if(f<102){const t=ease(prog(f,88,102));const zf=Math.exp(lerp(0,Math.log(close.z),t));return {cx:lerp(.5,close.cx,t),cy:lerp(.5,close.cy,t),z:zf};}
+  if(f<204){const z=close.z+.08*prog(f,102,204);return {cx:close.cx,cy:close.cy,z};}
+  const t=ease(prog(f,204,232));return {cx:lerp(close.cx,cameo.cx,t),cy:lerp(close.cy,cameo.cy,t),z:lerp(close.z+.08,cameo.z,t)};
+}
+// Text fade: in over 10f (rise 14px), out over 6f.
+function show(el,f,a,b,{inDur=10,outDur=6,rise=14,display='block'}={}){
+  if(f<a||f>=b){el.style.display='none';return;}
+  const tin=easeOut(prog(f,a,a+inDur)), tout=1-prog(f,b-outDur,b);
+  el.style.display=display;el.style.opacity=Math.min(tin,tout);
+  el.style.transform=`translateY(${(1-tin)*rise}px)`;
+}
+function load(img,src){return new Promise(r=>{if(img.getAttribute('src')===src){r();return;}img.onload=()=>img.decode().then(r,r);img.onerror=()=>{console.error('missing',src);r();};img.src=src;});}
+
+async function renderFrame(f){
+  const imgA=document.getElementById('imgA'),imgB=document.getElementById('imgB'),imgI=document.getElementById('imgI');
+  const shotB=document.getElementById('shotB'),inst=document.getElementById('install');
+  const jobs=[];let dip=0;
+  shotB.style.display='none';inst.style.display='none';document.getElementById('shotA').style.display='block';shotB.style.webkitMaskImage='';
+  if(f<S.seasons[0]){
+    jobs.push(load(imgA,`../frames/christmas/${pad(f)}.png`));
+    const c=camChristmas(f);place(imgA,c.cx,c.cy,c.z);
+  }else if(f<S.install[0]){
+    const i=f-S.seasons[0];
+    let k=0;for(const w of WIPES)if(f>=w)k++;
+    const z=1; // full frame: keeps the widget's season label and GitHub link intact
+    jobs.push(load(imgA,`../frames/${SEASONS[k]}/${pad(i)}.png`));place(imgA,.5,.5,z);
+    // Diagonal wipe into the next season over 12 frames, same characters underneath.
+    const w=WIPES.find(w=>f>=w-12&&f<w);
+    if(w!==undefined){
+      const t=ease(prog(f,w-12,w));
+      jobs.push(load(imgB,`../frames/${SEASONS[k+1]}/${pad(i)}.png`));place(imgB,.5,.5,z);
+      shotB.style.display='block';
+      const edge=lerp(-30,130,t);
+      shotB.style.webkitMaskImage=`linear-gradient(115deg,#000 ${edge-12}%,transparent ${edge}%)`;
+    }
+    if(f>=S.install[0]-5) dip=prog(f,S.install[0]-5,S.install[0]);
+  }else if(f<S.outro[0]){
+    document.getElementById('shotA').style.display='none';inst.style.display='block';
+    const i=f-S.install[0], src=19+i; // installer footage frames 19..100
+    jobs.push(load(imgI,`../frames/installer/${pad(src)}.png`));
+    // Footage 1728x960 in a 1220x1080 panel: right column (preview + code), then push toward the code block.
+    // Starts on the whole page card (season pick + preview swap), then pushes to the code block as it scrolls in.
+    const t=ease(prog(f,S.install[0]+20,S.outro[0]-6));
+    const z=lerp(.87,1.28,t), cx=lerp(864,1060,t), cy=lerp(480,665,t);
+    const W=1728*z,H=960*z;
+    const left=W<1220?(1220-W)/2:clamp(610-cx*z,1220-W,0);
+    const top=H<1080?(1080-H)/2:clamp(540-cy*z,1080-H,0);
+    imgI.style.width=W+'px';imgI.style.height=H+'px';imgI.style.transform=`translate(${left}px,${top}px)`;
+    dip=Math.max(1-prog(f,S.install[0],S.install[0]+5),f>=S.outro[0]-5?prog(f,S.outro[0]-5,S.outro[0]):0);
+  }else{
+    const i=f-S.outro[0];
+    jobs.push(load(imgA,`../frames/outro/${pad(i)}.png`));
+    // 1.5x on the upper-left: the tree sits right, the night sky on the left holds the brand.
+    place(imgA,0,0,1.62-.12*easeOut(prog(f,S.outro[0],S.outro[0]+70)));
+    dip=1-prog(f,S.outro[0],S.outro[0]+5);
+  }
+  if(f>=S.seasons[0]&&f<S.seasons[0]+1) dip=0;
+  document.getElementById('dip').style.opacity=dip;
+
+  // Overlays
+  const n=COUNT[Math.min(f,COUNT.length-1)]??24;
+  document.getElementById('num').textContent=String(n);
+  show(document.getElementById('hook'),f,4,92,{outDur:8});
+  show(document.getElementById('greet'),f,108,204);
+  show(document.getElementById('cameo'),f,208,265);
+  show(document.getElementById('seasons'),f,271,428,{outDur:5});
+  let k=0;for(const w of WIPES)if(f>=w-6)k++;
+  document.querySelectorAll('.chip').forEach((c,j)=>c.classList.toggle('on',j===k));
+  show(document.getElementById('installcap'),f,432,510,{outDur:5,display:'flex'});
+  show(document.getElementById('outro'),f,516,600,{inDur:14,outDur:0});
+  await Promise.all(jobs);
+  await document.fonts.ready;
+  return f;
+}
+window.renderFrame=renderFrame;
+window.setCounts=c=>{COUNT.length=0;COUNT.push(...c);};
+</script>
+</body>
+</html>

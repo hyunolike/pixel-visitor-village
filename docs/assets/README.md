@@ -1,5 +1,9 @@
 # README 이미지와 화면 캡처
 
+## Claude Code brag 재제작과 간결한 README
+
+상단 소개 썸네일과 네 언어 체험 이미지 버튼은 유지한다. 소개 MP4/포스터/GIF는 Claude Code의 실제 brag 실행으로 새로 제작했다. [새 장면표](brag-remake/video-contact-sheet.png),[제작 원본](../../assets/concepts/brag-remake/README.md),[영상 출처](../features/visitor-village/intro-media.md)를 본다. 현재 파일 정보는 brag-remake-evidence.json이 기준이며 아래 이전 미디어 갱신 기록과 구분한다. README4개는 각각44줄로 정리했고 상세내용은 docs/reference/widget.*.md로 보존했다.
+
 ## 작은 조형물과 이미지 버튼 최종 갱신
 
 후속 사용자 요청으로 README 상단 썸네일은 [기존 소개 일러스트](readme-tistory-village.png)를 그대로 유지한다. 네 README가 같은 원본을 사용하며 파일은 수정하지 않았다. [네 언어 이미지 버튼](entry/)과 갱신한 영상은 유지한다. 썸네일 축소 편집안은 최종 산출물에서 제외했다.
