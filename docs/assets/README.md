@@ -1,5 +1,13 @@
 # README 이미지와 화면 캡처
 
+## 작은 조형물과 이미지 버튼 최종 갱신
+
+후속 사용자 요청으로 README 상단 썸네일은 [기존 소개 일러스트](readme-tistory-village.png)를 그대로 유지한다. 네 README가 같은 원본을 사용하며 파일은 수정하지 않았다. [네 언어 이미지 버튼](entry/)과 갱신한 영상은 유지한다. 썸네일 축소 편집안은 최종 산출물에서 제외했다.
+
+버튼은 현재 여름 나무PNG와 편집 가능한 캐릭터RGBA 원본을 사용한 자체 SVG다. 외부 글꼴/URL/스크립트 없이 이미지와 각 언어 레이블을 포함하며 클릭은 README의 표준 링크가 처리한다. 생성 코드는 [create-entry-buttons.mjs](../../scripts/media/create-entry-buttons.mjs),공개용 사본은 public/media/visit-village-*.svg다. README4개 모두 홈의/#demo로 이동한다.
+
+소개 MP4/GIF/포스터와 구조도도 작은 조형물이 있는 최신 실제 PixiJS 화면으로 다시 만들었다. 현재 파일 정보와 촬영 모듈 해시는 [최종 미디어 기록](../features/visitor-village/reviews/entry-media-evidence.json)에 있다. 아래 축소 이전 영상 설명은 이력이며 현재 갱신본은 [소개 영상 문서](../features/visitor-village/intro-media.md)를 따른다.
+
 ## 티스토리와 픽셀 캐릭터 소개 썸네일
 
 2026-11-25 사용자 요청으로 [readme-tistory-village.png](readme-tistory-village.png)를 제작했다. 기본 한국어 README와 영어/일본어/중국어 문서 상단에서 같은 이미지를 사용한다. README용 프로젝트 소개 일러스트이며 제품 화면이나 실제 티스토리 블로그의 캡처가 아니다.
@@ -13,7 +21,7 @@
 
 ## 첨부 콘셉트로 개편한 현재 마을 (2026-11-25)
 
-후속 요청으로 티스토리 조형물을 작은 우물 크기로 줄인 화면을 다시 촬영했다. `cozy-village/scene-summer-large-monument.png`는 축소 전 이력이다. 소개 영상은 비율 축소 이전 촬영본이다.
+후속 요청으로 티스토리 조형물을 작은 우물 크기로 줄인 화면을 다시 촬영했다. `cozy-village/scene-summer-large-monument.png`는 축소 전 이력이다. 이 단계의 소개 영상은 비율 축소 전이었으며 현재는 위 최종 갱신본으로 교체했다.
 
 현재 README 계절 갤러리는 [cozy-village/](cozy-village/)의 실제 로컬 production 화면을 사용한다. 크리스마스/봄/여름/가을/겨울은 각각935×476px이고 데스크톱은1487×1058px,모바일은320/375×780px 뷰포트다. Google Chrome headless/DPR1에서 준비 완료 후 움직임을 멈추고 시연24명 상태로 테마를 바꿨다. 이미지로 위젯을 대체하지 않았다.
 
@@ -72,7 +80,7 @@
 
 [environment-v2.png](environment-v2.png)는 1120 × 740px이며, 같은 로컬 서버에서 실제 `src/art.ts`와 `src/environment.ts`의 Canvas 결과를 배치해 촬영했습니다. 봄/여름/가을/겨울 나무 4종과 크리스마스 테마의 집 3종, 가로등, 벤치와 표지판을 보여 줍니다. 외부 게임 이미지나 그림 목업은 사용하지 않았습니다.
 
-## 소개 영상 미디어
+## 소개 영상 미디어 — 축소 이전 갱신 이력
 
 2026-11-25의 현재 파일은 새 원화와 조형물이 있는 실제 production PixiJS 위젯 및 설치 작업실을 캡처한 갱신본이다. 예전 Canvas2D 재현 영상은 제작 이력으로 구분한다.
 
