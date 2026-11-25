@@ -7,10 +7,29 @@
 - 마을: https://pixel-visitor-village.pages.dev/
 - 설치 도우미: https://pixel-visitor-village.pages.dev/install.html
 - 독립 모듈: https://pixel-visitor-village.pages.dev/widget/visitor-village.js
-- 이번 고유 배포: https://d5bbcc11.pixel-visitor-village.pages.dev/
+- 이번 고유 배포: https://1a1111e3.pixel-visitor-village.pages.dev/
 - 프로젝트: `pixel-visitor-village`, production branch: `main`, 방식: Wrangler Direct Upload.
 - 계정 ID: `96dc7e6d07c8cb414af597acfec30146`. 인증은 사용자 OAuth를 사용하며 인증 값은 저장소와 명령 인자에 넣지 않는다.
-- 최신 소스: `3fb60b27b2420b8e2d0e5f032fb2511188e21833` (`feat/visitor-notice`). 최초 Pages 이전은 `234e854` 기반으로 진행했고 이후 `main`에 병합되었다. 이번 기능 커밋은 기능 브랜치에 푸시했으며 GitHub 자동 배포는 구성하지 않았다.
+- 최신 소스: `2a4e2b567ac90857c0cf4ec701449b3e7283a138` (`feat/visitor-notice`). 최초 Pages 이전은 `234e854` 기반으로 진행했고 이후 `main`에 병합되었다. 이번 기능 커밋은 기능 브랜치에 푸시했으며 GitHub 자동 배포는 구성하지 않았다.
+
+## 2026-11-25 마을 작업실 개편 배포 완료
+
+사용자가 추천 시안의 로컬 구현을 확인한 뒤 “진행해줘”라고 요청해 기존 production 반영을 진행했다. 소스 `2a4e2b567ac90857c0cf4ec701449b3e7283a138`을 `origin/feat/visitor-notice`에 푸시하고, 검증한 정적 묶음을 Wrangler Direct Upload했다. main 병합이나 자동 배포 설정은 수행하지 않았다.
+
+- 공개 설치 화면: https://pixel-visitor-village.pages.dev/install?lang=ko. 기존 `/install.html`, 홈과 `/docs/`도 동작한다.
+- 고유 배포: https://1a1111e3.pixel-visitor-village.pages.dev/ (`1a1111e3-ef42-4b06-83cc-6f359490199a`). Pages 목록에서 Production/main/소스2a4e2b5를 확인했다. 직전 production은 `d5bbcc11-9a68-4075-90fc-549f3beb1f3a`다.
+- 커밋 전 단위128/128, 타입/앱/독립 위젯 빌드, 전체 Chrome72/72를 다시 통과했다. 커밋의 빌드 입력48개를 검증한 작업 파일과 바이트 단위로 대조했다.
+- 고정 묶음 `/private/tmp/pvv-atelier-release-20261125/dist`:26개 파일/5,533,398bytes. 파일별 SHA-256 manifest를 저장했다. `_headers` 별도 처리 후25개 중7개 업로드/18개 재사용했다. 개발 Markdown이나 원본/인증 파일은 배포하지 않았다.
+- 공개 Chrome8/8 통과: 세 HTML과 설치 JS/CSS/위젯의 로컬 빌드 해시 일치, CORS/MIME/캐시/nosniff/없는 파일404, 데스크톱 코드 생성과 실제 클립보드 복사/단계 전환,320px 네 언어 메뉴 초점/Escape/고급 설정/변경 무효화와 재생성, 독립 HTTP 출처37명 렌더링, 홈·문서/앵커 이동과 JS 없는320px 문서를 확인했다. 설치/외부 위젯 페이지의 스크립트 오류 없음.
+- 공개 데스크톱1487×1058과 모바일375×667 캡처를 직접 열어 로컬 시안 구현이 반영됐음을 확인했다. 캡처와 테스트 결과는 `/private/tmp/pvv-atelier-production-results/`에 있다. Codex 패널 열기는 queued 응답으로 표시 완료를 주장하지 않는다.
+- 홈 SHA-256: `787865c3fd66bd241936a8e7b55d02b775a8674b5871c9d4239276890f217c3c`.
+- 설치 HTML SHA-256: `bf80b6cacdb38b18ad69cc226f93c7df306b2649f138ef066b9175d16ed0beb3`.
+- 문서 HTML SHA-256: `faf0fd4bad033030b6b0bd955d40e7530f22b90d37049e1ca703c2de54c8b2ea`.
+- 설치 JS SHA-256: `8c29f1931eab8143f01c35724b4ce7808d6af968129c3828842d6ff58a41e8be` (`install-B6wpcjXz.js`).
+- 설치 CSS SHA-256: `384ea3ee05e293f7736d122abe973925eb146ef93fd8d70dee4304f1852742f8` (`install-DjmfRH4o.css`).
+- 위젯 SHA-256: `6598bd78157dc7095b6ea70cbd0f24450245fb858c1da8fbcb83f37a240af4d7`. 위젯은 직전 배포와 같으며 설치 도구와 공통 스타일을 개편했다.
+
+첫 GitHub push는 HTTP400으로 중단됐고 원격이 이전 커밋임을 확인했다. 해당 명령에서만 `http.postBuffer=8388608`로 바꿔 재시도한 뒤 성공했다. 전역 Git 설정은 바꾸지 않았다. 원격 ref가 소스 커밋과 일치함을 재확인했다. 실제 티스토리 스킨 편집/집계와 모바일 실기기 확인은 수행하지 않았다.
 
 ## 2026-11-25 홈·설치·사용 문서 배포 완료
 
@@ -58,7 +77,7 @@
 
 ## 정적 배포 구성
 
-서버와 데이터베이스, Pages Functions 없이 `pnpm build`의 `dist`만 제공한다. 원본 에셋과 소스, 인증/개인 스킨, `node_modules`, 테스트 결과와 `brag-output`을 배포하지 않는다. 최신 홈·문서 배포의 출력 파일 26개는 총 5,527,201bytes이며 가장 큰 MP4는 2,979,821bytes다. `dist/widget`에는 독립 JavaScript 한 개만 둔다. 업로더는 `_headers`를 별도 처리하고 나머지 25개 파일 중 8개를 새로 올렸으며 17개는 기존 업로드를 재사용했다.
+서버와 데이터베이스, Pages Functions 없이 `pnpm build`의 `dist`만 제공한다. 원본 에셋과 소스, 인증/개인 스킨, `node_modules`, 테스트 결과와 `brag-output`을 배포하지 않는다. 최신 마을 작업실 배포의 출력 파일 26개는 총 5,533,398bytes이며 가장 큰 MP4는 2,979,821bytes다. `dist/widget`에는 독립 JavaScript 한 개만 둔다. 업로더는 `_headers`를 별도 처리하고 나머지 25개 파일 중 7개를 새로 올렸으며 18개는 기존 업로드를 재사용했다.
 
 `wrangler.jsonc`는 이름/출력/호환 날짜를 고정한다. `public/_headers`는 `/widget/*`에 CORS `*`, `public, max-age=300, must-revalidate`, `nosniff`를 적용한다. `public/404.html`로 없는 JS 경로가 기본 SPA HTML 200으로 바뀌지 않게 한다. `vite.widget.config.ts`의 `publicDir: false`는 영상과 설정의 중복 복사를 막는다.
 

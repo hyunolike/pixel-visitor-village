@@ -43,3 +43,7 @@ final result: passed
 - [x] 실제 로컬 화면과 근거를 전달하고 현재 변경은 운영 배포 전임을 구분.
 
 추가 필수 수정이나 열린 제품 결정은 없다. 실기기/보조기기 조합별 확인은 후속 검증 범위다.
+
+## 후속 공개 확인
+
+사용자의 후속 진행 승인으로 동일 소스를 production1a1111e3에 반영했다. 공개 Chrome8/8과 주요 HTML/JS/CSS/위젯의 검증 빌드 해시 일치를 확인했다. 공개1487×1058/375×667 실제 캡처를 다시 열어 로컬과 같은 배치/타이포그래피/이미지/색/카피임을 확인했다. 근거는 `/private/tmp/pvv-atelier-production-results/`와 [배포 기록](docs/features/visitor-village/deployment.md)에 있다. final result는 passed로 유지한다.
