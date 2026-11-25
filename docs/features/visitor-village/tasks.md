@@ -1,5 +1,14 @@
 # 진행 상태
 
+## 2026-11-25 자동 배포와 GitHub 릴리즈
+
+- [x] 기존 Direct Upload/인증/Actions와 독립 폰트 PR 상태 확인, VV-CI-001~004와 [계획](ci-release-plan.md) 작성.
+- [x] workflow와 배포 산출물/공개 검증/릴리즈 스크립트, 도구14/14와 기존 단위146/146, 타입/빌드/브라우저79/79 검증.
+- [x] 독립 검토의 태그 커밋 지적 해결과 재검토. [기록](reviews/ci-release-2026-11-25.md).
+- [x] PR #12의 실제 Linux146/14/79 통과와 main0215eb4 병합.
+- [x] 기존 계정의 Pages Edit 전용 토큰(2027-11-25 만료)과 계정 ID를 GitHub Secret에 등록.
+- [x] main0215eb4의 첫 자동 배포/35파일 SHA와 [릴리즈 deploy-2-0215eb4](https://github.com/hyunolike/pixel-visitor-village/releases/tag/deploy-2-0215eb4), [전체 실행 성공](https://github.com/hyunolike/pixel-visitor-village/actions/runs/45621195668) 확인.
+
 ## 2026-11-25 서비스 타이포그래피
 
 - [x] 현재 서비스/공통 CSS와 네 언어, 공식 폰트 라이선스/픽셀 조판 가이드 확인.
@@ -7,7 +16,7 @@
 - [x] 원본 폰트/OFL 자체 제공과 제목/브랜드/본문 역할 적용.
 - [x] 타입/빌드, 최종 브라우저79/79, 실제 네 언어 조판/폰트 실패와 캡처 [검증 기록](reviews/typography-2026-11-25.md). 썸네일/영상/외부 위젯 번들은 이전과 동일. 로컬5285 미리보기, 커밋/푸시/공개 배포는 실행하지 않았다.
 
-후속 “풀리퀘” 요청: 기존 PR #10은 병합되었으므로 최신 main에서 폰트 전용 feat/village-typography 브랜치로 분리한다. 독립 코드 검토와 전체 검사 후 커밋/푸시/PR 생성으로 전달한다. 병합/배포는 수행하지 않는다.
+후속 “풀리퀘” 요청으로 폰트 PR #11을 분리하고 독립 검토/전체 검사 후 생성했다. 이후 사용자 자동 배포/릴리즈 요청과 인증 발급 승인에 따라 새 main 자동화를 폰트 브랜치에 병합했다. 문서의 두 요구사항 블록을 모두 보존했고 통합 로컬14/빌드/브라우저79도 확인했다. 운영 반영의 실제 상태는 [PR #11](https://github.com/hyunolike/pixel-visitor-village/pull/11), 해당 main Actions와 [최신 릴리즈](https://github.com/hyunolike/pixel-visitor-village/releases/latest)를 기준으로 확인한다.
 
 ## Claude Code brag 재제작과 README 정리
 
