@@ -250,3 +250,11 @@ Implementation and acceptance checks: [interactive-home-plan.md](interactive-hom
 ## 2026-11-26 Unified installation and guide
 
 The user requested all pages match the selected Living Village Square homepage. VV-UNIFY-001–004 in [unified-pages-plan.md](unified-pages-plan.md) define shared chrome, four-locale installation compatibility, a static readable guide and responsive verification. This extends the existing visual system without a new concept selection.
+
+## 2026-11-26 Header consistency correction
+
+The user observed different mobile header arrangements after PR #14. Matching colors alone does not satisfy the request to unify pages.
+
+- VV-HEADER-001: Home, installer and guide use the same brand/nav/toggle structure, link order (demo, docs, GitHub, install), spacing and responsive breakpoint. Only current-page state and translated labels vary. Korean headers have equal geometry at 320, 390, 700, 701 and 1440px.
+- VV-HEADER-002: At ≤700px the shared header has a 64px row plus a 1px divider with a brand and menu button. Above 700px it keeps a 76px row plus divider in all four installer locales, including the 701px boundary. The same dropdown contains all four links, focuses its first link on opening and returns focus on Escape. Same-page navigation closes the dropdown. Desktop resizing preserves visible focus. Without JS, guide navigation and content remain accessible.
+- VV-HEADER-003: Installer language selection moves into its settings panel, retaining four locales, accessible labeling, focus, storage/query behavior and generated code. Homepage season handoff, source assets, README thumbnail and intro video remain unchanged.

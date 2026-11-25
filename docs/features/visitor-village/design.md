@@ -401,3 +401,7 @@ The detailed file boundaries, contracts, lifecycle and verification plan are in 
 ## 2026-11-26 Shared village chrome
 
 The user requested design consistency across home, installer and docs. Shared CSS owns the forest header, actual tree brand, gold action and cream surface tokens. Installer retains its live workspace and four-language state; documentation remains a static guide. Detailed file boundaries and verification are in [unified-pages-plan.md](unified-pages-plan.md).
+
+### Header structure correction
+
+Use identical static header slots on all three pages: outer header, inner flex row, brand, four-link navigation, menu toggle. `service-chrome.css` owns every header layout rule; page styles must not override them. A small shared `service-header.ts` controller progressively enhances the static links with the existing mobile menu behavior. Home initializes it after rendering its template; install and docs initialize it after parsed HTML. The no-JS guide shows all links in flow. Move the installer locale picker into the settings panel so it cannot alter common header geometry or the initial preview position. Preserve its ID and translation handling. No router, dependency, new art or widget behavior changes are needed.

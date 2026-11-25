@@ -366,3 +366,13 @@ PR follow-up: the user requested a pull request on 2026-11-26. Commit and push t
 - [x] Independent final review, actual results and local preview handoff.
 
 Unified-pages PR follow-up: the user requested a pull request on 2026-11-26. Commit and push the verified scope to feat/unified-village-pages and open against main; keep merge/deployment separate.
+
+## 2026-11-26 Header consistency correction
+
+- [x] Reproduce differing header structures and define VV-HEADER-001–003.
+- [x] Add a failing cross-page geometry/menu regression and translated701px regression.
+- [x] Share layout and controller; retain static guide and installer locale behavior.
+- [x] Verify all pages, four locales, responsive boundaries and existing regressions (unit151, release14, type/build, Chrome87).
+- [x] Independent review, visual comparison and local handoff. [Results](reviews/header-consistency-2026-11-26.md). New commit/push/deploy requires a user request.
+
+Header PR follow-up: the user requested a pull request on 2026-11-26. Commit and push the verified scope to fix/consistent-service-header and open against main. Keep merge and deployment separate.

@@ -9,6 +9,50 @@ const waitReady=async(page:Page)=> {
 };
 const state=async(page:Page)=>page.locator('visitor-village').first().evaluate((el:any)=>({count:el.visitorCount,season:el.season,people:el.getVisitors()}));
 
+test('service headers share geometry, menu order and responsive behavior across all pages',async({page})=>{
+  for(const width of [320,390,700,701,1440]){
+    await page.setViewportSize({width,height:850});
+    const layouts=[];
+    for(const path of ['/','/install.html?lang=ko','/docs/']){
+      await page.goto(path);await page.evaluate(()=>document.fonts.ready);
+      const header=page.locator('.service-header'),nav=header.locator('#project-navigation'),toggle=header.locator('#navigation-toggle');
+      await expect(nav.locator('a')).toHaveText(['마을 체험','사용 문서','GitHub (새 탭)','설치하기']);
+      if(width<=700){
+        await expect(nav).toBeHidden();await expect(toggle).toBeVisible();
+        expect((await header.boundingBox())!.height).toBe(65); // 64px row + shared 1px border.
+        await toggle.click();await expect(nav.locator('a').first()).toBeFocused();
+        expect(Math.abs((await nav.boundingBox())!.y-((await header.boundingBox())!.y+(await header.boundingBox())!.height))).toBeLessThanOrEqual(1);
+      }else{await expect(nav).toBeVisible();await expect(toggle).toBeHidden();}
+      layouts.push(await header.evaluate(el=>{
+        const box=(target:Element)=>{const r=target.getBoundingClientRect();return [r.x,r.y,r.width,r.height].map(v=>Math.round(v*100)/100);};
+        return {header:box(el),brand:box(el.querySelector('.project-brand')!),links:[...el.querySelectorAll('.project-nav>a')].map(box)};
+      }));
+      expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+      if(width<=700){await page.keyboard.press('Escape');await expect(toggle).toBeFocused();await expect(nav).toBeHidden();}
+    }
+    expect(layouts[1]).toEqual(layouts[0]);expect(layouts[2]).toEqual(layouts[0]);
+  }
+  await page.setViewportSize({width:390,height:850});await page.goto('/');
+  await page.locator('#navigation-toggle').click();await page.locator('#project-navigation a').first().click();
+  await expect(page).toHaveURL(/#demo$/);await expect(page.locator('#project-navigation')).toBeHidden();
+  await expect(page.locator('#demo')).toBeFocused();
+  await page.locator('#navigation-toggle').focus();await page.setViewportSize({width:701,height:850});
+  await expect(page.locator('#project-navigation a').first()).toBeFocused();
+  await page.setViewportSize({width:700,height:850});
+  await expect(page.locator('#navigation-toggle')).toBeFocused();await expect(page.locator('#project-navigation')).toBeHidden();
+});
+
+test('translated desktop headers keep the shared single row at the compact breakpoint',async({page})=>{
+  await page.setViewportSize({width:701,height:850});
+  for(const locale of ['ko','en','ja','zh-CN']){
+    await page.goto(`/install.html?lang=${locale}`);await page.evaluate(()=>document.fonts.ready);
+    expect((await page.locator('.service-header').boundingBox())!.height).toBe(77);
+    const title=(await page.locator('.brand-title').boundingBox())!,nav=(await page.locator('#project-navigation').boundingBox())!;
+    expect(nav.x-title.x-title.width).toBeGreaterThanOrEqual(20);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(701);
+  }
+});
+
 test('unified village chrome connects home, installation and static guide',async({page,browser,request})=>{
   const headers=[];
   for(const path of ['/','/install.html?lang=ko','/docs/']){
@@ -30,6 +74,8 @@ test('unified village chrome connects home, installation and static guide',async
   try{
     const docs=await context.newPage();await docs.goto(`${appOrigin()}/docs/`);
     await expect(docs.locator('.service-header')).toBeVisible();await expect(docs.locator('#quick-start')).toContainText('시연');
+    for(const link of await docs.locator('#project-navigation a').all()) await expect(link).toBeVisible();
+    await expect(docs.locator('#navigation-toggle')).toBeHidden();
     await docs.locator('.docs-toc a[href="#credits"]').click();await expect(docs.locator('#credits')).toBeInViewport();
     expect(await docs.evaluate(()=>document.documentElement.scrollWidth)).toBe(320);
   }finally{await context.close();}
@@ -165,6 +211,7 @@ test('home and usage docs keep their navigation, tables and code within 320px',a
   for(const [path,name] of [['/','home-mobile'],['/docs/','docs-mobile']]){
     await page.goto(path);await expect(page.locator('h1')).toBeVisible();
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    await page.locator('#navigation-toggle').click();
     for(const link of await page.locator('.project-nav a').all()){
       const box=await link.boundingBox();expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.x+box!.width).toBeLessThanOrEqual(320);
     }

@@ -2,7 +2,6 @@
 
 .docs-body { padding:0;background:var(--color-page); }
 .docs-shell { width:100%;margin:0; }
-.docs-header { justify-content:space-between; }
 .docs-intro { background:var(--village-forest);color:var(--village-cream);display:flex;align-items:center;justify-content:space-between;gap:40px;padding:48px max(40px,calc((100% - 1200px)/2)); }
 .docs-intro-copy { max-width:740px; }
 .docs-intro h1 { font-family:var(--font-display);font-size:48px;font-weight:var(--weight-display);letter-spacing:0;line-height:1.5; }
