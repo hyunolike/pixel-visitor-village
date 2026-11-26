@@ -15,8 +15,8 @@
     "preview": "vite preview --host 127.0.0.1 --port 4178",
     "test:e2e": "playwright test",
     "test:release": "node --test scripts/release/artifacts.test.mjs",
-    "format:service": "prettier --write src/demo.ts src/install.ts src/install-i18n.ts src/service-header.ts src/demo.css src/install.css src/site-pages.css src/design-system.css src/service-chrome.css src/docs.css install.html docs/index.html",
-    "format:check": "prettier --check src/demo.ts src/install.ts src/install-i18n.ts src/service-header.ts src/demo.css src/install.css src/site-pages.css src/design-system.css src/service-chrome.css src/docs.css install.html docs/index.html"
+    "format:service": "prettier --write src/demo.ts src/install.ts src/install-i18n.ts src/service-header.ts src/demo.css src/install.css src/site-pages.css src/design-system.css src/service-chrome.css src/docs.css install.html docs/index.html src/map-scene.ts src/docs.ts",
+    "format:check": "prettier --check src/demo.ts src/install.ts src/install-i18n.ts src/service-header.ts src/demo.css src/install.css src/site-pages.css src/design-system.css src/service-chrome.css src/docs.css install.html docs/index.html src/map-scene.ts src/docs.ts"
   },
   "dependencies": {
     "pixi.js": "^8.0.0"

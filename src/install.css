@@ -8,11 +8,11 @@
 }
 .intro-copy,
 .install-progress {
-  background: var(--village-forest);
-  color: var(--village-cream);
+  background: var(--service-sky);
+  color: var(--village-ink);
 }
 .intro-copy {
-  padding: 40px max(40px, calc((100% - 1407px) / 2)) 24px;
+  padding: 28px max(40px, calc((100% - 1407px) / 2)) 20px;
 }
 
 .language-picker {
@@ -42,7 +42,7 @@ h1 {
 }
 .intro-copy p {
   margin-top: var(--space-2);
-  color: #d5dfc9;
+  color: var(--color-muted);
   font-size: var(--font-size-lead);
 }
 h2 {
@@ -54,7 +54,7 @@ h2 {
   display: flex;
   align-items: center;
   gap: var(--space-6);
-  padding: 0 max(40px, calc((100% - 1407px) / 2)) 32px;
+  padding: 0 max(40px, calc((100% - 1407px) / 2)) 24px;
   margin: 0;
   list-style: none;
 }
@@ -66,7 +66,7 @@ h2 {
   min-width: 0;
   font-size: var(--font-size-lead);
   font-weight: var(--weight-semibold);
-  color: #d5dfc9;
+  color: var(--color-muted);
 }
 .install-progress li:not(:last-child)::after {
   content: '';
@@ -86,7 +86,7 @@ h2 {
   font-weight: var(--weight-medium);
 }
 .install-progress [aria-current='step'] {
-  color: var(--village-cream);
+  color: var(--village-ink);
 }
 .install-progress [aria-current='step'] .progress-number {
   background: var(--village-gold);
@@ -108,8 +108,10 @@ h2 {
 }
 .settings-panel {
   grid-area: settings;
-  padding: 0 32px 32px 0;
-  border-right: 1px solid var(--color-divider);
+  padding: 24px;
+  border: 2px solid #c7b887;
+  background: #fff0c7;
+  box-shadow: 0 4px 0 #ded1a6;
 }
 .preview-panel {
   grid-area: preview;
@@ -129,36 +131,46 @@ h2 {
 }
 .season-options {
   display: grid;
-  gap: var(--space-2);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
 }
 .season-option {
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  min-height: 56px;
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--color-input-border);
-  font-size: 16px;
-  background: var(--color-surface);
+  justify-content: center;
+  gap: 7px;
+  min-height: 106px;
+  padding: 8px 4px;
+  border: 1px solid #967845;
+  background: #fff8e7;
+  font-size: 14px;
   line-height: 1.35;
+  text-align: center;
+  box-shadow: 0 2px 0 #d3be8a;
+  cursor: pointer;
 }
 .season-option input {
-  width: 18px;
-  height: 18px;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
   margin: 0;
-  flex: none;
 }
 .season-option > span {
   pointer-events: none;
 }
 .season-option:has(input:checked) {
-  color: var(--village-cream);
-  border-color: var(--village-ink);
-  background: var(--village-ink);
-  font-weight: var(--weight-semibold);
+  color: var(--village-ink);
+  border: 2px solid #916623;
+  background: #f6c55d;
+  font-weight: 600;
+  box-shadow: inset 0 -3px #dfad42;
 }
 .season-option:has(input:focus-visible) {
-  outline: 3px solid var(--color-action);
+  outline: 3px solid var(--village-ink);
   outline-offset: 3px;
 }
 .season-option input:focus-visible {
@@ -409,8 +421,8 @@ h2 {
 }
 
 .season-option > img {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
   image-rendering: pixelated;
   flex: none;
@@ -538,14 +550,13 @@ h2 {
     font-size: 12px;
   }
   .season-options {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .season-option {
     font-size: 14px;
+    min-height: 96px;
   }
-  .season-option:first-child {
-    grid-column: 1/-1;
-  }
+
   .form-field > label {
     font-size: 14px;
   }

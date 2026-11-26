@@ -1,5 +1,6 @@
 import './install.css';
 import { setupServiceHeader } from './service-header';
+import { setupMapScene } from './map-scene';
 import {
   buildInstallSnippet,
   InstallError,
@@ -252,6 +253,8 @@ async function loadPreview() {
     preview.setAttribute('count', '24');
     preview.setAttribute('season', selectedSeason);
     preview.setAttribute('repository-link', 'badge');
+    preview.setAttribute('data-map-scene', '');
+    setupMapScene(preview);
     preview.toggleAttribute('paused', paused);
     preview.addEventListener('village-ready', () => {
       if (generation !== previewGeneration) return;

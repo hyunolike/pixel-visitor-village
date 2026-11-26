@@ -5,9 +5,138 @@ const waitReady=async(page:Page)=> {
   await page.goto('/');
   await page.waitForFunction(()=>Boolean((document.querySelector('visitor-village') as any)?.ready));
   // Legacy widget-contract tests use their original embedded fixture explicitly.
-  await page.locator('visitor-village').first().evaluate(el=>{el.removeAttribute('interactive');el.removeAttribute('repository-link');el.setAttribute('count','24');el.setAttribute('season','christmas');});
+  await page.locator('visitor-village').first().evaluate(el=>{el.removeAttribute('data-map-scene');el.removeAttribute('interactive');el.removeAttribute('repository-link');el.setAttribute('count','24');el.setAttribute('season','christmas');(el as any).setSceneBackdrop?.(null);});
 };
 const state=async(page:Page)=>page.locator('visitor-village').first().evaluate((el:any)=>({count:el.visitorCount,season:el.season,people:el.getVisitors()}));
+
+const trackTerrainImages=async(page:Page)=>page.addInitScript(()=>{
+  const Original=window.Image;(window as any).terrainImages=[];
+  window.Image=new Proxy(Original,{construct(target,args){const image=Reflect.construct(target,args);(window as any).terrainImages.push(image);return image;}});
+});
+const terrainFinished=async(page:Page,season:string)=>page.waitForFunction(season=>(window as any).terrainImages.some((image:HTMLImageElement)=>image.src.includes(`landscape-${season}`)&&image.complete&&image.naturalWidth>0),season);
+
+test('playable map house signs track the scene and carry the selected season into installation',async({page})=>{
+  for(const width of [320,390,1487]){
+    await page.setViewportSize({width,height:1058});await page.goto('/');await page.waitForFunction(()=>Boolean((document.querySelector('visitor-village') as any)?.ready));
+    const world=page.locator('visitor-village').first();await expect(world).toHaveAttribute('data-scene-state','ready');
+    await expect(page.locator('#guide-portrait')).toBeVisible();
+    for(const name of ['#map-install','#map-guide']){
+      const box=(await page.locator(name).boundingBox())!;expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(width);expect(box.height).toBeGreaterThanOrEqual(44);
+    }
+    await page.locator('[data-home-season=autumn]').click();await expect(world).toHaveAttribute('data-scene-season','autumn');
+    await expect(page.locator('#map-install')).toHaveAttribute('href','./install.html?season=autumn');
+    if(width===1487){const box=(await page.locator('#map-install').boundingBox())!;await page.locator('#map-install').click({position:{x:box.width/2,y:box.height-20}});}else{await page.locator('#map-install').focus();await page.keyboard.press('Enter');}await expect(page).toHaveURL(/install.html\?season=autumn$/);await expect(page.locator('input[value=autumn]')).toBeChecked();
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+  }
+});
+
+test('playable map ignores an obsolete terrain completion and retries a failed image on reselection',async({page})=>{
+  await trackTerrainImages(page);
+  let release:()=>void=()=>{},requested=false;
+  const gate=new Promise<void>(resolve=>{release=resolve;});
+  await page.route('**/landscape-spring*.webp',async route=>{requested=true;await gate;await route.continue();});
+  await page.goto('/');const world=page.locator('visitor-village').first();await expect(world).toHaveAttribute('data-scene-state','ready');
+  const before=(await state(page)).people;
+  await page.locator('[data-home-season=spring]').click();await expect.poll(()=>requested).toBe(true);
+  await page.locator('[data-home-season=autumn]').click();await expect(world).toHaveAttribute('data-scene-season','autumn');release();
+  await terrainFinished(page,'spring');await expect(world).toHaveAttribute('data-scene-season','autumn');
+  expect((await state(page)).people.map((p:any)=>p.id)).toEqual(before.map((p:any)=>p.id));
+  let attempts=0;await page.route('**/landscape-winter*.webp',route=>++attempts===1?route.abort():route.continue());
+  await page.locator('[data-home-season=winter]').click();await expect(world).toHaveAttribute('data-scene-state','fallback');await expect(page.locator('#greet')).toBeEnabled();
+  expect(await page.locator('#home-title').evaluate(el=>{const rgb=getComputedStyle(el).color.match(/\d+/g)!.slice(0,3).map(Number);const lum=(a:number[])=>a.map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;}).reduce((n,v,i)=>n+v*[.2126,.7152,.0722][i],0);const a=lum(rgb),b=lum([33,73,80]);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);})).toBeGreaterThanOrEqual(4.5);
+  await page.locator('[data-home-season=summer]').click();await expect(world).toHaveAttribute('data-scene-state','ready');
+  await page.locator('[data-home-season=winter]').click();await expect(world).toHaveAttribute('data-scene-season','winter');expect(attempts).toBe(2);
+});
+
+test('playable map optional presentation survives reconnect and leaves a plain widget independent',async({page})=>{
+  await page.goto('/');const world=page.locator('visitor-village').first();await expect(world).toHaveAttribute('data-scene-state','ready');
+  await world.evaluate((el:any)=>{el.setAttribute('paused','');(window as any).mapElement=el;el.remove();document.querySelector('#demo')!.append(el);});
+  await page.waitForFunction(()=>Boolean((window as any).mapElement.ready));await expect(page.locator('#greet')).toBeEnabled();
+  await page.evaluate(()=>{const el=document.createElement('visitor-village');el.id='plain-widget';el.setAttribute('count','7');el.setAttribute('season','summer');el.style.height='240px';document.body.append(el);});
+  await page.waitForFunction(()=>Boolean((document.querySelector('#plain-widget') as any)?.ready));
+  expect(await page.locator('#plain-widget').evaluate((el:any)=>({count:el.visitorCount,scene:el.dataset.sceneState}))).toEqual({count:7,scene:undefined});
+  await world.evaluate(el=>el.remove());await expect(page.locator('#plain-widget canvas')).toBeVisible();
+});
+
+test('playable map replays cached terrain after an image finishes while detached',async({page})=>{
+  await trackTerrainImages(page);
+  let release:()=>void=()=>{},requested=false;const gate=new Promise<void>(resolve=>{release=resolve;});
+  await page.route('**/landscape-spring*.webp',async route=>{requested=true;await gate;await route.continue();});
+  await page.goto('/');const world=page.locator('visitor-village').first();await expect(world).toHaveAttribute('data-scene-state','ready');
+  await page.locator('[data-home-season=spring]').click();await expect.poll(()=>requested).toBe(true);
+  await world.evaluate((el:any)=>{(window as any).detachedMap=el;el.remove();});release();await terrainFinished(page,'spring');
+  await page.evaluate(()=>document.querySelector('.world-wrap')!.append((window as any).detachedMap));
+  await expect(page.locator('visitor-village').first()).toHaveAttribute('data-scene-state','ready');await expect(page.locator('visitor-village').first()).toHaveAttribute('data-scene-season','spring');
+});
+
+test('playable map explicit opt-out prevents pending terrain from restoring a default fixture',async({page})=>{
+  await trackTerrainImages(page);
+  let release:()=>void=()=>{},requested=false;const gate=new Promise<void>(resolve=>{release=resolve;});
+  await page.route('**/landscape-spring*.webp',async route=>{requested=true;await gate;await route.continue();});
+  await page.goto('/');const world=page.locator('visitor-village').first();await expect(world).toHaveAttribute('data-scene-state','ready');
+  await page.locator('[data-home-season=spring]').click();await expect.poll(()=>requested).toBe(true);
+  await world.evaluate((el:any)=>{el.removeAttribute('data-map-scene');el.setSceneBackdrop(null);});release();
+  await terrainFinished(page,'spring');await expect(world).toHaveAttribute('data-scene-state','default');await expect(world).not.toHaveAttribute('data-scene-season');
+});
+
+test('two map renderers sharing one image retain independent textures after replacement and removal',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('/');await expect(page.locator('visitor-village').first()).toHaveAttribute('data-scene-state','ready');
+  await page.evaluate(async()=>{
+    const image=new Image();image.src=performance.getEntriesByType('resource').map(item=>item.name).find(url=>url.includes('landscape-summer'))!;await image.decode();
+    for(const id of ['shared-first','shared-second']){const el=document.createElement('visitor-village') as any;el.id=id;el.setAttribute('count','3');el.setAttribute('season','summer');el.setAttribute('paused','');el.style.cssText=`position:fixed;top:100px;left:${id==='shared-first'?0:350}px;width:320px;height:240px;z-index:100`;el.setSceneBackdrop(image);document.body.append(el);}
+  });
+  await page.waitForFunction(()=>['shared-first','shared-second'].every(id=>(document.getElementById(id) as any)?.ready));
+  const before=await page.locator('#shared-second canvas').screenshot({path:test.info().outputPath('shared-before.png')});
+  await page.locator('#shared-first').evaluate((el:any)=>{el.setSceneBackdrop(null);el.remove();});
+  expect((await page.locator('#shared-second canvas').screenshot({path:test.info().outputPath('shared-after.png')})).equals(before)).toBe(true);
+});
+
+test('game guide topic finder handles literal text, empty results and hidden hash destinations',async({page})=>{
+  await page.goto('/docs/');const search=page.locator('#guide-search');await expect(search).toBeVisible();
+  await search.fill('no-such-topic-9284');await expect(page.locator('#guide-empty')).toBeVisible();await expect(page.locator('.docs-content>section:visible')).toHaveCount(0);
+  await page.locator('#guide-reset').click();await expect(page.locator('.docs-content>section:visible')).toHaveCount(6);await expect(search).toBeFocused();
+  await search.fill('[##_count_today_##]');await expect(page.locator('#guide-empty')).toBeHidden();
+  await page.locator('.docs-toc a[href="#credits"]').click();await expect(search).toBeEmpty();await expect(page.locator('#credits')).toBeInViewport();
+  await expect(page.locator('.docs-toc a[href="#credits"]')).toHaveAttribute('aria-current','location');
+  for(const link of await page.locator('.guide-start a').all())await expect(link).toHaveAttribute('href',/install|#configuration|#troubleshooting/);
+  await page.setViewportSize({width:320,height:850});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(320);
+});
+
+test('map HUD fits compact desktop and house signs never overlap the hero on short screens',async({page})=>{
+  for(const [width,height] of [[701,900],[1024,768],[1280,720],[1440,768],[1440,850]]){
+    await page.setViewportSize({width,height});await page.goto('/');await expect(page.locator('visitor-village')).toHaveAttribute('data-scene-state','ready');
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+    const intro=(await page.locator('.scene-intro').boundingBox())!;
+    if(width>=1201){const dock=(await page.locator('.village-dock').boundingBox())!;expect(dock.y+dock.height).toBeLessThanOrEqual(height);}
+    for(const sign of await page.locator('.map-sign').all()){
+      const box=(await sign.boundingBox())!;
+      const overlap=Math.min(intro.x+intro.width,box.x+box.width)>Math.max(intro.x,box.x)&&Math.min(intro.y+intro.height,box.y+box.height)>Math.max(intro.y,box.y);
+      expect(overlap).toBe(false);
+    }
+  }
+});
+
+test('paused game control retains visible icon contrast on its pressed surface',async({page})=>{
+  await page.emulateMedia({colorScheme:'light'});
+  await page.goto('/');await expect(page.locator('#pause')).toBeEnabled();await page.locator('#pause').click();
+  const contrast=await page.locator('#pause').evaluate(async button=>{
+    const image=button.querySelector('img')!;await image.decode();
+    const canvas=document.createElement('canvas');canvas.width=24;canvas.height=24;const ctx=canvas.getContext('2d')!;ctx.filter=getComputedStyle(image).filter;ctx.drawImage(image,0,0,24,24);
+    const pixels=ctx.getImageData(0,0,24,24).data;let foreground:number[]=[];for(let i=0;i<pixels.length;i+=4)if(pixels[i+3]===255){foreground=[pixels[i],pixels[i+1],pixels[i+2]];break;}
+    const background=getComputedStyle(button).backgroundColor.match(/\d+/g)!.slice(0,3).map(Number);
+    const lum=(rgb:number[])=>rgb.map(c=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4;}).reduce((n,c,i)=>n+c*[.2126,.7152,.0722][i],0);
+    const a=lum(foreground),b=lum(background);return {ratio:(Math.max(a,b)+.05)/(Math.min(a,b)+.05),foreground,background,filter:getComputedStyle(image).filter,pressed:button.getAttribute('aria-pressed')};
+  });expect(contrast.ratio).toBeGreaterThanOrEqual(3);
+});
+
+test('guide current topic follows settled bottom scrolling and clears hidden search results',async({page,request})=>{
+  await page.goto('/docs/');await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight));await page.waitForTimeout(150);
+  await expect(page.locator('.docs-toc a[href="#credits"]')).toHaveAttribute('aria-current','location');
+  await page.locator('#guide-search').fill('nothing-matches-312');await expect(page.locator('#guide-empty')).toBeVisible();await expect(page.locator('.docs-toc a[aria-current]')).toHaveCount(0);
+  await page.locator('.docs-toc a[href="#credits"]').click();await page.waitForTimeout(150);await expect(page.locator('#credits')).toBeFocused();await expect(page.locator('.docs-toc a[href="#credits"]')).toHaveAttribute('aria-current','location');
+  const notice=await request.get('/licenses/pixelarticons.txt');expect(notice.status()).toBe(200);expect(await notice.text()).toContain('MIT License');
+});
 
 test('mobile homepage exposes installation before scrolling and keeps one season picker',async({page})=>{
   for(const width of [320,390]){
@@ -121,7 +250,7 @@ test('unified village chrome connects home, installation and static guide',async
       const pair=[luminance(style.color),luminance(style.backgroundColor)].sort((a,b)=>a-b);return (pair[1]+.05)/(pair[0]+.05);
     })).toBeGreaterThanOrEqual(4.5);
   }
-  expect(headers[0].color).toBe('rgb(18, 59, 62)');expect(headers[1]).toEqual(headers[0]);expect(headers[2]).toEqual(headers[0]);
+  expect(headers[0].color).toBe('rgb(180, 227, 219)');expect(headers[1]).toEqual(headers[0]);expect(headers[2]).toEqual(headers[0]);
   const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:320,height:850}});
   try{
     const docs=await context.newPage();await docs.goto(`${appOrigin()}/docs/`);
@@ -189,6 +318,7 @@ test.describe('interactive homepage',()=>{
     await page.emulateMedia({reducedMotion:'reduce'});await home(page);
     const village=page.locator('visitor-village');
     expect(await village.evaluate((el:any)=>el.greetVisitor(99))).toBe(false);
+    await expect(village).toHaveAttribute('data-scene-state','ready');
     const plain=await scenePixels(page);await village.evaluate((el:any)=>el.greetVisitor(0));
     expect((await scenePixels(page)).equals(plain)).toBe(false);
     await village.evaluate(el=>el.removeAttribute('interactive'));
@@ -200,8 +330,9 @@ test.describe('interactive homepage',()=>{
     expect((await scenePixels(page)).equals(plain)).toBe(true);
     await village.evaluate((el:any)=>{el.greetVisitor(11);el.setAttribute('count','11');el.setAttribute('count','12');});
     expect((await scenePixels(page)).equals(plain)).toBe(true);
-    expect(await village.evaluate((el:any)=>{el.greetVisitor(0);el.remove();const result=el.greetVisitor();document.querySelector('.stage')!.append(el);return result;})).toBe(false);
+    expect(await village.evaluate((el:any)=>{el.greetVisitor(0);el.remove();const result=el.greetVisitor();document.querySelector('.world-wrap')!.append(el);return result;})).toBe(false);
     await page.waitForFunction(()=>Boolean((document.querySelector('visitor-village') as any)?.ready));
+    await expect(village).toHaveAttribute('data-scene-state','ready');
     expect((await scenePixels(page)).equals(plain)).toBe(true);
   });
 });

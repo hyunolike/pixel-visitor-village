@@ -12,6 +12,7 @@ export class VisitorVillage extends HTMLElement {
   private greetingCursor=0;
   private model=new VillageModel();
   private view:VillageRenderer|undefined;
+  private sceneBackdrop:HTMLImageElement|null=null;
   private frame:HTMLElement;
   private status:HTMLElement;
   private nameLabel:HTMLElement;
@@ -54,6 +55,11 @@ export class VisitorVillage extends HTMLElement {
       const id=this.view?.greetAt(event.clientX,event.clientY);
       if(id!==undefined)this.greetVisitor(id);
     });
+  }
+  /** Optional service presentation. The source is copied into instance-owned textures. */
+  setSceneBackdrop(source:HTMLImageElement|null):void {
+    if(source&&(!source.complete||source.naturalWidth===0))return;
+    this.sceneBackdrop=source;this.view?.setSceneBackdrop(source);
   }
   get visitorCount(){return this.model.visitors.length;}
   get season(){return this.model.season;}
@@ -130,7 +136,7 @@ export class VisitorVillage extends HTMLElement {
     void VillageRenderer.create(this.frame,this.model,()=>generation===this.generation&&this.isConnected).then(view=>{
       if(!view)return;
       if(generation!==this.generation||!this.isConnected){view.destroy();return;}
-      this.view=view;view.setLabels(this.labels);view.setGlow(this.getAttribute('glow')!=='false');
+      this.view=view;view.setSceneBackdrop(this.sceneBackdrop);view.setLabels(this.labels);view.setGlow(this.getAttribute('glow')!=='false');
       this.resizeObserver=new ResizeObserver(()=>{view.resize();this.applyPlayback();});this.resizeObserver.observe(this);
       this.intersectionObserver=new IntersectionObserver(entries=>{this.visible=entries[0]?.isIntersecting??true;this.applyPlayback();});this.intersectionObserver.observe(this);
       if(!this.lastNotice&&!this.pendingNotice)this.queueNotice();

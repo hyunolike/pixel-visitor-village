@@ -1,0 +1,105 @@
+{
+  "created": "2026-11-26",
+  "version": 2,
+  "tool": "image_gen.imagegen (built-in default)",
+  "type": "Pixel terrain plate enrichment: tall varied forest and connecting paths",
+  "styleReference": "/Users/hyuno/.codex/generated_images/01a20dd3-dda2-7ad3-9bc3-4e9e31b44af9/exec-fc84ddbd-56ed-47cd-9f92-898aa4d2d1d0.png",
+  "alpha": "opaque",
+  "codec": {
+    "encoder": "cwebp",
+    "options": "-lossless -z 6",
+    "verification": "Pillow reads: exact dimensions and decoded RGBA bytes equal source PNG; runtime WebP equals verified archived v2 WebP byte-for-byte."
+  },
+  "assets": [
+    {
+      "season": "summer",
+      "path": "src/assets/map/landscape-summer.webp",
+      "raw": "assets/concepts/map-20261126/landscape-summer-v2.png",
+      "encodedArchive": "assets/concepts/map-20261126/landscape-summer-v2.webp",
+      "generatedSource": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-91e3036e-74ac-4501-ab4d-0f86aa7b712b.png",
+      "reference": "Selected concept plus original summer raw PNG",
+      "prompt": "Use case: precise-object-edit. Production raster pixel terrain background, 1536x1024.\nInput image1 is selected concept STYLE reference ONLY. Image2 is current SUMMER TERRAIN EDIT TARGET. Improve terrain richness while keeping image2's exact central sand oval geometry x15.5–84%, y74–91% and central path x46–54% down to bottom, water only extreme x0–3%, empty walkable region y50–94%. SUMMER.\nReplace uniform low hedge in target with the CONCEPT's rich layered forest: large overlapping broadleaf tree canopies with distinct height variation, beginning as high as y27% near sides/right and staggered depths through y49%. Taller broadleaf edge trees and lower middle clusters, visible trunks only within distant forest. Forest must be behind walking region, never below y50%. Hills remain hazy layered sage behind them. Upper-left x0–47%, y0–28% remains quiet mint sky #b4e3db for headings.\nAdd narrow pale sandy connecting paths (4% of canvaswidth), original charming pixel contours: from cottage future position x22%,y58% curve right/down to join plaza left at x30%,y80%; from shop future x82%,y58% curve left/down to join plaza right at x73%,y80%; from future cabin x91%,y74% short leftward branch merging with right connecting path near x79%,y76%. PATHS ONLY: endpoints empty land, do not draw buildings. Sand same #ead4a0 as existing plaza.\nKeep broad sunny green walkable meadow #8bb56e but enrich with little tiny grass clusters. A few small white daisies and modest shrub clusters ONLY by far left/right edges outside x8–92%; nothing blocking center. Small cropped wooden bridges stay at outermost edges.\nCrisp deliberate chunky pixel-art clusters 2–4px, original hand-crafted retro pastoral RPG artwork, lively and warm like concept. No smooth gradients/photorealistic rendering. ABSOLUTELY NO houses, buildings, central tree, foreground tree, characters/people/animals, signs, furniture, benches, lamps, fences, logo/well, typography, UI, border, watermark. Those objects are real separate source assets. Opaque. Do not reproduce reference screenshot; edit only target terrain per instructions.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1213736,
+      "sourceBytes": 1629295,
+      "sha256": "87fa66c366b788ddb92247ceb225c34b23c86519f52ffad19cad01c0571179bf",
+      "sourceSHA256": "962eb25386fa85928162e0c5efe08ab9a4be4a6ef9edb93589a18f2faa515ee8",
+      "decodedRGBAEqual": true
+    },
+    {
+      "season": "spring",
+      "path": "src/assets/map/landscape-spring.webp",
+      "raw": "assets/concepts/map-20261126/landscape-spring-v2.png",
+      "encodedArchive": "assets/concepts/map-20261126/landscape-spring-v2.webp",
+      "generatedSource": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-18f87bd5-0e5d-4470-82c6-3e40895e67b6.png",
+      "reference": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-91e3036e-74ac-4501-ab4d-0f86aa7b712b.png",
+      "prompt": "Use case: lighting-weather. Production pixel terrain plate 1536x1024. EDIT TARGET is approved summer v2. Change ONLY season to SPRING: fresh light green meadow and light mint-blue sky, pastel pink/cream blossoms mixed into distant forest canopies. Preserve EXACT geometry and pixel positions of all trees, trunks, canopy silhouettes, layered hills, little shrubs and flower clusters, all sandy paths, plaza oval, stem path, three branching connecting paths, edgewater and wooden bridges. Preserve same delicate high-quality pixel art. Blossoms ONLY on forest trees above y50%. Keep empty walkable meadow, sand remains warm pale cream, top-left sky stays clear for heading. Do not add anything: NO houses, center tree, people/characters, animals, UI, text, signs, benches, lamps, fences, logo or decorations. No foreground trees below y50%. Opaque. This is an exact same-map season repaint; do not move or redesign anything.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1487274,
+      "sourceBytes": 1942471,
+      "sha256": "9a5fde643364c646683bfc96920367b7a694f8697c6e008ac6695364b5b9d177",
+      "sourceSHA256": "bb568ebc50da88034b88026036767cb52bd27814e32b8a674bffcf953708f691",
+      "decodedRGBAEqual": true
+    },
+    {
+      "season": "autumn",
+      "path": "src/assets/map/landscape-autumn.webp",
+      "raw": "assets/concepts/map-20261126/landscape-autumn-v2.png",
+      "encodedArchive": "assets/concepts/map-20261126/landscape-autumn-v2.webp",
+      "generatedSource": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-08ffe760-7757-4eaf-878c-b31b20bece08.png",
+      "reference": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-91e3036e-74ac-4501-ab4d-0f86aa7b712b.png",
+      "prompt": "Use case: lighting-weather. Production pixel terrain plate 1536x1024. EDIT TARGET is approved summer v2. Change ONLY season to AUTUMN: golden ochre meadow and warm pale turquoise sky, muted gold, orange, rust and copper distant forest canopies with some olive foliage. Preserve EXACT geometry and pixel positions of all trees, trunks, canopy silhouettes, layered hills, little shrubs and flower clusters, all sandy paths, plaza oval, stem path, three branching connecting paths, edgewater and wooden bridges. Preserve same delicate high-quality pixel art. Seasonal foliage ONLY on forest trees above y50%. Keep empty walkable meadow, sand remains warm pale cream, top-left sky stays clear for heading. Do not add anything: NO houses, center tree, people/characters, animals, UI, text, signs, benches, lamps, fences, logo or decorations. No foreground trees below y50%. Opaque. This is an exact same-map season repaint; do not move or redesign anything.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1443710,
+      "sourceBytes": 1947018,
+      "sha256": "1a9872707f92d5d798bdcbd7a3d22036a50864b1d65a1147d7e76a4df3a016eb",
+      "sourceSHA256": "b24a36c2cfbfee28d238834cd8f102970d0c1a357211a17a78137393497563ca",
+      "decodedRGBAEqual": true
+    },
+    {
+      "season": "winter",
+      "path": "src/assets/map/landscape-winter.webp",
+      "raw": "assets/concepts/map-20261126/landscape-winter-v2.png",
+      "encodedArchive": "assets/concepts/map-20261126/landscape-winter-v2.webp",
+      "generatedSource": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-031ba1eb-e66f-47aa-ac15-f3ff4ffb13ae.png",
+      "reference": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-91e3036e-74ac-4501-ab4d-0f86aa7b712b.png",
+      "prompt": "Use case: lighting-weather. Production pixel terrain plate 1536x1024. EDIT TARGET is approved summer v2. Change ONLY season to WINTER: flat powder snow pale blue-white instead of meadow, icy lightblue sky, muted blue layered hills, snow-dusted blue-green distant forest canopies with visible same trunks and a few leafless snowy branches. Snow capped tiny edge shrubs. Preserve EXACT composition, geometry and positions of all trees, trunks, canopy silhouettes, hills, little shrubs and flower clusters, all sandy paths, plaza oval, stem path, three branching connecting paths, edgewater and wooden bridges. Preserve same high-quality crisp pixel art. Trees ONLY above y50%. Keep empty walkable snowfield. All sand paths/plaza remain visible warm pale cream with unchanged contours, top-left sky stays clear for heading. No falling snow. Do not add anything: NO houses, center tree, people/characters, animals, snowmen, UI, text, signs, benches, lamps, fences, logo or decorations. No new trees below y50%. Opaque. This is an exact same-map season repaint; do not move or redesign anything.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1302888,
+      "sourceBytes": 1749806,
+      "sha256": "b739700d7856197ada584ccbcd0877e172e76c6c49cf1edd579720e4a4153877",
+      "sourceSHA256": "f0e8f45d0cb66db5ac5731e2af845296ebca3b8e81a7577e37d2b992860d8872",
+      "decodedRGBAEqual": true
+    },
+    {
+      "season": "christmas",
+      "path": "src/assets/map/landscape-christmas.webp",
+      "raw": "assets/concepts/map-20261126/landscape-christmas-v2.png",
+      "encodedArchive": "assets/concepts/map-20261126/landscape-christmas-v2.webp",
+      "generatedSource": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-09327812-603b-4fbe-a66b-e49b71243e67.png",
+      "reference": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-91e3036e-74ac-4501-ab4d-0f86aa7b712b.png",
+      "prompt": "Use case: lighting-weather. Production pixel terrain plate 1536x1024. EDIT TARGET is approved summer v2. Change ONLY season/time to CHRISTMAS WINTER DUSK: flat powder snow cool pale blue-white instead of meadow, dusk indigo-blue sky with 6 tiny cream pixel stars at upper RIGHT only, subdued blue hills, snow-dusted darkblue-green distant forest canopies with visible same trunks. Snow capped tiny edge shrubs. Preserve EXACT composition, geometry and positions of all trees, trunks, canopy silhouettes, hills, little shrubs and flower clusters, all sandy paths, plaza oval, stem path, three branching connecting paths, edgewater and wooden bridges. Preserve same high-quality crisp pixel art. Trees ONLY above y50%. Keep empty walkable snowfield. All sand paths/plaza remain visible warm pale cream with unchanged contours, upperleft sky stays clear uniformly blue for heading. No falling snow. Christmas conveyed by snow and stars ONLY, NO decorations/lights/gifts. Do not add anything: NO houses, center tree, christmas tree in field, people/characters, animals, snowmen, UI, text, signs, benches, lamps, fences, logo. No new trees below y50%. Opaque. This is an exact same-map season repaint; do not move or redesign anything.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1386694,
+      "sourceBytes": 1886739,
+      "sha256": "ad492f38b41547fd48875c03ec9fe1602deea93af95c6431db0102c5ec059953",
+      "sourceSHA256": "54ae93c7d183740b47316ec4273553775d5a7f124291488995469e2a9d54f803",
+      "decodedRGBAEqual": true
+    }
+  ]
+}

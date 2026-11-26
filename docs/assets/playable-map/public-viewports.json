@@ -1,0 +1,146 @@
+[
+  {
+    "name": "home",
+    "width": 1487,
+    "height": 1058,
+    "scrollWidth": 1487,
+    "header": 77,
+    "errors": []
+  },
+  {
+    "name": "install",
+    "width": 1487,
+    "height": 1058,
+    "scrollWidth": 1487,
+    "header": 77,
+    "errors": []
+  },
+  {
+    "name": "docs",
+    "width": 1487,
+    "height": 1058,
+    "scrollWidth": 1487,
+    "header": 77,
+    "errors": []
+  },
+  {
+    "name": "home",
+    "width": 1440,
+    "height": 1024,
+    "scrollWidth": 1440,
+    "header": 77,
+    "errors": []
+  },
+  {
+    "name": "install",
+    "width": 1440,
+    "height": 1024,
+    "scrollWidth": 1440,
+    "header": 77,
+    "errors": []
+  },
+  {
+    "name": "docs",
+    "width": 1440,
+    "height": 1024,
+    "scrollWidth": 1440,
+    "header": 77,
+    "errors": []
+  },
+  {
+    "name": "home",
+    "width": 701,
+    "height": 900,
+    "scrollWidth": 701,
+    "header": 77,
+    "errors": []
+  },
+  {
+    "name": "install",
+    "width": 701,
+    "height": 900,
+    "scrollWidth": 701,
+    "header": 77,
+    "errors": []
+  },
+  {
+    "name": "docs",
+    "width": 701,
+    "height": 900,
+    "scrollWidth": 701,
+    "header": 77,
+    "errors": []
+  },
+  {
+    "name": "home",
+    "width": 700,
+    "height": 900,
+    "scrollWidth": 700,
+    "header": 65,
+    "errors": []
+  },
+  {
+    "name": "install",
+    "width": 700,
+    "height": 900,
+    "scrollWidth": 700,
+    "header": 65,
+    "errors": []
+  },
+  {
+    "name": "docs",
+    "width": 700,
+    "height": 900,
+    "scrollWidth": 700,
+    "header": 65,
+    "errors": []
+  },
+  {
+    "name": "home",
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "header": 65,
+    "errors": []
+  },
+  {
+    "name": "install",
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "header": 65,
+    "errors": []
+  },
+  {
+    "name": "docs",
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "header": 65,
+    "errors": []
+  },
+  {
+    "name": "home",
+    "width": 320,
+    "height": 850,
+    "scrollWidth": 320,
+    "header": 65,
+    "errors": []
+  },
+  {
+    "name": "install",
+    "width": 320,
+    "height": 850,
+    "scrollWidth": 320,
+    "header": 65,
+    "errors": []
+  },
+  {
+    "name": "docs",
+    "width": 320,
+    "height": 850,
+    "scrollWidth": 320,
+    "header": 65,
+    "errors": []
+  }
+]

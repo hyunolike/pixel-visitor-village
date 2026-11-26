@@ -39,6 +39,7 @@ export class VillageRenderer {
   private sceneryFrames:Texture[]=[];
   private scenerySprites:Sprite[]=[];
   private glowTexture:Texture|undefined;
+  private sceneBackdrop:HTMLImageElement|null=null;
   private dead=false;
   private glowEnabled=true;
   private initialized=false;
@@ -140,15 +141,20 @@ export class VillageRenderer {
     if(this.dead)return;
     this.cameo.setEnabled(this.model.season==='christmas'&&!this.motionReduced);
     const {width,height}=this.app.screen;
-    const scene=createVillageScene(width,height,this.model.season);
+    const scene=createVillageScene(width,height,this.model.season,Boolean(this.sceneBackdrop));
+    if(this.sceneBackdrop){
+      const ctx=scene.ground.getContext('2d')!;
+      ctx.imageSmoothingEnabled=false;ctx.clearRect(0,0,width,height);
+      ctx.drawImage(this.sceneBackdrop,0,0,width,height);
+    }
     const previous=this.backgroundTexture;
     this.backgroundTexture=Texture.from(scene.ground);
     this.backgroundTexture.source.scaleMode='nearest';this.background.texture=this.backgroundTexture;previous?.destroy(true);
     this.setScenery(scene.objects);
     this.tree.texture=this.trees.get(this.model.season)!;
-    const layout=getTreeLayout(width,height);
+    const layout=this.sceneBackdrop?{x:width/2,base:height*.72,size:Math.min(width*.68,height*.58)}:getTreeLayout(width,height);
     this.tree.position.set(layout.x,layout.base);this.tree.width=layout.size;this.tree.height=layout.size;this.tree.zIndex=layout.base;
-    const monument=getMonumentLayout(width,height);
+    const monument=this.sceneBackdrop?{x:width*.435,base:height*.78,size:Math.min(width*.16,height*.20)}:getMonumentLayout(width,height);
     this.monument.position.set(monument.x,monument.base);this.monument.width=monument.size;this.monument.height=monument.size;this.monument.zIndex=monument.base;
     this.glow.position.set(layout.x,layout.base-layout.size*.35);this.glow.width=layout.size*.85;this.glow.height=layout.size*.85;this.glow.zIndex=layout.base+.01;
     this.renderState();this.app.render();
@@ -177,6 +183,10 @@ export class VillageRenderer {
     this.sceneryAtlas.source.update();
   }
 
+  setSceneBackdrop(source:HTMLImageElement|null) {
+    if(this.dead||this.sceneBackdrop===source)return;
+    this.sceneBackdrop=source;this.setTheme();
+  }
   setGlow(enabled:boolean) {this.glowEnabled=enabled;this.renderState();this.app.render();}
   setLabels(labels:VillageLabels) {this.labels=labels;this.renderOnce();}
   hitVisitor(x:number,y:number) {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#123b3e" />
+    <meta name="theme-color" content="#b4e3db" />
     <link rel="icon" type="image/png" href="../src/assets/cozy/tree-summer.png" />
     <meta
       name="description"
@@ -54,14 +54,37 @@
             <p>설치 방법과 위젯 설정, 문제 해결을 안내합니다.</p>
             <a class="button button-accent" href="../install.html">설치하기</a>
           </div>
-          <img
-            class="docs-tree"
-            src="../src/assets/cozy/tree-summer.png"
-            alt=""
-            width="144"
-            height="144"
-          />
+          <img class="docs-tree" src="../src/assets/map/guide.png" alt="" width="80" height="112" />
         </div>
+        <nav class="guide-start" aria-label="설치 길잡이">
+          <a href="../install.html"
+            ><img src="../src/assets/cozy/tree-summer.png" alt="" width="48" height="48" /><span
+              ><small>첫 번째</small><strong>계절 고르기</strong></span
+            ></a
+          >
+          <a href="#configuration"
+            ><img src="../src/assets/map/icons/code.svg" alt="" width="32" height="32" /><span
+              ><small>두 번째</small><strong>코드 확인하기</strong></span
+            ></a
+          >
+          <a href="#troubleshooting"
+            ><img src="../src/assets/map/icons/home.svg" alt="" width="32" height="32" /><span
+              ><small>막히는 곳이 있나요?</small><strong>설치 도움받기</strong></span
+            ></a
+          >
+        </nav>
+        <form class="guide-search" role="search" hidden>
+          <label for="guide-search">궁금한 내용을 찾아보세요</label>
+          <div>
+            <input
+              id="guide-search"
+              type="search"
+              placeholder="설치, 방문 수, 자동 확인…"
+              autocomplete="off"
+            /><button id="guide-reset" class="button button-secondary" type="reset">지우기</button>
+          </div>
+          <p id="guide-results" role="status" aria-live="polite"></p>
+        </form>
         <div class="docs-layout">
           <nav class="docs-toc" aria-label="문서 목차">
             <span>이 문서에서</span><a href="#quick-start">빠른 시작</a
@@ -70,6 +93,9 @@
             ><a href="#credits">제작과 출처</a>
           </nav>
           <div class="docs-content">
+            <p id="guide-empty" class="guide-empty" hidden>
+              찾는 내용이 없어요. 다른 단어를 입력하거나 검색을 지워 보세요.
+            </p>
             <section id="quick-start" aria-labelledby="quick-title">
               <h2 id="quick-title">빠른 시작</h2>
               <p>
@@ -283,6 +309,11 @@ pnpm test:e2e</code></pre>
             </section>
             <section id="credits" aria-labelledby="credits-title">
               <h2 id="credits-title">제작과 출처</h2>
+              <p>
+                표준 픽셀 아이콘은
+                <a href="../licenses/pixelarticons.txt">Pixelarticons (MIT 라이선스)</a>를
+                사용합니다.
+              </p>
               <p>
                 마을의 캐릭터와 계절 소품, 손 인사와 아이콘 말풍선은 프로젝트의 자체 픽셀 코드로
                 그립니다. 크리스마스 나무 PNG의 생성 과정과 원본 시안, 그림과 영상별 출처는 저장소에

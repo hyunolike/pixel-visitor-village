@@ -270,3 +270,7 @@ The user requested implementation of the audit recommendations. The selected pix
 - VV-REFINE-005: Refresh the existing20-second introduction with the current logo, display/UI fonts, installation interface and source village. Keep mute/manual/reduced-motion/fallback behavior and music credits. Update MP4, poster/GIF, reproducible sources and truthful provenance together. Earlier brag production remains historical; do not claim a new external skill invocation unless it happened.
 - VV-REFINE-006: Consolidate old/new installer styles, remove unused old homepage/brand rules, and format affected service code without changing embedded widget APIs, counts, model motion or language storage semantics. Keep no-JS documentation and keyboard/mobile behavior.
 - VV-REFINE-007: Meaningful regressions cover optional-address state transitions, four locales, selected-season handoff and primary mobile action. Complete unit/type/build/release/browser checks, current before/after screenshots, media decoding and independent review before local handoff. Commit/push/deployment are not part of this implementation request.
+
+## Playable map design system
+
+The user selected concept1 after reviewing the public gallery. VV-MAP-001–007 and acceptance are defined in [playable-map-plan.md](playable-map-plan.md). The request covers the home, existing installer and guide. Preserve the real widget and synthetic-demo truth, four installation languages, static guide and original README thumbnail.
