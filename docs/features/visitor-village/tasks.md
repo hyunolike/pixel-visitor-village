@@ -405,3 +405,27 @@ Refinement PR follow-up: the user requested a pull request after local acceptanc
 Acceptance: unit157/157, release14/14, type/build/format and final Chrome100/100 pass. Public three-page/six-width matrix and interaction smoke pass. [Review and evidence](reviews/playable-map-2026-11-26.md). Working preview: https://playable-map.pixel-visitor-village.pages.dev/ . Production main remains46b3058; no commit/push/PR or promotion in this step. The original comparison gallery remains available.
 
 PR follow-up: the user requested a pull request after accepting the public preview. Commit and push the verified scope to `feat/playable-village-map` and open against `main`. Preserve the worktree for review; do not merge or promote production in this step.
+
+
+## Cohesive pixel artwork
+
+- [x] Baseline capture, style contract and fresh readiness review.
+- [x] Shared palette, native artwork refinement and raster finishing.
+- [x] All-season/pose visual QA, regression, final review and public preview.
+
+No commit/push/production promotion in this step. [Plan](cohesive-art-plan.md).
+
+Cohesive-art acceptance: unit164, release14, browser100, type/build/format and261-source native alpha/palette checks pass. Eleven raster exports are reproducible;53 public files match dist. [Review](reviews/cohesive-art-2026-11-26.md). Preview https://cohesive-art.pixel-visitor-village.pages.dev/ . No source commit/push/production promotion.
+
+
+## Corrected target: installed blog widget
+
+- [x] Reproduce missing standalone illustrated scene and preserve user correction in plan.
+- [x] Component-owned lifecycle and generated appearance attribute; targeted cross-origin exact-canvas regression.
+- [x] Final focused source review and full regression (unit164, release14, browser102, type/build/format).
+- [x] Publish and anonymously verify corrected public blog-body preview: https://cohesive-art.pixel-visitor-village.pages.dev/examples/blog (bc8f9ef0),54 file hashes,3 widths,5seasons and0/24 count transitions.
+
+Earlier homepage-centric screenshots are historical, not acceptance of this corrected scope.
+
+
+Integration follow-up: the user requested proceeding after the corrected installed-widget preview. Create the pull request against main, wait for CI, merge the verified change, and verify automatic production deployment and its release record. Earlier no-commit/no-promotion statements describe the preview stage.

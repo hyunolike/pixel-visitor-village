@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>블로그에 설치한 방문자 마을</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f2ec;color:#263d33;font:16px/1.8 system-ui,sans-serif;word-break:keep-all}main{max-width:840px;margin:40px auto;background:white;padding:40px;border:1px solid #deded4}h1{font-size:27px;line-height:1.4;margin:8px 0 24px}p{margin:20px 0}small{color:#627267}header small{font-size:13px}.controls{display:flex;gap:16px;flex-wrap:wrap;margin:24px 0 16px;padding:16px;background:#f5f1df;border:1px solid #d4d2be}label{display:flex;align-items:center;gap:8px}select,input{font:inherit;min-height:44px;border:1px solid #8b9b88;background:white;border-radius:0;padding:6px 10px;color:inherit}input{width:86px}select:focus-visible,input:focus-visible{outline:3px solid #8b9f57;outline-offset:3px}figure{margin:0}figcaption{font-size:13px;color:#627267;margin-top:12px}footer{border-top:1px solid #deded4;margin-top:32px;padding-top:16px;font-size:13px;color:#627267}@media(max-width:600px){main{margin:0;padding:20px 16px;border:0;min-height:100svh}h1{font-size:24px}.controls{gap:12px;padding:12px}}
+</style>
+<script type="module" src="../widget/visitor-village.js"></script>
+</head>
+<body>
+<main>
+<header><small>설치 결과 미리보기</small><h1>블로그에 놓인 작은 방문자 마을</h1></header>
+<p>본문 사이에 방문자 마을을 넣은 모습입니다. 아래 그림은 설치 코드에서 불러오는 실제 독립 위젯입니다.</p>
+<div class="controls" aria-label="위젯 시연 설정">
+<label>계절 <select id="season"><option value="spring">봄</option><option value="summer" selected>여름</option><option value="autumn">가을</option><option value="winter">겨울</option><option value="christmas">크리스마스</option></select></label>
+<label>시연 방문 <input id="count" type="number" min="0" max="5000" value="12" inputmode="numeric">명</label>
+</div>
+<figure>
+<visitor-village count="12" season="summer" illustrated style="display: block; width: 100%; height: 420px;"></visitor-village>
+<figcaption>시연용 숫자입니다. 블로그에서는 티스토리의 오늘 누적 방문 수가 적용됩니다.</figcaption>
+</figure>
+<p>계절을 바꾸면 배경과 나무, 집의 계절 장식이 함께 바뀝니다. 본문과 링크는 평소처럼 스크롤하고 사용할 수 있습니다.</p>
+<footer>이 화면은 설치 결과를 확인하기 위한 예시입니다. 실제 티스토리 스킨에 설치한 결과는 아닙니다.</footer>
+</main>
+<script>
+const village=document.querySelector('visitor-village');document.querySelector('#season').addEventListener('change',e=>village.setAttribute('season',e.target.value));document.querySelector('#count').addEventListener('input',e=>{if(e.target.value!==''&&e.target.validity.valid)village.setAttribute('count',e.target.value)});
+</script>
+</body>
+</html>

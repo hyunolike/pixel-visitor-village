@@ -1,0 +1,1568 @@
+[
+  {
+    "name": "visitor-0-front-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c0353e9975e2aba20a6acc0723c1bc01efea8cdd1aa042a378e79d10a9551a9e"
+  },
+  {
+    "name": "visitor-0-front-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "503c2d11361d85227835a5908f5c2fe51c803d41ed835168b269cc78006edcd8"
+  },
+  {
+    "name": "visitor-0-front-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "6ae819fd2e8f1c2f77e6d8b5be0bf43744946b045cc5962b4528ea5fc9b113dd"
+  },
+  {
+    "name": "visitor-0-front-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "4f4006cdf58820b50d235857118089c4aca6547a68ae6b1cd73c8c90306f8505"
+  },
+  {
+    "name": "visitor-0-front-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "003bd5f42c1b4a2de8742405703b595385cbf6bb93c75d4742d091eea611e0ad"
+  },
+  {
+    "name": "visitor-0-front-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c0353e9975e2aba20a6acc0723c1bc01efea8cdd1aa042a378e79d10a9551a9e"
+  },
+  {
+    "name": "visitor-0-front-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e803147ceaf8d2251edb2c50a98dd9f744fdadb1b9b5ede53e9449fc38b88332"
+  },
+  {
+    "name": "visitor-0-front-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "6e5ecfacd4224b453db40f9213a9b175f79deed67643e7742ace8beab41ee48f"
+  },
+  {
+    "name": "visitor-0-side-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "cb5fdbc567cad238d6d2756e892007267606f12d8a5b9516b3fb29c3a6e24f81"
+  },
+  {
+    "name": "visitor-0-side-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "216e009558362ad397371dbc721f9136a6114cf40a50a38b249be326ce42094d"
+  },
+  {
+    "name": "visitor-0-side-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9ded85dce2855c540186def40648ae7999f0c87069011e6f0823087d5c82213d"
+  },
+  {
+    "name": "visitor-0-side-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "6eb787202e1e654a6a368c8f4c590e9e27181e7423c14e2087888e9d8bd0be87"
+  },
+  {
+    "name": "visitor-0-side-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "297187b66ab15400d4c5b7ebcd6440d37b8ac0ec3b1d2747fbcc0e6c6eeda4f5"
+  },
+  {
+    "name": "visitor-0-side-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "cb5fdbc567cad238d6d2756e892007267606f12d8a5b9516b3fb29c3a6e24f81"
+  },
+  {
+    "name": "visitor-0-side-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "be69c231832cd1d3dd518446ccd4b061cc0aabde6b8defe412312e80b2e919a5"
+  },
+  {
+    "name": "visitor-0-side-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "335d88331a6adaa72a0d408ff8c3ac37287e3cabbbf8c897d4dd14562010eb55"
+  },
+  {
+    "name": "visitor-0-back-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c0353e9975e2aba20a6acc0723c1bc01efea8cdd1aa042a378e79d10a9551a9e"
+  },
+  {
+    "name": "visitor-0-back-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "503c2d11361d85227835a5908f5c2fe51c803d41ed835168b269cc78006edcd8"
+  },
+  {
+    "name": "visitor-0-back-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "6ae819fd2e8f1c2f77e6d8b5be0bf43744946b045cc5962b4528ea5fc9b113dd"
+  },
+  {
+    "name": "visitor-0-back-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "4f4006cdf58820b50d235857118089c4aca6547a68ae6b1cd73c8c90306f8505"
+  },
+  {
+    "name": "visitor-0-back-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "003bd5f42c1b4a2de8742405703b595385cbf6bb93c75d4742d091eea611e0ad"
+  },
+  {
+    "name": "visitor-0-back-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c0353e9975e2aba20a6acc0723c1bc01efea8cdd1aa042a378e79d10a9551a9e"
+  },
+  {
+    "name": "visitor-0-back-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e803147ceaf8d2251edb2c50a98dd9f744fdadb1b9b5ede53e9449fc38b88332"
+  },
+  {
+    "name": "visitor-0-back-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "6e5ecfacd4224b453db40f9213a9b175f79deed67643e7742ace8beab41ee48f"
+  },
+  {
+    "name": "visitor-1-front-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "11ac3efaf5ddd5764c5e90d8fd20b3d7832ff4c1ce57e7fffa1888aaaa5db0e4"
+  },
+  {
+    "name": "visitor-1-front-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "8979597e1dde0aec26493119d5fdbe799f82641f773fe1ac30ae6dccde1e42fa"
+  },
+  {
+    "name": "visitor-1-front-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e895986b3a94054f683f89c1d042150cf3389f4df356f2a479eb2736de2b5d9c"
+  },
+  {
+    "name": "visitor-1-front-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "82902b0bf134a98d246ebee1c3dced281938e4df05cb1e012bd4a40a35021b4a"
+  },
+  {
+    "name": "visitor-1-front-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e7a7fdb543829285dd939980e23c1a41116dbeaab52da53c395494d195f8fdf1"
+  },
+  {
+    "name": "visitor-1-front-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "11ac3efaf5ddd5764c5e90d8fd20b3d7832ff4c1ce57e7fffa1888aaaa5db0e4"
+  },
+  {
+    "name": "visitor-1-front-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "4410cc51711ae228dcbc3166a86df8899440f652060c2a2b2460890dba7cb585"
+  },
+  {
+    "name": "visitor-1-front-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "bdafe488cebde36bbb97b85b2a9ffac24c0b3095a4a452f41a0b4ebff6e6f572"
+  },
+  {
+    "name": "visitor-1-side-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "77c270ea561b2bd58013fc4911d1af001da0a96d78dc9120f36aeb35ff46b67e"
+  },
+  {
+    "name": "visitor-1-side-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c8b46dabb62d570ac789ae60d8e52c23d293c6927f63c64d24ff0f7462a5ca6f"
+  },
+  {
+    "name": "visitor-1-side-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9bd1d70d77ae337ae934f429d996dcc6f696286c4d41b02ae8b061b5985ab8e8"
+  },
+  {
+    "name": "visitor-1-side-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ff55367919315d3ba958018e1c5979446d2b4525eb3ce731d273a10361ad612c"
+  },
+  {
+    "name": "visitor-1-side-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "1d978f5ae5a30100e628e9175779915412547b3c5899ad2805419ec6664e3016"
+  },
+  {
+    "name": "visitor-1-side-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "77c270ea561b2bd58013fc4911d1af001da0a96d78dc9120f36aeb35ff46b67e"
+  },
+  {
+    "name": "visitor-1-side-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "40135746bd58e87c1f3d6fadab4b8bb515237c199123d272d5d6e38ae1e32cd0"
+  },
+  {
+    "name": "visitor-1-side-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ae58a77e5124a99a7efeb19571fc414c0ecddc502d9c8507c955b764c13fdaa5"
+  },
+  {
+    "name": "visitor-1-back-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "11ac3efaf5ddd5764c5e90d8fd20b3d7832ff4c1ce57e7fffa1888aaaa5db0e4"
+  },
+  {
+    "name": "visitor-1-back-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "8979597e1dde0aec26493119d5fdbe799f82641f773fe1ac30ae6dccde1e42fa"
+  },
+  {
+    "name": "visitor-1-back-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e895986b3a94054f683f89c1d042150cf3389f4df356f2a479eb2736de2b5d9c"
+  },
+  {
+    "name": "visitor-1-back-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "82902b0bf134a98d246ebee1c3dced281938e4df05cb1e012bd4a40a35021b4a"
+  },
+  {
+    "name": "visitor-1-back-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e7a7fdb543829285dd939980e23c1a41116dbeaab52da53c395494d195f8fdf1"
+  },
+  {
+    "name": "visitor-1-back-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "11ac3efaf5ddd5764c5e90d8fd20b3d7832ff4c1ce57e7fffa1888aaaa5db0e4"
+  },
+  {
+    "name": "visitor-1-back-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "4410cc51711ae228dcbc3166a86df8899440f652060c2a2b2460890dba7cb585"
+  },
+  {
+    "name": "visitor-1-back-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "bdafe488cebde36bbb97b85b2a9ffac24c0b3095a4a452f41a0b4ebff6e6f572"
+  },
+  {
+    "name": "visitor-2-front-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "09345b76c2260e5688e72339a4dd2bce0a6b1207076bcf635cff45f188f3dc1f"
+  },
+  {
+    "name": "visitor-2-front-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ec252e5e23a9e39b6b0ddba233a7b8e742aeda4042c223eabe44652353add61c"
+  },
+  {
+    "name": "visitor-2-front-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ccc5ab8a9434bd3d7aed4f4f45b72d7ae7323571bc912365b9205b743cb400d8"
+  },
+  {
+    "name": "visitor-2-front-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e0c90e33a8414c659afe6ceb2cfd6f7a96fe2bc2be39c49ffa631cc000c74e3a"
+  },
+  {
+    "name": "visitor-2-front-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "d1ffb0e2f6a7747dbf0bd67aacc469edee5cb673aabe22fbbd13058d548a50ad"
+  },
+  {
+    "name": "visitor-2-front-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "09345b76c2260e5688e72339a4dd2bce0a6b1207076bcf635cff45f188f3dc1f"
+  },
+  {
+    "name": "visitor-2-front-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e65cfc5ad7ccf6a30ad2ce5dfa973e42bed4d824cbbbec0bd91edb7ba28f349a"
+  },
+  {
+    "name": "visitor-2-front-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c10c6243cde514789fc5a63dfe6bd44388cd4791d0ce8ef0ac9decbcae02c873"
+  },
+  {
+    "name": "visitor-2-side-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ce30eb3898fd424d2cc47e4e53a0746d5d19c9c68bef49744c02cc0cfc91a216"
+  },
+  {
+    "name": "visitor-2-side-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "262f3a5ea424ffb1aa996fd0b9fded7d4e55972edd7a19bcb779f1f0a170b61d"
+  },
+  {
+    "name": "visitor-2-side-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "10db0739154104bf8bbf68c56df1a4c94c8949df68b9629f155d77629c437dc7"
+  },
+  {
+    "name": "visitor-2-side-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "59b592e0154f97f758bb8e838eef85b2dfa0534cfa8d79aefd84e8abd810a26e"
+  },
+  {
+    "name": "visitor-2-side-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "77fb8db7ec729d3f9ca4771bc2a93694c6da4a60db4eb4958ac78fc83df678d6"
+  },
+  {
+    "name": "visitor-2-side-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ce30eb3898fd424d2cc47e4e53a0746d5d19c9c68bef49744c02cc0cfc91a216"
+  },
+  {
+    "name": "visitor-2-side-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3c687d0d67d39681c5e5daecf9cc57a530c36eaebed5d495ecd271576cb24476"
+  },
+  {
+    "name": "visitor-2-side-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "d1302af29acf37de8e6f221b974a1508eb8c12eb70e9f88d0b83ab2492925976"
+  },
+  {
+    "name": "visitor-2-back-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "09345b76c2260e5688e72339a4dd2bce0a6b1207076bcf635cff45f188f3dc1f"
+  },
+  {
+    "name": "visitor-2-back-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ec252e5e23a9e39b6b0ddba233a7b8e742aeda4042c223eabe44652353add61c"
+  },
+  {
+    "name": "visitor-2-back-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ccc5ab8a9434bd3d7aed4f4f45b72d7ae7323571bc912365b9205b743cb400d8"
+  },
+  {
+    "name": "visitor-2-back-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e0c90e33a8414c659afe6ceb2cfd6f7a96fe2bc2be39c49ffa631cc000c74e3a"
+  },
+  {
+    "name": "visitor-2-back-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "d1ffb0e2f6a7747dbf0bd67aacc469edee5cb673aabe22fbbd13058d548a50ad"
+  },
+  {
+    "name": "visitor-2-back-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "09345b76c2260e5688e72339a4dd2bce0a6b1207076bcf635cff45f188f3dc1f"
+  },
+  {
+    "name": "visitor-2-back-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e65cfc5ad7ccf6a30ad2ce5dfa973e42bed4d824cbbbec0bd91edb7ba28f349a"
+  },
+  {
+    "name": "visitor-2-back-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c10c6243cde514789fc5a63dfe6bd44388cd4791d0ce8ef0ac9decbcae02c873"
+  },
+  {
+    "name": "visitor-3-front-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9cb152e572611c288bb2a36a58334457679b04f972f1a846dc727e8052e33d38"
+  },
+  {
+    "name": "visitor-3-front-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "51f5f17bdade4ed21e7e82ec2ac3db41ecabf120b085221e32faa1ff541f91ae"
+  },
+  {
+    "name": "visitor-3-front-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "13c6348e55e3474d559180e176c7e8a26ef847906e19e5121cc2cdb9cb9b2ec4"
+  },
+  {
+    "name": "visitor-3-front-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "4d045adf2482bf2582d95d9ae802a5fc9e5b40210f00edeece669a2f431ccd5b"
+  },
+  {
+    "name": "visitor-3-front-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3e8912bcafc30f1beb477397a30050d26b8bfaee9b481b2e7661ff34b5419a44"
+  },
+  {
+    "name": "visitor-3-front-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9cb152e572611c288bb2a36a58334457679b04f972f1a846dc727e8052e33d38"
+  },
+  {
+    "name": "visitor-3-front-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "991406ef61f013e698b9a60f8926facfc05fcc771ea02b5d66decf2a281b43ae"
+  },
+  {
+    "name": "visitor-3-front-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "a631d5309ef5e5c0af219db1cb3514c7c9f97043e99a8756c4faef08ec35d6dc"
+  },
+  {
+    "name": "visitor-3-side-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c6f41faee9fa366cf8ab5194e1855d24c1446cdde89c7c186cbc7e38a11c63ca"
+  },
+  {
+    "name": "visitor-3-side-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9f71b049a0400b8164576381041599c5c7ced864e67184f5e9cf785d5674313c"
+  },
+  {
+    "name": "visitor-3-side-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "7ccd5a53360885d60c23b47c35f1694936c06223dbf4f409f6cac32f33d8e2ae"
+  },
+  {
+    "name": "visitor-3-side-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e3d4d88fcc29546acf21b040f044db413af3a0202d98c9dfbf2b325542a4b8fb"
+  },
+  {
+    "name": "visitor-3-side-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ccb311d53495b73c7f1c90df887933fb68d33748598ab06fd5d7866a722da04c"
+  },
+  {
+    "name": "visitor-3-side-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c6f41faee9fa366cf8ab5194e1855d24c1446cdde89c7c186cbc7e38a11c63ca"
+  },
+  {
+    "name": "visitor-3-side-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "50da648e0d50c153097cda5bf94f6c8c8a4555268dfe222ccfafc17543f1b91e"
+  },
+  {
+    "name": "visitor-3-side-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "8db92a50caad9ab3f095e52f57a26f863fec4e9095e87cafa83be9fbcd54702a"
+  },
+  {
+    "name": "visitor-3-back-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9cb152e572611c288bb2a36a58334457679b04f972f1a846dc727e8052e33d38"
+  },
+  {
+    "name": "visitor-3-back-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "51f5f17bdade4ed21e7e82ec2ac3db41ecabf120b085221e32faa1ff541f91ae"
+  },
+  {
+    "name": "visitor-3-back-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "13c6348e55e3474d559180e176c7e8a26ef847906e19e5121cc2cdb9cb9b2ec4"
+  },
+  {
+    "name": "visitor-3-back-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "4d045adf2482bf2582d95d9ae802a5fc9e5b40210f00edeece669a2f431ccd5b"
+  },
+  {
+    "name": "visitor-3-back-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3e8912bcafc30f1beb477397a30050d26b8bfaee9b481b2e7661ff34b5419a44"
+  },
+  {
+    "name": "visitor-3-back-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9cb152e572611c288bb2a36a58334457679b04f972f1a846dc727e8052e33d38"
+  },
+  {
+    "name": "visitor-3-back-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "991406ef61f013e698b9a60f8926facfc05fcc771ea02b5d66decf2a281b43ae"
+  },
+  {
+    "name": "visitor-3-back-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "a631d5309ef5e5c0af219db1cb3514c7c9f97043e99a8756c4faef08ec35d6dc"
+  },
+  {
+    "name": "visitor-4-front-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "f4788c4041e1c958d6783edb66fd15c414c92160072b4d41ad72a006e4cf67a7"
+  },
+  {
+    "name": "visitor-4-front-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3e3e5fd82e2ea3682d66fbce310a0e0ed985fc49862901a2251a90d1028e7555"
+  },
+  {
+    "name": "visitor-4-front-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "78defd2ec6635a466e5401d600e8bdeb0c0364cc81ae78450ab7ae8ae6205e54"
+  },
+  {
+    "name": "visitor-4-front-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e2b82bf457a6814f8a3ba48681fd1bd0e128f0fd6a0680bf359efc8654556fdf"
+  },
+  {
+    "name": "visitor-4-front-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "813fff8cd59948d874887074ac969f620f2839cd008af012d79c29bd1a8ca17e"
+  },
+  {
+    "name": "visitor-4-front-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "f4788c4041e1c958d6783edb66fd15c414c92160072b4d41ad72a006e4cf67a7"
+  },
+  {
+    "name": "visitor-4-front-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3b72bc071e6dfa84148011b6428160e78cd13a9b3554b7cf3b6dac909c522e73"
+  },
+  {
+    "name": "visitor-4-front-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "55f859d32ec694592556f104fcb88a7186fd0bc57bb6c6ad25d6aabcc7444273"
+  },
+  {
+    "name": "visitor-4-side-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "bc263f73f72efbc6266332767df245bcfb66cf112e08c8f898aeacf140576080"
+  },
+  {
+    "name": "visitor-4-side-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "5b2fbbbae434b4f3f5d93ef206c1ca05a2d302ceca56dfd000109266a51d7b8f"
+  },
+  {
+    "name": "visitor-4-side-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "59aec91e6b0aae6667c2d3ba6cfe15d74fdcf0f3adbee1afa69b2651ae4e163e"
+  },
+  {
+    "name": "visitor-4-side-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "2cb03c0f1b54182b34adb7421c2998463af6e6617beb1400caa59d42477842b2"
+  },
+  {
+    "name": "visitor-4-side-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "6be5b2551d4403eaebc48e19f24453c4ec9083775b8e2bdc05fe31f3d129b85e"
+  },
+  {
+    "name": "visitor-4-side-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "bc263f73f72efbc6266332767df245bcfb66cf112e08c8f898aeacf140576080"
+  },
+  {
+    "name": "visitor-4-side-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "24ce319dc57717b0a71e673bc17814590fe12994e3913345c84786fae25428f6"
+  },
+  {
+    "name": "visitor-4-side-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "f0f744a48098c7f3addd531ed5d7460c6dffccfc8f7311c2436f1137d23e311b"
+  },
+  {
+    "name": "visitor-4-back-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "f4788c4041e1c958d6783edb66fd15c414c92160072b4d41ad72a006e4cf67a7"
+  },
+  {
+    "name": "visitor-4-back-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3e3e5fd82e2ea3682d66fbce310a0e0ed985fc49862901a2251a90d1028e7555"
+  },
+  {
+    "name": "visitor-4-back-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "78defd2ec6635a466e5401d600e8bdeb0c0364cc81ae78450ab7ae8ae6205e54"
+  },
+  {
+    "name": "visitor-4-back-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e2b82bf457a6814f8a3ba48681fd1bd0e128f0fd6a0680bf359efc8654556fdf"
+  },
+  {
+    "name": "visitor-4-back-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "813fff8cd59948d874887074ac969f620f2839cd008af012d79c29bd1a8ca17e"
+  },
+  {
+    "name": "visitor-4-back-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "f4788c4041e1c958d6783edb66fd15c414c92160072b4d41ad72a006e4cf67a7"
+  },
+  {
+    "name": "visitor-4-back-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3b72bc071e6dfa84148011b6428160e78cd13a9b3554b7cf3b6dac909c522e73"
+  },
+  {
+    "name": "visitor-4-back-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "55f859d32ec694592556f104fcb88a7186fd0bc57bb6c6ad25d6aabcc7444273"
+  },
+  {
+    "name": "visitor-5-front-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "6032685a8f825a15f84ab3c90102984f46682e1638564e10e0e211f8077940e3"
+  },
+  {
+    "name": "visitor-5-front-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "7ba0b9bc9e99f6d0a9b3bc5dbaf5d234dc7077df6a374ba60295c3438e42ec77"
+  },
+  {
+    "name": "visitor-5-front-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "2f478d86d315eb72ec48099a96733748e8bc99b2b9925606013db947aa629eb6"
+  },
+  {
+    "name": "visitor-5-front-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "f5e446765a43def7bffe453794b3291a85abc318d49a8e907e6836bfbcdd3dfd"
+  },
+  {
+    "name": "visitor-5-front-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "37d36850ce239c0aa5bc9c30c1961b5c633f4d5aa685f046508020cdf1298a9e"
+  },
+  {
+    "name": "visitor-5-front-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "6032685a8f825a15f84ab3c90102984f46682e1638564e10e0e211f8077940e3"
+  },
+  {
+    "name": "visitor-5-front-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "dbe248c305ac8ac7ac3c8541f1cc2a6b227da0e858e73a52066dfb2c2958647b"
+  },
+  {
+    "name": "visitor-5-front-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9f51154acdda6614e059d24fd09caedcb14aeddec8b68317995e7db344568b08"
+  },
+  {
+    "name": "visitor-5-side-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "2a9b3072b331c9e3ecc340a3ebc0839e2f01a9db4363872c7c121f595d39ef4a"
+  },
+  {
+    "name": "visitor-5-side-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c80e7d0b90fe59d6cedb6aa23600432b6dd679c4dd3204309eb56e9812273673"
+  },
+  {
+    "name": "visitor-5-side-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "46aa26bff24ec6529ac082a7cbc60a5b3651dbb39c6c0bf9134585341a01700a"
+  },
+  {
+    "name": "visitor-5-side-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "911348687ffb9a1b07cf7ccb701576d56706a66dffb32129c4a01b2666990d5d"
+  },
+  {
+    "name": "visitor-5-side-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "81aface1c51a729f37077f59030295f0fd9e8ad2017c251178081dd6a56c9395"
+  },
+  {
+    "name": "visitor-5-side-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "2a9b3072b331c9e3ecc340a3ebc0839e2f01a9db4363872c7c121f595d39ef4a"
+  },
+  {
+    "name": "visitor-5-side-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "8ed9be0ea7a47a2f9addc78fd917e4c91213922b2207f0d67a870bf405c0ca24"
+  },
+  {
+    "name": "visitor-5-side-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e2aa3348f06b6102a45e3be545682b52b64d9fc2bcbb55c3a42dd1844ee221a8"
+  },
+  {
+    "name": "visitor-5-back-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "6032685a8f825a15f84ab3c90102984f46682e1638564e10e0e211f8077940e3"
+  },
+  {
+    "name": "visitor-5-back-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "7ba0b9bc9e99f6d0a9b3bc5dbaf5d234dc7077df6a374ba60295c3438e42ec77"
+  },
+  {
+    "name": "visitor-5-back-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "2f478d86d315eb72ec48099a96733748e8bc99b2b9925606013db947aa629eb6"
+  },
+  {
+    "name": "visitor-5-back-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "f5e446765a43def7bffe453794b3291a85abc318d49a8e907e6836bfbcdd3dfd"
+  },
+  {
+    "name": "visitor-5-back-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "37d36850ce239c0aa5bc9c30c1961b5c633f4d5aa685f046508020cdf1298a9e"
+  },
+  {
+    "name": "visitor-5-back-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "6032685a8f825a15f84ab3c90102984f46682e1638564e10e0e211f8077940e3"
+  },
+  {
+    "name": "visitor-5-back-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "dbe248c305ac8ac7ac3c8541f1cc2a6b227da0e858e73a52066dfb2c2958647b"
+  },
+  {
+    "name": "visitor-5-back-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9f51154acdda6614e059d24fd09caedcb14aeddec8b68317995e7db344568b08"
+  },
+  {
+    "name": "visitor-6-front-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "b17817878f60b123c2b5ef4d9cec27cc2fe3501a69074d1e311a03ee56f67697"
+  },
+  {
+    "name": "visitor-6-front-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9b984b183eb1307054a649f942b640f500270a1852f104c29ea8bf9bc75864df"
+  },
+  {
+    "name": "visitor-6-front-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "18227ca4b08c5754123fa1c388340f18b358c77548eb5fb8a93c45b5ad5a488f"
+  },
+  {
+    "name": "visitor-6-front-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "77a79cd944e202ef94338bd5ab46f1681c8c574373f8ac4fcfec66c934b6ef7b"
+  },
+  {
+    "name": "visitor-6-front-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ba88f794d7c4a82448be416d8ccbe34ab96689d52dde843b087e9f5e8f70e362"
+  },
+  {
+    "name": "visitor-6-front-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "b17817878f60b123c2b5ef4d9cec27cc2fe3501a69074d1e311a03ee56f67697"
+  },
+  {
+    "name": "visitor-6-front-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "954185f90fc0e54d27be5e2023c0831a3e3c92b68c3896371f50bed1642de317"
+  },
+  {
+    "name": "visitor-6-front-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "99784457713790ab765fb3d8f8138feba894a3e26a6af2506e140ad31af10d20"
+  },
+  {
+    "name": "visitor-6-side-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ebf024ea0aa6c937f7f451f2cedb2b69b8c5e2f5eff16be9ddcb0bdfdae4237b"
+  },
+  {
+    "name": "visitor-6-side-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "b08a80a35604b60a4a2c3868f99ebea503ddf21f762b2769aeec0778787a7914"
+  },
+  {
+    "name": "visitor-6-side-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "2f27e85455568e1c722faa344ac3a51afbab7ee58f92df67739ecbbde5ac7c69"
+  },
+  {
+    "name": "visitor-6-side-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "7e48e66c7cb266cb420c5b3fc6f17ae4dc7f3436dfd43a3d22e56d32dc3520eb"
+  },
+  {
+    "name": "visitor-6-side-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9dae93d3a6e483ad5a2cd17a9d8a07f9f98affd657ddb92fe2c3b75dbc5d9f08"
+  },
+  {
+    "name": "visitor-6-side-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ebf024ea0aa6c937f7f451f2cedb2b69b8c5e2f5eff16be9ddcb0bdfdae4237b"
+  },
+  {
+    "name": "visitor-6-side-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "c04e1adfd598aa95302006c504515b9af389bfe2d844e4321cdd75faa7a9c3cd"
+  },
+  {
+    "name": "visitor-6-side-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "22d302fa890a1284874bf52c847be07355a73754128f4a57ce49aef0902fec2a"
+  },
+  {
+    "name": "visitor-6-back-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "b17817878f60b123c2b5ef4d9cec27cc2fe3501a69074d1e311a03ee56f67697"
+  },
+  {
+    "name": "visitor-6-back-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "9b984b183eb1307054a649f942b640f500270a1852f104c29ea8bf9bc75864df"
+  },
+  {
+    "name": "visitor-6-back-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "18227ca4b08c5754123fa1c388340f18b358c77548eb5fb8a93c45b5ad5a488f"
+  },
+  {
+    "name": "visitor-6-back-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "77a79cd944e202ef94338bd5ab46f1681c8c574373f8ac4fcfec66c934b6ef7b"
+  },
+  {
+    "name": "visitor-6-back-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ba88f794d7c4a82448be416d8ccbe34ab96689d52dde843b087e9f5e8f70e362"
+  },
+  {
+    "name": "visitor-6-back-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "b17817878f60b123c2b5ef4d9cec27cc2fe3501a69074d1e311a03ee56f67697"
+  },
+  {
+    "name": "visitor-6-back-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "954185f90fc0e54d27be5e2023c0831a3e3c92b68c3896371f50bed1642de317"
+  },
+  {
+    "name": "visitor-6-back-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "99784457713790ab765fb3d8f8138feba894a3e26a6af2506e140ad31af10d20"
+  },
+  {
+    "name": "visitor-7-front-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "09939c416e286937bb08eb45a69115f32223dc3fc94b52a64c3441bb3a46381b"
+  },
+  {
+    "name": "visitor-7-front-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "45215a653abe519d8db0a71464b86083eb368b70154ca8acc6afe2d5c660771c"
+  },
+  {
+    "name": "visitor-7-front-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "a2d71f15b1c6d5ca5b2fe447f46d58583f9a51cdaf4c42d59cd1909f2a5734c8"
+  },
+  {
+    "name": "visitor-7-front-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "a030696bf6388123bbb558e3ccb8a292a6fe49814289630411c755d9a1724276"
+  },
+  {
+    "name": "visitor-7-front-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "331373107407af1df93fbd95e3e28270bb69b489113b83f74013df2e7a007f18"
+  },
+  {
+    "name": "visitor-7-front-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "09939c416e286937bb08eb45a69115f32223dc3fc94b52a64c3441bb3a46381b"
+  },
+  {
+    "name": "visitor-7-front-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3c99c9b8799299ef05a4d579de293d4b937dac81577052a4c1cb64e5e1d96082"
+  },
+  {
+    "name": "visitor-7-front-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3404dfd4c6ed4df53b376916a67b307b272d90df08e35eedc54e0fffb8c9ae2f"
+  },
+  {
+    "name": "visitor-7-side-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "8dd3cc2a262b7eb7dceca8b94d29ce4da3906aab238879e007d57493b9fc37bd"
+  },
+  {
+    "name": "visitor-7-side-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "e0387a4d7c74aa42f4979d13c2630dfb7571fe069ab765f8f75733d016220a1d"
+  },
+  {
+    "name": "visitor-7-side-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "b73ba801c524223855da004ddb2dec9dc1a0496f12b9ac60a980bdba46cac935"
+  },
+  {
+    "name": "visitor-7-side-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "70af54fdb41cc9d20d38bf34f4a46e4214f434a47436abf33b803ff12cc2ce75"
+  },
+  {
+    "name": "visitor-7-side-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "af68344d2881e6394b86aff774df03ebd5c9d575b0a99b46473d03c90a3daf60"
+  },
+  {
+    "name": "visitor-7-side-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "8dd3cc2a262b7eb7dceca8b94d29ce4da3906aab238879e007d57493b9fc37bd"
+  },
+  {
+    "name": "visitor-7-side-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "2be54d5fd225418e889858cdd36ad38c12776728320c633671113d21037b0ce5"
+  },
+  {
+    "name": "visitor-7-side-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "ccd439c07a7833105a4405802b9ec1a057b575c97dda04130c9787b67f146dfb"
+  },
+  {
+    "name": "visitor-7-back-0",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "09939c416e286937bb08eb45a69115f32223dc3fc94b52a64c3441bb3a46381b"
+  },
+  {
+    "name": "visitor-7-back-1",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "45215a653abe519d8db0a71464b86083eb368b70154ca8acc6afe2d5c660771c"
+  },
+  {
+    "name": "visitor-7-back-2",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "a2d71f15b1c6d5ca5b2fe447f46d58583f9a51cdaf4c42d59cd1909f2a5734c8"
+  },
+  {
+    "name": "visitor-7-back-3",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "a030696bf6388123bbb558e3ccb8a292a6fe49814289630411c755d9a1724276"
+  },
+  {
+    "name": "visitor-7-back-4",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "331373107407af1df93fbd95e3e28270bb69b489113b83f74013df2e7a007f18"
+  },
+  {
+    "name": "visitor-7-back-5",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "09939c416e286937bb08eb45a69115f32223dc3fc94b52a64c3441bb3a46381b"
+  },
+  {
+    "name": "visitor-7-back-6",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3c99c9b8799299ef05a4d579de293d4b937dac81577052a4c1cb64e5e1d96082"
+  },
+  {
+    "name": "visitor-7-back-7",
+    "width": 20,
+    "height": 28,
+    "alphaSha256": "3404dfd4c6ed4df53b376916a67b307b272d90df08e35eedc54e0fffb8c9ae2f"
+  },
+  {
+    "name": "holiday-santa-0",
+    "width": 32,
+    "height": 36,
+    "alphaSha256": "a4c26f059d4b1f818bd523bd440fff73325e0ff2dcc48d76800d8fc8ab0c56a3"
+  },
+  {
+    "name": "holiday-santa-1",
+    "width": 32,
+    "height": 36,
+    "alphaSha256": "9cf463421505715a787d04d45eb0f8ccddb9272d2d28e4d38a042133a8bfde94"
+  },
+  {
+    "name": "holiday-rudolph-0",
+    "width": 32,
+    "height": 36,
+    "alphaSha256": "9c7122b70724a6d2294f1d560c4f2c7107d097bc424f8c78c6bfd270a0c00707"
+  },
+  {
+    "name": "holiday-rudolph-1",
+    "width": 32,
+    "height": 36,
+    "alphaSha256": "3a03eedf319f741a5841a339a3686a2133233215e1d6b908dab8a951357882f7"
+  },
+  {
+    "name": "bubble-dots",
+    "width": 18,
+    "height": 14,
+    "alphaSha256": "80788cf9b95a0c9f024dea6685c9849b03fb7fd7a7797e758fd50e3b73ec8975"
+  },
+  {
+    "name": "bubble-heart",
+    "width": 18,
+    "height": 14,
+    "alphaSha256": "80788cf9b95a0c9f024dea6685c9849b03fb7fd7a7797e758fd50e3b73ec8975"
+  },
+  {
+    "name": "bubble-spark",
+    "width": 18,
+    "height": 14,
+    "alphaSha256": "80788cf9b95a0c9f024dea6685c9849b03fb7fd7a7797e758fd50e3b73ec8975"
+  },
+  {
+    "name": "ground-spring",
+    "width": 744,
+    "height": 422,
+    "alphaSha256": "3ad48bd7f067b82bf7442dcf938557dc97bc9182caddfd961e4df281b5018433"
+  },
+  {
+    "name": "fallback-spring",
+    "width": 180,
+    "height": 180,
+    "alphaSha256": "b697cb62a63ded76c54ba6b35e2236a60cd71a10c37d90da0690c568f82db0a3"
+  },
+  {
+    "name": "prop-spring-cottage-164",
+    "width": 72,
+    "height": 80,
+    "alphaSha256": "9b8083c00d63ed98ae74ce018e461ca03ce6eff163450a5506aba8693a5ff262"
+  },
+  {
+    "name": "prop-spring-shop-610",
+    "width": 76,
+    "height": 76,
+    "alphaSha256": "7630eefc7e9d4408f8d6e47d4e21826bf5b152791dccaaac35661cf2ba7996c4"
+  },
+  {
+    "name": "prop-spring-cabin-677.5",
+    "width": 57,
+    "height": 63,
+    "alphaSha256": "9a7a6dc046f00a5a954329b349950ce02fee0dc9109cce849105dd0d47ba039e"
+  },
+  {
+    "name": "prop-spring-lamp-201",
+    "width": 18,
+    "height": 46,
+    "alphaSha256": "b15cc946f8973dc5eb53a93af949ec75c771cfeda13cb82a4e4701dac5b83931"
+  },
+  {
+    "name": "prop-spring-lamp-543",
+    "width": 18,
+    "height": 46,
+    "alphaSha256": "b15cc946f8973dc5eb53a93af949ec75c771cfeda13cb82a4e4701dac5b83931"
+  },
+  {
+    "name": "prop-spring-bench-179",
+    "width": 38,
+    "height": 24,
+    "alphaSha256": "7fc8355bfaa11fb8b2ecbbfddad781cfb3513682b00b698ea02570824fbf8ef1"
+  },
+  {
+    "name": "prop-spring-bench-573",
+    "width": 38,
+    "height": 24,
+    "alphaSha256": "7fc8355bfaa11fb8b2ecbbfddad781cfb3513682b00b698ea02570824fbf8ef1"
+  },
+  {
+    "name": "prop-spring-sign-56",
+    "width": 24,
+    "height": 30,
+    "alphaSha256": "0c07e886e3100990140a9b75b9f38dad182bfc9a51e7a11416d3af51e8acdebe"
+  },
+  {
+    "name": "prop-spring-fence-107.5",
+    "width": 171,
+    "height": 18,
+    "alphaSha256": "afbfebe432262b33242ab857d8b3f0dfd18c6890c75f4c1b1207f8dbf2c68317"
+  },
+  {
+    "name": "prop-spring-fence-636.5",
+    "width": 171,
+    "height": 18,
+    "alphaSha256": "afbfebe432262b33242ab857d8b3f0dfd18c6890c75f4c1b1207f8dbf2c68317"
+  },
+  {
+    "name": "ground-summer",
+    "width": 744,
+    "height": 422,
+    "alphaSha256": "3ad48bd7f067b82bf7442dcf938557dc97bc9182caddfd961e4df281b5018433"
+  },
+  {
+    "name": "fallback-summer",
+    "width": 180,
+    "height": 180,
+    "alphaSha256": "b697cb62a63ded76c54ba6b35e2236a60cd71a10c37d90da0690c568f82db0a3"
+  },
+  {
+    "name": "prop-summer-cottage-164",
+    "width": 72,
+    "height": 80,
+    "alphaSha256": "9b8083c00d63ed98ae74ce018e461ca03ce6eff163450a5506aba8693a5ff262"
+  },
+  {
+    "name": "prop-summer-shop-610",
+    "width": 76,
+    "height": 76,
+    "alphaSha256": "7630eefc7e9d4408f8d6e47d4e21826bf5b152791dccaaac35661cf2ba7996c4"
+  },
+  {
+    "name": "prop-summer-cabin-677.5",
+    "width": 57,
+    "height": 63,
+    "alphaSha256": "9a7a6dc046f00a5a954329b349950ce02fee0dc9109cce849105dd0d47ba039e"
+  },
+  {
+    "name": "prop-summer-lamp-201",
+    "width": 18,
+    "height": 46,
+    "alphaSha256": "b15cc946f8973dc5eb53a93af949ec75c771cfeda13cb82a4e4701dac5b83931"
+  },
+  {
+    "name": "prop-summer-lamp-543",
+    "width": 18,
+    "height": 46,
+    "alphaSha256": "b15cc946f8973dc5eb53a93af949ec75c771cfeda13cb82a4e4701dac5b83931"
+  },
+  {
+    "name": "prop-summer-bench-179",
+    "width": 38,
+    "height": 24,
+    "alphaSha256": "7fc8355bfaa11fb8b2ecbbfddad781cfb3513682b00b698ea02570824fbf8ef1"
+  },
+  {
+    "name": "prop-summer-bench-573",
+    "width": 38,
+    "height": 24,
+    "alphaSha256": "7fc8355bfaa11fb8b2ecbbfddad781cfb3513682b00b698ea02570824fbf8ef1"
+  },
+  {
+    "name": "prop-summer-sign-56",
+    "width": 24,
+    "height": 30,
+    "alphaSha256": "0c07e886e3100990140a9b75b9f38dad182bfc9a51e7a11416d3af51e8acdebe"
+  },
+  {
+    "name": "prop-summer-fence-107.5",
+    "width": 171,
+    "height": 18,
+    "alphaSha256": "afbfebe432262b33242ab857d8b3f0dfd18c6890c75f4c1b1207f8dbf2c68317"
+  },
+  {
+    "name": "prop-summer-fence-636.5",
+    "width": 171,
+    "height": 18,
+    "alphaSha256": "afbfebe432262b33242ab857d8b3f0dfd18c6890c75f4c1b1207f8dbf2c68317"
+  },
+  {
+    "name": "ground-autumn",
+    "width": 744,
+    "height": 422,
+    "alphaSha256": "3ad48bd7f067b82bf7442dcf938557dc97bc9182caddfd961e4df281b5018433"
+  },
+  {
+    "name": "fallback-autumn",
+    "width": 180,
+    "height": 180,
+    "alphaSha256": "b697cb62a63ded76c54ba6b35e2236a60cd71a10c37d90da0690c568f82db0a3"
+  },
+  {
+    "name": "prop-autumn-cottage-164",
+    "width": 72,
+    "height": 80,
+    "alphaSha256": "942938c5e13fb965b031de693bbfa3a058ca76447eac3ee068e34ff6f9014f0e"
+  },
+  {
+    "name": "prop-autumn-shop-610",
+    "width": 76,
+    "height": 76,
+    "alphaSha256": "014416ce16324a02c578aea4756d03531f43002b058f5613b762e224de094578"
+  },
+  {
+    "name": "prop-autumn-cabin-677.5",
+    "width": 57,
+    "height": 63,
+    "alphaSha256": "a96d58b10c08d87706e9e9bd2ebd2e38e47d0b2f6600d71554052e2dc4e78f6c"
+  },
+  {
+    "name": "prop-autumn-lamp-201",
+    "width": 18,
+    "height": 46,
+    "alphaSha256": "b15cc946f8973dc5eb53a93af949ec75c771cfeda13cb82a4e4701dac5b83931"
+  },
+  {
+    "name": "prop-autumn-lamp-543",
+    "width": 18,
+    "height": 46,
+    "alphaSha256": "b15cc946f8973dc5eb53a93af949ec75c771cfeda13cb82a4e4701dac5b83931"
+  },
+  {
+    "name": "prop-autumn-bench-179",
+    "width": 38,
+    "height": 24,
+    "alphaSha256": "ca7c58db7833158a4ddefbf24e442eafd164e7054e62fd56d34c12b1746422ca"
+  },
+  {
+    "name": "prop-autumn-bench-573",
+    "width": 38,
+    "height": 24,
+    "alphaSha256": "ca7c58db7833158a4ddefbf24e442eafd164e7054e62fd56d34c12b1746422ca"
+  },
+  {
+    "name": "prop-autumn-sign-56",
+    "width": 24,
+    "height": 30,
+    "alphaSha256": "0c07e886e3100990140a9b75b9f38dad182bfc9a51e7a11416d3af51e8acdebe"
+  },
+  {
+    "name": "prop-autumn-fence-107.5",
+    "width": 171,
+    "height": 18,
+    "alphaSha256": "afbfebe432262b33242ab857d8b3f0dfd18c6890c75f4c1b1207f8dbf2c68317"
+  },
+  {
+    "name": "prop-autumn-fence-636.5",
+    "width": 171,
+    "height": 18,
+    "alphaSha256": "afbfebe432262b33242ab857d8b3f0dfd18c6890c75f4c1b1207f8dbf2c68317"
+  },
+  {
+    "name": "ground-winter",
+    "width": 744,
+    "height": 422,
+    "alphaSha256": "3ad48bd7f067b82bf7442dcf938557dc97bc9182caddfd961e4df281b5018433"
+  },
+  {
+    "name": "fallback-winter",
+    "width": 180,
+    "height": 180,
+    "alphaSha256": "978cfe9b2720aa217d4d61f221f35c4fc09b575d8701f1d41700a76619c8d8ca"
+  },
+  {
+    "name": "prop-winter-cottage-164",
+    "width": 72,
+    "height": 80,
+    "alphaSha256": "516b806a4476256b22d6ef228ae363fb2226a28fe5263cfa6e38accb46a6da8f"
+  },
+  {
+    "name": "prop-winter-shop-610",
+    "width": 76,
+    "height": 76,
+    "alphaSha256": "0958437d15db233b349a57602d4d1849f50013cacd5c0ee7c0394b07c268a3a8"
+  },
+  {
+    "name": "prop-winter-cabin-677.5",
+    "width": 57,
+    "height": 63,
+    "alphaSha256": "816b77dcd1f009634098c7ec1ddb9f1394cf9d757a6ffc25031145ad74ea4e2c"
+  },
+  {
+    "name": "prop-winter-lamp-201",
+    "width": 18,
+    "height": 46,
+    "alphaSha256": "7ef45683f3080b23d5f71a095986480c6251b9359ff1a53486469aa4d158ae23"
+  },
+  {
+    "name": "prop-winter-lamp-543",
+    "width": 18,
+    "height": 46,
+    "alphaSha256": "7ef45683f3080b23d5f71a095986480c6251b9359ff1a53486469aa4d158ae23"
+  },
+  {
+    "name": "prop-winter-bench-179",
+    "width": 38,
+    "height": 24,
+    "alphaSha256": "20bbdfefd2cac7b1330174c85c316848bf67fdb33590e06cb57c33fb82cfc629"
+  },
+  {
+    "name": "prop-winter-bench-573",
+    "width": 38,
+    "height": 24,
+    "alphaSha256": "20bbdfefd2cac7b1330174c85c316848bf67fdb33590e06cb57c33fb82cfc629"
+  },
+  {
+    "name": "prop-winter-sign-56",
+    "width": 24,
+    "height": 30,
+    "alphaSha256": "e1f6d5ced57ccd276aee7c522c746aa4fe48a0e8d3aadb4d770e28c3391d62fd"
+  },
+  {
+    "name": "prop-winter-fence-107.5",
+    "width": 171,
+    "height": 18,
+    "alphaSha256": "bec15a5b8cc2c0be7a0732a6686453455f77259dfae31ee536ee322d07fc4e69"
+  },
+  {
+    "name": "prop-winter-fence-636.5",
+    "width": 171,
+    "height": 18,
+    "alphaSha256": "bec15a5b8cc2c0be7a0732a6686453455f77259dfae31ee536ee322d07fc4e69"
+  },
+  {
+    "name": "ground-christmas",
+    "width": 744,
+    "height": 422,
+    "alphaSha256": "3ad48bd7f067b82bf7442dcf938557dc97bc9182caddfd961e4df281b5018433"
+  },
+  {
+    "name": "fallback-christmas",
+    "width": 180,
+    "height": 180,
+    "alphaSha256": "8b0555d1ddc6a8172ecbe81ce5591198f1d8e352dfa1a06940041f59478af76f"
+  },
+  {
+    "name": "prop-christmas-cottage-164",
+    "width": 72,
+    "height": 80,
+    "alphaSha256": "35f2d45a1bd75fc2b55a9eb7d5edfee63db890baafe164ad262340f7e0255384"
+  },
+  {
+    "name": "prop-christmas-shop-610",
+    "width": 76,
+    "height": 76,
+    "alphaSha256": "0958437d15db233b349a57602d4d1849f50013cacd5c0ee7c0394b07c268a3a8"
+  },
+  {
+    "name": "prop-christmas-cabin-677.5",
+    "width": 57,
+    "height": 63,
+    "alphaSha256": "816b77dcd1f009634098c7ec1ddb9f1394cf9d757a6ffc25031145ad74ea4e2c"
+  },
+  {
+    "name": "prop-christmas-lamp-201",
+    "width": 18,
+    "height": 46,
+    "alphaSha256": "0ca217265615c336f1ecedfce0b4997f11fa5af452043f033904643f28b97196"
+  },
+  {
+    "name": "prop-christmas-lamp-543",
+    "width": 18,
+    "height": 46,
+    "alphaSha256": "0ca217265615c336f1ecedfce0b4997f11fa5af452043f033904643f28b97196"
+  },
+  {
+    "name": "prop-christmas-bench-179",
+    "width": 38,
+    "height": 24,
+    "alphaSha256": "20bbdfefd2cac7b1330174c85c316848bf67fdb33590e06cb57c33fb82cfc629"
+  },
+  {
+    "name": "prop-christmas-bench-573",
+    "width": 38,
+    "height": 24,
+    "alphaSha256": "20bbdfefd2cac7b1330174c85c316848bf67fdb33590e06cb57c33fb82cfc629"
+  },
+  {
+    "name": "prop-christmas-sign-56",
+    "width": 24,
+    "height": 30,
+    "alphaSha256": "e1f6d5ced57ccd276aee7c522c746aa4fe48a0e8d3aadb4d770e28c3391d62fd"
+  },
+  {
+    "name": "prop-christmas-fence-107.5",
+    "width": 171,
+    "height": 18,
+    "alphaSha256": "bec15a5b8cc2c0be7a0732a6686453455f77259dfae31ee536ee322d07fc4e69"
+  },
+  {
+    "name": "prop-christmas-fence-636.5",
+    "width": 171,
+    "height": 18,
+    "alphaSha256": "bec15a5b8cc2c0be7a0732a6686453455f77259dfae31ee536ee322d07fc4e69"
+  },
+  {
+    "name": "fallback-monument",
+    "width": 180,
+    "height": 180,
+    "alphaSha256": "0ff351e10fdef15c8fe713df35cc894af8005555000b69aee205635700c408d7"
+  },
+  {
+    "name": "tree-glow",
+    "width": 100,
+    "height": 100,
+    "alphaSha256": "3f603e3e299121194976a595a865dc1846cd71d39ebdc154f0f411361808276c"
+  }
+]

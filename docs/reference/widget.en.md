@@ -20,10 +20,13 @@ For manual installation, use:
 
 <visitor-village
   count="[##_count_today_##]"
+  illustrated
   season="christmas"
   style="display: block; width: 100%; height: 420px;"
 ></visitor-village>
 ```
+
+`illustrated` enables the artwork shown in the installer. New snippets include it; remove the attribute to use the original scenery.
 
 Tistory replaces `[##_count_today_##]` with today's visitor count **inside the skin HTML**. Placing it in an external JavaScript file or a regular blog post is unsupported. If the placeholder remains on the published page, check its location in the skin. If you use Tistory's automatic mobile skin, check whether it needs a separate installation.
 
@@ -135,7 +138,7 @@ pnpm test:e2e  # Check the built output in Chrome
 pnpm preview   # http://127.0.0.1:4178/
 ```
 
-The build writes the demo and installation helper to `dist/`, and the standalone ES module to `dist/widget/visitor-village.js`. The module includes PixiJS, internal styles, and all six landmark images. Open `/embed-example.html` on the preview server to check embedding on a separate page.
+The build writes the demo and installation helper to `dist/`, and the standalone ES module to `dist/widget/visitor-village.js`. The module includes PixiJS, internal styles, six landmark images and five seasonal backgrounds. Open `/examples/blog.html` to see the new generated widget in a blog body, or `/embed-example.html` for the original scenery.
 
 Browser tests run installed Chrome in headless mode; mobile checks use emulation. Install Chrome or adjust `channel` in [playwright.config.ts](../../playwright.config.ts) for another browser setup.
 

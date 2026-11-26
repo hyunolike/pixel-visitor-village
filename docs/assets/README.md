@@ -135,3 +135,10 @@
 `public-home-{source-state,paused,short}.png`는 https://playable-map.pixel-visitor-village.pages.dev/ 의 실제 Chrome 캡처다. `home-390.png`, `home-320.png`, `home-701.png`, `install-1487.png`, `docs-1487.png`, `install-390.png`, `docs-390.png`도 같은 공개 빌드에서 촬영했다. `seasons-{desktop,mobile}.jpg`는 실제5계절을 한 장으로 배치한 검토용 축소 시트다. 캔버스는 원래 캐릭터/집/나무/작은 티스토리 조형물을 렌더링하며 숫자는 시연용이다.
 
 `public-viewports.json`은3페이지×6너비의 오류/넘침/헤더 높이 결과, `public-smoke.json`은 실제 클릭/복사/키보드/정적 문서와 production 보존 결과다. [검토 기록](../features/visitor-village/reviews/playable-map-2026-11-26.md) 및 [시각 QA](../../design-qa.md)와 함께 본다. 이번 작업은 README 원본 썸네일과 소개 영상 파일을 변경하지 않았다.
+
+
+## 공통 픽셀 아트 마감
+
+cohesive-art/는2026-11-26 픽셀 격자·팔레트·명암 마감의 실제 Chrome/DPR1 검증 자료다. before-after.jpg는 원래 운영6bd61c3과 수정 production 빌드의1487×1058/여름12명/모션 줄이기 화면을 하나의 입력에 나란히 배치했다. focus-world.jpg와 characters/props/emotes-comparison.png는 같은 원본·수정 비교다. seasons-desktop/mobile.jpg는 실제 다섯 계절 검토 시트다. default-summer/christmas.png는 서비스 배경을 사용하지 않는 기본 위젯이다. native-check.json과 public-files/public-smoke.json이 실제 검증 결과를 담는다. [검토](../features/visitor-village/reviews/cohesive-art-2026-11-26.md)와 [제작 규칙](../../assets/concepts/cohesive-20261126/README.md)을 참고한다. 원본 이미지/프레임을 재생성하지 않고 사용자가 허용한 정밀 마감과 네이티브 소스 수정으로 작업했다.
+
+Installed-widget correction: `cohesive-art/blog-installed-{1000,390,320}.png` and `blog-widget-{spring,summer,autumn,winter,christmas}.png` capture the actual independent module in a synthetic blog article on the public preview. `blog-capture.json` records anonymous interactions and viewport checks. Earlier homepage comparisons are historical.

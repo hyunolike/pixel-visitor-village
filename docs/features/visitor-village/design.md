@@ -415,3 +415,13 @@ Keep the existing separate model/Web Component/render modules and four-locale di
 ## Playable map structure
 
 Use the user-selected daylight world, real house links and inventory/dialogue HUD, then extend the same sunlit tokens to the installer and guide. Existing sprites remain live. Optional per-instance background sources belong to service presentation; embedded defaults do not change. [Plan and contracts](playable-map-plan.md).
+
+
+## Cohesive pixel art structure
+
+Use shared authored ramps for build-time raster finishing and native source/atlas creation, preserving original frame geometry and alpha. Reuse user-authorized deterministic Pillow finishing, source archives and native art. [Contracts and implementation plan](cohesive-art-plan.md).
+
+
+## Installed illustrated art ownership
+
+The Web Component owns the existing guarded scene loader for illustrated (public boolean) and data-map-scene (service alias). Services do not install a second loader. Vite library output embeds raster sources; only the selected image decodes. Standalone snippets include illustrated; old unflagged snippets retain native geometry. Independent generated-code/blog-body acceptance replaces service-hero screenshots for this correction.

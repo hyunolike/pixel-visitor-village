@@ -25,14 +25,15 @@ function load(season: Season): Promise<HTMLImageElement> {
   return promise;
 }
 
-/** Service-only opt-in; embedded widgets fetch no terrain images. */
+/** Component-owned illustrated scenery; sources are shared, disposable textures are per widget. */
 export function setupMapScene(widget: VisitorVillage): () => void {
   let generation = 0;
   let requested: Season | undefined;
   let disposed = false;
+  const optedIn = () => widget.hasAttribute('illustrated') || widget.hasAttribute('data-map-scene');
   function sync(force = false) {
     if (disposed) return;
-    if (!widget.hasAttribute('data-map-scene')) {
+    if (!optedIn()) {
       generation++;
       requested = undefined;
       widget.setSceneBackdrop(null);
@@ -53,7 +54,7 @@ export function setupMapScene(widget: VisitorVillage): () => void {
           disposed ||
           current !== generation ||
           !widget.isConnected ||
-          !widget.hasAttribute('data-map-scene') ||
+          !optedIn() ||
           widget.season !== season
         )
           return;
@@ -66,7 +67,7 @@ export function setupMapScene(widget: VisitorVillage): () => void {
           disposed ||
           current !== generation ||
           !widget.isConnected ||
-          !widget.hasAttribute('data-map-scene') ||
+          !optedIn() ||
           widget.season !== season
         )
           return;
@@ -76,7 +77,10 @@ export function setupMapScene(widget: VisitorVillage): () => void {
   const change = () => sync();
   const ready = () => sync(true);
   const observer = new MutationObserver(() => sync(true));
-  observer.observe(widget, { attributes: true, attributeFilter: ['data-map-scene'] });
+  observer.observe(widget, {
+    attributes: true,
+    attributeFilter: ['illustrated', 'data-map-scene'],
+  });
   widget.addEventListener('village-change', change);
   widget.addEventListener('village-ready', ready);
   sync();
@@ -87,6 +91,8 @@ export function setupMapScene(widget: VisitorVillage): () => void {
     widget.removeEventListener('village-change', change);
     widget.removeEventListener('village-ready', ready);
     widget.setSceneBackdrop(null);
+    widget.dataset.sceneState = 'default';
+    delete widget.dataset.sceneSeason;
   };
 }
 

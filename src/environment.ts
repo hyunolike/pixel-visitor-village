@@ -1,3 +1,4 @@
+import { finishArtCanvas } from './art-palette';
 import type { Season } from './model';
 import { themes,type Theme } from './themes';
 import { getVillageLayout,PROP_SIZES,type PropKind,type VillageObjectLayout } from './environment-layout';
@@ -5,7 +6,7 @@ import { blend,brush,ellipse,hash,surface,type PixelBrush } from './pixel-art';
 
 export interface VillageScenery extends VillageObjectLayout{canvas:HTMLCanvasElement}
 export interface VillageScene{ground:HTMLCanvasElement;objects:VillageScenery[]}
-const wood='#654d35',woodLight='#c39a60',ink='#2c4539';
+const wood='#7d593c',woodLight='#d6ac73',ink='#354b3e';
 const snowy=(season:Season)=>season==='christmas'||season==='winter';
 
 function pine(r:PixelBrush,x:number,base:number,height:number,color:string,snow=false):void{
@@ -57,7 +58,7 @@ function house(kind:'cottage'|'shop'|'cabin',season:Season):HTMLCanvasElement{
   r(10,roofBase,w-20,floor-roofBase,t.wall);
   r(w-19,roofBase+2,9,floor-roofBase-2,blend(t.wall,wood,.28));
   r(11,roofBase+1,2,floor-roofBase-2,blend(t.wall,'#fff5d8',.55));
-  for(let y=roofBase+7;y<floor-2;y+=7)for(let x=14+(y%2)*3;x<w-20;x+=12)r(x,y,6,1,blend(t.wall,wood,.12));
+  for(let y=roofBase+7;y<floor-2;y+=11)for(let x=14+(y%2)*3;x<w-20;x+=18)r(x,y,6,1,blend(t.wall,wood,.07));
   r(8,floor-1,w-16,3,'#827869');r(10,floor,w-20,1,'#b7ae92');
   // Chimney is behind the stepped, tiled roof.
   r(w-24,3,8,roofBase-8,roofDark);r(w-23,4,5,roofBase-10,'#a38d7c');
@@ -68,7 +69,7 @@ function house(kind:'cottage'|'shop'|'cabin',season:Season):HTMLCanvasElement{
     const half=Math.round(4+(w/2-6)*(y-6)/(roofBase-6));
     r(cx-half,y,half*2+1,4,roofDark);r(cx-half+2,y,Math.max(1,half*2-3),3,roof);
     r(cx-half+2,y,Math.max(1,half*.7),1,roofLight);
-    for(let x=cx-half+7+(y%2)*4;x<cx+half-3;x+=11)r(x,y,1,3,roofDark);
+    for(let x=cx-half+7+(y%2)*4;x<cx+half-3;x+=11)r(x,y+1,2,1,blend(roof,roofDark,.45));
     if(cold&&y%6===0)r(cx-half+1,y-1,Math.max(1,half*.75),2,'#dce8df');
   }
   r(1,roofBase+2,w-2,2,wood);r(3,roofBase+2,w-6,1,woodLight);
@@ -102,7 +103,7 @@ function house(kind:'cottage'|'shop'|'cabin',season:Season):HTMLCanvasElement{
   }
   if(kind!=='cabin'){shrub(r,6,floor+1,7,season);shrub(r,w-7,floor+1,7,season);}
   if(season==='christmas')for(let x=8;x<w-6;x+=7){r(x,roofBase+5,1,1,'#536b4a');r(x,roofBase+6,1,2,x%3?'#f1cd78':'#d27666');}
-  return canvas;
+  return finishArtCanvas(canvas);
 }
 function furniture(kind:Exclude<PropKind,'cottage'|'shop'|'cabin'|'fence'>,season:Season):HTMLCanvasElement{
   const [w,h]=PROP_SIZES[kind],{canvas,ctx}=surface(w,h),r=brush(ctx),t=themes[season],cold=snowy(season);
@@ -125,7 +126,7 @@ function furniture(kind:Exclude<PropKind,'cottage'|'shop'|'cabin'|'fence'>,seaso
     r(7,7,4,1,'#4d7460');r(6,8,6,2,'#4d7460');r(8,10,2,2,'#4d7460');r(15,7,3,1,'#eee2ba');r(17,8,2,1,'#eee2ba');
     if(cold)r(2,2,17,2,'#e5ede2');
   }
-  return canvas;
+  return finishArtCanvas(canvas);
 }
 function fence(width:number,height:number,season:Season):HTMLCanvasElement{
   const {canvas,ctx}=surface(width,height),r=brush(ctx),t=themes[season],cold=snowy(season);
@@ -134,7 +135,7 @@ function fence(width:number,height:number,season:Season):HTMLCanvasElement{
   r(1,height-2,width-2,2,'#34574732');
   for(const y of [.38,.68]){r(1,height*y,width-2,Math.max(1,2*scale),dark);r(1,height*y,width-2,1,light);if(cold)r(1,height*y-1,width-2,1,'#dae7de');}
   for(let x=3;x<width-1;x+=gap){r(x,2,post,height-3,dark);r(x,2,1,height-5,light);r(x+1,1,Math.max(1,post-2),1,light);if(cold)r(x-1,1,post+2,1,'#edf2e8');}
-  return canvas;
+  return finishArtCanvas(canvas);
 }
 
 function ground(width:number,height:number,season:Season):HTMLCanvasElement{
@@ -184,7 +185,7 @@ function ground(width:number,height:number,season:Season):HTMLCanvasElement{
     if(Math.abs(x-cx)<w*.12&&Math.abs(y-cy)<ry)continue;
     r(x,y,2,1,i%2?'#b77b42':'#d9ac5e');r(x+1,y-1,1,2,i%2?'#d9ac5e':'#b77b42');
   }
-  return canvas;
+  return finishArtCanvas(canvas);
 }
 
 /** Scenery is built only on resize/theme changes; no animation or visitor data here. */

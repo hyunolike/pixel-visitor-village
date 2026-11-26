@@ -1,0 +1,38 @@
+[
+  {
+    "origin": "https://cohesive-art.pixel-visitor-village.pages.dev",
+    "width": 1000,
+    "errors": [],
+    "onlyIndependentWidget": true,
+    "overflow": false,
+    "requests": [
+      "/examples/blog.html",
+      "/examples/blog",
+      "/widget/visitor-village.js"
+    ]
+  },
+  {
+    "origin": "https://cohesive-art.pixel-visitor-village.pages.dev",
+    "width": 390,
+    "errors": [],
+    "onlyIndependentWidget": true,
+    "overflow": false,
+    "requests": [
+      "/examples/blog.html",
+      "/examples/blog",
+      "/widget/visitor-village.js"
+    ]
+  },
+  {
+    "origin": "https://cohesive-art.pixel-visitor-village.pages.dev",
+    "width": 320,
+    "errors": [],
+    "onlyIndependentWidget": true,
+    "overflow": false,
+    "requests": [
+      "/examples/blog.html",
+      "/examples/blog",
+      "/widget/visitor-village.js"
+    ]
+  }
+]

@@ -1,3 +1,4 @@
+import { fitArtPixels } from './art-palette.ts';
 import type { VisitorFacing } from './character-motion';
 
 export const CHARACTER_WIDTH=20;
@@ -17,6 +18,7 @@ export const VISITOR_STYLES=[
   {name:'밤하늘 털모자',hat:'pompom',coat:'#638b99',light:'#a6bfbc',shade:'#3f6371',accent:'#d8b1c9',hair:'#a8754e',skin:'#e8b88f',skinShade:'#c38b6a'},
 ] as const;
 
+const hairHighlights=['#9b7047','#9b7047','#bc8c59','#7d593c','#bc8c59','#7d593c','#bc8c59','#bc8c59'] as const;
 const ink='#263e38';
 const boots='#2c3c3a';
 const colors=new Map<string,readonly number[]>();
@@ -49,9 +51,9 @@ export function visitorPixels(style:number,facing:VisitorFacing,frame:number):Ui
   const leftX=side?7-stride:6+(frame===4?1:0);
   const rightX=side?10+stride:11-(frame===2?1:0);
   r(leftX,21+stride,3,4,ink);r(rightX,21-stride,3,4,ink);
-  r(leftX,22+stride,2,2,'#677080');r(rightX,22-stride,2,2,'#677080');
+  r(leftX,22+stride,2,2,'#68949d');r(rightX,22-stride,2,2,'#68949d');
   r(leftX-1,24+stride,4,2,boots);r(rightX,24-stride,4,2,boots);
-  r(leftX-1,24+stride,2,1,'#a5a1a1');r(rightX+1,24-stride,2,1,'#a5a1a1');
+  r(leftX-1,24+stride,2,1,'#c8c9aa');r(rightX+1,24-stride,2,1,'#c8c9aa');
 
   // Coat, mittens and a small scarf remain readable at native resolution.
   r(side?6:4,y(16),side?8:12,6,ink);
@@ -78,7 +80,7 @@ export function visitorPixels(style:number,facing:VisitorFacing,frame:number):Ui
   r(5,y(12),10,2,back?outfit.hair:outfit.skinShade);
   r(5,y(4),10,3,outfit.hair);r(4,y(6),2,4,outfit.hair);r(14,y(6),2,3,outfit.hair);
   if(back){
-    r(5,y(6),10,7,outfit.hair);r(6,y(13),8,1,outfit.shade);r(7,y(6),2,4,outfit.light);
+    r(5,y(6),10,7,outfit.hair);r(6,y(13),8,1,outfit.shade);r(7,y(6),2,4,hairHighlights[style%hairHighlights.length]);
   }else if(side){
     r(4,y(6),5,7,outfit.hair);r(7,y(11),2,3,outfit.hair);
     r(16,y(9),2,2,outfit.skinShade);r(16,y(9),1,1,outfit.skin);
@@ -138,5 +140,5 @@ export function visitorPixels(style:number,facing:VisitorFacing,frame:number):Ui
     r(14,y(16),4,3,ink);r(15,y(16),2,2,outfit.coat);
     r(handX-1,y(handY),3,6,ink);r(handX,y(handY),2,3,outfit.skin);r(handX,y(handY+3),2,2,outfit.light);
   }
-  return pixels;
+  return fitArtPixels(pixels);
 }

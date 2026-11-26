@@ -1,3 +1,4 @@
+import { fitArtPixels } from './art-palette.ts';
 import type { HolidayKind } from './holiday-cameo';
 
 export const HOLIDAY_WIDTH=32;
@@ -57,5 +58,5 @@ export function holidayPixels(kind:HolidayKind,frame:number):Uint8ClampedArray {
     r(29,2,2,3,'#73533c');r(24,6,4,2,'#b09168');
     r(20,19,9,3,red);r(23,22,3,5,red);r(20,19,7,1,light);
   }
-  return pixels;
+  return fitArtPixels(pixels);
 }
