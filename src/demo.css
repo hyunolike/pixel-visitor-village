@@ -1,223 +1,324 @@
 @import './site-pages.css';
 
 body {
-  background: var(--village-forest);
-  color: var(--village-cream);
+  background: var(--color-page);
+  color: var(--village-ink);
 }
 .page {
   width: 100%;
   margin: 0;
 }
 .playground {
-  min-height: 100svh;
   display: grid;
-  grid-template-rows: auto minmax(600px, 1fr) auto;
-  background: var(--village-forest);
+  grid-template-rows: 77px minmax(650px, 1fr) auto;
+  min-height: 100svh;
+  position: relative;
+  background: #8bb56e;
+  padding-bottom: 22px;
 }
 .stage {
   position: relative;
-  min-width: 0;
   isolation: isolate;
+  min-width: 0;
+  min-height: 650px;
+  background: var(--service-sky);
 }
-.stage visitor-village {
+.world-wrap {
   position: absolute;
-  inset: 120px 0 0;
+  inset: 0;
+  min-width: 0;
+}
+.world-wrap visitor-village {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: calc(100% - 120px);
+  height: 100%;
 }
 .scene-intro {
   position: absolute;
-  z-index: 2;
-  left: 64px;
-  right: 64px;
+  z-index: 3;
   top: 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px;
+  left: 5.5%;
+  right: 5.5%;
   pointer-events: none;
 }
 .scene-intro h1 {
   font-family: var(--font-display);
-  font-size: 64px;
+  font-size: 56px;
   font-weight: 400;
-  line-height: 1.35;
+  line-height: 1.25;
+  color: var(--village-ink);
   letter-spacing: 0;
-  color: var(--village-cream);
 }
 .hero-description {
   font-size: 18px;
-  color: var(--village-cream);
-  max-width: 480px;
-  margin-top: 12px;
-}
-.scene-intro .hero-description {
-  display: inline-block;
-  background: var(--village-forest);
-  padding-right: 8px;
+  margin-top: 14px;
+  color: var(--village-ink);
+  max-width: 540px;
 }
 .hero-install {
   display: none;
   pointer-events: auto;
 }
-.count {
-  margin-top: 20px;
-  border-left: 2px solid #89ab94;
-  padding-left: 20px;
+.playground[data-season='christmas'] .scene-intro :is(h1, .hero-description) {
+  color: var(--village-cream);
+}
+.map-landmarks {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.map-landmark {
+  position: absolute;
+  display: block;
+  transform: translateY(-100%);
+  pointer-events: auto;
+  color: #3d3522;
+  text-decoration: none;
+}
+.map-sign {
+  position: absolute;
+  top: 0;
+  left: var(--sign-center);
+  transform: translateX(-50%);
+  min-height: 48px;
+  width: 144px;
   display: flex;
-  align-items: baseline;
-  gap: 8px;
-  flex-wrap: wrap;
-  max-width: 250px;
-}
-.count > span {
-  font-size: 16px;
-}
-.count strong {
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
   font-family: var(--font-display);
-  font-size: 48px;
-  font-weight: 400;
-  line-height: 1;
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
+  font-size: 20px;
+  line-height: 1.3;
+  text-align: center;
+  color: #3d3522;
+  background: #fff0c7;
+  border: 2px solid #805c31;
+  box-shadow: 0 4px 0 #6b4a28;
 }
-.count small {
-  font-family: var(--font-ui);
-  font-size: 16px;
-  font-weight: 500;
+.house-target {
+  position: absolute;
+  bottom: 0;
+  left: var(--house-center);
+  transform: translateX(-50%);
+  width: var(--house-width);
+  height: var(--house-height);
 }
-.count p {
-  flex-basis: 100%;
-  font-size: 12px;
-  color: #bad0bd;
+.map-landmark:hover .map-sign {
+  background: #ffe098;
+  box-shadow: 0 5px 0 #6b4a28;
+}
+.map-landmark:is(:hover, :focus-visible) .house-target {
+  outline: 3px solid #f6c55d;
+  outline-offset: 5px;
+}
+.map-landmark:active .map-sign {
+  box-shadow: 0 1px 0 #6b4a28;
 }
 .scene-loading {
   position: absolute;
-  z-index: 3;
+  z-index: 4;
   left: 50%;
   top: 55%;
   transform: translate(-50%, -50%);
   padding: 16px 20px;
   background: var(--village-cream);
   color: var(--village-ink);
+  border: 2px solid #805c31;
   font-size: 16px;
   max-width: calc(100% - 40px);
   text-align: center;
 }
-.scene-bottom {
-  position: absolute;
-  left: 40px;
-  right: 40px;
-  bottom: 44px;
-  z-index: 2;
-  display: flex;
+.village-dock {
+  position: relative;
+  z-index: 4;
+  background: var(--village-cream);
+  color: var(--village-ink);
+  margin: 0 24px;
+  padding: 12px 18px;
+  display: grid;
+  grid-template-columns: minmax(360px, 1fr) auto minmax(360px, 1fr);
   align-items: center;
-  gap: 24px;
-  justify-content: space-between;
-  pointer-events: none;
+  gap: 14px;
+  border: 2px solid #9a7744;
+  box-shadow: 0 5px 0 #5e6538;
+  min-width: 0;
 }
-.scene-hint {
-  color: #fff4d7;
-  background: #183e2de8;
+.guide-dialogue {
+  display: grid;
+  grid-template-columns: 60px minmax(130px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding-right: 14px;
+  border-right: 1px solid #cbb47d;
+}
+#guide-portrait {
+  width: 60px;
+  height: 84px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.dialogue-copy {
+  font-size: 16px;
+  line-height: 1.55;
+  min-height: 44px;
+}
+.guide-dialogue .button {
+  justify-self: start;
+  min-height: 48px;
   padding: 8px 12px;
   font-size: 14px;
+  white-space: nowrap;
 }
 .interaction-status {
-  padding: 8px 16px;
-  font-size: 14px;
-  color: var(--village-cream);
-  background: var(--village-forest);
-  border: 1px solid var(--village-cream);
+  font-size: 16px;
+  color: var(--village-ink);
 }
 .interaction-status:empty {
   display: none;
 }
-.village-dock {
-  background: var(--village-cream);
-  color: var(--village-ink);
-  margin: 0 40px 24px;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  border: 2px solid #8a794a;
-  box-shadow: 0 4px 0 #32492d;
+.guide-dialogue:has(.interaction-status:not(:empty)) .guide-intro {
+  display: none;
 }
 .season-buttons {
   display: flex;
-  gap: 4px;
-  align-items: center;
+  align-items: stretch;
+  gap: 5px;
+  min-width: 0;
 }
 .season-buttons button {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 48px;
-  padding: 6px 16px;
-  border: 1px solid transparent;
-  background: transparent;
+  gap: 4px;
+  min-height: 88px;
+  min-width: 62px;
+  padding: 7px 8px;
+  border: 1px solid #cbb47d;
+  background: #fff5db;
   color: var(--village-ink);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
+  box-shadow: 0 2px 0 #d3be8a;
 }
 .season-buttons img {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   image-rendering: pixelated;
 }
 .season-buttons button[aria-pressed='true'] {
-  background: var(--village-ink);
-  color: var(--village-cream);
-  border-color: #728351;
+  background: #f6c55d;
+  border: 2px solid #916623;
+  color: var(--village-ink);
+  box-shadow: inset 0 -3px #dfad42;
 }
 .season-buttons button:hover:not([aria-pressed='true']) {
-  background: #e4d9b0;
+  background: #ffe7a5;
+}
+.dock-visit {
+  min-width: 0;
+  border-left: 1px solid #cbb47d;
+  padding-left: 14px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 12px;
+  align-items: center;
+}
+.count {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 0;
+}
+.count a {
+  font-size: 14px;
+  color: var(--village-ink);
+  text-decoration-style: dotted;
+}
+.count strong {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-weight: 400;
+}
+.count small {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
 }
 .dock-actions {
   display: flex;
+  justify-content: flex-end;
   gap: 8px;
-  align-items: center;
 }
 .dock-actions .button {
-  font-size: 16px;
+  font-size: 13px;
   height: 48px;
-  padding-block: 10px;
+  min-height: 48px;
+  padding: 8px 10px;
+  flex: 1;
+  white-space: nowrap;
+}
+#pause {
+  transition: none;
+  width: 48px;
+  min-width: 48px;
+  flex: 0 0 48px;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+#invite {
+  order: -1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+#invite img {
+  width: 18px;
+  height: 18px;
 }
 .dock-secondary {
+  background: #fff5db;
   color: var(--village-ink);
-  background: transparent;
-  border-color: #a5966d;
-  white-space: nowrap;
-  min-width: 92px;
+  border: 1px solid #967845;
+  box-shadow: 0 2px 0 #cbb47d;
 }
 .dock-secondary:hover {
-  background: #e4d9b0;
+  background: #ffe7a5;
 }
 .village-dock .dock-secondary[aria-pressed='true'] {
-  color: var(--village-cream);
   background: var(--village-ink);
-  border-color: var(--village-ink);
+  color: var(--village-cream);
 }
 .invite-action {
-  background: var(--village-ink);
-  color: var(--village-cream);
-  white-space: nowrap;
-  min-width: 160px;
+  background: #f6c55d;
+  color: var(--village-ink);
+  border: 2px solid #916623;
+  box-shadow: 0 2px 0 #c2953c;
 }
 .invite-action:hover {
-  background: #2c5742;
+  background: #ffda84;
+}
+.demo-truth {
+  grid-column: 1/-1;
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 8px;
+  color: #4d6759;
 }
 .playground :is(button, a, [tabindex]):focus-visible {
-  outline: 3px solid var(--village-gold);
+  outline: 3px solid #244f3a;
   outline-offset: 4px;
-}
-.village-dock :is(button, [tabindex]):focus-visible {
-  outline-color: var(--village-ink);
 }
 .home-content {
   background: var(--color-surface);
@@ -336,171 +437,200 @@ input[type='range'] {
   font-size: 14px;
   color: var(--color-muted);
 }
-@media (min-height: 850px) and (min-width: 1101px) {
+
+@media (min-width: 1101px) and (min-height: 850px), (min-width: 1201px) and (min-height: 720px) {
   .playground {
     height: 100svh;
+    grid-template-rows: 77px minmax(0, 1fr) auto;
   }
-  .playground .stage {
+  .stage {
     min-height: 0;
   }
 }
 @media (max-width: 1200px) {
-  .scene-intro {
-    left: 40px;
-    right: 40px;
+  .scene-intro h1 {
+    font-size: 48px;
   }
   .village-dock {
-    margin-inline: 24px;
-    gap: 12px;
+    grid-template-columns: minmax(330px, 1fr) auto;
+    gap: 14px;
   }
-  .season-buttons button {
-    padding-inline: 8px;
-    font-size: 14px;
+  .dock-visit {
+    grid-column: 1/-1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    border-left: 0;
+    border-top: 1px solid #cbb47d;
+    padding: 10px 0 0;
+  }
+  .count {
+    margin: 0;
+  }
+  .demo-truth {
+    margin: 0;
   }
   .dock-actions {
-    gap: 4px;
+    flex-wrap: nowrap;
   }
-  .dock-secondary {
-    min-width: 0;
-    padding-inline: 12px;
-  }
-  .invite-action {
-    min-width: 0;
-    padding-inline: 16px;
+  .dock-actions .button {
+    flex: none;
   }
 }
-@media (max-width: 1000px) {
+@media (min-width: 701px) and (max-width: 1000px) {
   .village-dock {
-    flex-wrap: wrap;
-    justify-content: center;
+    grid-template-columns: 1fr;
+  }
+  .guide-dialogue {
+    padding-right: 0;
+    border-right: 0;
   }
   .season-buttons {
     justify-content: center;
   }
-  .dock-actions {
-    gap: 12px;
-  }
-  .scene-intro h1 {
-    font-size: 48px;
-  }
-  .count {
-    max-width: 210px;
-  }
-  .stage {
-    min-height: 640px;
+  .dock-visit {
+    grid-column: auto;
   }
 }
-@media (max-width: 700px) {
-  .hero-install {
-    display: inline-flex;
-    margin-top: 16px;
-  }
-  .playground {
-    min-height: 0;
-    grid-template-rows: auto auto auto;
-  }
-  .stage {
-    min-height: 0;
-  }
+@media (min-width: 701px) and (max-height: 950px) {
   .scene-intro {
-    position: relative;
-    inset: auto;
-    display: block;
-    padding: 24px 20px 0;
+    top: 16px;
   }
   .scene-intro h1 {
-    font-size: 32px;
-    line-height: 1.5;
+    font-size: 36px;
+    line-height: 1.1;
   }
   .hero-description {
     font-size: 14px;
     margin-top: 8px;
+    max-width: 540px;
   }
-  .count {
-    border: 0;
-    padding: 0;
-    margin-top: 20px;
-    max-width: none;
-    gap: 8px;
-    align-items: baseline;
+}
+@media (min-width: 1201px) and (min-height: 720px) and (max-height: 849px) {
+  .scene-intro {
+    top: 8px;
   }
-  .count > span {
-    font-size: 14px;
-  }
-  .count strong {
+  .scene-intro h1 {
     font-size: 32px;
   }
-  .count small {
-    font-size: 14px;
+  .scene-intro h1 br {
+    display: none;
   }
-  .count p {
-    font-size: 12px;
-    flex-basis: auto;
-    width: 100%;
+  .hero-description {
+    margin-top: 4px;
+    line-height: 1.4;
   }
-  .stage visitor-village {
+}
+@media (max-width: 700px) {
+  .playground {
+    grid-template-rows: 65px auto auto;
+    min-height: 0;
+    padding-bottom: 20px;
+  }
+  .stage {
+    min-height: 0;
+    background: #b4e3db;
+  }
+  .scene-intro {
     position: relative;
     inset: auto;
-    height: 340px;
-    margin-top: 0;
+    padding: 24px 20px 12px;
   }
-  .scene-bottom {
-    left: 12px;
-    right: 12px;
-    bottom: 40px;
-    gap: 8px;
-    align-items: flex-start;
-    flex-direction: column;
+  .scene-intro h1 {
+    font-size: 32px;
+    line-height: 1.35;
   }
-  .scene-hint {
-    font-size: 12px;
-    padding: 4px 8px;
+  .hero-description {
+    font-size: 14px;
+    margin-top: 10px;
   }
-  .interaction-status {
-    font-size: 12px;
-    padding: 6px 10px;
+  .hero-install {
+    display: inline-flex;
+    margin-top: 14px;
+  }
+  .playground[data-season='christmas'] .scene-intro :is(h1, .hero-description) {
+    color: var(--village-ink);
+  }
+  .world-wrap {
+    position: relative;
+    height: 390px;
+  }
+  .world-wrap visitor-village {
+    height: 100%;
+  }
+  .map-sign {
+    width: 136px;
+    font-size: 18px;
   }
   .village-dock {
-    margin: 0 12px 24px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
+    margin: 0 12px;
+    padding: 12px;
+    grid-template-columns: 1fr;
     gap: 12px;
+  }
+  .guide-dialogue {
+    border: 0;
+    padding: 0;
+    grid-template-columns: 44px 1fr auto;
+    column-gap: 8px;
+  }
+  #guide-portrait {
+    width: 44px;
+    height: 62px;
+    grid-row: auto;
+  }
+  .dialogue-copy {
+    font-size: 12px;
+    min-height: 0;
+  }
+  .guide-dialogue .button {
+    font-size: 12px;
+    padding: 8px;
+    min-width: 92px;
   }
   .season-buttons {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
-    width: 100%;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
   }
   .season-buttons button {
-    padding: 8px 2px;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 14px;
+    min-width: 0;
     min-height: 76px;
+    padding: 6px 2px;
+    font-size: 12px;
   }
   .season-buttons img {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
+  }
+  .dock-visit {
+    grid-column: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    padding-top: 12px;
+  }
+  .count {
+    gap: 5px;
+  }
+  .count strong {
+    font-size: 30px;
+  }
+  .count a {
+    font-size: 12px;
   }
   .dock-actions {
-    order: -1;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin: 0;
-    padding: 0 0 12px;
-    border-bottom: 1px solid #b9ac81;
+    justify-content: end;
   }
   .dock-actions .button {
-    font-size: 14px;
-    min-height: 48px;
     padding: 8px;
+    font-size: 12px;
+    flex: 1;
   }
-  .invite-action {
+  .demo-truth {
     grid-column: 1/-1;
+    text-align: center;
   }
   .home-content {
     padding: 40px 20px 0;
@@ -531,16 +661,65 @@ input[type='range'] {
   }
 }
 @media (max-width: 360px) {
-  .stage visitor-village {
-    height: 300px;
+  .world-wrap {
+    height: 340px;
+  }
+  .guide-dialogue {
+    grid-template-columns: 36px 1fr;
+  }
+  .guide-dialogue .button {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 4px;
+  }
+  #guide-portrait {
+    width: 36px;
+    height: 51px;
+    grid-row: 1/3;
+  }
+  .dock-visit {
+    grid-template-columns: 1fr;
+  }
+  .dock-actions {
+    justify-content: stretch;
+  }
+  .dock-actions .button {
+    flex: 1;
+  }
+  .count {
+    justify-content: center;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .season-buttons button,
-  .dock-actions button,
-  .install-action {
+  .map-landmark {
     transition:
-      background-color 140ms ease-out,
-      color 140ms ease-out;
+      transform 160ms ease-out,
+      background-color 120ms ease-out;
+  }
+  .season-buttons button,
+  .dock-actions button {
+    transition: background-color 140ms ease-out;
+  }
+}
+
+@media (min-width: 701px) {
+  .scene-intro h1 {
+    -webkit-text-stroke: 1px currentColor;
+  }
+}
+
+.village-dock #pause[aria-pressed='true'] img {
+  filter: brightness(0) invert(1);
+}
+
+@media (min-width: 701px) {
+  .playground:has(visitor-village[data-scene-state='fallback'])
+    .scene-intro
+    :is(h1, .hero-description),
+  .playground:has(visitor-village[data-scene-state='loading'])
+    .scene-intro
+    :is(h1, .hero-description),
+  .playground:not([data-world-ready='true']) .scene-intro :is(h1, .hero-description) {
+    color: var(--village-cream);
   }
 }

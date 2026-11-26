@@ -392,3 +392,16 @@ Execution ledger: mobile CTA and optional-address regressions failed against bas
 Final refinement acceptance: final production build with completed media passes all90 Chrome tests in55.4s. Unit151, release14, formatting, artwork validation and type/build pass. Fresh independent whole-branch review found no material defect; actual media hashes and8decoded samples were checked. [Review and evidence](reviews/refinement-2026-11-26.md). Local production preview is http://127.0.0.1:5208/; public service remains unchanged pending a separate PR/deployment request.
 
 Refinement PR follow-up: the user requested a pull request after local acceptance. Commit and push the verified scope to feat/refined-village-experience and open against main. Merge and public deployment remain separate.
+
+## Playable map implementation
+
+- [x] User selected exact concept1 in the public comparison page.
+- [x] Inspect current service and define VV-MAP-001–007 and implementation plan.
+- [x] Fresh implementation-readiness review, targeted regressions and asset production.
+- [x] Optional service background presentation and real map/HUD navigation.
+- [x] Shared game-style installer, guide and interaction states.
+- [x] Full verification, visual comparison, independent review and public preview.
+
+Acceptance: unit157/157, release14/14, type/build/format and final Chrome100/100 pass. Public three-page/six-width matrix and interaction smoke pass. [Review and evidence](reviews/playable-map-2026-11-26.md). Working preview: https://playable-map.pixel-visitor-village.pages.dev/ . Production main remains46b3058; no commit/push/PR or promotion in this step. The original comparison gallery remains available.
+
+PR follow-up: the user requested a pull request after accepting the public preview. Commit and push the verified scope to `feat/playable-village-map` and open against `main`. Preserve the worktree for review; do not merge or promote production in this step.

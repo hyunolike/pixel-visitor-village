@@ -1,0 +1,100 @@
+{
+  "created": "2026-11-26",
+  "tool": "image_gen.imagegen (built-in default)",
+  "type": "Generated pixel terrain background plates",
+  "styleReference": "/Users/hyuno/.codex/generated_images/01a20dd3-dda2-7ad3-9bc3-4e9e31b44af9/exec-fc84ddbd-56ed-47cd-9f92-898aa4d2d1d0.png",
+  "alpha": "opaque",
+  "processing": "Original generated PNGs retained byte-for-byte under assets/concepts/map-20261126. Runtime copies encoded with installed cwebp -lossless -z 6. Decoded RGBA bytes and dimensions verified equal by Pillow reads. No color, palette, resampling or content changes.",
+  "assets": [
+    {
+      "season": "summer",
+      "path": "src/assets/map/landscape-summer.webp",
+      "raw": "assets/concepts/map-20261126/landscape-summer-raw.png",
+      "generatedSource": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-ad951fbd-86cb-4fa8-baf4-1fad3261b266.png",
+      "reference": "selected concept",
+      "prompt": "Use case: stylized-concept. Asset type: pixel-art terrain background plate for a live 2D browser village; landscape 1536x1024.\nThe reference image establishes ONLY visual pixel style and pastoral palette. Generate a NEW EMPTY TERRAIN PLATE, not an interface or village screenshot. Top 35 percent of frame clean mint sky #b4e3db, very few small cream pixel clouds at upper right only. Keep top-left sky perfectly quiet for overlaid HTML headings. Layered hazy sage hills at y32-43%; distant broadleaf pixel forest band ONLY around y36-48%. Below y50% a broad continuous flat walkable sunlit meadow #8bb56e. Central pale sand #ead4a0 horizontal ellipse plaza centered exactly x50%,y82%, radius35%width,8%height, connected to straight narrow sandy path x46-54% from y86% down through bottom. Very sparse 2-4px grass clusters, tiny daisies near lower OUTSIDE edges. Bright blue stream ONLY cropped at extreme left/right 0-3%width, tiny wooden bridges at edge; no river inside x4-96%,y52-94%. Empty flat terrain at x13%y63%, x87%y60%, x92.5%y81% for real houses later.\nStyle: crisp charming hand-painted pixel art, discrete square 2-4px clusters, restricted cohesive green palette, stepped silhouettes, no smooth gradients, no photorealism. Cohesive depth like retro pastoral RPG, original art.\nABSOLUTELY EMPTY playable meadow: NO houses, NO center tree, NO foreground trees in meadow, NO people/characters/animals, NO benches, NO lampposts, NO fences, NO signposts, NO logo/well, NO decorations/props. All those are real separate renderer objects and must not be painted. NO text, typography, UI, borders, buttons, watermark. No trees anywhere below y50%. Only background hills/forest, sky, grass and sand path. Opaque full canvas.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 991262,
+      "sha256": "007e06cc45c57af93d6c79477189c2634b6b5421696cabaa6c7c392d9975ae46",
+      "sourceSHA256": "f7f3b09c6b1f4c44864df8f4f81c28ace02054ff46a1f5957c5d23cf03096ab8",
+      "decodedRGBAEqual": true,
+      "rawPNGMatchesFormerRuntimePNG": true
+    },
+    {
+      "season": "spring",
+      "path": "src/assets/map/landscape-spring.webp",
+      "raw": "assets/concepts/map-20261126/landscape-spring-raw.png",
+      "generatedSource": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-20bd0d50-d822-40f9-99e4-741f00b58a60.png",
+      "reference": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-ad951fbd-86cb-4fa8-baf4-1fad3261b266.png",
+      "prompt": "Use case: lighting-weather. Asset type: production pixel-art game terrain background plate, 1536x1024.\nEDIT TARGET image is the approved SUMMER EMPTY TERRAIN PLATE. Change ONLY season to SPRING. Keep EXACT frame composition, all land boundaries, hills silhouettes, forest/tree positions, horizon, dimensions, central sand ellipse and stem path silhouette, water edges, tiny bridges and all empty spaces unchanged. Broadleaf distant forest gets subtle blush pink and cream blossoms mixed with fresh green, ONLY at forest band y36–49%. Fresh light-green meadow, mint blue sky, spring pastel color harmony. Keep plaza and path light warm sand. Very sparse flowers along outside lower edges only.\nKeep pixel art with crisp square clusters, no smoothing or realistic painted texture. Absolutely NO new foreground tree, houses, center tree, characters, people, animals, benches, fences, signs, lamps, decorations or logos. No foliage below y50% except existing sparse tiny grass patches/flowers. Walkable zone x4–96% y52–94% remains empty flat terrain. Top-left sky quiet for HTML heading. NO UI, words, text, borders, watermark. Opaque full canvas. This is a season repaint of exactly the same game map, never a new map.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1217570,
+      "sha256": "eb01ef34d1a0429b50a47c03702da971da397d2f3883480763284aadf86d116b",
+      "sourceSHA256": "6fe00f0561f1f8ba37e2c4859df478c07c6040743797ce42b81d8698f8273cf2",
+      "decodedRGBAEqual": true,
+      "rawPNGMatchesFormerRuntimePNG": true
+    },
+    {
+      "season": "autumn",
+      "path": "src/assets/map/landscape-autumn.webp",
+      "raw": "assets/concepts/map-20261126/landscape-autumn-raw.png",
+      "generatedSource": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-bfef8d02-2b99-459b-aeff-e39a9cb949f6.png",
+      "reference": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-ad951fbd-86cb-4fa8-baf4-1fad3261b266.png",
+      "prompt": "Use case: lighting-weather. Asset type: production pixel-art game terrain background plate, 1536x1024.\nEDIT TARGET is approved SUMMER EMPTY TERRAIN PLATE. Change ONLY season to AUTUMN. Keep EXACT frame composition, every land boundary, hills silhouettes, forest/tree positions, horizon, dimensions, central sand ellipse and stem path silhouette, water edges, tiny wooden bridges and all empty spaces unchanged. Distant broadleaf forest foliage y36–49% becomes golden ochre, rust orange, muted copper and warm yellow-green. Meadow becomes warm dry golden-green ochre grass, still sunlit and welcoming. Warm pale turquoise sky and softly muted warm sage hills; plaza and path remain light warm sand. Few tiny scattered leaf pixels may replace existing tiny grass patches but never add bulky details.\nKeep crisp square pixel-art clusters, no smoothing or realistic painted texture. Absolutely NO new foreground trees, houses, center tree, characters, people, animals, benches, fences, signs, lamps, decorations or logos. No tree foliage below y50%. Walkable zone x4–96% y52–94% remains empty flat terrain. Top-left sky quiet for HTML heading. NO UI, words, text, border, watermark. Opaque full canvas. Season repaint of exactly same game map, never a new map.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1260908,
+      "sha256": "3a14152e9c8c44092d14a4e0dcdcc5435e63a9d01c2addc93a248837db825357",
+      "sourceSHA256": "7cd3c3d477e165650c94889850f3b02c7a3642fd207420fe2763702ac6be39c3",
+      "decodedRGBAEqual": true,
+      "rawPNGMatchesFormerRuntimePNG": true
+    },
+    {
+      "season": "winter",
+      "path": "src/assets/map/landscape-winter.webp",
+      "raw": "assets/concepts/map-20261126/landscape-winter-raw.png",
+      "generatedSource": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-28f94288-aa48-4178-a4ec-80ed1f3252d0.png",
+      "reference": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-ad951fbd-86cb-4fa8-baf4-1fad3261b266.png",
+      "prompt": "Use case: lighting-weather. Asset type: production pixel-art game terrain background plate, 1536x1024.\nEDIT TARGET is approved SUMMER EMPTY TERRAIN PLATE. Change ONLY season to WINTER. Preserve EXACT frame composition, land boundary geometry, hills silhouettes, forest/tree positions and height, horizon, dimensions, central sand ellipse and stem path silhouette, water edges, tiny bridges and empty spaces. Forest band ONLY y36–49% becomes snow-dusted quiet distant firs and leafless snowy broadleaf silhouettes with same heights/density, cool subdued blue-green. Meadow below y50% covered in quiet flat powder snow pale blue-white with very sparse tiny pale blue snow pixels. Icy light blue sky, muted distant blue hills; existing plaza and stem path must stay visible warm pale sand, same contours and positions. Edge streams icy blue, wooden bridges carry light snow.\nKeep crisp pixel art square clusters, no smoothing or realistic texture, no falling snow. Absolutely NO added foreground trees, NO houses, NO center tree, NO snowmen, NO people/characters, animals, benches, fences, signs, lamps, decorations or logos. Nothing tall below y50%. Walkable zone x4–96% y52–94% remains clear flat snow. Top-left sky quiet for HTML heading. NO UI, words, text, borders, watermark. Opaque full canvas. Season repaint of exactly same game map, never a new map.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 993188,
+      "sha256": "bdd59582755e355e39534485916cc86fadc5db22230940272873468a716875a5",
+      "sourceSHA256": "208be67df07e0724b8adf6a0bcc3813035fe62bb3f5b5dab228f29bc133e44b5",
+      "decodedRGBAEqual": true,
+      "rawPNGMatchesFormerRuntimePNG": true
+    },
+    {
+      "season": "christmas",
+      "path": "src/assets/map/landscape-christmas.webp",
+      "raw": "assets/concepts/map-20261126/landscape-christmas-raw.png",
+      "generatedSource": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-ba40ea47-7e4f-44d5-8d7b-7a05c31b1fd0.png",
+      "reference": "/Users/hyuno/.codex/generated_images/01a21670-12c7-7ce2-ba77-154629b01c77/exec-ad951fbd-86cb-4fa8-baf4-1fad3261b266.png",
+      "prompt": "Use case: lighting-weather. Asset type: production pixel-art game terrain background plate, 1536x1024.\nEDIT TARGET is approved SUMMER EMPTY TERRAIN PLATE. Change ONLY season/time to CHRISTMAS WINTER DUSK. Preserve EXACT composition, land boundary geometry, hills silhouettes, forest/tree positions and height, horizon, dimensions, sand ellipse and stem path silhouette, water edges, wooden bridge positions and all empty spaces. Christmas season conveyed by cool dusk indigo-blue sky with a few tiny warm cream pixel stars mostly top-right, snow covered distant dark blue-green fir and broadleaf forest ONLY in existing band y36–49%, powder snow quiet blue-white field below y50%. Hills subdued dusty blue. Cozy twilight colors, map still readable and welcoming. Existing plaza and stem path must remain warm pale sandy cream, same contours/positions. Edge water cool icyblue and bridges lightly snow-covered.\nNO Christmas decorations or light strings anywhere, NO christmas tree in field, NO houses, NO center tree, NO snowmen, NO foreground trees, NO characters/people, animals, benches, fences, signs, lamps or logos; all real holiday decorations will be separate source-owned objects. No falling snow to obscure characters. No tall objects below y50%. Walkable x4–96%, y52–94% stays clear flat snow. Keep upper left sky quiet and uniformly blue for HTML headings. Crisp square pixel-art clusters, no smoothing, no gradients, no realistic painting. NO UI, words, text, borders, watermark. Opaque full canvas. A season repaint of exactly same map, never a new map.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1204088,
+      "sha256": "9b19b77a917209fc20010f9af2e70cb06caab6167b2f5f5583b10b0c1af9304b",
+      "sourceSHA256": "70bdf0305e4e283573064977f1329dea3c7d64ef7d269623bf57514d5710e6df",
+      "decodedRGBAEqual": true,
+      "rawPNGMatchesFormerRuntimePNG": true
+    }
+  ],
+  "codec": {
+    "encoder": "cwebp",
+    "options": "-lossless -z 6",
+    "verification": "Pillow convert RGBA read comparison of every decoded pixel; original raw PNG SHA-256 equals former runtime PNG"
+  }
+}

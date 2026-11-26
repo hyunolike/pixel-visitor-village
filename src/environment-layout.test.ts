@@ -40,3 +40,24 @@ describe('village scenery placement',()=>{
     for(const fence of fences)expect(fence.y).toBeGreaterThan(270*.94);
   });
 });
+
+it('uses map house anchors only when explicitly enabled',()=>{
+  const original=getVillageLayout(740,410);
+  expect(getVillageLayout(740,410,false)).toEqual(original);
+  const map=getVillageLayout(740,410,true);
+  const cottage=map.find(item=>item.kind==='cottage')!;
+  const shop=map.find(item=>item.kind==='shop')!;
+  expect(Math.abs(cottage.x-740*.22)).toBeLessThanOrEqual(.5);
+  expect(Math.abs(shop.x-740*.82)).toBeLessThanOrEqual(.5);
+  expect(Math.abs(cottage.y-410*.58)).toBeLessThanOrEqual(.5);
+  expect(map.filter(item=>!['cottage','shop','cabin'].includes(item.kind))).toEqual(original.filter(item=>!['cottage','shop','cabin'].includes(item.kind)));
+});
+it.each([[740,410],[195,195],[160,30],[1,1],[0,0]])('keeps map scenery inside %sx%s frames',(width,height)=>{
+  const w=Math.max(1,Math.round(width)),h=Math.max(1,Math.round(height));
+  for(const item of getVillageLayout(width,height,true)){
+    expect(item.x-item.width/2).toBeGreaterThanOrEqual(0);
+    expect(item.x+item.width/2).toBeLessThanOrEqual(w);
+    expect(item.y-item.height).toBeGreaterThanOrEqual(0);
+    expect(item.y).toBeLessThanOrEqual(h);
+  }
+});

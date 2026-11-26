@@ -5,6 +5,11 @@ import { setupServiceHeader } from './service-header';
 import { MAX_VISITORS, type Season } from './model';
 import { themes } from './themes';
 import type { VisitorVillage } from './visitor-village';
+import { setupMapScene, setupMapLandmarks } from './map-scene';
+import guidePortrait from './assets/map/guide.png';
+import pauseIcon from './assets/map/icons/pause.svg';
+import playIcon from './assets/map/icons/play.svg';
+import plusIcon from './assets/map/icons/plus.svg';
 import spring from './assets/cozy/tree-spring.png';
 import summer from './assets/cozy/tree-summer.png';
 import autumn from './assets/cozy/tree-autumn.png';
@@ -66,7 +71,10 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = /* HTML */ ` <articl
     >
       <div class="scene-intro">
         <div>
-          <h1 id="home-title">오늘의 방문이,<br />작은 마을로.</h1>
+          <h1 id="home-title">
+            작은 방문이<br />
+            마을이 되는 곳.
+          </h1>
           <p class="hero-description">티스토리 오늘 방문자 수를 픽셀 캐릭터로 보여줘요.</p>
           <a
             id="hero-install"
@@ -76,52 +84,80 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = /* HTML */ ` <articl
             >내 블로그에 설치하기</a
           >
         </div>
-        <div class="count">
-          <span>시연 방문</span><strong id="visitor-count">12<small>명</small></strong>
-          <p>실제 방문 정보가 아닌 체험용 숫자예요.</p>
-        </div>
       </div>
-      <visitor-village
-        interactive
-        repository-link="badge"
-        count="12"
-        season="summer"
-      ></visitor-village>
-      <p class="scene-loading" id="scene-loading" role="status">마을 문을 열고 있어요…</p>
-      <div class="scene-bottom">
-        <p class="scene-hint">캐릭터를 눌러 인사해 보세요.</p>
-        <p
-          id="interaction-status"
-          class="interaction-status"
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-        ></p>
+      <div class="world-wrap">
+        <visitor-village
+          data-map-scene
+          interactive
+          repository-link="badge"
+          count="12"
+          season="summer"
+        ></visitor-village>
+        <p class="scene-loading" id="scene-loading" role="status">마을 문을 열고 있어요…</p>
+        <div class="map-landmarks" aria-label="마을의 장소">
+          <a id="map-install" class="map-landmark" data-install href="./install.html?season=summer"
+            ><span class="map-sign">설치 작업실</span
+            ><span class="house-target" aria-hidden="true"></span
+          ></a>
+          <a id="map-guide" class="map-landmark" href="./docs/"
+            ><span class="map-sign">사용 안내</span
+            ><span class="house-target" aria-hidden="true"></span
+          ></a>
+        </div>
       </div>
     </section>
     <div id="village-controls" class="village-dock" tabindex="-1" aria-label="마을 조작">
-      <div class="season-buttons" role="group" aria-label="마을 계절">
-        ${seasons.map(({ value, label, image }) => `<button type="button" data-home-season="${value}" aria-pressed="${value === 'summer'}"><img src="${image}" alt="" width="32" height="32"><span>${label}</span></button>`).join('')}
-      </div>
-      <div class="dock-actions">
+      <div class="guide-dialogue">
+        <img id="guide-portrait" src="${guidePortrait}" alt="" width="60" height="84" />
+        <div class="dialogue-copy">
+          <p class="guide-intro">반가워요! 계절을 바꾸고<br />손님에게 인사해 보세요.</p>
+          <p
+            id="interaction-status"
+            class="interaction-status"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          ></p>
+        </div>
         <button id="greet" class="button dock-secondary" type="button" disabled>
-          손님에게 인사</button
-        ><button
-          id="pause"
-          class="button dock-secondary"
-          type="button"
-          aria-pressed="false"
-          disabled
-        >
-          움직임 멈추기</button
-        ><button id="invite" class="button invite-action" type="button" disabled>
-          손님 한 명 초대
+          손님에게 인사
         </button>
+      </div>
+      <div class="season-buttons" role="group" aria-label="마을 계절">
+        ${seasons.map(({ value, label, image }) => `<button type="button" data-home-season="${value}" aria-pressed="${value === 'summer'}"><img src="${image}" alt="" width="40" height="40"><span>${label}</span></button>`).join('')}
+      </div>
+      <div class="dock-visit">
+        <div class="count">
+          <a href="#visitor-settings" aria-label="시연 방문자 수 바꾸기">시연 방문</a
+          ><strong id="visitor-count">12<small>명</small></strong>
+        </div>
+        <div class="dock-actions">
+          <button
+            id="pause"
+            class="button dock-secondary"
+            type="button"
+            aria-pressed="false"
+            disabled
+          >
+            <img id="pause-icon" src="${pauseIcon}" alt="" width="20" height="20" /><span
+              class="pause-label sr-only"
+              >움직임 멈추기</span
+            ></button
+          ><button id="invite" class="button invite-action" type="button" disabled>
+            <img src="${plusIcon}" alt="" width="20" height="20" />손님 한 명 초대
+          </button>
+        </div>
+        <p class="demo-truth">실제 방문 정보가 아닌 체험용 숫자예요.</p>
       </div>
     </div>
   </section>
   <div class="home-content service-paper">
-    <section class="detail-settings" aria-labelledby="details-title">
+    <section
+      id="visitor-settings"
+      class="detail-settings"
+      tabindex="-1"
+      aria-labelledby="details-title"
+    >
       <div class="section-heading">
         <h2 id="details-title">방문자 수 바꿔보기</h2>
         <p>0명부터 5,000명까지 직접 입력할 수 있어요.</p>
@@ -260,6 +296,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = /* HTML */ ` <articl
 
 const find = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
 const widget = find<VisitorVillage>('visitor-village');
+setupMapScene(widget);
+setupMapLandmarks(widget, find('#map-install'), find('#map-guide'));
 const number = find<HTMLInputElement>('#visitors'),
   range = find<HTMLInputElement>('#visitor-range');
 const pause = find<HTMLButtonElement>('#pause'),
@@ -309,6 +347,8 @@ widget.addEventListener('village-error', (event) => {
   }
 });
 const sync = () => {
+  find('.playground').dataset.season = widget.season;
+  find('.playground').dataset.worldReady = String(widget.ready);
   find('#visitor-count').replaceChildren(
     String(widget.visitorCount),
     Object.assign(document.createElement('small'), { textContent: '명' }),
@@ -326,7 +366,10 @@ const sync = () => {
   const reduced = widget.motionReduced,
     paused = widget.hasAttribute('paused');
   pause.disabled = !widget.ready || reduced;
-  pause.textContent = reduced ? '모션 줄이기 적용' : paused ? '움직임 재생' : '움직임 멈추기';
+  const pauseLabel = reduced ? '모션 줄이기 적용' : paused ? '움직임 재생' : '움직임 멈추기';
+  pause.querySelector('.pause-label')!.textContent = pauseLabel;
+  pause.title = pauseLabel;
+  find<HTMLImageElement>('#pause-icon').src = reduced || paused ? playIcon : pauseIcon;
   pause.setAttribute('aria-pressed', String(reduced || paused));
   greet.disabled = !widget.ready || widget.visitorCount === 0;
   invite.disabled = !widget.ready || widget.visitorCount >= MAX_VISITORS;

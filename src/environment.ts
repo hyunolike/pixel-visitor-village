@@ -188,9 +188,9 @@ function ground(width:number,height:number,season:Season):HTMLCanvasElement{
 }
 
 /** Scenery is built only on resize/theme changes; no animation or visitor data here. */
-export function createVillageScene(width:number,height:number,season:Season):VillageScene{
+export function createVillageScene(width:number,height:number,season:Season,map=false):VillageScene{
   const terrain=ground(width,height,season);
-  const objects=getVillageLayout(terrain.width,terrain.height).map(layout=>{
+  const objects=getVillageLayout(terrain.width,terrain.height,map).map(layout=>{
     if(layout.kind==='fence')return {...layout,canvas:fence(layout.width,layout.height,season)};
     const source=layout.kind==='cottage'||layout.kind==='shop'||layout.kind==='cabin'?house(layout.kind,season):furniture(layout.kind,season);
     const scaled=surface(layout.width,layout.height);scaled.ctx.drawImage(source,0,0,layout.width,layout.height);

@@ -2,7 +2,7 @@ export const PROP_SIZES={cottage:[72,80],shop:[76,76],cabin:[62,68],lamp:[18,46]
 export type PropKind=keyof typeof PROP_SIZES;
 export interface VillageObjectLayout{kind:PropKind;x:number;y:number;width:number;height:number;variant:number}
 
-export function getVillageLayout(width:number,height:number):VillageObjectLayout[]{
+export function getVillageLayout(width:number,height:number,map=false):VillageObjectLayout[]{
   const w=Math.max(1,Math.round(width)),h=Math.max(1,Math.round(height));
   const scale=Math.min(1,Math.max(.62,w/520),Math.max(.5,h/260),w/160,h/100);
   const items:VillageObjectLayout[]=[];
@@ -14,9 +14,9 @@ export function getVillageLayout(width:number,height:number):VillageObjectLayout
     const bottom=Math.max(objectHeight,Math.min(h,Math.round(ny*h)));
     items.push({kind,x:left+objectWidth/2,y:bottom,width:objectWidth,height:objectHeight,variant});
   };
-  place('cottage',.13,.63);
-  place('shop',.87,.60);
-  if(w>=340)place('cabin',.925,.81,.92);
+  place('cottage',map?.22:.13,map?.58:.63);
+  place('shop',map?.82:.87,map?.58:.60);
+  if(w>=340)place('cabin',map?.91:.925,map?.74:.81,.92);
   place('lamp',.27,.755);place('lamp',.73,.755,1,1);
   if(w>=200){place('bench',.24,.88);place('bench',.77,.865,1,1);}
   if(w>=230)place('sign',.075,.81);

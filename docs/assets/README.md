@@ -126,3 +126,12 @@
 ## 마을 작업실 시안과 구현 비교
 
 `install-atelier-reference.png`는 사용자가 선택한 생성 시안이며 실제 제품 캡처와 구분한다. `install-atelier-desktop.png`(1487×1058)와 `install-atelier-mobile.png`(375×667)는 2026-11-25 로컬 production 빌드의 Chrome/DPR1 실제 화면이다. `install-atelier-comparison.png`와 `install-atelier-focus-settings.png`는 원본과 구현을 브라우저에 같은 크기로 나란히 배치한 비교 자료다. 미리보기24명은 시연 값이며 제품은 기존 실제 렌더러와 source 로고를 재사용한다. `install-rebuild-audit/`는 개편 전 공개 설치 화면의 조사 캡처다. [조사 출처](../features/visitor-village/reviews/install-rebuild-research-2026-11-25.md)와 [최종 시각 QA](../../design-qa.md)를 함께 본다.
+
+
+## 선택한 인터랙티브 마을 지도1안
+
+2026-11-26 선택 시안 원본은 `assets/concepts/map-20261126/design-reference.png`다. 실제 실행 캡처와 구분한다. 원본과 동일한1487×1058 CSS/DPR1에서 여름12명과 설치 집 hover 상태를 촬영했다. `playable-map/comparison-final.jpg`는 로컬 production, `comparison-public.jpg`는 공개 preview와 원본을 같은 입력에 나란히 배치한 비교다. `focus-{type,landmarks,hud}.png`는 글꼴과 건물/조작창을 원본 크기로 자른 비교다. `comparison-initial.png`는 수정 전 이력이다.
+
+`public-home-{source-state,paused,short}.png`는 https://playable-map.pixel-visitor-village.pages.dev/ 의 실제 Chrome 캡처다. `home-390.png`, `home-320.png`, `home-701.png`, `install-1487.png`, `docs-1487.png`, `install-390.png`, `docs-390.png`도 같은 공개 빌드에서 촬영했다. `seasons-{desktop,mobile}.jpg`는 실제5계절을 한 장으로 배치한 검토용 축소 시트다. 캔버스는 원래 캐릭터/집/나무/작은 티스토리 조형물을 렌더링하며 숫자는 시연용이다.
+
+`public-viewports.json`은3페이지×6너비의 오류/넘침/헤더 높이 결과, `public-smoke.json`은 실제 클릭/복사/키보드/정적 문서와 production 보존 결과다. [검토 기록](../features/visitor-village/reviews/playable-map-2026-11-26.md) 및 [시각 QA](../../design-qa.md)와 함께 본다. 이번 작업은 README 원본 썸네일과 소개 영상 파일을 변경하지 않았다.
