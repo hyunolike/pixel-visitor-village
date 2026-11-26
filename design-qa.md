@@ -1,3 +1,19 @@
+# Product refinement QA (2026-11-26)
+
+Final result: passed. Implementation, art/media, build, full browser acceptance and independent review complete.
+
+The selected pixel village is retained. Mobile installation now appears in the first viewport, optional blog-address input serves only the admin shortcut, secondary copy names the actual task, season controls have one owner and Christmas-only options stay contextual. Header geometry remains77px desktop/65px compact across home, installer and guide.
+
+Actual comparison: [390px before/after](docs/assets/refinement/before-after.png), [desktop home](docs/assets/refinement/home-desktop.png), [mobile installer](docs/assets/refinement/install-mobile.png), [generated code](docs/assets/refinement/code-mobile.png), [guide](docs/assets/refinement/docs-mobile.png). Production preview5208 captures use DPR1 at1440×1024,390×844 and320×850. All9 main captures have no page/console errors or horizontal overflow; compact translated menus remain anchored. Demo input is synthetic, not visitor identity or concurrent presence.
+
+Six artwork files retain their180px grid and thresholded silhouettes while using binary alpha and bounded palettes:16–27 colors for trees,11 for the monument. Their combined bytes fall88.6%. [Art inspection](docs/assets/refinement/art-seasons.png) and [actual five-season world crops](docs/assets/refinement/scene-seasons.png) were opened; full-page geometry is judged from the separate page captures. The small monument and real character family remain.
+
+The20-second intro now shows the current installer, tree brand and service fonts. [Scene sheet](docs/assets/refinement/video-contact.png), [actual metadata/hashes](docs/features/visitor-village/reviews/refinement-media.json) and the [full review](docs/features/visitor-village/reviews/refinement-2026-11-26.md) distinguish Codex adaptation from historical Claude Code execution. Eight final decoded samples were inspected. The17s forest transition covers one frame, intentionally within the0.10s allowance; no0.1s black segment was detected. The README top thumbnail is unchanged. The earlier media/hash preservation statements below describe earlier iterations only.
+
+Unit151/151, release14/14, formatting, asset validation and type/app/widget build pass. Final production Chrome90/90 passed in55.4s. Independent whole-branch review found no material defects. No commit/push/PR/deployment or real Tistory skin validation is claimed.
+
+---
+
 # Shared header correction QA (2026-11-26)
 
 final result: passed

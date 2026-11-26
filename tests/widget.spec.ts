@@ -9,6 +9,58 @@ const waitReady=async(page:Page)=> {
 };
 const state=async(page:Page)=>page.locator('visitor-village').first().evaluate((el:any)=>({count:el.visitorCount,season:el.season,people:el.getVisitors()}));
 
+test('mobile homepage exposes installation before scrolling and keeps one season picker',async({page})=>{
+  for(const width of [320,390]){
+    await page.setViewportSize({width,height:844});await page.goto('/');
+    const action=page.locator('#hero-install');await expect(action).toBeInViewport();
+    await expect(page.locator('.hero-description')).toContainText('티스토리');
+    await expect(page.locator('#season')).toHaveCount(0);await expect(page.locator('[data-home-season]')).toHaveCount(5);
+    await expect(page.locator('#season-effects')).toBeHidden();
+    await page.locator('[data-home-season=christmas]').click();await expect(page.locator('#season-effects')).toBeVisible();
+    await page.locator('[data-home-season=spring]').click();await expect(page.locator('#season-effects')).toBeHidden();
+    await action.click();await expect(page).toHaveURL(/install.html\?season=spring$/);
+    await expect(page.locator('input[name=season][value=spring]')).toBeChecked();
+  }
+});
+
+test('all installer languages create reusable code without an address and clear optional admin destinations',async({page,context})=>{
+  await context.grantPermissions(['clipboard-read','clipboard-write']);
+  await page.setViewportSize({width:320,height:850});
+  for(const locale of ['ko','en','ja','zh-CN']){
+    await page.goto(`/install.html?lang=${locale}&season=summer`);
+    await expect(page.locator('#blog-url')).not.toHaveAttribute('required');
+    await page.locator('#create-code').click();await expect(page.locator('#copy-title')).toBeFocused();
+    const emptyCode=await page.locator('#install-code').inputValue();expect(emptyCode).toContain('season="summer"');
+    await page.locator('#copy-code').click();expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe(emptyCode);
+    await expect(page.locator('#admin-link')).toBeHidden();await expect(page.locator('#normalized-blog')).toBeEmpty();
+    await expect(page.locator('#admin-pending')).toBeVisible();await expect(page.locator('#install-error')).toBeEmpty();
+    await page.locator('#blog-url').fill('example.tistory.com');await page.locator('#create-code').click();
+    await expect(page.locator('#install-code')).toHaveValue(emptyCode);await expect(page.locator('#admin-link')).toHaveAttribute('href','https://example.tistory.com/manage');
+    await expect(page.locator('#normalized-blog')).toContainText('example.tistory.com');
+    await page.locator('#blog-url').fill('');await expect(page.locator('#admin-link')).toBeHidden();
+    await expect(page.locator('#install-result')).toBeHidden();await page.locator('#create-code').click();
+    await expect(page.locator('#install-code')).toHaveValue(emptyCode);await expect(page.locator('#admin-link')).not.toHaveAttribute('href');
+    await expect(page.locator('#normalized-blog')).toBeEmpty();await expect(page.locator('#admin-pending')).toBeVisible();
+    await page.locator('#blog-url').fill('not-a-blog');await page.locator('#create-code').click();
+    await expect(page.locator('#install-error')).not.toBeEmpty();await expect(page.locator('#blog-url')).toBeFocused();
+    await expect(page.locator('#install-result')).toBeHidden();await expect(page.locator('#admin-link')).toBeHidden();
+    await page.locator('#blog-url').fill('');await page.locator('#create-code').click();await expect(page.locator('#install-code')).toHaveValue(emptyCode);
+    await expect(page.locator('#install-error')).toBeEmpty();
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(320);
+  }
+});
+
+test('optional admin address regeneration ignores an old copy and keeps blank-address fallback usable',async({page})=>{
+  await page.addInitScript(()=>Object.defineProperty(navigator,'clipboard',{value:{writeText:()=>new Promise<void>(resolve=>{(window as any).finishOldCopy=resolve;})}}));
+  await page.goto('/install.html?lang=en');await page.locator('#blog-url').fill('example.tistory.com');await page.locator('#create-code').click();
+  await page.locator('#copy-code').click();await page.locator('#blog-url').fill('');await page.locator('#create-code').click();
+  await page.evaluate(()=>(window as any).finishOldCopy());await expect(page.locator('#copy-state')).toBeEmpty();
+  await expect(page.locator('#admin-link')).toBeHidden();await expect(page.locator('#install-code')).toHaveValue(/count="\[##_count_today_##\]"/);
+  await page.evaluate(()=>{navigator.clipboard.writeText=()=>Promise.reject(new Error('denied'));});await page.locator('#copy-code').click();
+  await expect(page.locator('#copy-state')).toHaveText('Code selected. Use your keyboard’s copy shortcut.');
+  expect(await page.locator('#install-code').evaluate(el=>(el as HTMLTextAreaElement).selectionEnd-(el as HTMLTextAreaElement).selectionStart)).toBeGreaterThan(20);
+});
+
 test('service headers share geometry, menu order and responsive behavior across all pages',async({page})=>{
   for(const width of [320,390,700,701,1440]){
     await page.setViewportSize({width,height:850});
@@ -160,7 +212,7 @@ test('site pages connect the product explanation, live demo, installer and usage
   await expect(page.locator('.hero-description')).toContainText('오늘 방문자 수');
   await page.locator('.project-nav a[href="#demo"]').click();await expect(page).toHaveURL(/#demo$/);
   await expect(page.locator('visitor-village').first()).toBeInViewport();
-  await page.locator('#season').selectOption('spring');expect((await state(page)).season).toBe('spring');
+  await page.locator('[data-home-season=spring]').click();expect((await state(page)).season).toBe('spring');
   await page.locator('#home-install').click();await expect(page).toHaveURL(/install.html\?season=spring$/);
   await page.locator('#usage-docs-link').click();await expect(page).toHaveURL(/\/docs\/$/);
   await expect(page.getByRole('heading',{name:'마을 사용 문서',exact:true})).toBeVisible();
@@ -415,7 +467,7 @@ test('the demo remains within a 320px screen and controls change real state',asy
   await page.setViewportSize({width:320,height:850});await waitReady(page);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
   const canvas=await page.locator('visitor-village canvas').boundingBox();expect(canvas!.width).toBeLessThanOrEqual(320);
-  await page.getByLabel('나무 꾸미기',{exact:true}).selectOption('autumn');
+  await page.locator('[data-home-season=autumn]').click();
   expect((await state(page)).season).toBe('autumn');
   await page.getByLabel('시연 방문자 수',{exact:true}).fill('37');
   expect((await state(page)).count).toBe(37);
@@ -638,7 +690,7 @@ test('the installer only adds automatic refresh after an explicit choice',async(
   await page.goto('/install.html?lang=ko');
   const option=page.locator('#install-refresh');
   await expect(option).not.toBeChecked();
-  await page.getByLabel('티스토리 주소',{exact:true}).fill('hyunolike.tistory.com');
+  await page.getByLabel('블로그 주소 (선택)',{exact:true}).fill('hyunolike.tistory.com');
   await page.locator('#create-code').click();
   expect(await page.getByLabel('티스토리 설치 코드',{exact:true}).inputValue()).not.toContain('refresh-interval');
   await page.locator('#advanced-settings summary').click();
@@ -756,7 +808,7 @@ test('the distribution module loads from a different blog origin',async({page})=
 test('the installer generates deployed code and an owner admin link without claiming installation',async({page,context})=>{
   await context.grantPermissions(['clipboard-read','clipboard-write']);
   await page.goto('/install.html?lang=ko');
-  await page.getByLabel('티스토리 주소',{exact:true}).fill('example.tistory.com/entry/hello');
+  await page.getByLabel('블로그 주소 (선택)',{exact:true}).fill('example.tistory.com/entry/hello');
   await page.locator('#create-code').click();
   const code=await page.getByLabel('티스토리 설치 코드',{exact:true}).inputValue();
   expect(code).toContain(`src="${appOrigin()}/widget/visitor-village.js"`);
@@ -765,7 +817,7 @@ test('the installer generates deployed code and an owner admin link without clai
   await expect(page.getByText('주소 입력만으로 설치되지는 않습니다.',{exact:false})).toBeVisible();
   await page.getByRole('button',{name:'코드 복사',exact:true}).click();
   expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe(code);
-  await page.getByLabel('티스토리 주소',{exact:true}).fill('javascript:alert(1)');
+  await page.getByLabel('블로그 주소 (선택)',{exact:true}).fill('javascript:alert(1)');
   await expect(page.getByLabel('티스토리 설치 코드',{exact:true})).toBeHidden();
   await page.locator('#create-code').click();
   await expect(page.getByRole('alert')).not.toBeEmpty();
@@ -806,21 +858,23 @@ test('installation languages preserve the generated code, selected season and fo
   await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
 });
 
-for (const [lang, heading, emptyError] of [
-  ['ko', '내 블로그에, 작은 마을 하나.', '티스토리 주소를 입력해 주세요.'],
-  ['en', 'A little village, at home on your blog.', 'Enter your Tistory blog address.'],
-  ['ja', 'あなたのブログに、小さな村を。', 'Tistoryのブログアドレスを入力してください。'],
-  ['zh-CN', '给你的博客，添一座小村庄。', '请输入 Tistory 博客地址。'],
+for (const [lang, heading, invalidError, unsafeError] of [
+  ['ko', '블로그에 마을 설치하기', '올바른 블로그 주소를 입력해 주세요. 예: myblog.tistory.com', '계정 정보나 포트가 없는 http 또는 https 블로그 주소를 사용해 주세요.'],
+  ['en', 'Install your village', 'Enter a valid blog address, such as myblog.tistory.com.', 'Use an HTTP or HTTPS blog address without account details or a port.'],
+  ['ja', 'ブログに村を設置', '正しいブログアドレスを入力してください。例：myblog.tistory.com', 'アカウント情報やポート番号を含まないHTTPまたはHTTPSのアドレスを使用してください。'],
+  ['zh-CN', '把村庄放到博客中', '请输入有效的博客地址，例如 myblog.tistory.com。', '请使用不含账号信息或端口号的 HTTP 或 HTTPS 博客地址。'],
 ] as const) {
   test(`installer ${lang} translates validation and fits a 320px screen`, async ({page}) => {
     await page.setViewportSize({width: 320, height: 780});
     await page.goto(`/install.html?lang=${lang}`);
     await expect(page.getByRole('heading', {level: 1})).toHaveText(heading);
-    await page.locator('#create-code').click();
-    await expect(page.locator('#install-error')).toHaveText(emptyError);
+    await page.locator('#blog-url').fill('http://%');await page.locator('#create-code').click();
+    await expect(page.locator('#install-error')).toHaveText(invalidError);
     await expect(page.locator('#blog-url')).toBeFocused();
     await expect(page.locator('#blog-url')).toHaveAttribute('aria-invalid', 'true');
-    await page.locator('#blog-url').fill('example.tistory.com');
+    await page.locator('#blog-url').fill('https://user:secret@example.com');await page.locator('#create-code').click();
+    await expect(page.locator('#install-error')).toHaveText(unsafeError);
+    await page.locator('#blog-url').fill('');
     await page.locator('#create-code').click();
     await expect(page.locator('#copy-title')).toBeFocused();
     expect(await page.locator('#install-code').inputValue()).toContain('count="[##_count_today_##]"');
@@ -862,9 +916,10 @@ test('installer translates existing errors and survives blocked storage', async 
     Storage.prototype.setItem = () => { throw new Error('blocked'); };
   });
   await page.goto('/install.html?lang=en');
+  await page.locator('#blog-url').fill('http://%');
   await page.locator('#create-code').click();
   await page.locator('#locale-select').selectOption('zh-CN');
-  await expect(page.locator('#install-error')).toHaveText('请输入 Tistory 博客地址。');
+  await expect(page.locator('#install-error')).toHaveText('请输入有效的博客地址，例如 myblog.tistory.com。');
   await page.locator('#blog-url').fill('https://user:secret@example.com');
   await page.locator('#create-code').click();
   await expect(page.locator('#install-error')).toHaveText('请使用不含账号信息或端口号的 HTTP 或 HTTPS 博客地址。');
@@ -1071,7 +1126,8 @@ test('design polish keeps readable brand and controls across installation and im
     await page.goto('/install.html?lang=ko');const installMark=await metrics();
     await page.goto('/');const homeMark=await metrics();expect(parseFloat(homeMark.width)).toBeGreaterThanOrEqual(parseFloat(installMark.width));expect(parseFloat(homeMark.height)).toBeGreaterThanOrEqual(parseFloat(installMark.height));
     await expect(page.locator('.brand-mark')).toHaveAttribute('src',/tree-summer/);
-    for(const control of ['#pause','#season','#visitors']) expect(await page.locator(control).evaluate(el=>el.getBoundingClientRect().height)).toBe(48);
+    for(const control of ['#pause','#visitors']) expect(await page.locator(control).evaluate(el=>el.getBoundingClientRect().height)).toBe(48);
+    expect((await page.locator('[data-home-season=summer]').boundingBox())!.height).toBeGreaterThanOrEqual(48);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
     if(width===1440)await page.screenshot({path:testInfo.outputPath('demo-dark-desktop.png'),fullPage:true});
   }
@@ -1121,7 +1177,7 @@ test('atelier desktop prioritizes a large live village beside concise season set
   await page.setViewportSize({width:1487,height:1058});
   await page.goto('/install.html?lang=ko');
   await page.waitForFunction(()=>(document.querySelector('#preview-village') as any)?.ready);
-  await expect(page.locator('#page-title')).toHaveText('내 블로그에, 작은 마을 하나.');
+  await expect(page.locator('#page-title')).toHaveText('블로그에 마을 설치하기');
   await expect(page.locator('.intro-copy p')).toHaveText('오늘 방문자 수만큼 픽셀 캐릭터가 마을에 모여요.');
   const settings=await page.locator('#setup').boundingBox(),preview=await page.locator('.preview-panel').boundingBox();
   expect(preview!.x).toBeGreaterThan(settings!.x+settings!.width-1);

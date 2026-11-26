@@ -1,7 +1,19 @@
 import './install.css';
 import { setupServiceHeader } from './service-header';
-import { buildInstallSnippet, InstallError, normalizeBlogUrl, type InstallErrorCode } from './install-model';
-import { LOCALE_STORAGE_KEY, messages, normalizeLocale, resolveLocale, saveLocale, type TextKey } from './install-i18n';
+import {
+  buildInstallSnippet,
+  InstallError,
+  normalizeBlogUrl,
+  type InstallErrorCode,
+} from './install-model';
+import {
+  LOCALE_STORAGE_KEY,
+  messages,
+  normalizeLocale,
+  resolveLocale,
+  saveLocale,
+  type TextKey,
+} from './install-i18n';
 import { SEASONS, type Season } from './model';
 import type { VisitorVillage } from './visitor-village';
 
@@ -22,10 +34,18 @@ const retry = find<HTMLButtonElement>('#preview-retry');
 const pause = find<HTMLButtonElement>('#preview-pause');
 const navigation = find<HTMLElement>('#project-navigation');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-let locale = resolveLocale(location.search, () => localStorage.getItem(LOCALE_STORAGE_KEY), navigator.languages);
-const requestedSeason=new URLSearchParams(location.search).get('season');
-let selectedSeason: Season=SEASONS.includes(requestedSeason as Season)?requestedSeason as Season:'christmas';
-document.querySelectorAll<HTMLInputElement>('input[name="season"]').forEach(input=>{input.checked=input.value===selectedSeason;});
+let locale = resolveLocale(
+  location.search,
+  () => localStorage.getItem(LOCALE_STORAGE_KEY),
+  navigator.languages,
+);
+const requestedSeason = new URLSearchParams(location.search).get('season');
+let selectedSeason: Season = SEASONS.includes(requestedSeason as Season)
+  ? (requestedSeason as Season)
+  : 'christmas';
+document.querySelectorAll<HTMLInputElement>('input[name="season"]').forEach((input) => {
+  input.checked = input.value === selectedSeason;
+});
 let origin = '';
 let errorCode: InstallErrorCode | 'unexpectedError' | undefined;
 let copyStatus: 'copySuccess' | 'copyFallback' | undefined;
@@ -47,10 +67,11 @@ function renderResultState() {
   find('#refresh-enabled').hidden = !refresh.checked;
   find('#refresh-warning').hidden = !refresh.checked;
   const description = refresh.checked ? 'refresh-help refresh-warning' : 'refresh-help';
-  if (refresh.getAttribute('aria-describedby') !== description) refresh.setAttribute('aria-describedby', description);
+  if (refresh.getAttribute('aria-describedby') !== description)
+    refresh.setAttribute('aria-describedby', description);
   find('#copy-step').hidden = installState === 'pristine';
   const currentStep = installState !== 'ready' ? '1' : copyStatus === 'copySuccess' ? '3' : '2';
-  document.querySelectorAll<HTMLElement>('[data-install-step]').forEach(step => {
+  document.querySelectorAll<HTMLElement>('[data-install-step]').forEach((step) => {
     if (step.dataset.installStep === currentStep) step.setAttribute('aria-current', 'step');
     else step.removeAttribute('aria-current');
   });
@@ -58,7 +79,8 @@ function renderResultState() {
 
 function renderPreviewText() {
   const t = messages[locale];
-  find('#preview-message').textContent = previewState === 'loading' ? t.loading : previewState === 'failed' ? t.previewError : '';
+  find('#preview-message').textContent =
+    previewState === 'loading' ? t.loading : previewState === 'failed' ? t.previewError : '';
   retry.hidden = previewState !== 'failed';
   pause.disabled = previewState !== 'ready' || reducedMotion.matches;
   find('#pause-label').textContent = paused ? t.resume : t.pause;
@@ -75,16 +97,20 @@ function renderLocale() {
   navigation.setAttribute('aria-label', t.navigationLabel);
   find('.install-progress').setAttribute('aria-label', t.stepsLabel);
   language.value = locale;
-  document.querySelectorAll<HTMLElement>('[data-i18n]').forEach(element => {
+  document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((element) => {
     element.textContent = t[element.dataset.i18n as TextKey];
   });
-  document.querySelectorAll<HTMLElement>('[data-season]').forEach(element => {
+  document.querySelectorAll<HTMLElement>('[data-season]').forEach((element) => {
     element.textContent = t.seasons[element.dataset.season as Season];
   });
   result.setAttribute('aria-label', t.resultLabel);
   find('#menu-original').hidden = locale === 'ko';
   find('#normalized-blog').textContent = origin ? t.originNote(origin) : '';
-  error.textContent = errorCode ? errorCode === 'unexpectedError' ? t.unexpectedError : t.errors[errorCode] : '';
+  error.textContent = errorCode
+    ? errorCode === 'unexpectedError'
+      ? t.unexpectedError
+      : t.errors[errorCode]
+    : '';
   copyState.textContent = copyStatus ? t[copyStatus] : '';
   if (preview) preview.labels = t.village;
   renderResultState();
@@ -119,7 +145,13 @@ function syncActionFocus() {
   if (document.activeElement === address) formAction.dataset.editing = 'true';
   else if (document.activeElement !== createCode) delete formAction.dataset.editing;
 }
-document.addEventListener('pointerdown', () => { pointerActive = true; }, true);
+document.addEventListener(
+  'pointerdown',
+  () => {
+    pointerActive = true;
+  },
+  true,
+);
 const finishPointer = () => {
   pointerActive = false;
   requestAnimationFrame(syncActionFocus);
@@ -127,8 +159,10 @@ const finishPointer = () => {
 document.addEventListener('pointerup', finishPointer, true);
 document.addEventListener('pointercancel', finishPointer, true);
 document.addEventListener('focusin', syncActionFocus);
-form.addEventListener('focusout', () => { requestAnimationFrame(syncActionFocus); });
-form.addEventListener('change', event => {
+form.addEventListener('focusout', () => {
+  requestAnimationFrame(syncActionFocus);
+});
+form.addEventListener('change', (event) => {
   const input = event.target;
   if (!(input instanceof HTMLInputElement)) return;
   if (input.name === 'season') {
@@ -140,28 +174,29 @@ form.addEventListener('change', event => {
 
 language.addEventListener('change', () => {
   locale = normalizeLocale(language.value) ?? 'ko';
-  saveLocale(locale, value => localStorage.setItem(LOCALE_STORAGE_KEY, value));
+  saveLocale(locale, (value) => localStorage.setItem(LOCALE_STORAGE_KEY, value));
   const url = new URL(location.href);
   url.searchParams.set('lang', locale);
   history.replaceState(history.state, '', url);
   renderLocale();
 });
 
-form.addEventListener('submit', event => {
+form.addEventListener('submit', (event) => {
   event.preventDefault();
   clearResult();
   try {
-    const blog = normalizeBlogUrl(address.value);
+    const blog = address.value.trim() ? normalizeBlogUrl(address.value) : undefined;
     const moduleUrl = new URL('./widget/visitor-village.js', location.href).href;
     code.value = buildInstallSnippet(moduleUrl, selectedSeason, refresh.checked);
-    origin = blog.origin;
-    admin.href = blog.adminUrl;
-    admin.hidden = false;
+    origin = blog?.origin ?? '';
+    admin.hidden = !blog;
+    if (blog) admin.href = blog.adminUrl;
+    else admin.removeAttribute('href');
     result.hidden = false;
     installState = 'ready';
     find<HTMLDetailsElement>('#install-instructions').open = true;
     find('#code-pending').hidden = true;
-    find('#admin-pending').hidden = true;
+    find('#admin-pending').hidden = Boolean(blog);
     errorCode = undefined;
     address.removeAttribute('aria-invalid');
     renderLocale();
@@ -224,11 +259,13 @@ async function loadPreview() {
       stage.setAttribute('aria-busy', 'false');
       renderPreviewText();
     });
-    preview.addEventListener('village-error', event => {
-      if ((event as CustomEvent<{attribute: string}>).detail.attribute === 'renderer') failed();
+    preview.addEventListener('village-error', (event) => {
+      if ((event as CustomEvent<{ attribute: string }>).detail.attribute === 'renderer') failed();
     });
     stage.append(preview);
-  } catch { failed(); }
+  } catch {
+    failed();
+  }
 }
 
 pause.addEventListener('click', () => {
@@ -236,7 +273,9 @@ pause.addEventListener('click', () => {
   preview?.toggleAttribute('paused', paused);
   renderPreviewText();
 });
-retry.addEventListener('click', () => { void loadPreview(); });
+retry.addEventListener('click', () => {
+  void loadPreview();
+});
 reducedMotion.addEventListener('change', renderPreviewText);
 renderLocale();
 setupServiceHeader();

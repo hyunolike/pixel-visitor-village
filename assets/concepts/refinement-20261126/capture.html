@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>capture harness</title>
+<style>
+  @font-face{font-family:PVVUI;src:url('/media-fonts/pretendard-variable-1.3.9.woff2')}html,body{margin:0;background:#123b3e;overflow:hidden;font-family:PVVUI,sans-serif;--font-ui:PVVUI,sans-serif}
+  visitor-village{position:fixed;left:0;top:0;width:var(--w,1280px);height:var(--h,720px)}
+</style>
+<script>
+  // Deterministic randomness for the product's social + cameo models (seeded mulberry32).
+  (()=>{let a=Number(new URLSearchParams(location.search).get('seed')||7)>>>0;
+    Math.random=()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};})();
+  // Video-time timers: the widget's 3s notice timer advances with captured frames, not wall time.
+  (()=>{const realSet=window.setTimeout.bind(window),realClear=window.clearTimeout.bind(window);
+    const virtual=new Map();let next=1;window.__videoNow=0;
+    window.setTimeout=(fn,delay,...args)=>{if(delay===3000){const id=-(next++);virtual.set(id,{due:window.__videoNow+delay,fn,args});return id;}return realSet(fn,delay,...args);};
+    window.clearTimeout=id=>{if(typeof id==='number'&&id<0){virtual.delete(id);return;}realClear(id);};
+    window.__advanceTimers=ms=>{window.__videoNow+=ms;for(const [id,t] of [...virtual]){if(t.due<=window.__videoNow){virtual.delete(id);t.fn(...t.args);}}};})();
+</script>
+</head>
+<body>
+<script type="module">
+  import '/widget/visitor-village.js';
+  const params=new URLSearchParams(location.search);
+  const w=Number(params.get('w')||1280),h=Number(params.get('h')||720);
+  document.documentElement.style.setProperty('--w',w+'px');document.documentElement.style.setProperty('--h',h+'px');
+  const el=document.createElement('visitor-village');
+  el.setAttribute('paused','');
+  el.setAttribute('count',params.get('count')||'0');
+  el.setAttribute('season',params.get('season')||'christmas');
+  const ready=new Promise(r=>el.addEventListener('village-ready',r,{once:true}));
+  document.body.append(el);
+  const dt=1/30;const started=new WeakMap();let frame=0;
+  // CSS transitions inside the widget's shadow root follow video time too.
+  const syncAnimations=()=>{for(const a of el.shadowRoot.getAnimations()){if(!started.has(a)){started.set(a,frame);a.pause();}a.currentTime=(frame-started.get(a))*1000*dt;}};
+  window.cap={
+    ready:()=>ready.then(()=>document.fonts.ready).then(()=>true),
+    step(n=1){for(let i=0;i<n;i++){frame++;el.model.step(dt);el.view.cameo.step(dt);window.__advanceTimers(1000*dt);}el.view.renderOnce();syncAnimations();return frame;},
+    setCount(c){el.setAttribute('count',String(c));el.view.renderOnce();syncAnimations();},
+    setSeason(s){el.setAttribute('season',s);},
+    // Schedule the product's own cameo: zero its countdown so the next step spawns a guest via its seeded RNG.
+    spawnCameo(){el.view.cameo.remaining=0;},
+    state(){const v=el.view,m=el.model,W=v.app.screen.width,H=v.app.screen.height;
+      const pairs=m.social.pairs.map(p=>{const a=m.visitors[p.firstId],b=m.visitors[p.secondId];return{age:+p.age.toFixed(2),emote:p.emote,ax:a.x,ay:a.y,bx:b.x,by:b.y,a:p.firstId,b:p.secondId};});
+      const g=v.cameo.guest;return{frame,W,H,pairs,guest:g?{kind:g.kind,x:g.x,y:g.y,age:+g.age.toFixed(2),duration:g.duration}:null,notice:el.shadowRoot.querySelector('.notice').textContent,open:el.shadowRoot.querySelector('.notice').dataset.open};},
+  };
+</script>
+</body>
+</html>

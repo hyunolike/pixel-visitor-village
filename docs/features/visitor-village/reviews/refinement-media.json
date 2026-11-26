@@ -1,0 +1,170 @@
+{
+  "description": "Codex adaptation of preserved brag-slim sources; no new Claude Code invocation.",
+  "prepared": {
+    "bundleSha256": "b8b201e5317e9902aaf1a1d0d8e37e942382ef36c78c83a018aa507faed6fae9",
+    "audioSha256": "85dfce4e21f94c998b4544cc945b1a8110fcd6039189e369da2ee806af6d2021",
+    "audioBaselineCommit": "5bea9201da858c200b0a81b4c965e3eec49edd5a",
+    "source": "assets/concepts/refinement-20261126",
+    "origin": "http://127.0.0.1:5208"
+  },
+  "probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "mime_codec_string": "avc1.640028",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 1920,
+        "coded_height": 1080,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 40,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 307200,
+        "duration": "20.000000",
+        "bit_rate": "1721958",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "600",
+        "extradata_size": 47,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "encoder": "Lavc63.1.102 libx264"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "mime_codec_string": "mp4a.40.2",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 1024,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 960000,
+        "duration": "20.000000",
+        "bit_rate": "196767",
+        "nb_frames": "939",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler"
+        }
+      }
+    ],
+    "format": {
+      "filename": "public/media/intro.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "20.000000",
+      "size": "4820604",
+      "bit_rate": "1928241",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf63.1.102"
+      }
+    }
+  },
+  "files": {
+    "public/media/intro.mp4": {
+      "bytes": 4820604,
+      "sha256": "fe6d491b8459a763c486adecfc3690ba5e254a2c4c81796285ea7320d112fa82"
+    },
+    "public/media/intro-poster.jpg": {
+      "bytes": 304491,
+      "sha256": "0e1cf603504ca37182e6b689e36a4ddcffbbe063bd2e152c5dac9ddd9246522a"
+    },
+    "docs/assets/intro-preview.gif": {
+      "bytes": 3039635,
+      "sha256": "4e0a2490ce163c45e496b3b6f2d2b69a91fc86072a4803682c62a05915762bdd"
+    }
+  },
+  "blackSegments": [],
+  "decodedFrames": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14.5,
+    17,
+    19.5
+  ],
+  "music": "Sascha Ende — Happy Beats (Business Moves Vol.10), CC BY4.0; existing mixed audio reused."
+}

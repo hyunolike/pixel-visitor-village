@@ -26,7 +26,7 @@ Tistoryブログの今日の訪問者数と同じ数のキャラクターが集�
 
 ## 設置
 
-1. [設置画面](https://pixel-visitor-village.pages.dev/install?lang=ja)でブログURLと季節を選び、コードをコピーします。
+1. [設置画面](https://pixel-visitor-village.pages.dev/install?lang=ja)で季節を選び、コードをコピーします。ブログアドレスは管理画面へのリンクが必要な場合だけ入力します。
 2. スキンをバックアップし、Tistory管理の **꾸미기 → 스킨 편집 → HTML 편집** に貼り付けます。
 3. 実際のブログで訪問者数とモバイル表示を確認します。
 

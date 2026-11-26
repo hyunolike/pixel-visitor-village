@@ -14,7 +14,9 @@
     "build": "pnpm typecheck && vite build && vite build --config vite.widget.config.ts",
     "preview": "vite preview --host 127.0.0.1 --port 4178",
     "test:e2e": "playwright test",
-    "test:release": "node --test scripts/release/artifacts.test.mjs"
+    "test:release": "node --test scripts/release/artifacts.test.mjs",
+    "format:service": "prettier --write src/demo.ts src/install.ts src/install-i18n.ts src/service-header.ts src/demo.css src/install.css src/site-pages.css src/design-system.css src/service-chrome.css src/docs.css install.html docs/index.html",
+    "format:check": "prettier --check src/demo.ts src/install.ts src/install-i18n.ts src/service-header.ts src/demo.css src/install.css src/site-pages.css src/design-system.css src/service-chrome.css src/docs.css install.html docs/index.html"
   },
   "dependencies": {
     "pixi.js": "^8.0.0"
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@playwright/test": "^1.58.0",
     "@types/node": "^22.20.5",
+    "prettier": "3.10.1",
     "typescript": "^5.9.0",
     "vite": "^7.0.0",
     "vitest": "^3.2.0"

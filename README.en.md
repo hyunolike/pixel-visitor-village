@@ -26,7 +26,7 @@ Visitor counts in the video and demo are demonstration inputs.
 
 ## Installation
 
-1. Open the [installation helper](https://pixel-visitor-village.pages.dev/install?lang=en), enter your blog URL, choose a season and copy the code.
+1. Open the [installation helper](https://pixel-visitor-village.pages.dev/install?lang=en), choose a season and copy the code. A blog address is optional and only creates an admin shortcut.
 2. Back up your skin, then paste it in Tistory administration → **꾸미기 → 스킨 편집 → HTML 편집** (Appearance → Edit skin → Edit HTML).
 3. Check the count and mobile layout on your blog.
 

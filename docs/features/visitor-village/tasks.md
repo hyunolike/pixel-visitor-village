@@ -376,3 +376,19 @@ Unified-pages PR follow-up: the user requested a pull request on 2026-11-26. Com
 - [x] Independent review, visual comparison and local handoff. [Results](reviews/header-consistency-2026-11-26.md). New commit/push/deploy requires a user request.
 
 Header PR follow-up: the user requested a pull request on 2026-11-26. Commit and push the verified scope to fix/consistent-service-header and open against main. Keep merge and deployment separate.
+
+## 2026-11-26 Product refinement
+
+- [x] Audit current public pages, generated-code behavior, source, artwork and video; user authorized improvements.
+- [x] Define VV-REFINE-001–007 and [implementation plan](refinement-plan.md).
+- [x] Independent implementation-readiness review and targeted failing regressions. Four material plan gaps (write boundary, runnable media recipe, legacy test migration and optional-address copying) were clarified and the fresh reviewer rechecked them as ready.
+- [x] Primary installation action, optional domain/admin behavior, concrete copy and single season control.
+- [x] Runtime art refinement and current-design introduction media.
+- [x] Consolidate/format service styles and source; update public docs and provenance.
+- [x] Full verification, visual/media inspection, independent final review and local preview. No commit/push/deployment in this step.
+
+Execution ledger: mobile CTA and optional-address regressions failed against baseline; after implementation, all8 targeted behavior/locale cases passed. After CSS consolidation,10/11 focused layout/keyboard/contrast checks passed; the remaining assertion used the intentionally replaced title and was migrated. Unit151/151, release tooling14/14, type/app/widget build, service-format checks and the full90-test Chrome run pass. The first generated summer-tree edit was rejected for remaining gradients. The user explicitly authorized deterministic Python/Pillow pixel/palette/alpha finishing in the asynchronous reply; processing began only after that authorization. Asset validation first reproduced14,272 partial-alpha pixels in summer; the finishing pipeline now enforces binary alpha, bounded palette and identical visible silhouettes for all six assets. Current media capture is refreshed after the final asset build.
+
+Final refinement acceptance: final production build with completed media passes all90 Chrome tests in55.4s. Unit151, release14, formatting, artwork validation and type/build pass. Fresh independent whole-branch review found no material defect; actual media hashes and8decoded samples were checked. [Review and evidence](reviews/refinement-2026-11-26.md). Local production preview is http://127.0.0.1:5208/; public service remains unchanged pending a separate PR/deployment request.
+
+Refinement PR follow-up: the user requested a pull request after local acceptance. Commit and push the verified scope to feat/refined-village-experience and open against main. Merge and public deployment remain separate.
