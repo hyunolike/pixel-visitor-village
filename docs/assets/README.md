@@ -1,5 +1,13 @@
 # README 이미지와 화면 캡처
 
+## 2026-11-26 서비스 정리와 픽셀 마감
+
+[변경 전후](refinement/before-after.png)는 같은390×844px, DPR1의 실제 Chrome 화면이다. [홈](refinement/home-desktop.png), [설치](refinement/install-desktop.png), [모바일 설치](refinement/install-mobile.png), [사용 문서](refinement/docs-mobile.png)는 현재 로컬 production 빌드다. 방문 수는 시연 입력이며 실제 방문자 기록이 아니다.
+
+사용자가 허용한 Pillow 방식으로 기존180px 나무5종과 조형물의 색상과 투명도를 정리했다. 공간 리샘플링 없이 기존 실루엣을 유지했고 색상 수는 나무16~27개, 조형물11개다. [원본과 마감본](refinement/art-seasons.png), [실제 다섯 계절](refinement/scene-seasons.png), [측정과 해시](../../assets/concepts/cozy/refinement-20261126/exports.json)를 보존한다. 계절 비교 이미지는 위젯 영역의 미술 검토용 크롭이며 페이지 전체 레이아웃 비교는 홈 화면을 사용한다.
+
+소개 영상은 보존된 brag 편집 소스를 Codex에서 갱신한 버전이다. 실제 현재 설치 화면과 픽셀 에셋, 자체 제공 글꼴을 사용한다. 새 Claude Code 실행으로 설명하지 않는다. [장면표](refinement/video-contact.png), [재현 소스](../../assets/concepts/refinement-20261126/README.md), [현재 영상 출처](../features/visitor-village/intro-media.md)를 따른다. 아래 미디어 설명은 이전 제작 이력이다. README 상단 소개 썸네일과 네 언어 체험 이미지 버튼은 이번에 변경하지 않았다.
+
 ## 서비스 글꼴
 
 제목과 브랜드는 Neo둥근모 v1.600, 본문과 조작 UI는 Pretendard Variable v1.3.9를 자체 제공한다. 원본 WOFF2를 수정하지 않았으며 [출처와 OFL 전문](../../public/fonts/README.md)을 함께 보존한다. [PC 화면](typography/home-1440-viewport.png), [모바일 화면](typography/home-375-viewport.png), [한국어 설치](typography/install-ko-375.png), [일본어 설치](typography/install-ja-320.png), [중국어 설치](typography/install-zh-CN-320.png)는 실제 빌드의 Chrome 캡처다. [검증 데이터](typography/result.json)에 실제 사용 글꼴과 네 언어/폭 결과가 있다. 기존 README 상단 썸네일과 소개 영상은 변경하지 않는다.

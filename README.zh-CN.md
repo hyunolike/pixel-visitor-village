@@ -26,7 +26,7 @@
 
 ## 安装
 
-1. 在[安装页面](https://pixel-visitor-village.pages.dev/install?lang=zh-CN)输入博客地址，选择季节并复制代码。
+1. 在[安装页面](https://pixel-visitor-village.pages.dev/install?lang=zh-CN)选择季节并复制代码。仅在需要管理页面快捷链接时输入博客地址。
 2. 备份当前皮肤，在Tistory管理中打开 **꾸미기 → 스킨 편집 → HTML 편집** 并粘贴代码。
 3. 在实际博客中检查访客数和手机布局。
 

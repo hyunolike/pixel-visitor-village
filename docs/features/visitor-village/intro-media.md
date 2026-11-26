@@ -3,7 +3,22 @@
 2026-11-20 요청: “claude code로 brag 스킬 사용해 썸네일, 소개 영상 바로 재생되게 추가해줘”.
 
 
-## 현재 버전: Claude Code brag 재제작
+## 현재 버전: 서비스 디자인 반영 (2026-11-26)
+
+보존된 brag-slim 편집 소스를 Codex에서 갱신했다. 현재 production 빌드의 실제 마을과 설치 화면을 다시 캡처했고 나무 브랜드 이미지, Neo둥근모 제목과 Pretendard 본문을 반영했다. 새 Claude Code 실행은 하지 않았다. 아래 Claude Code 제작 기록은 이전 버전의 이력이다.
+
+주소를 비워 둔 상태에서 여름을 선택하고 코드를 생성하는 실제 설치 동작을 담았다. 방문 수0→24와 캐릭터 인사, 크리스마스 손님, 다섯 계절, 설치와 마무리의20초 구성이다. 실제 티스토리 스킨에 설치한 영상은 아니며 방문 수는 시연 입력이다.
+
+- MP4:1920×1080,30fps,600프레임,20.000초,H.264/AAC,4,820,604bytes.
+- SHA-256:`fe6d491b8459a763c486adecfc3690ba5e254a2c4c81796285ea7320d112fa82`.
+- 포스터는 정착된 f585이며 첫 프레임만 교체했다. 전체600프레임은 유지했다.
+- GIF:7초,720×405px,12fps. 첫 포스터를 지나0.0667초부터 추출했다.
+- 기존 Git 기준 영상5bea920…에서 AAC 트랙을 추출해 재인코딩 없이 재사용했다. Sascha Ende의 Happy Beats(Business Moves Vol.10), CC BY4.0과 기존 CC0효과음 출처를 유지한다. 새 음원 다운로드나 유료 생성, 내레이션은 없다.
+- [실행 가능한 소스와 명령](../../../assets/concepts/refinement-20261126/README.md), [실제 장면표](../../assets/refinement/video-contact.png), [규격과 파일 해시](reviews/refinement-media.json).
+
+FFmpeg 전체 검은 화면 검사에서0.1초 이상 구간이 없었다. 완성 파일의0/3/6/9/12/14.5/17/19.5초를 디코딩해 확인했다. 검수는 로컬 production 화면이며 공개 사이트 반영에는 별도 배포가 필요하다. README 상단 썸네일은 그대로 유지했다.
+
+## 이전 버전: Claude Code brag 재제작
 
 사용자의 명시적 요청으로 Claude Code에서 `brag:brag --tone polished --duration 20 --format landscape`를 실제 실행했다. 모델 Claude Opus5.5는 공식 스킬의 분기 규칙에 따라 brag-slim으로 진행했다. 이번 영상은 HyperFrames 재촬영본이 아니라 Vite/Playwright/Chrome/FFmpeg로 새로 구성한20초 영상이다.
 

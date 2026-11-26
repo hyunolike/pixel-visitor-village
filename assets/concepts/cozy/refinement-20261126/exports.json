@@ -1,0 +1,164 @@
+{
+  "src/assets/cozy/tree-summer.png": {
+    "before": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 2586,
+      "partialAlphaPixels": 14272,
+      "visiblePixels": 13768,
+      "maskSha256": "6ffa083514aeb63442cb190d27582547759edc6d5dd8295812c0d97a08142b97",
+      "bytes": 32424,
+      "sha256": "2cd08fa9659acfa15275337599ae627772ef8ceaf5ca8bbe357c15ae5e851cf8"
+    },
+    "after": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 16,
+      "partialAlphaPixels": 0,
+      "visiblePixels": 13768,
+      "maskSha256": "6ffa083514aeb63442cb190d27582547759edc6d5dd8295812c0d97a08142b97",
+      "bytes": 3427,
+      "sha256": "4a1e4713cd08fe7a3b173f40e951491104eabbfad409df43274e3c14b7dca6d4"
+    },
+    "paletteLimit": 32
+  },
+  "src/assets/cozy/tree-spring.png": {
+    "before": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 2508,
+      "partialAlphaPixels": 14334,
+      "visiblePixels": 13863,
+      "maskSha256": "a9c4531e5aa3e7f9e12d8fe33195ec94a1500cf5609636456f4fd4f0a7570305",
+      "bytes": 33072,
+      "sha256": "c83b60486c7288a49a5bc367da64b36f849507dfa11801476c2f4c424e1cfbdf"
+    },
+    "after": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 16,
+      "partialAlphaPixels": 0,
+      "visiblePixels": 13863,
+      "maskSha256": "a9c4531e5aa3e7f9e12d8fe33195ec94a1500cf5609636456f4fd4f0a7570305",
+      "bytes": 4037,
+      "sha256": "d53c882be7b8570f9f1c28924f1b1f3da262809185effad0d7d98fd8f0abad11"
+    },
+    "paletteLimit": 32
+  },
+  "src/assets/cozy/tree-autumn.png": {
+    "before": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 4885,
+      "partialAlphaPixels": 16262,
+      "visiblePixels": 15768,
+      "maskSha256": "0fe9cfec7dd1fcd8091c5c61fc6bc2644ec4eb018ce2aa2b6f99b03b44a4efd4",
+      "bytes": 39421,
+      "sha256": "6977d4c0563d4809e0add03f9be8305ab887a9c1e596c86e6529c8ff551c50f0"
+    },
+    "after": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 16,
+      "partialAlphaPixels": 0,
+      "visiblePixels": 15768,
+      "maskSha256": "0fe9cfec7dd1fcd8091c5c61fc6bc2644ec4eb018ce2aa2b6f99b03b44a4efd4",
+      "bytes": 5108,
+      "sha256": "5f093d60fcd34901af26a1be530be37a087bf5fa7bd001d68c25c2af9bed000a"
+    },
+    "paletteLimit": 32
+  },
+  "src/assets/cozy/tree-winter.png": {
+    "before": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 3137,
+      "partialAlphaPixels": 14366,
+      "visiblePixels": 12597,
+      "maskSha256": "fdb7cf320c8a1fd54fb981d3fea6376316df437351ffda1ce379aed8de918757",
+      "bytes": 38702,
+      "sha256": "a352a0b5f7522ed465a77a45828c5c2043b3eb1a46ca7ba597d84b40b88346ec"
+    },
+    "after": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 16,
+      "partialAlphaPixels": 0,
+      "visiblePixels": 12597,
+      "maskSha256": "fdb7cf320c8a1fd54fb981d3fea6376316df437351ffda1ce379aed8de918757",
+      "bytes": 4634,
+      "sha256": "f074c6af8e461d0a331a60109377585b81072bfa06d8c0a31e003c5100e241ee"
+    },
+    "paletteLimit": 32
+  },
+  "src/assets/cozy/tree-christmas.png": {
+    "before": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 3962,
+      "partialAlphaPixels": 12592,
+      "visiblePixels": 11979,
+      "maskSha256": "d96eec9f526a1172510ad768a80cfaefd79fd334ba9dfbeef4bcda10ea34eed2",
+      "bytes": 33676,
+      "sha256": "fb3f983c4ee090274d84429f65c70ade9e9c419c94b8539a2a4dcc8ea384d41f"
+    },
+    "after": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 27,
+      "partialAlphaPixels": 0,
+      "visiblePixels": 11979,
+      "maskSha256": "d96eec9f526a1172510ad768a80cfaefd79fd334ba9dfbeef4bcda10ea34eed2",
+      "bytes": 4542,
+      "sha256": "7a6a0dfe51decb7f5cac675113fce8f66eeece0ab4672e0dd96297d8226cb9e1"
+    },
+    "paletteLimit": 32
+  },
+  "src/assets/cozy/tistory-monument.png": {
+    "before": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 2067,
+      "partialAlphaPixels": 14732,
+      "visiblePixels": 14576,
+      "maskSha256": "086c55ff17d08c797ed560b98817ec71041d1f4aaec7139f7f2f53dfe30b3608",
+      "bytes": 30708,
+      "sha256": "54ae39d5bfeac6f60e4b1655c4e579f279af79402ec43e9e0ed4313fb26d58b8"
+    },
+    "after": {
+      "size": [
+        180,
+        180
+      ],
+      "visibleColors": 11,
+      "partialAlphaPixels": 0,
+      "visiblePixels": 14576,
+      "maskSha256": "086c55ff17d08c797ed560b98817ec71041d1f4aaec7139f7f2f53dfe30b3608",
+      "bytes": 2025,
+      "sha256": "304895757b44b9c298899cbccb8bf3a29d14f11bfc62880a4fffe3c49c696565"
+    },
+    "paletteLimit": 16
+  }
+}
