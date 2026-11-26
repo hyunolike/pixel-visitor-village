@@ -24,6 +24,7 @@ describe('Tistory installation snippet',()=>{
     const code=buildInstallSnippet('https://village.example.com/widget/visitor-village.js','christmas');
     expect(code).toContain('src="https://village.example.com/widget/visitor-village.js"');
     expect(code).toContain('count="[##_count_today_##]"');
+    expect(code).toContain('\n  illustrated\n');
     expect(code).toContain('season="christmas"');expect(code).toContain('height: 420px');
     expect(code).not.toContain('count="24"');
   });

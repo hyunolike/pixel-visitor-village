@@ -5,7 +5,7 @@ import { setupServiceHeader } from './service-header';
 import { MAX_VISITORS, type Season } from './model';
 import { themes } from './themes';
 import type { VisitorVillage } from './visitor-village';
-import { setupMapScene, setupMapLandmarks } from './map-scene';
+import { setupMapLandmarks } from './map-scene';
 import guidePortrait from './assets/map/guide.png';
 import pauseIcon from './assets/map/icons/pause.svg';
 import playIcon from './assets/map/icons/play.svg';
@@ -296,7 +296,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = /* HTML */ ` <articl
 
 const find = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
 const widget = find<VisitorVillage>('visitor-village');
-setupMapScene(widget);
 setupMapLandmarks(widget, find('#map-install'), find('#map-guide'));
 const number = find<HTMLInputElement>('#visitors'),
   range = find<HTMLInputElement>('#visitor-range');

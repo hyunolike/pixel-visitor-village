@@ -274,3 +274,13 @@ The user requested implementation of the audit recommendations. The selected pix
 ## Playable map design system
 
 The user selected concept1 after reviewing the public gallery. VV-MAP-001–007 and acceptance are defined in [playable-map-plan.md](playable-map-plan.md). The request covers the home, existing installer and guide. Preserve the real widget and synthetic-demo truth, four installation languages, static guide and original README thumbnail.
+
+
+## Cohesive pixel artwork
+
+The user approved completing the remaining art consistency work. VV-ART-001–006 and concrete acceptance live in [cohesive-art-plan.md](cohesive-art-plan.md): shared palettes/grid/lighting across terrain, trees, well, native props/characters/holiday/emotes, with original identities and behavior retained.
+
+
+## Installed blog widget art — user correction
+
+The user clarified that artwork after blog installation is the target. VV-EMBED-ART-001–003 in [cohesive-art-plan.md](cohesive-art-plan.md) supersede the homepage-centric handoff: generated standalone code must reproduce selected illustrated art without service initializers, retain legacy unflagged behavior and be verified in a blog-body fixture on another origin.

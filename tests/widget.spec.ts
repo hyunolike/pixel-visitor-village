@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { createServer } from 'node:http';
+import { createHash } from 'node:crypto';
 const appOrigin=()=>new URL(test.info().project.use.baseURL!).origin;
 const waitReady=async(page:Page)=> {
   await page.goto('/');
@@ -14,6 +15,37 @@ const trackTerrainImages=async(page:Page)=>page.addInitScript(()=>{
   window.Image=new Proxy(Original,{construct(target,args){const image=Reflect.construct(target,args);(window as any).terrainImages.push(image);return image;}});
 });
 const terrainFinished=async(page:Page,season:string)=>page.waitForFunction(season=>(window as any).terrainImages.some((image:HTMLImageElement)=>image.src.includes(`landscape-${season}`)&&image.complete&&image.naturalWidth>0),season);
+
+test('illustrated widget clears appearance metadata when opted out while detached',async({page})=>{
+  await page.goto('/examples/blog.html');const widget=page.locator('visitor-village');await expect(widget).toHaveAttribute('data-scene-state','ready');
+  await widget.evaluate(el=>{el.remove();el.removeAttribute('illustrated');document.body.append(el);});
+  await expect(widget).toHaveAttribute('data-scene-state','default');await expect(widget).not.toHaveAttribute('data-scene-season');
+});
+
+test('generated blog code owns illustrated artwork cross-origin and matches the installation preview',async({page,context})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/install.html?lang=ko&season=summer');
+  await page.locator('#create-code').click();const code=await page.locator('#install-code').inputValue();expect(code).toContain('illustrated');
+  const preview=page.locator('visitor-village').first();await preview.evaluate(el=>{el.setAttribute('count','0');el.style.cssText='position:fixed;top:0;left:0;width:520px;height:420px;z-index:9999';});
+  await expect(preview).toHaveAttribute('data-scene-season','summer');
+  await expect.poll(()=>preview.locator('canvas').evaluate(el=>[(el as HTMLCanvasElement).width,(el as HTMLCanvasElement).height])).toEqual([260,210]);
+  const picture=async(p:Page)=>{
+    const png=await p.locator('visitor-village canvas').first().screenshot({path:test.info().outputPath(p===page?'preview.png':'blog.png'),style:'.notice,.repository,.status,.name{visibility:hidden!important}'});
+    const diversity=await p.evaluate(async base64=>{const image=new Image();image.src='data:image/png;base64,'+base64;await image.decode();const canvas=document.createElement('canvas');canvas.width=image.width;canvas.height=image.height;const ctx=canvas.getContext('2d')!;ctx.drawImage(image,0,0);const pixels=ctx.getImageData(0,0,image.width,image.height).data;const colors=new Set<string>();for(let i=0;i<pixels.length;i+=64)colors.add([...pixels.slice(i,i+4)].join(','));return colors.size;},png.toString('base64'));expect(diversity).toBeGreaterThan(16);return createHash('sha256').update(png).digest('hex');
+  };
+  const expected=await picture(page);
+  const server=createServer((_req,res)=>{res.setHeader('Content-Type','text/html');res.end(`<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0"><article><h1>블로그 본문</h1>${code.replace('[##_count_today_##]','0').replace('  illustrated\n','').replace('<visitor-village\n','<visitor-village illustrated\n')}</article></body></html>`);});
+  await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));const address=server.address() as {port:number};const blog=await context.newPage();const serviceAssets:string[]=[];blog.on('request',r=>{if(r.url().startsWith(appOrigin()+'/assets/'))serviceAssets.push(r.url());});
+  try{await trackTerrainImages(blog);await blog.emulateMedia({reducedMotion:'reduce'});await blog.setViewportSize({width:520,height:850});await blog.goto(`http://127.0.0.1:${address.port}`);const widget=blog.locator('visitor-village');await widget.evaluate(el=>{el.style.position='fixed';el.style.top='0';el.style.left='0';});await expect(widget).toHaveAttribute('data-scene-state','ready');await blog.waitForFunction(()=>(document.querySelector('visitor-village') as any)?.ready);expect(await picture(blog)).toBe(expected);expect(serviceAssets).toEqual([]);expect(await blog.evaluate(()=>(window as any).terrainImages.filter((im:HTMLImageElement)=>im.src.startsWith('data:image/webp')).length)).toBe(1);
+    await widget.evaluate(el=>el.removeAttribute('illustrated'));await expect(widget).toHaveAttribute('data-scene-state','default');expect(await picture(blog)).not.toBe(expected);await widget.evaluate(el=>el.setAttribute('illustrated',''));await expect(widget).toHaveAttribute('data-scene-state','ready');expect(await picture(blog)).toBe(expected);
+    for(const season of ['spring','summer','autumn','winter','christmas']){await widget.evaluate((el,season)=>el.setAttribute('season',season),season);await expect(widget).toHaveAttribute('data-scene-season',season);}
+    await widget.evaluate(el=>el.setAttribute('count','12'));expect(await widget.evaluate((el:any)=>el.visitorCount)).toBe(12);
+    await widget.evaluate(el=>el.removeAttribute('illustrated'));await expect(widget).toHaveAttribute('data-scene-state','default');
+    await widget.evaluate(el=>el.setAttribute('illustrated',''));await expect(widget).toHaveAttribute('data-scene-state','ready');
+    await widget.evaluate((el:any)=>{(window as any).blogVillage=el;el.remove();document.body.append(el);});await expect(blog.locator('visitor-village')).toHaveAttribute('data-scene-state','ready');await blog.waitForFunction(()=>(document.querySelector('visitor-village') as any)?.ready);
+    await blog.locator('visitor-village').evaluate(el=>{el.remove();el.removeAttribute('illustrated');document.body.append(el);});await expect(blog.locator('visitor-village')).toHaveAttribute('data-scene-state','default');await expect(blog.locator('visitor-village')).not.toHaveAttribute('data-scene-season');
+    await blog.locator('visitor-village').evaluate(el=>el.style.cssText='display:block;width:100%;height:420px');await blog.setViewportSize({width:320,height:850});expect(await blog.evaluate(()=>document.documentElement.scrollWidth)).toBe(320);
+  }finally{await blog.close();await new Promise<void>((resolve,reject)=>server.close(error=>error?reject(error):resolve()));}
+});
 
 test('playable map house signs track the scene and carry the selected season into installation',async({page})=>{
   for(const width of [320,390,1487]){

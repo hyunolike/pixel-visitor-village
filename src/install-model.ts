@@ -35,5 +35,5 @@ export function buildInstallSnippet(moduleUrl:string,season:string='christmas',r
   if(!['https:','http:'].includes(url.protocol)||url.username||url.password)throw new InstallError('module');
   if(!(SEASONS as readonly string[]).includes(season))throw new InstallError('season');
   const source=url.href.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-  return `<script type="module" src="${source}"></script>\n<visitor-village\n  count="[##_count_today_##]"\n  season="${season}"${refresh?'\n  refresh-interval="60"':''}\n  style="display: block; width: 100%; height: 420px;"\n></visitor-village>`;
+  return `<script type="module" src="${source}"></script>\n<visitor-village\n  count="[##_count_today_##]"\n  season="${season}"\n  illustrated${refresh?'\n  refresh-interval="60"':''}\n  style="display: block; width: 100%; height: 420px;"\n></visitor-village>`;
 }

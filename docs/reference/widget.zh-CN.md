@@ -20,10 +20,13 @@
 
 <visitor-village
   count="[##_count_today_##]"
+  illustrated
   season="christmas"
   style="display: block; width: 100%; height: 420px;"
 ></visitor-village>
 ```
+
+`illustrated` 显示与安装预览相同的季节画面。新代码默认包含此属性，删除后使用原有场景。
 
 Tistory 会在**皮肤 HTML 内**将 `[##_count_today_##]` 替换为今天的访客数。不支持将其放入外部 JavaScript 文件或普通文章正文。若发布后的页面仍保留该占位符，请检查代码在皮肤中的插入位置。使用 Tistory 自动手机皮肤时，还需确认是否要单独安装。
 
@@ -135,7 +138,7 @@ pnpm test:e2e  # 在 Chrome 中验证构建结果
 pnpm preview   # http://127.0.0.1:4178/
 ```
 
-演示和安装助手输出到 `dist/`，独立 ES 模块输出到 `dist/widget/visitor-village.js`。模块包含 PixiJS、内部样式和树木图片。可在预览服务器的 `/embed-example.html` 中检查独立页面嵌入效果。
+演示和安装助手输出到 `dist/`，独立 ES 模块输出到 `dist/widget/visitor-village.js`。模块包含 PixiJS、内部样式和树木图片。可在预览服务器的 `/examples/blog.html` / `/embed-example.html` 中检查独立页面嵌入效果。
 
 浏览器测试以无头模式运行已安装的 Chrome，手机测试使用模拟环境。若未安装 Chrome，请先安装，或调整 [playwright.config.ts](../../playwright.config.ts) 中的 `channel`。
 

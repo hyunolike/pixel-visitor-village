@@ -1,0 +1,151 @@
+{
+  "paletteSha256": "07315409c6379735271109ca160f6cb5859ca404b038dcfc0d60c027607efe8f",
+  "recipeSha256": "e59138780311ca3eeddad63b3091b0661dafd49acd259e41b8a9af6dfb4df45b",
+  "pillow": "12.3.0",
+  "webp": "1.6.0\nlibsharpyuv: 0.4.2",
+  "assets": {
+    "src/assets/map/landscape-spring.webp": {
+      "sourceSha256": "9a5fde643364c646683bfc96920367b7a694f8697c6e008ac6695364b5b9d177",
+      "sha256": "f01eb0606d17c262a6f4c118a65dd23581fae18f0d03da34a0ad4aa5a0de57ba",
+      "bytesBefore": 1487274,
+      "bytesAfter": 39296,
+      "size": [
+        1536,
+        1024
+      ],
+      "paletteLimit": 41,
+      "colors": 41,
+      "maskSha256": "852aad42795f401e21ded6e51fc392da9d94e2f386cacc08327046c319e903fc"
+    },
+    "src/assets/map/landscape-summer.webp": {
+      "sourceSha256": "87fa66c366b788ddb92247ceb225c34b23c86519f52ffad19cad01c0571179bf",
+      "sha256": "65efcf2cb0772d9669247026e54532d1fb62b373bb82b7ba3bc33ccfcc23879e",
+      "bytesBefore": 1213736,
+      "bytesAfter": 32058,
+      "size": [
+        1536,
+        1024
+      ],
+      "paletteLimit": 36,
+      "colors": 36,
+      "maskSha256": "852aad42795f401e21ded6e51fc392da9d94e2f386cacc08327046c319e903fc"
+    },
+    "src/assets/map/landscape-autumn.webp": {
+      "sourceSha256": "1a9872707f92d5d798bdcbd7a3d22036a50864b1d65a1147d7e76a4df3a016eb",
+      "sha256": "bf90a7e90eb8f486fe9324f81abd16c9ae389c6207b065c81e0c581586aaecef",
+      "bytesBefore": 1443710,
+      "bytesAfter": 27262,
+      "size": [
+        1536,
+        1024
+      ],
+      "paletteLimit": 41,
+      "colors": 38,
+      "maskSha256": "852aad42795f401e21ded6e51fc392da9d94e2f386cacc08327046c319e903fc"
+    },
+    "src/assets/map/landscape-winter.webp": {
+      "sourceSha256": "b739700d7856197ada584ccbcd0877e172e76c6c49cf1edd579720e4a4153877",
+      "sha256": "12e7c70cfe19101a6a9e1293458757e6bf464184296631939c4a5605614a957f",
+      "bytesBefore": 1302888,
+      "bytesAfter": 36668,
+      "size": [
+        1536,
+        1024
+      ],
+      "paletteLimit": 35,
+      "colors": 35,
+      "maskSha256": "852aad42795f401e21ded6e51fc392da9d94e2f386cacc08327046c319e903fc"
+    },
+    "src/assets/map/landscape-christmas.webp": {
+      "sourceSha256": "ad492f38b41547fd48875c03ec9fe1602deea93af95c6431db0102c5ec059953",
+      "sha256": "9c022c9ec76b1b837d864e1e4ffa4581408d4ef661110706f46dfff47aec0a81",
+      "bytesBefore": 1386694,
+      "bytesAfter": 36276,
+      "size": [
+        1536,
+        1024
+      ],
+      "paletteLimit": 36,
+      "colors": 36,
+      "maskSha256": "852aad42795f401e21ded6e51fc392da9d94e2f386cacc08327046c319e903fc"
+    },
+    "src/assets/cozy/tree-spring.png": {
+      "sourceSha256": "d53c882be7b8570f9f1c28924f1b1f3da262809185effad0d7d98fd8f0abad11",
+      "sha256": "ed265e0868cd04d34c26bac76aca9f7486bf7583668574f6687c69f4d0d1f8b6",
+      "bytesBefore": 4037,
+      "bytesAfter": 3636,
+      "size": [
+        180,
+        180
+      ],
+      "paletteLimit": 17,
+      "colors": 12,
+      "maskSha256": "a9c4531e5aa3e7f9e12d8fe33195ec94a1500cf5609636456f4fd4f0a7570305"
+    },
+    "src/assets/cozy/tree-summer.png": {
+      "sourceSha256": "4a1e4713cd08fe7a3b173f40e951491104eabbfad409df43274e3c14b7dca6d4",
+      "sha256": "fa2b8a784f073a2b5b283d0904b02bcaf85873870261e4f26563efcbbf42dbcb",
+      "bytesBefore": 3427,
+      "bytesAfter": 3066,
+      "size": [
+        180,
+        180
+      ],
+      "paletteLimit": 22,
+      "colors": 12,
+      "maskSha256": "6ffa083514aeb63442cb190d27582547759edc6d5dd8295812c0d97a08142b97"
+    },
+    "src/assets/cozy/tree-autumn.png": {
+      "sourceSha256": "5f093d60fcd34901af26a1be530be37a087bf5fa7bd001d68c25c2af9bed000a",
+      "sha256": "c4b3f8c0765731b108980fa7a9996080d4f415160eeace2223bde11d4e480f77",
+      "bytesBefore": 5108,
+      "bytesAfter": 4727,
+      "size": [
+        180,
+        180
+      ],
+      "paletteLimit": 21,
+      "colors": 12,
+      "maskSha256": "0fe9cfec7dd1fcd8091c5c61fc6bc2644ec4eb018ce2aa2b6f99b03b44a4efd4"
+    },
+    "src/assets/cozy/tree-winter.png": {
+      "sourceSha256": "f074c6af8e461d0a331a60109377585b81072bfa06d8c0a31e003c5100e241ee",
+      "sha256": "75289e961bc13ff8475892b8696af948504ed611a83f816c739aba67aafdf742",
+      "bytesBefore": 4634,
+      "bytesAfter": 4522,
+      "size": [
+        180,
+        180
+      ],
+      "paletteLimit": 17,
+      "colors": 13,
+      "maskSha256": "fdb7cf320c8a1fd54fb981d3fea6376316df437351ffda1ce379aed8de918757"
+    },
+    "src/assets/cozy/tree-christmas.png": {
+      "sourceSha256": "7a6a0dfe51decb7f5cac675113fce8f66eeece0ab4672e0dd96297d8226cb9e1",
+      "sha256": "bb5cd549f7946c77f87458ffe432bb16c76fbeb56cf11349d8bb1af8385fa7b6",
+      "bytesBefore": 4542,
+      "bytesAfter": 4173,
+      "size": [
+        180,
+        180
+      ],
+      "paletteLimit": 27,
+      "colors": 22,
+      "maskSha256": "d96eec9f526a1172510ad768a80cfaefd79fd334ba9dfbeef4bcda10ea34eed2"
+    },
+    "src/assets/cozy/tistory-monument.png": {
+      "sourceSha256": "304895757b44b9c298899cbccb8bf3a29d14f11bfc62880a4fffe3c49c696565",
+      "sha256": "20b69b3fef4567b78976afa38f8b3da38615d44cd592a96608ad5f6654e6423c",
+      "bytesBefore": 2025,
+      "bytesAfter": 1842,
+      "size": [
+        180,
+        180
+      ],
+      "paletteLimit": 18,
+      "colors": 8,
+      "maskSha256": "086c55ff17d08c797ed560b98817ec71041d1f4aaec7139f7f2f53dfe30b3608"
+    }
+  }
+}

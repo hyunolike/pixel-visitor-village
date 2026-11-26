@@ -1,0 +1,49 @@
+{
+  "baseline": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+  "files": {
+    "src/assets/map/landscape-spring.webp": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "9a5fde643364c646683bfc96920367b7a694f8697c6e008ac6695364b5b9d177"
+    },
+    "src/assets/map/landscape-summer.webp": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "87fa66c366b788ddb92247ceb225c34b23c86519f52ffad19cad01c0571179bf"
+    },
+    "src/assets/map/landscape-autumn.webp": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "1a9872707f92d5d798bdcbd7a3d22036a50864b1d65a1147d7e76a4df3a016eb"
+    },
+    "src/assets/map/landscape-winter.webp": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "b739700d7856197ada584ccbcd0877e172e76c6c49cf1edd579720e4a4153877"
+    },
+    "src/assets/map/landscape-christmas.webp": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "ad492f38b41547fd48875c03ec9fe1602deea93af95c6431db0102c5ec059953"
+    },
+    "src/assets/cozy/tree-spring.png": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "d53c882be7b8570f9f1c28924f1b1f3da262809185effad0d7d98fd8f0abad11"
+    },
+    "src/assets/cozy/tree-summer.png": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "4a1e4713cd08fe7a3b173f40e951491104eabbfad409df43274e3c14b7dca6d4"
+    },
+    "src/assets/cozy/tree-autumn.png": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "5f093d60fcd34901af26a1be530be37a087bf5fa7bd001d68c25c2af9bed000a"
+    },
+    "src/assets/cozy/tree-winter.png": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "f074c6af8e461d0a331a60109377585b81072bfa06d8c0a31e003c5100e241ee"
+    },
+    "src/assets/cozy/tree-christmas.png": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "7a6a0dfe51decb7f5cac675113fce8f66eeece0ab4672e0dd96297d8226cb9e1"
+    },
+    "src/assets/cozy/tistory-monument.png": {
+      "commit": "6bd61c39323d5eddbadf7bcb221f65e0dc8c9096",
+      "sha256": "304895757b44b9c298899cbccb8bf3a29d14f11bfc62880a4fffe3c49c696565"
+    }
+  }
+}

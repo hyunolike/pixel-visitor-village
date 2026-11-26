@@ -20,10 +20,13 @@
 
 <visitor-village
   count="[##_count_today_##]"
+  illustrated
   season="christmas"
   style="display: block; width: 100%; height: 420px;"
 ></visitor-village>
 ```
+
+`illustrated`はインストール画面と同じ季節の絵を表示します。新しいコードに含まれ、属性を削除すると従来の風景に戻ります。
 
 `[##_count_today_##]`は**TistoryのスキンHTML内で**今日の訪問者数に置換されます。外部JavaScriptファイルや通常の記事本文への配置には対応していません。公開ページにプレースホルダーが残る場合は、スキン内の挿入位置を確認してください。Tistoryの自動モバイルスキンを使う場合は、別途設置が必要かどうかも確認してください。
 
@@ -135,7 +138,7 @@ pnpm test:e2e  # ビルド結果をChromeで検証
 pnpm preview   # http://127.0.0.1:4178/
 ```
 
-デモと設置ヘルパーは`dist/`、独立ESモジュールは`dist/widget/visitor-village.js`に出力されます。モジュールにはPixiJS、内部スタイル、木の画像を含みます。プレビューサーバーの`/embed-example.html`で、別ページへの埋め込みを確認できます。
+デモと設置ヘルパーは`dist/`、独立ESモジュールは`dist/widget/visitor-village.js`に出力されます。モジュールにはPixiJS、内部スタイル、木の画像を含みます。プレビューサーバーの`/examples/blog.html` / `/embed-example.html`で、別ページへの埋め込みを確認できます。
 
 ブラウザーテストはインストール済みのChromeをヘッドレスで実行し、モバイルはエミュレーションで確認します。Chromeがない場合はインストールするか、[playwright.config.ts](../../playwright.config.ts)の`channel`を環境に合わせて変更してください。
 

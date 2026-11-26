@@ -4,15 +4,18 @@ import styles from './widget.css?inline';
 import { koreanDay, noticeForCount, type CountNotice, type CountSnapshot } from './visitor-notice';
 import { parseRefreshInterval, visitorRefresh, type RefreshResult } from './visitor-refresh';
 import { defaultVillageLabels, type VillageLabels } from './village-labels';
+import { setupMapScene } from './map-scene';
 
 interface PendingNotice {snapshot:CountSnapshot;notice:CountNotice}
 
 export class VisitorVillage extends HTMLElement {
-  static observedAttributes=['count','season','paused','glow','refresh-interval','interactive'];
+  static observedAttributes=['count','season','paused','glow','refresh-interval','interactive','illustrated','data-map-scene'];
   private greetingCursor=0;
   private model=new VillageModel();
   private view:VillageRenderer|undefined;
   private sceneBackdrop:HTMLImageElement|null=null;
+  private sceneCleanup:(()=>void)|undefined;
+  private sceneConnected=false;
   private frame:HTMLElement;
   private status:HTMLElement;
   private nameLabel:HTMLElement;
@@ -56,7 +59,7 @@ export class VisitorVillage extends HTMLElement {
       if(id!==undefined)this.greetVisitor(id);
     });
   }
-  /** Optional service presentation. The source is copied into instance-owned textures. */
+  /** Optional illustrated presentation. The source is copied into instance-owned textures. */
   setSceneBackdrop(source:HTMLImageElement|null):void {
     if(source&&(!source.complete||source.naturalWidth===0))return;
     this.sceneBackdrop=source;this.view?.setSceneBackdrop(source);
@@ -100,8 +103,13 @@ export class VisitorVillage extends HTMLElement {
     const attribute=this.view?.assetErrorAttribute;
     if(attribute)this.emit('village-error',{attribute,message:this.labels.assetWarning});
   }
+  private setupScene(){
+    if(this.sceneConnected&&this.isConnected&&!this.sceneCleanup&&(this.hasAttribute('illustrated')||this.hasAttribute('data-map-scene')))
+      this.sceneCleanup=setupMapScene(this);
+  }
 
   attributeChangedCallback(attribute:string,_previous:string|null,value:string|null) {
+    if(attribute==='illustrated'||attribute==='data-map-scene'){this.setupScene();return;}
     if(attribute==='count')visitorRefresh.invalidate(this.onRefresh);
     try {
       if(attribute==='count') {
@@ -128,6 +136,8 @@ export class VisitorVillage extends HTMLElement {
 
   connectedCallback() {
     const generation=++this.generation;
+    this.sceneConnected=true;
+    this.setupScene();
     this.visible=false;this.loadError='';this.showStatus();
     this.motion=matchMedia('(prefers-reduced-motion: reduce)');this.motion.addEventListener('change',this.onMotion);
     document.addEventListener('visibilitychange',this.onVisibility);
@@ -188,6 +198,7 @@ export class VisitorVillage extends HTMLElement {
       ?this.labels.today(current.snapshot.count,current.notice.delta):this.labels.recent(current.snapshot.count);
   }
   disconnectedCallback() {
+    this.sceneConnected=false;
     this.model.greeting=null;this.greetingCursor=0;
     this.model.social.reset();
     visitorRefresh.unsubscribe(this.onRefresh);
@@ -197,6 +208,7 @@ export class VisitorVillage extends HTMLElement {
     this.motion?.removeEventListener('change',this.onMotion);this.motion=undefined;
     document.removeEventListener('visibilitychange',this.onVisibility);
     this.view?.destroy();this.view=undefined;
+    this.sceneCleanup?.();this.sceneCleanup=undefined;
   }
 }
 if(!customElements.get('visitor-village'))customElements.define('visitor-village',VisitorVillage);

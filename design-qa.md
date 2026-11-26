@@ -1,3 +1,35 @@
+# Installed blog widget QA (2026-11-26, corrected target)
+
+final result: passed
+
+The user clarified the actual target: artwork shown inside a blog after installation. The earlier homepage-centric evidence below is historical. New generated code includes boolean `illustrated`; the standalone component owns the selected seasonal background and lifecycle. Existing manual unflagged embeds keep classic scenery. No service layout revision is part of this correction.
+
+Actual public [desktop](docs/assets/cohesive-art/blog-installed-1000.png), [390px](docs/assets/cohesive-art/blog-installed-390.png), [320px](docs/assets/cohesive-art/blog-installed-320.png) and five `blog-widget-*` captures use only the distributed widget inside a plain article. Summer/Christmas desktop and mobile examples were opened and inspected. All five seasons, counts0/24, zero horizontal overflow, no service asset requests and zero console/page errors pass publicly. The independent generated-code cross-origin compositor image matches the installer exactly, is nonblank and differs from the classic negative control. Selected-only image decode, opt-out, detach/reconnect and stale completion cases pass.
+
+Fresh focused review findings were fixed directly and covered by regressions. Unit164/164, release14/14, browser102/102, type/build/format/whitespace pass. All54 public files match local dist hashes; widget CORS/MIME/nosniff/404 pass. One immediate post-deploy public capture timed out waiting for readiness; a fresh anonymous run with error/request logging passed all three widths without code changes. Its transient cause is not claimed resolved. [Public capture record](docs/assets/cohesive-art/blog-capture.json), [files](docs/assets/cohesive-art/public-files.json), [review](docs/features/visitor-village/reviews/cohesive-art-2026-11-26.md).
+
+Handoff: https://cohesive-art.pixel-visitor-village.pages.dev/examples/blog (immutable https://bc8f9ef0.pixel-visitor-village.pages.dev/examples/blog). Preview branch only; production remains6bd61c3. No source commit/push/PR or production promotion. Thumbnail/video unchanged. Actual private Tistory skin installation remains unverified. Existing installed snippets need the new appearance flag after production integration to select the illustrated scene.
+
+---
+
+# Cohesive pixel art QA (2026-11-26)
+
+final result: passed
+
+The user requested consistency across the redesigned village art. Visual truth: the accepted playable-map composition, existing production6bd61c3 artwork and the authored style contract in docs/features/visitor-village/cohesive-art-plan.md. Native identities/animations stay; this is grid, palette, lighting and material finishing, not a new illustration set.
+
+**Matched comparison:** [before/after](docs/assets/cohesive-art/before-after.jpg), two1487×1058 CSS/DPR1 captures in one2974×1058 input, summer12/reduced motion/summer selection feedback, no resampling. [World detail](docs/assets/cohesive-art/focus-world.jpg), [192 native poses](docs/assets/cohesive-art/characters-comparison.png), [five-season props](docs/assets/cohesive-art/props-comparison.png) and [holiday/emotes](docs/assets/cohesive-art/emotes-comparison.png) compare actual sources together. [Desktop seasons](docs/assets/cohesive-art/seasons-desktop.jpg), [mobile seasons](docs/assets/cohesive-art/seasons-mobile.jpg), actual default summer/Christmas widgets and installer captures were inspected. These contact sheets resize only inspection copies. Public home/installer captures are saved with public- prefixes.
+
+**Iterations:** initial full view showed dense generated terrain against coarse outlined originals. The fixed seasonal grid/palette removes microtexture and softens outline/material mismatches. Neutral gray initially mapped violet and dark hair green; authored stone/dark-wood ramps and a RED→GREEN regression fix that. Fresh independent review identified actual medium/light skin collapse, default skyline loss and missing source-palette checks. Three actual face colors, per-style exposed back-hair highlights, distinct native sky/hill/forest ramps and261-source integration checks fix these. Source-color sky cleanup avoids the rejected fixed-row mountain cut; winter central snow avoids river-blue colors. Final captures follow all fixes. No actionable P0/P1/P2 finding remains.
+
+**Required fidelity surfaces:** typography remains locally hosted NeoDunggeunmo/Pretendard, with accepted weights/wrapping and readable labels. Spacing and shared77/65px header/layout are unchanged; all graphics occupy original dimensions/landmarks. Colors use shared warm olive/wood/cream ramps, protected red and distinct skin/season tones, with upper-left highlights. Image quality uses exact binary raster masks,261 unchanged native alpha/dimension signatures, zero opaque off-palette pixels and a strict2× background grid. All192 character poses and seasonal identity/eye/fruit details remain visible. Copy remains the truthful Tistory cumulative-count demo and the existing four-locale installer; no online identity claims or new marketing copy.
+
+**Evidence:** unit164/164, release14/14, type/service/widget build, formatting and whitespace checks pass. Final Chrome100/100 in1.3minutes includes four locales,320px, keyboard, reduced motion, image failure/retry, reconnect/shared ownership and no-JS docs. Eleven raster exports and the guide repeat byte-identically. Raster bytes6,858,075→193,526,97.18% reduction. All53 public files match local dist SHA256 and widget headers/404 pass. Public interaction smoke has no page/console errors. [Source checks](docs/assets/cohesive-art/native-check.json), [public files](docs/assets/cohesive-art/public-files.json), [public smoke](docs/assets/cohesive-art/public-smoke.json), [full review](docs/features/visitor-village/reviews/cohesive-art-2026-11-26.md).
+
+**Handoff:** https://cohesive-art.pixel-visitor-village.pages.dev/ (immutable a5f6e49d). Production remains6bd61c3. No source commit/push/PR or promotion; README thumbnail and video files unchanged. Actual Tistory installation remains unverified. The original silhouette/native-source choice is deliberate; if a different character family is later desired, that is a separate art direction. No deferred review finding remains.
+
+---
+
 # Playable village map QA (2026-11-26, selected concept1)
 
 final result: passed

@@ -20,10 +20,13 @@
 
 <visitor-village
   count="[##_count_today_##]"
+  illustrated
   season="christmas"
   style="display: block; width: 100%; height: 420px;"
 ></visitor-village>
 ```
+
+`illustrated`는 설치 미리보기와 같은 계절 그림을 표시합니다. 새 설치 코드에 포함되며, 속성을 제거하면 기존 기본 풍경을 사용합니다.
 
 `[##_count_today_##]`는 **티스토리 스킨 HTML에서** 오늘 방문자 수로 치환됩니다. 외부 JavaScript 파일이나 일반 글 본문에 넣는 방식은 지원하지 않습니다. 실제 페이지에 치환자가 그대로 보이면 스킨의 삽입 위치를 확인해야 합니다. 자동 모바일 스킨을 사용하는 경우에도 별도 적용 여부를 확인합니다.
 
@@ -147,7 +150,7 @@ pnpm test:e2e  # 빌드 결과를 Chrome에서 검증
 pnpm preview   # http://127.0.0.1:4178/
 ```
 
-`dist/`에 데모와 설치 도우미, `dist/widget/visitor-village.js`에 독립 ES 모듈이 생성됩니다. 모듈에는 PixiJS와 내부 스타일, 나무 이미지가 포함됩니다. 미리보기 서버의 `/embed-example.html`에서 별도 페이지 삽입을 확인할 수 있습니다.
+`dist/`에 데모와 설치 도우미, `dist/widget/visitor-village.js`에 독립 ES 모듈이 생성됩니다. 모듈에는 PixiJS와 내부 스타일, 나무·조형물과 다섯 계절 배경이 포함됩니다. `/examples/blog.html`에서 새 설치 코드의 삽입 모습을, `/embed-example.html`에서 기존 기본 풍경을 확인할 수 있습니다.
 
 브라우저 테스트는 설치된 Chrome을 headless로 실행하며 모바일은 에뮬레이션으로 확인합니다. Chrome이 없는 환경은 설치하거나 [playwright.config.ts](../../playwright.config.ts)의 `channel`을 조정합니다.
 

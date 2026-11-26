@@ -1,3 +1,4 @@
+import { fitArtPixels } from './art-palette.ts';
 import type { SocialEmote } from './social';
 export const SOCIAL_EMOTES=['dots','heart','spark'] as const;
 export const BUBBLE_WIDTH=18;
@@ -19,7 +20,7 @@ export function socialPixels(kind:SocialEmote):Uint8ClampedArray {
   if(kind==='spark'){
     const gold=[203,149,62,255];rect(8,2,2,8,gold);rect(5,5,8,2,gold);rect(7,4,4,4,gold);rect(8,5,2,2,[255,216,116,255]);
   }
-  return pixels;
+  return fitArtPixels(pixels);
 }
 export function getBubbleLayout(width:number,height:number,x:number,y:number) {
   const w=Math.max(1,width),h=Math.max(1,height),scale=Math.min(1,w/BUBBLE_WIDTH,h/BUBBLE_HEIGHT);

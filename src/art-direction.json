@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "ramps": {
+    "ink": ["#354b3e", "#47634d"],
+    "wood": ["#4c3c33", "#604b36", "#7d593c", "#9b7047", "#bc8c59", "#d6ac73", "#eccb92"],
+    "cream": ["#c8c9aa", "#e5dcba", "#fff0c7"],
+    "green": ["#365e43", "#4b754c", "#638d52", "#7fa65b", "#9fbc6f", "#bfce8b"],
+    "grass": ["#7e9f61", "#91af6b", "#a8bf79"],
+    "sky": ["#8bcac4", "#a3d8d0", "#b4e3db"],
+    "path": ["#cda668", "#e5bd80", "#f4d19a", "#ffe0ac"],
+    "water": ["#397387", "#5599aa", "#7cbdc5", "#b7d9d2"],
+    "coral": ["#a34f42", "#cd6555", "#e9876b", "#ff5a3e"],
+    "skin": ["#a86c55", "#c88b65", "#d7a27d", "#edc29a", "#f4d5b0", "#e8b88f"],
+    "lavender": ["#705c79", "#a282aa", "#c9aac8"],
+    "blue": ["#436974", "#68949d", "#a6c6c5"],
+    "pink": ["#98657f", "#bd859d", "#dfa9bc", "#f3c8cf", "#ffe0d9"],
+    "autumn": ["#894d35", "#b46c38", "#d68c40", "#edb25d", "#ffda8c"],
+    "snow": ["#719993", "#9bb8b0", "#c5d9cc", "#e1e8d5", "#f6f2db"],
+    "night": ["#273e59", "#354f76", "#4b6691", "#7186a0"],
+    "stone": ["#6c7567", "#939c85", "#b8bea4", "#d5d8c0"],
+    "nativeSkyline": [
+      "#10383c",
+      "#1b4b49",
+      "#2a6152",
+      "#43765c",
+      "#164846",
+      "#245a52",
+      "#336b57",
+      "#3f7452",
+      "#103b3d",
+      "#1b4c46",
+      "#275e4d",
+      "#346c4c",
+      "#283f3b",
+      "#405744",
+      "#59724c",
+      "#69804f",
+      "#214950",
+      "#366065",
+      "#4d7775",
+      "#628a7f"
+    ]
+  },
+  "objectRamps": [
+    "ink",
+    "wood",
+    "cream",
+    "green",
+    "coral",
+    "skin",
+    "lavender",
+    "blue",
+    "pink",
+    "autumn",
+    "snow",
+    "stone",
+    "nativeSkyline"
+  ],
+  "terrainRamps": {
+    "summer": ["ink", "wood", "cream", "green", "grass", "sky", "path", "water", "stone"],
+    "spring": ["ink", "wood", "cream", "green", "grass", "sky", "path", "water", "pink", "stone"],
+    "autumn": ["ink", "wood", "cream", "green", "grass", "sky", "path", "water", "autumn", "stone"],
+    "winter": ["ink", "wood", "cream", "blue", "sky", "path", "water", "snow", "stone"],
+    "christmas": ["ink", "wood", "cream", "blue", "path", "water", "snow", "night", "stone"]
+  },
+  "objectAssetRamps": {
+    "tree-summer": ["ink", "wood", "green", "coral", "cream"],
+    "tree-spring": ["ink", "wood", "pink", "cream"],
+    "tree-autumn": ["ink", "wood", "autumn", "coral", "cream"],
+    "tree-winter": ["ink", "wood", "snow", "cream"],
+    "tree-christmas": ["ink", "wood", "green", "coral", "autumn", "cream"],
+    "tistory-monument": ["ink", "snow", "cream", "coral", "stone"]
+  },
+  "terrainSky": {
+    "spring": "#b4e3db",
+    "summer": "#a3d8d0",
+    "autumn": "#b4e3db",
+    "winter": "#b4e3db",
+    "christmas": "#354f76"
+  }
+}

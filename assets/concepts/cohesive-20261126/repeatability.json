@@ -1,0 +1,9 @@
+{
+  "rasterExports": 11,
+  "guideExports": 1,
+  "byteIdenticalRerun": true,
+  "recipeSha256": "e59138780311ca3eeddad63b3091b0661dafd49acd259e41b8a9af6dfb4df45b",
+  "paletteSha256": "07315409c6379735271109ca160f6cb5859ca404b038dcfc0d60c027607efe8f",
+  "node": "v22.23.2",
+  "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers"
+}
