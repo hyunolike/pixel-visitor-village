@@ -10,6 +10,10 @@ import { BUBBLE_WIDTH, BUBBLE_HEIGHT, SOCIAL_EMOTES, socialPixels, getBubbleLayo
 import { getHolidayLayout, HolidayCameoModel, type HolidayKind } from './holiday-cameo';
 import { HOLIDAY_WIDTH, HOLIDAY_HEIGHT, holidayPixels } from './holiday-art';
 import { defaultVillageLabels, type VillageLabels } from './village-labels';
+import { loadEffectArt } from './effect-art';
+import fxMeta from './assets/effects/village-fx.json';
+import { VillageEffects, ambientParticles, effectFrame } from './village-effects';
+type EffectKind=keyof typeof fxMeta.effects;
 
 export class VillageRenderer {
   private artFailures=new Set<string>();
@@ -25,6 +29,13 @@ export class VillageRenderer {
   private compactAtlas:Texture|undefined;
   private glow=new Sprite();
   private weather=new Graphics();
+  private effects=new VillageEffects();
+  private effectLayer=new Container();
+  private effectAtlas:Texture|undefined;
+  private effectFrames:Partial<Record<EffectKind,Texture[]>>={};
+  private ambientSprites:Sprite[]=[];
+  private arrivalSprite=new Sprite();
+  private playing=false;
   private trees=new Map<Season,Texture>();
   private frames:Texture[][][]=[];
   private characterAtlas:Texture|undefined;
@@ -121,12 +132,37 @@ export class VillageRenderer {
       view.glowTexture=Texture.from(treeGlow());view.glow.texture=view.glowTexture;
       view.tree.anchor.set(.5,1);view.glow.anchor.set(.5);view.objects.sortableChildren=true;
       view.objects.addChild(view.tree,view.monument,view.glow);
-      view.app.stage.addChild(view.background,view.objects,view.weather);
+      view.effectLayer.eventMode='none';view.app.stage.addChild(view.background,view.objects,view.weather,view.effectLayer);
       view.app.canvas.setAttribute('role','img');frame.prepend(view.app.canvas);
       view.app.ticker.maxFPS=30;
-      view.app.ticker.add(ticker=>{if(view.dead)return;model.step(ticker.deltaMS/1000);view.cameo.step(ticker.deltaMS/1000);view.renderState();});
-      view.resize();return view;
+      view.app.ticker.add(ticker=>{if(view.dead)return;model.step(ticker.deltaMS/1000);view.cameo.step(ticker.deltaMS/1000);view.effects.step(ticker.deltaMS/1000);view.renderState();});
+      view.resize();void view.installEffects(isCurrent);return view;
     } catch(error) {view.destroy();throw error;}
+  }
+
+  /** Optional art never gates core readiness; late completions cannot revive a disposed renderer. */
+  private async installEffects(isCurrent:()=>boolean){
+    let atlas:Texture|undefined;
+    const frames:Partial<Record<EffectKind,Texture[]>>={},sprites:Sprite[]=[];
+    try{
+      const source=await loadEffectArt();
+      if(this.dead||!isCurrent())return;
+      const copy=surface(source.width,source.height);copy.ctx.drawImage(source,0,0);
+      atlas=Texture.from(copy.canvas);atlas.source.scaleMode='nearest';
+      for(const kind of Object.keys(fxMeta.effects) as EffectKind[])
+        frames[kind]=fxMeta.effects[kind].frames.map(f=>new Texture({source:atlas!.source,frame:new Rectangle(f.x,f.y,f.w,f.h)}));
+      for(let i=0;i<26;i++){const sprite=new Sprite();sprite.anchor.set(.5);sprite.visible=false;sprites.push(sprite);}
+      this.arrivalSprite.anchor.set(.5,40/64);this.arrivalSprite.visible=false;
+      this.effectLayer.addChild(...sprites,this.arrivalSprite);
+      this.effectAtlas=atlas;this.effectFrames=frames;this.ambientSprites=sprites;
+      this.renderOnce();
+    }catch{
+      for(const sprite of sprites){sprite.removeFromParent();sprite.destroy();}
+      this.arrivalSprite.removeFromParent();this.arrivalSprite.visible=false;
+      for(const textures of Object.values(frames))for(const texture of textures)texture.destroy();
+      atlas?.destroy(true);this.effectAtlas=undefined;this.effectFrames={};this.ambientSprites=[];
+      this.effects.clearBurst();this.renderOnce();
+    }
   }
 
   resize() {
@@ -139,6 +175,7 @@ export class VillageRenderer {
 
   setTheme() {
     if(this.dead)return;
+    this.effects.setSeason(this.model.season);
     this.cameo.setEnabled(this.model.season==='christmas'&&!this.motionReduced);
     const {width,height}=this.app.screen;
     const scene=createVillageScene(width,height,this.model.season,Boolean(this.sceneBackdrop));
@@ -200,6 +237,7 @@ export class VillageRenderer {
   setMotionReduced(reduced:boolean) {
     if(this.dead)return;
     // A new renderer may inherit a model disabled by a previous connection.
+    this.effects.setReduced(reduced);
     this.model.social.setEnabled(!reduced);
     if(this.motionReduced===reduced)return;
     this.motionReduced=reduced;
@@ -262,7 +300,7 @@ export class VillageRenderer {
     this.weather.clear();
     const snowy=this.model.season==='christmas'||this.model.season==='winter';
     const petals=this.model.season==='spring'||this.model.season==='autumn';
-    if(snowy||petals) {
+    if(!this.effectAtlas&&this.effects.active&&(snowy||petals)) {
       for(let i=0;i<(snowy?45:17);i++) {
         const y=(hash(i+12)*height+this.model.elapsed*(5+hash(i+17)*5))%height;
         const x=(hash(i+74)*width+Math.sin(this.model.elapsed*.3+i)*5+width)%width;
@@ -272,14 +310,45 @@ export class VillageRenderer {
       }
       this.weather.fill({color:snowy?0xf0f8ee:this.model.season==='spring'?0xf3c4cd:0xa66b45,alpha:snowy?.65:1});
     }
+    this.renderEffects();
   }
 
+  private renderEffects(){
+    const {width,height}=this.app.screen;
+    const particles=this.effectAtlas&&this.effects.active?ambientParticles(this.model.season,width,height,this.effects.elapsed):[];
+    this.ambientSprites.forEach((sprite,i)=>{
+      const p=particles[i];sprite.visible=Boolean(p);if(!p)return;
+      const meta=fxMeta.effects[p.kind],frames=this.effectFrames[p.kind]!;
+      sprite.texture=frames[effectFrame(p.age,meta.fps,frames.length,true)];
+      sprite.position.set(p.x,p.y);sprite.scale.set(p.scale);sprite.alpha=p.alpha;
+    });
+    const age=this.effects.burstAge;
+    this.arrivalSprite.visible=Boolean(this.effectAtlas&&this.effects.active&&age!==null);
+    if(this.arrivalSprite.visible){
+      const frames=this.effectFrames.welcome!;
+      this.arrivalSprite.texture=frames[effectFrame(age!,fxMeta.effects.welcome.fps,frames.length,false)];
+      const scale=Math.min(.75,width/100,height/90);
+      this.arrivalSprite.position.set(this.monument.x,this.monument.y-this.monument.height*.3);
+      this.arrivalSprite.scale.set(scale);
+    }
+    const state=this.motionReduced?'reduced':!this.effects.active?'off':!this.effectAtlas?'fallback':!this.playing?'paused':this.model.season;
+    if(this.app.canvas.dataset.effects!==state)this.app.canvas.dataset.effects=state;
+    const arrival=this.arrivalSprite.visible?'active':'idle';
+    if(this.app.canvas.dataset.arrival!==arrival)this.app.canvas.dataset.arrival=arrival;
+  }
+  setEffectsEnabled(enabled:boolean){this.effects.setEnabled(enabled);this.renderOnce();}
+  clearArrival(){this.effects.clearBurst();this.renderOnce();}
+  celebrateArrival(){if(this.playing&&this.effectAtlas&&this.effects.celebrate())this.renderOnce();}
+
+
   renderOnce() {if(this.dead)return;this.renderState();this.app.render();}
-  play(active:boolean) {if(this.dead)return;active?this.app.start():this.app.stop();}
+  play(active:boolean) {if(this.dead)return;this.playing=active;if(!active)this.effects.clearBurst();active?this.app.start():this.app.stop();this.renderOnce();}
   destroy() {
     if(this.dead)return;this.dead=true;
     this.clearScenery();
     if(this.initialized)this.app.destroy(true,{children:true});
+    for(const frames of Object.values(this.effectFrames))for(const texture of frames)texture.destroy();
+    this.effectAtlas?.destroy(true);this.effectFrames={};this.ambientSprites=[];
     this.backgroundTexture?.destroy(true);this.glowTexture?.destroy(true);
     for(const texture of this.frames.flat(2))texture.destroy();
     this.characterAtlas?.destroy(true);

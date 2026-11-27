@@ -28,6 +28,8 @@ For manual installation, use:
 
 `illustrated` enables the artwork shown in the installer. New snippets include it; remove the attribute to use the original scenery.
 
+Seasonal effects and a brief sparkle for an increase in today’s count are enabled by default. Set `effects="off"` to disable them. Reduced motion hides these decorations. Initial readings, decreases and day changes do not trigger the sparkle.
+
 Tistory replaces `[##_count_today_##]` with today's visitor count **inside the skin HTML**. Placing it in an external JavaScript file or a regular blog post is unsupported. If the placeholder remains on the published page, check its location in the skin. If you use Tistory's automatic mobile skin, check whether it needs a separate installation.
 
 Public deployment and loading the widget from another origin have been verified. **Installation in an actual Tistory account's skin still needs verification.** See the [deployment and installation guide (Korean)](../../docs/features/visitor-village/deployment.md).

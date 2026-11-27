@@ -1,0 +1,32 @@
+{
+  "origin": "http://127.0.0.1:5211",
+  "results": [
+    {
+      "width": 1000,
+      "errors": [],
+      "overflow": false,
+      "seasons": 5,
+      "arrival": true,
+      "pauseAndOffAndReduced": true,
+      "independentWidget": true
+    },
+    {
+      "width": 390,
+      "errors": [],
+      "overflow": false,
+      "seasons": 5,
+      "arrival": true,
+      "pauseAndOffAndReduced": true,
+      "independentWidget": true
+    },
+    {
+      "width": 320,
+      "errors": [],
+      "overflow": false,
+      "seasons": 5,
+      "arrival": true,
+      "pauseAndOffAndReduced": true,
+      "independentWidget": true
+    }
+  ]
+}
