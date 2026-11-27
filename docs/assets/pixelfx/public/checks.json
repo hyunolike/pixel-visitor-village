@@ -1,0 +1,32 @@
+{
+  "origin": "https://blog-pixelfx.pixel-visitor-village.pages.dev",
+  "results": [
+    {
+      "width": 1000,
+      "errors": [],
+      "overflow": false,
+      "seasons": 5,
+      "arrival": true,
+      "pauseAndOffAndReduced": true,
+      "independentWidget": true
+    },
+    {
+      "width": 390,
+      "errors": [],
+      "overflow": false,
+      "seasons": 5,
+      "arrival": true,
+      "pauseAndOffAndReduced": true,
+      "independentWidget": true
+    },
+    {
+      "width": 320,
+      "errors": [],
+      "overflow": false,
+      "seasons": 5,
+      "arrival": true,
+      "pauseAndOffAndReduced": true,
+      "independentWidget": true
+    }
+  ]
+}

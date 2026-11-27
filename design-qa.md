@@ -1,3 +1,19 @@
+# Installed widget pixelfx QA (2026-11-27)
+
+final result: passed with one deferred performance Minor
+
+The target is the standalone widget inside a blog article. The installed pixelfx skill and pinned upstream Node renderer produced five small authored motifs with the village palette. Three render/refine passes are preserved under docs/assets/pixelfx/{round1,round2,final}; library candidates were inspected first. Final atlas11,471bytes/770,048decoded bytes, deterministic hash c418b516e23110286f035a9d25a68bbba574f6f83bb05d881e8e5b2ac9204421. All5upstream effect checks pass without warnings.
+
+Actual [public mobile article](docs/assets/pixelfx/public/blog-390.png), [spring desktop](docs/assets/pixelfx/public/spring-1000.png), [arrival](docs/assets/pixelfx/public/arrival-1000.png), all five seasons and320px captures use the independent widget module. Small foliage motifs and breathing fireflies retain the existing figures/landmarks; the one-shot sparkles sit at the small Tistory well. No service layout or source character/terrain changes. External controls only operate the fixture. Synthetic cumulative counts and unverified private Tistory installation are explicitly labelled. Initial notice entrance is allowed to settle before whole-article capture.
+
+Runtime uses the existing30fps ticker with bounded sprites and owned textures, no new runtime library. Count increases are same-day and one-use; suppressed readings never queue later celebrations. Optional decode/setup cannot block or destroy the core village. Fresh review found the hidden suppression and optional-startup failure paths; three reproducing failures became green. Two actually loaded instances now exercise live texture ownership through exact compositor on/off/restoration. No second review loop was run.
+
+Verification:174unit,14release,109browser, type/build/service+new-file formatting, whitespace and5upstream checks pass. Complete MIT text is retained in the final standalone bundle. Public56files match local dist hashes; headers/404 and3width×5season interactions pass without console/page errors, overflow or extra service assets. [Final review](docs/features/visitor-village/reviews/pixelfx-final-2026-11-27.md), [public flow](docs/assets/pixelfx/public/checks.json), [public files](docs/assets/pixelfx/public-files.json).
+
+Handoff: https://blog-pixelfx.pixel-visitor-village.pages.dev/examples/blog (immutable4f45198c). Production staysf9315b7. No source commit/push/PR/promotion; thumbnail/video hashes unchanged. Deferred Minor: unchanged play() calls still cause an extra full draw on some state updates; no separate ticker is created. Kept outside the direct significant-finding fix pass.
+
+---
+
 # Installed blog widget QA (2026-11-26, corrected target)
 
 final result: passed

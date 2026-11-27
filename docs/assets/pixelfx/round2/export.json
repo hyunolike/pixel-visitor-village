@@ -1,0 +1,16 @@
+{
+  "upstream": "patch-gg/pixelfx",
+  "commit": "5294518ce7c72e48b6100a744596e0acf57f2826",
+  "width": 512,
+  "height": 376,
+  "pngBytes": 11436,
+  "decodedBytes": 770048,
+  "sha256": "e9770a1eaf6db1e947002296c80d5e5d4986e6d8eb87c2f67e2c63d3e0aaecfb",
+  "sources": {
+    "petal": "2878b7f0e0b6ff13b91041beaf358bf7eab90d8940d76acd8cf424e92e08dc3f",
+    "leaf": "d733f9571d1d368408d0cdcff68f85cc88cbabd3ed40178a2e517250c82ce1e7",
+    "firefly": "258d00d01407fd30aaac55b3831dd3c7894898d4ae3b4b548f4b9c53c7681b5e",
+    "snow": "451b49f9973670df04aa9013219d153bcacf0915f7384418397d8e4672e6f472",
+    "welcome": "c0a07052d92a1d4ec8d7a795086a17de0e0532d36e5be99637c5a8681101a92e"
+  }
+}

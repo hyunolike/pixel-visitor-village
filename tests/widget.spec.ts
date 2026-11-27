@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { createServer } from 'node:http';
 import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 const appOrigin=()=>new URL(test.info().project.use.baseURL!).origin;
 const waitReady=async(page:Page)=> {
   await page.goto('/');
@@ -1468,4 +1469,123 @@ test('cozy mobile renderer keeps every visitor sprite inside the actual canvas',
     const overflow=await page.locator('#preview-village').evaluate(el=>{const view=(el as any).view,{width,height}=view.app.screen;return view.people.map((sprite:any,id:number)=>({id,b:sprite.getBounds()})).filter(({b}:any)=>b.minX<-.001||b.maxX>width+.001||b.minY<-.001||b.maxY>height+.001).map(({id}:any)=>id);});
     expect(overflow).toEqual([]);expect(await page.locator('#preview-village').evaluate(el=>(el as any).visitorCount)).toBe(5000);
   }
+});
+
+test('installed pixelfx seasons use one bounded layer with reduced, pause and off controls',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/examples/blog.html');
+  const widget=page.locator('visitor-village'),canvas=widget.locator('canvas');
+  await expect(canvas).toHaveAttribute('data-effects','reduced');
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  for(const season of ['spring','summer','autumn','winter','christmas']){
+    await widget.evaluate((el,season)=>el.setAttribute('season',season),season);
+    await expect(canvas).toHaveAttribute('data-effects',season);
+  }
+  await widget.evaluate(el=>el.setAttribute('paused',''));
+  await expect(canvas).toHaveAttribute('data-effects','paused');
+  const options={style:'.notice,.repository,.status,.name{visibility:hidden!important}'};
+  const withEffects=await canvas.screenshot(options);
+  await widget.evaluate(el=>el.setAttribute('effects','off'));
+  await expect(canvas).toHaveAttribute('data-effects','off');
+  expect(await canvas.screenshot(options)).not.toEqual(withEffects);
+  await page.setViewportSize({width:320,height:850});
+  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth)).toBe(320);
+  await widget.evaluate(el=>{el.removeAttribute('paused');el.removeAttribute('effects')});
+  await expect(canvas).toHaveAttribute('data-effects','christmas');
+  await page.emulateMedia({reducedMotion:'reduce'});await expect(canvas).toHaveAttribute('data-effects','reduced');
+});
+
+test('installed arrival sparkle consumes count readings across pause, replay and Korean midnight',async({page})=>{
+  await page.clock.setFixedTime(new Date('2026-11-27T03:00:00Z'));
+  await page.goto('/examples/blog.html');const widget=page.locator('visitor-village'),canvas=widget.locator('canvas');
+  await expect(canvas).toHaveAttribute('data-effects','summer');await expect(canvas).toHaveAttribute('data-arrival','idle');
+  await widget.evaluate(el=>el.setAttribute('count','13'));await expect(canvas).toHaveAttribute('data-arrival','active');
+  await widget.evaluate(el=>el.setAttribute('count','bad'));await expect(widget.locator('.status')).toBeVisible();
+  await widget.evaluate(el=>el.setAttribute('count','13'));
+  await widget.evaluate(el=>{el.remove();document.querySelector('figure')!.prepend(el)});
+  await expect(canvas).toHaveAttribute('data-arrival','idle');
+  await widget.evaluate(el=>el.setAttribute('paused',''));await widget.evaluate(el=>el.setAttribute('count','14'));
+  await expect(canvas).toHaveAttribute('data-arrival','idle');await widget.evaluate(el=>el.removeAttribute('paused'));
+  await expect(canvas).toHaveAttribute('data-arrival','idle');
+  await widget.evaluate(el=>el.setAttribute('count','0'));await expect(canvas).toHaveAttribute('data-arrival','idle');
+  await widget.evaluate(el=>el.setAttribute('count','1'));await expect(canvas).toHaveAttribute('data-arrival','active');
+  await page.clock.setFixedTime(new Date('2026-11-27T15:00:01Z'));
+  await widget.evaluate(el=>el.setAttribute('count','2'));await expect(canvas).toHaveAttribute('data-arrival','idle');
+  await widget.evaluate(el=>el.setAttribute('count','3'));await expect(canvas).toHaveAttribute('data-arrival','active');
+  await expect(canvas).toHaveAttribute('data-arrival','idle',{timeout:4000});
+});
+
+test('standalone widget retains the complete pixelfx license and loads without optional art',async({page})=>{
+  const module=await(await page.request.get('/widget/visitor-village.js')).text();
+  expect(module.includes('Copyright (c) 2026 Patch')).toBe(true);expect(module.includes('Copyright (c) 2026 Hugo Duprez')).toBe(true);
+  expect(module.includes('THE SOFTWARE IS PROVIDED "AS IS"')).toBe(true);
+  const fxSource='data:image/png;base64,'+readFileSync(new URL('../src/assets/effects/village-fx.png',import.meta.url)).toString('base64');
+  await page.addInitScript((source)=>{
+    const NativeImage=window.Image;
+    window.Image=new Proxy(NativeImage,{construct(target,args){const image=Reflect.construct(target,args) as HTMLImageElement;const descriptor=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,'src')!;Object.defineProperty(image,'src',{set(value:string){if(value===source&&!(window as any).allowEffects)queueMicrotask(()=>image.dispatchEvent(new Event('error')));else descriptor.set!.call(image,value)},get(){return descriptor.get!.call(image)}});return image}});
+  },fxSource);
+  await page.goto('/examples/blog.html');const widget=page.locator('visitor-village');
+  await expect(widget.locator('canvas')).toHaveAttribute('data-effects','fallback');
+  expect(await widget.evaluate(el=>(el as HTMLElementTagNameMap['visitor-village']).visitorCount)).toBe(12);
+  await widget.evaluate(el=>el.setAttribute('effects','off'));await expect(widget.locator('canvas')).toHaveAttribute('data-effects','off');
+  await page.evaluate(()=>{(window as any).allowEffects=true;const second=document.createElement('visitor-village');second.id='fx-retry';second.setAttribute('count','2');second.style.cssText='display:block;width:100%;height:300px';document.querySelector('figure')!.prepend(second);});
+  await expect(page.locator('#fx-retry canvas')).toHaveAttribute('data-effects','christmas');
+  await widget.last().evaluate(el=>el.remove());
+  await expect(page.locator('#fx-retry canvas')).toHaveAttribute('data-effects','christmas');
+});
+
+test('suppressed offscreen readings never celebrate when suppression ends before reveal',async({page})=>{
+  for(const mode of ['paused','effects','reduced']){
+    await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/examples/blog.html');
+    const widget=page.locator('visitor-village'),canvas=widget.locator('canvas');
+    await expect(canvas).toHaveAttribute('data-effects','summer');
+    await widget.evaluate(el=>el.style.display='none');await expect(canvas).toHaveAttribute('data-effects','paused');
+    if(mode==='reduced')await page.emulateMedia({reducedMotion:'reduce'});
+    else await widget.evaluate((el,mode)=>el.setAttribute(mode,mode==='effects'?'off':''),mode);
+    await widget.evaluate(el=>el.setAttribute('count','13'));
+    if(mode==='reduced')await page.emulateMedia({reducedMotion:'no-preference'});
+    else await widget.evaluate((el,mode)=>el.removeAttribute(mode),mode);
+    await widget.evaluate(el=>el.style.display='block');await expect(canvas).toHaveAttribute('data-effects','summer');
+    expect(await canvas.getAttribute('data-arrival')).toBe('idle');
+  }
+});
+
+test('a held optional effects image does not block the core village or allocate after detach',async({page})=>{
+  const fxSource='data:image/png;base64,'+readFileSync(new URL('../src/assets/effects/village-fx.png',import.meta.url)).toString('base64');
+  await page.addInitScript(source=>{
+    const NativeImage=window.Image;(window as any).heldEffects=[];
+    window.Image=new Proxy(NativeImage,{construct(target,args){const image=Reflect.construct(target,args) as HTMLImageElement;const descriptor=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,'src')!;Object.defineProperty(image,'src',{set(value:string){if(value===source&&!(window as any).releaseEffects)(window as any).heldEffects.push([image,value]);else descriptor.set!.call(image,value)},get(){return descriptor.get!.call(image)}});return image}});
+  },fxSource);
+  await page.goto('/examples/blog.html');const widget=page.locator('visitor-village');
+  await expect(widget.locator('canvas')).toHaveAttribute('data-effects','fallback');
+  await widget.evaluate(el=>{(window as any).detachedEffectsWidget=el;el.remove()});
+  await page.evaluate(()=>{(window as any).releaseEffects=true;for(const [image,source]of(window as any).heldEffects)image.src=source;const next=document.createElement('visitor-village');next.setAttribute('count','2');next.style.cssText='display:block;height:300px';document.querySelector('figure')!.prepend(next)});
+  await expect(page.locator('visitor-village canvas')).toHaveAttribute('data-effects','christmas');
+  expect(await page.evaluate(()=>({ready:(window as any).detachedEffectsWidget.ready,canvases:(window as any).detachedEffectsWidget.shadowRoot.querySelectorAll('canvas').length}))).toEqual({ready:false,canvases:0});
+});
+
+test('a per-instance effect texture copy failure leaves a working basic village',async({page})=>{
+  await page.addInitScript(()=>{
+    const draw=CanvasRenderingContext2D.prototype.drawImage;
+    CanvasRenderingContext2D.prototype.drawImage=function(...args:any[]){
+      if(this.canvas.width===512&&this.canvas.height===376&&args[0] instanceof HTMLCanvasElement&&!(window as any).effectCopyFailed){(window as any).effectCopyFailed=true;throw new Error('Synthetic optional copy failure')}
+      return (draw as any).apply(this,args);
+    };
+  });
+  await page.goto('/examples/blog.html');const widget=page.locator('visitor-village');
+  await expect(widget.locator('canvas')).toHaveAttribute('data-effects','fallback');
+  await expect.poll(()=>page.evaluate(()=>(window as any).effectCopyFailed)).toBe(true);
+  expect(await widget.evaluate(el=>(el as HTMLElementTagNameMap['visitor-village']).visitorCount)).toBe(12);
+  await expect(widget.locator('.status')).toBeEmpty();
+});
+
+test('two loaded effects instances retain live independent textures after neighbor disposal',async({page})=>{
+  await page.goto('/examples/blog.html');const first=page.locator('visitor-village').first();
+  await expect(first.locator('canvas')).toHaveAttribute('data-effects','summer');
+  await page.evaluate(()=>{const el=document.createElement('visitor-village');el.id='second-effects';el.setAttribute('count','0');el.setAttribute('season','spring');el.style.cssText='position:fixed;left:0;top:0;width:520px;height:420px;z-index:9999';document.body.append(el)});
+  const second=page.locator('#second-effects'),canvas=second.locator('canvas');await expect(canvas).toHaveAttribute('data-effects','spring');
+  await second.evaluate(el=>el.setAttribute('paused',''));await expect(canvas).toHaveAttribute('data-effects','paused');
+  const options={style:'.notice,.repository,.status,.name{visibility:hidden!important}'},before=await canvas.screenshot(options);
+  await first.evaluate(el=>el.remove());await second.evaluate(el=>el.setAttribute('effects','off'));
+  const without=await canvas.screenshot(options);expect(without).not.toEqual(before);
+  await second.evaluate(el=>el.removeAttribute('effects'));expect(await canvas.screenshot(options)).toEqual(before);
 });

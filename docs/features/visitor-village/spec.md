@@ -284,3 +284,8 @@ The user approved completing the remaining art consistency work. VV-ART-001–00
 ## Installed blog widget art — user correction
 
 The user clarified that artwork after blog installation is the target. VV-EMBED-ART-001–003 in [cohesive-art-plan.md](cohesive-art-plan.md) supersede the homepage-centric handoff: generated standalone code must reproduce selected illustrated art without service initializers, retain legacy unflagged behavior and be verified in a blog-body fixture on another origin.
+
+
+## Installed widget pixel effects
+
+The user requested installing pixelfx and improving the blog-installed widget. VV-FX-001–005, design, interfaces, implementation tasks and acceptance are in [pixelfx-plan.md](pixelfx-plan.md). Scope is restrained arrival and seasonal effects on the actual standalone widget; no homepage redesign or production promotion.

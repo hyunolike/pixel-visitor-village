@@ -429,3 +429,13 @@ Earlier homepage-centric screenshots are historical, not acceptance of this corr
 
 
 Integration follow-up: the user requested proceeding after the corrected installed-widget preview. Create the pull request against main, wait for CI, merge the verified change, and verify automatic production deployment and its release record. Earlier no-commit/no-promotion statements describe the preview stage.
+
+
+## Installed widget pixel effects
+
+The user requested installing pixelfx and improving the blog-installed widget. VV-FX-001–005, design, interfaces, implementation tasks and acceptance are in [pixelfx-plan.md](pixelfx-plan.md). Scope is restrained arrival and seasonal effects on the actual standalone widget; no homepage redesign or production promotion.
+
+Pixelfx implementation complete: skill installed at pinned5294518c; five authored motifs11.47KB, upstream5/5 checks,174unit/14release/109browser and type/build/format pass. One readiness review and one fresh final review performed; significant findings directly fixed and verified. [Final review](reviews/pixelfx-final-2026-11-27.md). Public blog-body preview: https://blog-pixelfx.pixel-visitor-village.pages.dev/examples/blog. Production remainsf9315b7; no source integration in this request. A duplicate-render performance Minor remains documented.
+
+
+PR follow-up: the user requested a pull request for the verified pixelfx widget changes. Commit and push feat/blog-pixelfx and open against main. Preserve the preview and worktree. Merge and production promotion remain outside this request. Earlier no-commit statements describe the implementation/preview stage.

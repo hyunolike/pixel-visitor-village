@@ -5,11 +5,12 @@ import { koreanDay, noticeForCount, type CountNotice, type CountSnapshot } from 
 import { parseRefreshInterval, visitorRefresh, type RefreshResult } from './visitor-refresh';
 import { defaultVillageLabels, type VillageLabels } from './village-labels';
 import { setupMapScene } from './map-scene';
+import { shouldCelebrateArrival } from './village-effects';
 
-interface PendingNotice {snapshot:CountSnapshot;notice:CountNotice}
+interface PendingNotice {snapshot:CountSnapshot;notice:CountNotice;fresh:boolean}
 
 export class VisitorVillage extends HTMLElement {
-  static observedAttributes=['count','season','paused','glow','refresh-interval','interactive','illustrated','data-map-scene'];
+  static observedAttributes=['count','season','paused','glow','refresh-interval','interactive','illustrated','data-map-scene','effects'];
   private greetingCursor=0;
   private model=new VillageModel();
   private view:VillageRenderer|undefined;
@@ -115,6 +116,7 @@ export class VisitorVillage extends HTMLElement {
       if(attribute==='count') {
         const previous=this.visitorCount;
         this.model.setCount(parseCount(value));
+        if(this.visitorCount<previous||this.lastNotice?.day!==koreanDay(new Date()))this.view?.clearArrival();
         this.errors.delete('count');
         if(previous!==this.visitorCount||!this.lastNotice||this.lastNotice.day!==koreanDay(new Date()))this.queueNotice(previous);
       }
@@ -127,6 +129,7 @@ export class VisitorVillage extends HTMLElement {
       this.errors.delete(attribute);this.nameLabel.textContent=this.labels.seasons[this.model.season];
       if(attribute==='season'){this.view?.setTheme();this.reportArtWarning();}
       if(attribute==='glow')this.view?.setGlow(value!=='false');
+      if(attribute==='effects')this.view?.setEffectsEnabled(value!=='off');
       if(attribute==='interactive'&&value===null)this.model.greeting=null;
       this.showStatus();this.applyPlayback();this.view?.renderOnce();this.emit('village-change');
     } catch(error) {
@@ -146,7 +149,7 @@ export class VisitorVillage extends HTMLElement {
     void VillageRenderer.create(this.frame,this.model,()=>generation===this.generation&&this.isConnected).then(view=>{
       if(!view)return;
       if(generation!==this.generation||!this.isConnected){view.destroy();return;}
-      this.view=view;view.setSceneBackdrop(this.sceneBackdrop);view.setLabels(this.labels);view.setGlow(this.getAttribute('glow')!=='false');
+      this.view=view;view.setSceneBackdrop(this.sceneBackdrop);view.setLabels(this.labels);view.setGlow(this.getAttribute('glow')!=='false');view.setEffectsEnabled(this.getAttribute('effects')!=='off');
       this.resizeObserver=new ResizeObserver(()=>{view.resize();this.applyPlayback();});this.resizeObserver.observe(this);
       this.intersectionObserver=new IntersectionObserver(entries=>{this.visible=entries[0]?.isIntersecting??true;this.applyPlayback();});this.intersectionObserver.observe(this);
       if(!this.lastNotice&&!this.pendingNotice)this.queueNotice();
@@ -159,9 +162,16 @@ export class VisitorVillage extends HTMLElement {
     });
   }
 
+  private arrivalAllowed(){
+    return !this.hasAttribute('paused')&&this.getAttribute('effects')!=='off'&&!(this.motion?.matches??matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
   private applyPlayback() {
     this.frame.classList.toggle('compact',this.clientHeight<120);
     const visible=!document.hidden&&this.visible&&this.clientWidth>0&&this.clientHeight>0;
+    if(!this.arrivalAllowed()){
+      if(this.pendingNotice)this.pendingNotice.fresh=false;
+      if(this.shownNotice)this.shownNotice.fresh=false;
+    }
     this.view?.setMotionReduced(this.motionReduced);
     this.view?.play(visible&&!this.hasAttribute('paused')&&!this.motionReduced);
     visitorRefresh.setActive(this.onRefresh,visible&&Boolean(this.view));
@@ -177,12 +187,15 @@ export class VisitorVillage extends HTMLElement {
       this.lastNotice=snapshot;this.pendingNotice=null;this.closeNotice();return;
     }
     const notice=noticeForCount(this.lastNotice,snapshot.count,snapshot.day);
-    this.pendingNotice=notice?{snapshot,notice}:null;
+    this.pendingNotice=notice?{snapshot,notice,fresh:this.arrivalAllowed()}:null;
     this.presentNotice();
   }
   private presentNotice() {
     if(!this.pendingNotice||!this.view||!this.visible||document.hidden||this.clientWidth<=0||this.clientHeight<=0)return;
     const current=this.pendingNotice;this.pendingNotice=null;this.shownNotice=current;this.lastNotice=current.snapshot;
+    const celebrate=shouldCelebrateArrival({delta:current.notice.delta,day:current.snapshot.day,today:koreanDay(new Date()),fresh:current.fresh});
+    current.fresh=false;
+    if(celebrate&&this.arrivalAllowed())this.view.celebrateArrival();
     // A paused notice is not a fresh reading: don't relabel yesterday's count as today's.
     this.renderNotice(current);
     this.notice.dataset.open='true';this.notice.setAttribute('aria-hidden','false');this.frame.classList.add('notice-open');

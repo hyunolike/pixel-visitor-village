@@ -425,3 +425,8 @@ Use shared authored ramps for build-time raster finishing and native source/atla
 ## Installed illustrated art ownership
 
 The Web Component owns the existing guarded scene loader for illustrated (public boolean) and data-map-scene (service alias). Services do not install a second loader. Vite library output embeds raster sources; only the selected image decodes. Standalone snippets include illustrated; old unflagged snippets retain native geometry. Independent generated-code/blog-body acceptance replaces service-hero screenshots for this correction.
+
+
+## Installed widget pixel effects
+
+The user requested installing pixelfx and improving the blog-installed widget. VV-FX-001–005, design, interfaces, implementation tasks and acceptance are in [pixelfx-plan.md](pixelfx-plan.md). Scope is restrained arrival and seasonal effects on the actual standalone widget; no homepage redesign or production promotion.
